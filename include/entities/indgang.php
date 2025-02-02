@@ -176,6 +176,7 @@ class Indgang extends DBObject
         {
             return false;
         }
+        if (stripos($this->type, 'fastafamily') !== false) return true;
         return stripos($this->type, 'partout') !== false;
     }
 
@@ -191,7 +192,8 @@ class Indgang extends DBObject
             return false;
         }
 
-        return stripos($this->type, 'alle') !== false || stripos($this->type, 'partout') !== false || stripos($this->type, 'leje') !== false;
+        if ($this->isPartout()) return true;
+        return stripos($this->type, 'alle') !== false || stripos($this->type, 'leje') !== false;
     }
 
     public function isDayTicket()

@@ -1379,7 +1379,7 @@ class SignupApiModel extends Model {
     }
 
     // Get notes
-    if (is_array($participant->note)) {
+    if (is_object($participant->note)) {
       foreach($participant->note as $key => $note) {
         if ($key == 'junior_ward') {
           $ids = [
