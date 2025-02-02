@@ -142,11 +142,11 @@ class SignupApiModel extends Model {
     $result = (object)[];
 
     $categories = [
-      12 => [
-        'exclude' => 18,
+      24 => [
+        'exclude' => 25,
       ],
-      18 => [
-        'exclude' => 12,
+      25 => [
+        'exclude' => 24,
       ],
     ];
     $food_entity = $this->createEntity('Mad');
@@ -362,6 +362,7 @@ class SignupApiModel extends Model {
     
     if(count($result['errors']) == 0) {
       // Update participant
+      $participant->participant_hash = $data['hash'];
       try {
         if(!$participant->update()) {
           throw new FrameworkException("Failed update on participant\nParticipant:".print_r($participant, true));
@@ -804,13 +805,23 @@ class SignupApiModel extends Model {
               //   continue 2;
               // }
 
+              
+
               $entry = $this->createEntity('Indgang');
               $select = $entry->getSelect();
               if ($key_item == 'partout') {
-                $select->setWhere('type', 'like', 'Overnatning - Partout%');
-                // NB! We assume organizer setting is before this
-                if ($age >= $config['main']->age_kid && $is_organizer) {
-                  $select->setWhere('type', 'like', '%Arrangør%');
+                if ($items['sleeping_area:family'] == 'on') {
+                  if ($age >= $config['main']->age_kid) {
+                    $select->setWhere('type', '=', 'Overnatning - FastaFamily');
+                  } else {
+                    $select->setWhere('type', '=', 'Overnatning - FastaFamily - Barn');
+                  }
+                } else {
+                  $select->setWhere('type', 'like', 'Overnatning - Partout%');
+                  // NB! We assume organizer setting is before this
+                  if ($age >= $config['main']->age_kid && $is_organizer) {
+                    $select->setWhere('type', 'like', '%Arrangør%');
+                  }
                 }
               } else {
                 $day = intval($key_item) -1;

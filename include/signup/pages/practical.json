@@ -103,7 +103,7 @@
                     "type": "checkbox",
                     "text": {
                         "en": "I would like to receive text alerts about activities i have signed up for, as well as general updates\/info about Fastaval. (Note that Fastaval SMS-alerts do not work with non-Danish phones)",
-                        "da": "Jeg vil gerne modtaget SMS beskeder om aktiviteter jeg er tilmeldt, samt generelle opdateringer\/info om Fastaval. (Bem\u00e6rk at sms-funktionen kun fungerer med danske telefonnumre)."
+                        "da": "Jeg vil gerne modtaget SMS beskeder om aktiviteter, jeg er tilmeldt, samt generelle opdateringer\/info om Fastaval. (Bem\u00e6rk at sms-funktionen kun fungerer med danske telefonnumre)."
                     },
                     "infosys_id": "medbringer_mobil",
                     "disabled": "true"
@@ -179,8 +179,8 @@
                 {
                     "type": "paragraph",
                     "text": {
-                        "en": "If you sign up for before the 23th of february, you will receive a nametag upon check-in at Fastaval.\u00a0The nametag will display your participant number first name and preferred pronouns.\u00a0",
-                        "da": "Hvis du tilmelder dig inden d. 23. februar, vil du f\u00e5 et navneskilt n\u00e5r du checker ind p\u00e5 Fastaval. P\u00e5 navneskiltet vil der fremg\u00e5 dit deltagernummer, fornavn og fortrukne pronomen.\u00a0\u00a0\u00a0"
+                        "en": "If you sign up for before the 28th of february, you will receive a nametag upon check-in at Fastaval.\u00a0The nametag will display your participant number first name and preferred pronouns.\u00a0",
+                        "da": "Hvis du tilmelder dig inden d. 28. februar, vil du f\u00e5 et navneskilt, n\u00e5r du checker ind p\u00e5 Fastaval. P\u00e5 navneskiltet vil der fremg\u00e5 dit deltagernummer, fornavn og fortrukne pronomen.\u00a0\u00a0\u00a0"
                     }
                 },
                 {
@@ -243,7 +243,7 @@
                     "type": "paragraph",
                     "text": {
                         "en": "",
-                        "da": "[b]Fastaval Junior er lige nu fyldt, men du kan stadig melde dig til p\u00e5 venteliste.[\/b]"
+                        "da": "[b]Fastaval Junior er lige nu fyldt, men du kan stadig melde dig til p\u00e5 ventelisten.[\/b]"
                     },
                     "display_logic": [
                         {
@@ -267,7 +267,7 @@
                     "type": "paragraph",
                     "text": {
                         "en": "",
-                        "da": "[b]Alle pladser til Fastaval Junior og ventelisten er desv\u00e6rre fyldt ud.[\/b]"
+                        "da": "[b]Alle pladser til Fastaval Junior og ventelisten er desv\u00e6rre fyldt.[\/b]"
                     },
                     "display_logic": [
                         {
@@ -299,8 +299,8 @@
                         {
                             "value": "Juniordeltager",
                             "text": {
-                                "en": "I want to participate in Fastaval Junior (180 kr.)\u00a0 [b]not available in english[\/b]",
-                                "da": "Jeg vil gerne deltage i Fastaval Junior (180 kr.) - For b\u00f8rn fra 6 til 14 \u00e5r"
+                                "en": "I want to participate in Fastaval Junior (230 kr.)\u00a0 [b]not available in english[\/b]",
+                                "da": "Jeg vil gerne deltage i Fastaval Junior (230 kr.) - For b\u00f8rn fra 6 til 14 \u00e5r"
                             },
                             "display_logic": [
                                 {
@@ -334,8 +334,8 @@
                         {
                             "value": "For\u00e6lder",
                             "text": {
-                                "en": "I'm a parent of a Fastaval Junior participant",
-                                "da": "Jeg er for\u00e6lder til en Fastaval Junior deltager"
+                                "en": "I am only at Fastaval in connection with Fastaval Junior, for example, as a parent or game master.",
+                                "da": "Jeg er kun p\u00e5 Fastaval i forbindelse med Fastaval Junior. F.eks. som for\u00e6ldre eller spilleder\u00a0"
                             }
                         }
                     ],
@@ -350,7 +350,7 @@
                     "type": "paragraph",
                     "text": {
                         "en": "If you are attending Fastaval with your club\/school, fill out the name below",
-                        "da": "Hvis du er p\u00e5 Fastaval med din forening\/klub\/ungdomsskole, s\u00e5 udfyld navnet nedenfor"
+                        "da": "Hvis du er p\u00e5 Fastaval med din forening\/klub\/ungdomsskole, s\u00e5 udfyld feltet nedenfor"
                     }
                 },
                 {
@@ -468,8 +468,8 @@
                 {
                     "type": "paragraph",
                     "text": {
-                        "en": "If you are an organizer, you must be a member of ALEA. Fastavals organizers are insurred through ALEA, and in order to be covered, you must be part of the organization.\u00a0",
-                        "da": "Hvis du er arrang\u00f8r er det obligatorisk at v\u00e6re medlemmer af Alea, da det g\u00f8r det muligt for os at d\u00e6kke dig ind under vores forsikring."
+                        "en": "If you are an organizer, you must be a member of ALEA. Fastaval\u2019s organizers are insured through ALEA, and in order to be covered, you must be part of the organization.\u00a0",
+                        "da": "Hvis du er arrang\u00f8r, er det obligatorisk at v\u00e6re medlem af Alea, da du skal v\u00e6re d\u00e6kket af vores forsikring."
                     }
                 },
                 {

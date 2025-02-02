@@ -295,6 +295,9 @@ class Deltagere extends DBObject implements AgeFulfilment
      */
     public function getName()
     {
+        if (isset($this->nickname) && $this->nickname != ''){
+            return $this->nickname;
+        }
         return trim("{$this->fornavn} {$this->efternavn}");
     }
 

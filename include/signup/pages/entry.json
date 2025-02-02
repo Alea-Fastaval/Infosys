@@ -14,7 +14,7 @@
             "status": "disabled",
             "input": "participant",
             "compare": "equals",
-            "value": "Forælder"
+            "value": "For\u00e6lder"
         },
         {
             "type": "field_compare",
@@ -49,21 +49,21 @@
                     "type": "paragraph",
                     "text": {
                         "en": "At Fastaval, you can either buy a ticket for all days (partout) or to the individual days separately.  Note that a ticket fee of 15 kr. is placed on all sign-ups.",
-                        "da": "Til Fastaval kan du enten k\u00f8be billet til alle dage (partout) eller til de enkelte dage hver for sig. V\u00e6r opm\u00e6rksom p\u00e5, at der p\u00e5l\u00e6gges et billetgebyr p\u00e5 15 kr. til alle tilmeldinger."
+                        "da": "Til Fastaval kan du enten k\u00f8be billet til alle dage (partout) eller til de enkelte dage hver for sig. V\u00e6r opm\u00e6rksom p\u00e5, at der p\u00e5l\u00e6gges et billetgebyr p\u00e5 15 kr. p\u00e5 alle tilmeldinger."
                     }
                 },
                 {
                     "type": "paragraph",
                     "text": {
-                        "en": "A partout ticket for Fastaval costs 400 kr, but organizers, participants younger than 18 and members of Alea receive a discount. The discounts can be combined. Kids under the age of 15 can attend Fastaval for free provided they are accompanied by an adult.",
-                        "da": "En partout-billet til Fastaval koster 400 kr, men arrang\u00f8rer, deltagere under 18 og medlemmer af Alea f\u00e5r rabat. Rabatterne kan kombineres.\u00a0B\u00f8rn under 15 \u00e5r kan komme gratis med p\u00e5 Fastaval s\u00e5 l\u00e6nge de er ledsaget af en voksen."
+                        "en": "A partout ticket for Fastaval costs 400 kr, but organizers, participants younger than 25 and members of Alea receive a discount. The discounts can be combined. Kids under the age of 15 can attend Fastaval for free provided they are accompanied by an adult who has payed for admission.",
+                        "da": "En partout-billet til Fastaval koster 400 kr, men arrang\u00f8rer, deltagere under 25 og medlemmer af Alea f\u00e5r rabat. Rabatterne kan kombineres.\u00a0B\u00f8rn under 15 \u00e5r kan komme gratis med p\u00e5 Fastaval, s\u00e5 l\u00e6nge de er ledsaget af en betalende voksen."
                     }
                 },
                 {
                     "type": "list",
                     "text": {
-                        "en": "Organizer discount: 125 kr\nYouth discount (U18): 125 kr\nAlea discount: 125 kr",
-                        "da": "Arrang\u00f8rrabat: 125 kr\nUngdomsrabat (U18): 125 kr\nAlea rabat: 125 kr"
+                        "en": "Organizer discount: 125 kr\nYouth discount (U25): 125 kr\nAlea discount: 125 kr",
+                        "da": "Arrang\u00f8rrabat: 125 kr\nUngdomsrabat (U25): 125 kr\nAlea rabat: 125 kr"
                     }
                 },
                 {
@@ -178,8 +178,8 @@
                 {
                     "type": "paragraph",
                     "text": {
-                        "en": "Accomodation at Fastaval for the whole event costs 200 kr. for participants and 50 kr. for organizers.",
-                        "da": "Overnatning p\u00e5 hele Fastaval koster 200 kr. for deltagere og 50 kr. for arrang\u00f8rer."
+                        "en": "Accomodation at Fastaval for the whole event costs 200 kr. for participants and 50 kr. for organizers. FastaFamily costs 400 kr. for adult, but for children under the age of 15 it's free",
+                        "da": "Overnatning p\u00e5 hele Fastaval koster 200 kr. for deltagere og 50 kr. for arrang\u00f8rer. Familie p\u00e5 Fastaval koster 400 kr. for voksne, men er gratis for b\u00f8rn under 15 \u00e5r."
                     }
                 },
                 {
@@ -319,8 +319,8 @@
                 {
                     "type": "paragraph",
                     "text": {
-                        "en": "[b]quiet and sober dormitory[\/b]\nThis year there will be a sober dormitory for people who want to stay sober, quiet and prefer others to do the same. The quiet\/sober dormitories are located at Mariagerfjord Gymnasium, where you will share a classroom with up to 9 other people.\u00a0",
-                        "da": "[b]Stille- og \u00e6drusovesal[\/b]\nI \u00e5r vil der v\u00e6re en s\u00e6rlig sovesal for folk der \u00f8nsker at holde sig \u00e6dru, stille og \u00f8nsker at andre g\u00f8r det samme. Stille\/\u00e6dru sovesalene ligger p\u00e5 Mariagerfjord Gymnasium, hvor du vil dele et klassev\u00e6relse med op til 9 andre deltagere."
+                        "en": "[b]quiet and sober dormitory[\/b]\nThis year there will be a sober dormitory for people who want to stay sober, quiet, and prefer others to do the same. The quiet\/sober dormitories are located at Mariagerfjord Gymnasium, where you will share a classroom with up to 9 other people.\u00a0",
+                        "da": "[b]Stille- og \u00e6drusovesal[\/b]\nI \u00e5r vil der v\u00e6re en s\u00e6rlig sovesal for folk, der \u00f8nsker at holde sig \u00e6dru og stille og \u00f8nsker, at andre g\u00f8r det samme. Stille\/\u00e6dru sovesalene ligger p\u00e5 Mariagerfjord Gymnasium, hvor du vil dele et klassev\u00e6relse med op til 9 andre deltagere."
                     }
                 },
                 {
@@ -343,7 +343,7 @@
                     "type": "paragraph",
                     "text": {
                         "en": "[b]Youth dormitory[\/b]\nIf you are under 18 years, you will be able to sleep in the youth dormitory at Mariagerfjord Gymnasium.",
-                        "da": "[b]Ungdomssovesal[\/b]\nHvis du er under 18 \u00e5r har du mulighed for at overnatte i en ungdomssovesal p\u00e5 Mariagerfjord Gymnasium."
+                        "da": "[b]Ungdomssovesal[\/b]\nHvis du er under 18 \u00e5r, har du mulighed for at overnatte i en ungdomssovesal p\u00e5 Mariagerfjord Gymnasium."
                     }
                 },
                 {
@@ -358,7 +358,7 @@
                             "type": "age",
                             "status": "disabled",
                             "compare": "greater_equal",
-                            "value": "config.age_young"
+                            "value": 18
                         },
                         {
                             "type": "age",
@@ -371,8 +371,8 @@
                 {
                     "type": "paragraph",
                     "text": {
-                        "en": "[b]Organizer Dormitory[\/b]\nIf you are an organizer, you can sleep in the organizer dormitory at the high school (organizers with shifts during Fastaval will be prioritized, in case there is a lack of spots).",
-                        "da": "[b]Arrang\u00f8rsovesalen[\/b]\nHvis du er arrang\u00f8r kan du sove i arrang\u00f8rsovesalen p\u00e5 Mariagerfjord gymnasium (arrang\u00f8rer med j\u00e6vnlige vagter under Fastaval prioriteres, hvis der er mangel p\u00e5 pladser)."
+                        "en": "[b]Organizer Dormitory[\/b]\nIf you are an organizer, you can sleep in the organizer dormitory at the high school. Organizers with shifts during Fastaval will be prioritized, in case there is a lack of spots.",
+                        "da": "[b]Arrang\u00f8rsovesalen[\/b]\nHvis du er arrang\u00f8r, kan du sove i arrang\u00f8rsovesalen p\u00e5 Mariagerfjord Gymnasium. Arrang\u00f8rer med j\u00e6vnlige vagter under Fastaval prioriteres, hvis der er mangel p\u00e5 pladser."
                     }
                 },
                 {
@@ -399,8 +399,8 @@
                 {
                     "type": "paragraph",
                     "text": {
-                        "en": "[b]Family Dormitory[\/b]\nIf you are visiting Fastaval with children you can sleep in the family dormitory. This is [b]not[\/b] a children's dorm, and it is required that all children have an accompanying adult with them. Children sleeping in the family dorm should be old enough to keep quiet during the night, and show consideration to other sleepers, especially regarding noise and light.",
-                        "da": "[b]Familiesovesal[\/b]\nHvis du er p\u00e5 Fastaval med b\u00f8rn kan i sove sammen i familiesovesalen. Familiesovesalen er [b]ikke[\/b] en b\u00f8rnesovesal, og det er et krav at alle b\u00f8rn har en ledsagende voksen med dem. B\u00f8rn der sover i familiesovealen skal v\u00e6re gamle nok til at v\u00e6re rolige natten igennem, og tage hensyn til andre sovende deltagere, med hensyn til is\u00e6r larm og lys."
+                        "en": "[b]Fastaval Family[\/b]\nIf you are visiting Fastaval with children below 15 years old you can sleep at \u00d8sterskov Efterskole. This is [b]not[\/b] a children's dorm, and it is required that all children have an accompanying adult with them. Children sleeping in at \u00d8sterskov Efterskole should be old enough to keep quiet during the night, and show consideration to other sleepers, especially regarding noise and light.",
+                        "da": "[b]Familie p\u00e5 Fastaval[\/b]\nHvis du er p\u00e5 Fastaval med b\u00f8rn under 15 \u00e5r, kan I sove sammen p\u00e5 \u00d8sterskov Efterskole. \u00d8sterskov Efterskole er [b]ikke[\/b] en b\u00f8rnesovesal, og det er et krav, at alle b\u00f8rn har en ledsagende voksen med dem. B\u00f8rn, der sover p\u00e5 \u00d8sterskov Efterskole, skal v\u00e6re gamle nok til at v\u00e6re rolige natten igennem, og tage hensyn til andre sovende deltagere, is\u00e6r hvad ang\u00e5r larm og lys."
                     }
                 },
                 {
@@ -409,13 +409,24 @@
                         "en": "I would like a spot in the family dormitory",
                         "da": "Jeg vil gerne have en plads i familiesovesalen"
                     },
-                    "infosys_id": "sleeping_area:family"
+                    "infosys_id": "sleeping_area:family",
+                    "display_logic": [
+                        {
+                            "type": "default",
+                            "status": "disabled"
+                        },
+                        {
+                            "type": "checkbox",
+                            "input": "sleeping:partout",
+                            "status": "normal"
+                        }
+                    ]
                 },
                 {
                     "type": "text_area",
                     "text": {
                         "en": "[b]Comments[\/b]\nIf you have any remarks about your sleeping arrangements, for instance if you would rather sleep in a certain place compared to another, or have special sleeping needs, let us know here",
-                        "da": "[b]Bem\u00e6rkninger[\/b]\nHvis du har nogle bem\u00e6rkninger til hvor du skal sove, f.eks hvis du hellere vil sove et sted frem for et andet, eller har s\u00e6rlige sovebehov, s\u00e5 skriv det her"
+                        "da": "[b]Bem\u00e6rkninger[\/b]\nHvis du har nogle bem\u00e6rkninger til, hvor du skal sove, f.eks hvis du hellere vil sove et sted frem for et andet eller har s\u00e6rlige sovebehov, s\u00e5 skriv det her"
                     },
                     "infosys_id": "note:sleeping"
                 },

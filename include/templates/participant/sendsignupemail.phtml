@@ -5,7 +5,7 @@
 <p>
     Der vil komme mere information om dit fastlagte program, når vi nærmer os Fastaval.
 </p>
-<?php if ($this->participant->betalt_beloeb < $this->prices['total']) : ?>
+<?php if ($this->participant->betalt_beloeb < $this->prices['total'] || $this->participant->id == 1) : ?>
 <h2>Betaling</h2>
 <p>
     <?php if ($this->participant->betalt_beloeb == 0) : ?>
@@ -17,24 +17,24 @@ Du kan betale nu via online-betalingen eller bankoverførsel, eller når du anko
     <?php endif;?>
 </p>
 <p>
-Ved betaling skal du HUSKE at anføre dit navn og deltagernummer som er: <strong><?=$this->participant->id?></strong>
+Vi har fået nyt betalingssystem der kører gennem Bifrost, derfor vil det være deres navn der fremgår i betalingsvinduet. 
+Du kan betale via vores nye on-line betalingsystem ved at følge nedenstående link:<br>
+<a href="https://www.fastaval.dk/25tilmelding/paynow?hash=<?=$this->participant->participant_hash?>">Betal on-line</a>
 </p>
 <p>
-Betal nemt og hurtigt ved at benytte mobilepay - send ovenstående beløb til 438490 (Alea).<br>
-Det er vigtigt, at du betaler fra samme telefonnummer, som du har angivet i din tilmelding. Hvis det ikke er muligt,
-skriv til <a href=mailto:andreas@fastaval.dk>andreas@fastaval.dk</a>, og så finder vi en løsning.
+Ved anden form for betaling skal du HUSKE at anføre dit navn og deltagernummer som er: <strong><?=$this->participant->id?></strong>
 </p>
 <p>
 Alternativt kan du betale via bankoverførsel - bemærk at der er et gebyr på bankoverførsel på 20 kr (og betalingen bliver derfor <strong><?=($this->prices['total'] - $this->participant->betalt_beloeb + 20)?></strong> kr.)<br/>
 Hvis du betaler via overførsel fra en bank udenfor Danmark, skal du være opmærksom på at, banken ofte tager et ekstra gebyr som du selv skal betale.<br/>
 * Ved bankoverførsel til vores bankkonto: Reg.: 9070 / Kontonr.: 1638710893<br/>
-* Ved indbetaling fra en bank UDENFOR Danmark: BIC VRAADK21 og IBAN DK1090701638710893 <strong>Alle gebyrer for internationale overførlser er dit ansvar</strong><br/>
+* Ved indbetaling fra en bank UDENFOR Danmark: BIC VRSPDK22 og IBAN DK1090701638710893 <strong>Alle gebyrer for internationale overførlser er dit ansvar</strong><br/>
 * deadline for indbetaling er her ligeledes <?= $this->payment_day;?>
 </p>
 <?php endif;?>
 
 <p>
-<strong>Læg mærke til</strong> at du via tilmeldingen på <a href="https://www.fastaval.dk/24tilmelding/">www.fastaval.dk</a> kan loade og ændre din tilmelding, helt frem til <?=$this->end_signup_changes_date?>. Du skal bare bruge din email og denne kode: <strong><?=$this->participant->password?></strong>
+<strong>Læg mærke til</strong> at du via tilmeldingen på <a href="https://www.fastaval.dk/25tilmelding/">www.fastaval.dk</a> kan loade og ændre din tilmelding, helt frem til <?=$this->end_signup_changes_date?>. Du skal bare bruge din email og denne kode: <strong><?=$this->participant->password?></strong>
 </p>
 
 <?php if ($this->participant_photo_upload_link) : ?>

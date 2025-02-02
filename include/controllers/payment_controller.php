@@ -21,7 +21,67 @@ class PaymentController extends Controller {
   }
 
   public function moduleDisabled() {
-    die('The payment module is not enabled');
+    die('This payment function is not enabled');
+  }
+
+  public function setupPayment() {
+    if (!$this->page->request->isPost()) {
+      $this->jsonOutput([
+        'status' => 'error',
+        'message' => 'Not a POST request'
+      ], 400);
+    }
+    $post = $this->page->request->post;
+
+    if (!isset($post->id) && !isset($post->hash)) {
+      $this->jsonOutput([
+        'status' => 'error',
+        'message' => 'No user ID'
+      ], 401);
+    }
+
+    $participant = $this->model->checkParticipant($post);
+    if ($participant == null) {
+      $this->jsonOutput([
+        'status' => 'error',
+        'message' => 'Incorrect credentials'
+      ], 401);
+    }
+
+    $payment_uid = $this->model->getPaymentUser($participant->id);
+    if ($payment_uid == null) {
+      $payment_uid = $this->model->createPaymentUser($participant->id);
+    }
+
+    $msg = $this->model->updatePayments($participant);
+
+    if (is_array($msg) && $msg[0] == 'pending') {
+      $this->jsonOutput([
+        'status' => 'success',
+        'url' => $msg[1],
+      ]);
+    }
+
+    if ($msg != 'success') {
+      $this->jsonOutput([
+        'status' => 'error',
+        'message' => $msg
+      ], 400);
+    }
+
+    [$status, $msg] = $this->model->createFLPaymentURL($payment_uid);
+
+    if ($status == 'error') {
+      $this->jsonOutput([
+        'status' => 'error',
+        'message' => $msg
+      ], 400);
+    }
+
+    $this->jsonOutput([
+      'status' => 'success',
+      'url' => $msg
+    ]);
   }
 
   public function paymentCallBack() {

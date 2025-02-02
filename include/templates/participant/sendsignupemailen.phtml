@@ -17,12 +17,12 @@ You can pay via the online-payment functionality, by bank transfer or upon arriv
     <?php endif;?>
 </p>
 <p>
-When paying remember to clearly state your name and participant ID which is: <strong><?=$this->participant->id?></strong>
+We have a new payment system that goes through Birfrost, therefore it will be their name that appears in the payment window.
+You can pay using our new on-line payment system, by following the link below:<br>
+<a href="https://www.fastaval.dk/25tilmelding/paynow?hash=<?=$this->participant->participant_hash?>">Pay on-line</a>
 </p>
 <p>
-If you're using the Danish MobilePay, you can transfer the money to 438490 (Alea).<br>
-It's important that you pay from the same number as the one you entered during sign-up. If this isn't possible, please
-email <a href=mailto:andreas@fastaval.dk>andreas@fastaval.dk</a> and we'll figure something out.
+When using other payment options remember to clearly state your name and participant ID which is: <strong><?=$this->participant->id?></strong>
 </p>
 <p>
     You can also pay right away by using Paypal. Transfer to <a href="mailto:andreas@fastaval.dk.">andreas@fastaval.dk.</a>
@@ -33,12 +33,12 @@ email <a href=mailto:andreas@fastaval.dk>andreas@fastaval.dk</a> and we'll figur
 Alternatively you can pay by bank transfer - please note that we take a fee on bank transfer amounting to 20 DKK (which makes the amount to pay <strong><?=($this->prices['total'] - $this->participant->betalt_beloeb + 20)?></strong> DKK)<br/>
 Please notice that there are usually an extra fee on international bank transfers. <b>All fees incurred on international transfers will be your responsibility</b>.</br>
 * Paying from a Danish bank, use these details: Reg.: 9070 / Accountnr.: 1638710893<br/>
-* Our bank information is IBAN DK1090701638710893 and BIC VRAADK21.<br/>
+* Our bank information is IBAN DK1090701638710893 and BIC VRSPDK22.<br/>
 * deadline for payment is the same here: <?=$this->payment_day?>
 </p>
 <?php endif;?>
 <p>
-<strong>Please note </strong>that you can change your signup details through the signup at <a href="https://www.fastaval.dk/en/24tilmelding/">www.fastaval.dk</a>, up until <?=$this->end_signup_changes_date?>. All you need is your e-mail address and this code: <strong><?=$this->participant->password?></strong>
+<strong>Please note </strong>that you can change your signup details through the signup at <a href="https://www.fastaval.dk/en/25tilmelding/">www.fastaval.dk</a>, up until <?=$this->end_signup_changes_date?>. All you need is your e-mail address and this code: <strong><?=$this->participant->password?></strong>
 </p>
 <?php if ($this->participant_photo_upload_link) : ?>
 <p>

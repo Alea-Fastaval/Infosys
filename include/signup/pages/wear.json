@@ -14,7 +14,7 @@
             "status": "disabled",
             "input": "participant",
             "compare": "equals",
-            "value": "Forælder"
+            "value": "For\u00e6lder"
         }
     ],
     "sections": [
@@ -27,8 +27,8 @@
                 {
                     "type": "paragraph",
                     "text": {
-                        "en": "Here you can order wear (clothes and other merchandise) for Fastaval 2024. Only wear ordered in advance is produced. This means that there is no physical shop at Fastaval - order here or miss out!",
-                        "da": "Her kan du bestille wear (t\u00f8j og andet merchandise) til Fastaval 2024. Der bliver kun produceret det wear, som bliver bestilt. Det betyder, at der ikke er mulighed for at k\u00f8be det i en fysisk butik p\u00e5 Fastaval - vil du ikke g\u00e5 glip af det, s\u00e5 bestil det her."
+                        "en": "Here you can order wear (clothes and other merchandise) for Fastaval 2025. Only wear ordered in advance is produced. This means that there is no physical shop at Fastaval - order here or miss out!",
+                        "da": "Her kan du bestille wear (t\u00f8j og andet merchandise) til Fastaval 2025. Der bliver kun produceret det wear, som bliver bestilt. Det betyder, at der ikke er mulighed for at k\u00f8be det i en fysisk butik p\u00e5 Fastaval - vil du ikke g\u00e5 glip af det, s\u00e5 bestil det her."
                     }
                 }
             ]
@@ -39,7 +39,7 @@
                     "type": "paragraph",
                     "text": {
                         "en": "",
-                        "da": "Som en del af prisen f\u00e5r alle b\u00f8rn en Fastaval Junior T-shirt. Du f\u00e5r den udleveret, n\u00e5r du tjekker ind p\u00e5 Fastaval Junior p\u00e5 dagen.\u00a0Du kan derudover tilk\u00f8be flere Fastaval Junior t-shirts."
+                        "da": "Som en del af prisen f\u00e5r alle b\u00f8rn en Fastaval Junior-T-shirt. Du f\u00e5r den udleveret, n\u00e5r du tjekker ind p\u00e5 Fastaval Junior p\u00e5 dagen.\u00a0Du kan derudover k\u00f8be flere Fastaval Junior t-shirts, hvis du \u00f8nsker.\u00a0"
                     }
                 }
             ],

@@ -469,6 +469,7 @@ class Routes
         // $this->routes['payment_cancel']             = array('url' => 'payment/cancel', 'controller' => 'Payment', 'method' => 'cancelPayment');
         // $this->routes['payment_status']             = array('url' => 'payment/status', 'controller' => 'Payment', 'method' => 'checkPayment');
         // $this->routes['payment_check_total']        = array('url' => 'payment/participanttotal', 'controller' => 'Payment', 'method' => 'checkTotal');
+        $this->routes['payment_create']            = array('url' => 'payment/create', 'controller' => 'Payment', 'method' => 'setupPayment');
 
         // Ticket system
         $this->routes['tickets_main']               = array('url' => 'tickets', 'controller' => 'Tickets', 'method' => 'mainPage');

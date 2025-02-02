@@ -14,7 +14,7 @@
             "status": "disabled",
             "input": "participant",
             "compare": "equals",
-            "value": "Forælder"
+            "value": "For\u00e6lder"
         },
         {
             "type": "field_compare",
@@ -40,28 +40,28 @@
                     "type": "paragraph",
                     "text": {
                         "en": "Fastaval will have dinner delivered from [url=https:\/\/mosmadhus.dk\/]MOS Madhus[\/url]. The food will be served in the common area, in the following period:",
-                        "da": "Fastaval f\u00e5r aftensmaden leveret fra [url=https:\/\/mosmadhus.dk\/]MOS Madhus[\/url]. Maden serveres i f\u00e6llesomr\u00e5det, i f\u00f8lgende tidsrum:"
+                        "da": "Fastaval f\u00e5r aftensmaden leveret fra [url=https:\/\/mosmadhus.dk\/]MOS Madhus[\/url]. Maden serveres i f\u00e6llesomr\u00e5det i f\u00f8lgende tidsrum:"
                     }
                 },
                 {
                     "type": "list",
                     "text": {
-                        "en": "Breakfast: 08.30-10.30\nDinner: 17.30-19.30 (Sunday 17:00 - 19:00)",
-                        "da": "Morgenmaden: kl. 08:30-10:30\nAftensmaden: kl. 17:30-19:30 (s\u00f8ndag kl. 17:00-19:00)"
+                        "en": "Breakfast: 08.30-10.30Lunch (Sandwich): 11:00-13:00\nDinner: 17.30-19.30 (Sunday 17:00 - 19:00)",
+                        "da": "Morgenmad: kl. 08:30-10:30\nFrokost (Sandwich): 11:00-13:00\nAftensmad: kl. 17:30-19:30 (s\u00f8ndag kl. 17:00-19:00)"
                     }
                 },
                 {
                     "type": "paragraph",
                     "text": {
                         "en": "Dinner will be served in shifts. Your time slot will appear on your participant sheet closer to Fastaval.",
-                        "da": "Aftensmad udleveres i runder. Du f\u00e5r dit tidsrum p\u00e5 din deltagerseddel, n\u00e5r vi n\u00e6rmer os Fastaval."
+                        "da": "Aftensmaden udleveres i runder. Du f\u00e5r dit tidsrum p\u00e5 din deltagerseddel, n\u00e5r vi n\u00e6rmer os Fastaval."
                     }
                 },
                 {
                     "type": "paragraph",
                     "text": {
-                        "en": "If you have an allergy not mentioned in the detailed description bellow, and worry that it will be present in the food, please contact our food coordinator at mathias@fastaval.dk",
-                        "da": "Har du en allergi, som ikke er n\u00e6vnt, og er du bange for, at den findes i maden, s\u00e5 kontakt vores madansvarlige p\u00e5 mathias@fastaval.dk"
+                        "en": "If you have an allergy not mentioned in the detailed description bellow, and worry that it will be present in the food, please contact our food coordinator at maj@fastaval.dk",
+                        "da": "Har du en allergi, som ikke er n\u00e6vnt, og er du bange for, at den findes i maden, s\u00e5 kontakt vores madansvarlige p\u00e5 maj@fastaval.dk"
                     }
                 }
             ]
@@ -98,14 +98,14 @@
                     "type": "paragraph",
                     "text": {
                         "en": "This year, the funds provided by the rich aunts and uncles (people who choose to contribute to Fastaval with additional funds) will be used to give financial aid to those who may need it. In practice, it will be possible to get 2 days of food (breakfast + dinner) paid for by Fastaval.",
-                        "da": "I \u00e5r g\u00e5r st\u00f8tten fra rige onkler og tanter (personer, der v\u00e6lger at donere ekstra penge til Fastaval) til at give et \u00f8konomisk bidrag til dem, der m\u00e5tte have behov for det. Konkret vil det v\u00e6re muligt at f\u00e5 betalt to fulde dages mad (morgenmad + aftensmad) under Fastaval."
+                        "da": "I \u00e5r g\u00e5r st\u00f8tten fra rige onkler og tanter (personer der v\u00e6lger at donere ekstra penge til Fastaval) til at give et \u00f8konomisk bidrag til dem, der m\u00e5tte have behov for det. Konkret vil det v\u00e6re muligt at f\u00e5 betalt to dages mad (morgenmad + aftensmad) under Fastaval."
                     }
                 },
                 {
                     "type": "paragraph",
                     "text": {
                         "en": "It is up to you to decide if you are eligible for financial aid. The program is designed for, but not limited to, students, the unemployed, pensioners, single family providers and people on government assistance, or with otherwise limited funds. We do not require documentation of your economic situation.",
-                        "da": "Om du har behov for st\u00f8tte er op til dig selv at vurdere. Ordningen er tilt\u00e6nkt, men ikke begr\u00e6nset til, studerende, arbejdsl\u00f8se, pensionister, f\u00f8rtidspensionister, enlige fors\u00f8gere og andre personer p\u00e5 offentlige ydelser eller med en p\u00e5 anden m\u00e5de trang \u00f8konomi. Vi kr\u00e6ver ikke dokumentation for din \u00f8konomiske situation."
+                        "da": "Om du har behov for st\u00f8tte, er op til dig selv at vurdere. Ordningen er tilt\u00e6nkt, men ikke begr\u00e6nset til studerende, enlige fors\u00f8rgere, ledige, pensionister, f\u00f8rtidspensionister og andre personer p\u00e5 offentlige ydelser eller med en p\u00e5 anden m\u00e5de trang \u00f8konomi. Vi kr\u00e6ver ikke dokumentation for din \u00f8konomiske situation."
                     }
                 },
                 {
@@ -141,8 +141,8 @@
         },
         {
             "headline": {
-                "en": "Here you can order breakfast and dinner:",
-                "da": "Her kan du bestille morgenmad og aftensmad:"
+                "en": "Order food",
+                "da": "Bestil mad"
             },
             "items": [
                 {
@@ -156,7 +156,7 @@
                     "type": "paragraph",
                     "text": {
                         "en": "Thursday is vegetarian day and therefore only has the vegetarian option.",
-                        "da": "Torsdag er vegetardag og har derfor kun mulighed for vegetarmad."
+                        "da": "Torsdag er vegetardag og har derfor kun mulighed for at v\u00e6lge vegetarmad."
                     }
                 }
             ]
@@ -185,14 +185,28 @@
                     "type": "paragraph",
                     "text": {
                         "en": "Breakfast will be a breakfast buffet with hearty bread, spreads, boiled eggs, fruits, and vegetables as well as cereal with yogurt, milk, or skyr.",
-                        "da": "Morgenmaden bliver en morgenmadsbuffet med groft br\u00f8d, p\u00e5l\u00e6g, kogte \u00e6g, frugt og gr\u00f8nt, samt morgenmadsprodukter med yoghurt, m\u00e6lk eller skyr."
+                        "da": "Morgenmad er en morgenmadsbuffet med groft br\u00f8d, p\u00e5l\u00e6g, kogte \u00e6g, frugt og gr\u00f8nt, samt morgenmadsprodukter med yoghurt, m\u00e6lk eller skyr."
+                    }
+                },
+                {
+                    "type": "paragraph",
+                    "text": {
+                        "en": "[b]Lunch  (all days)[\/b]",
+                        "da": "[b]Frokost (alle dage)[\/b]"
+                    }
+                },
+                {
+                    "type": "paragraph",
+                    "text": {
+                        "en": "The pre-ordered lunch, in the form of a sandwich, can be picked up at the kiosk.",
+                        "da": "Den forudbestilte frokost, i form af sandwich, kan du afhente i kiosken."
                     }
                 },
                 {
                     "type": "paragraph",
                     "text": {
                         "en": "[b]Dinner Wednesday[\/b]",
-                        "da": "[b]Aftensmad Onsdag[\/b]"
+                        "da": "[b]Aftensmad onsdag[\/b]"
                     }
                 },
                 {
@@ -206,21 +220,21 @@
                     "type": "paragraph",
                     "text": {
                         "en": "[b]Dinner Thursday [\/b]",
-                        "da": "[b]Aftensmad Torsdag[\/b]"
+                        "da": "[b]Aftensmad torsdag[\/b]"
                     }
                 },
                 {
                     "type": "paragraph",
                     "text": {
                         "en": "Chili sin Carne with steamed rice & cr\u00e8me fra\u00eeche\nSide course: Mexican salad\nAllergens: Celery, mustard",
-                        "da": "Chili sin Carne med dampede ris og cr\u00e8me fraiche\nTilh\u00f8rende salat: Mexikansk salat\nAllergener: Selleri, sennep"
+                        "da": "Chili sin Carne med dampede ris og cr\u00e8me fraiche\nTilh\u00f8rende salat: Mexicansk salat\nAllergener: Selleri, sennep"
                     }
                 },
                 {
                     "type": "paragraph",
                     "text": {
                         "en": "[b]Dinner Friday [\/b]",
-                        "da": "[b]Aftensmad Fredag [\/b]"
+                        "da": "[b]Aftensmad fredag [\/b]"
                     }
                 },
                 {
@@ -234,21 +248,21 @@
                     "type": "paragraph",
                     "text": {
                         "en": "[b]Dinner Saturday [\/b]",
-                        "da": "[b]Aftensmad L\u00f8rdag [\/b]"
+                        "da": "[b]Aftensmad l\u00f8rdag [\/b]"
                     }
                 },
                 {
                     "type": "paragraph",
                     "text": {
-                        "en": "Lasagne\nVegetarian: Lasagne with\u00a0spinach\nSide course: Italian inspired salad\nAllergens: Gluten, egg, milk, celery, mustard",
-                        "da": "Lasagne\nVegetar: Lasagne med spinat\nTilh\u00f8rende salat: Italiensk inspireret salat\nAllergener:\u00a0Gluten, \u00e6g, m\u00e6lk, selleri, sennep"
+                        "en": "Butter Chicken\nVegetarian: Paprika Stew\nSide course: Italian inspired salad\nAllergens: Gluten, eggs, milk, celery, mustard, fish, soy, peanuts, mustard",
+                        "da": "Butter Chicken\nVegetar: Paprikagryde\nTilh\u00f8rende salat: Italiensk inspireret salat\nAllergener:\u00a0Gluten, \u00e6g, m\u00e6lk, selleri, sennep, fisk, soya, jordn\u00f8dder, sennep"
                     }
                 },
                 {
                     "type": "paragraph",
                     "text": {
                         "en": "[b]Dinner Sunday [\/b]",
-                        "da": "[b]Aftensmad S\u00f8ndag [\/b]"
+                        "da": "[b]Aftensmad s\u00f8ndag [\/b]"
                     }
                 },
                 {

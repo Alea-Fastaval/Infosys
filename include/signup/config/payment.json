@@ -63,6 +63,10 @@
         "en": "You have already paid the full amount for your registration.",
         "da": "Du har allerede betalt det fulde bel\u00f8b for din tilmelding."
     },
+    "pending_payment": {
+        "en": "You have an unconfirmed payment, but the price of your registration has changed. Please contact info@fastaval.dk so they can confirm or delete your existing payment.",
+        "da": "Der ligger en ubekræftet betaling, men prisen for din tilmelding har ændret sig. Vi beder dig skrive til info@fastaval.dk så de enten kan bekræfte eller slette din tidligere betaling."
+    },
     "return_text": {
         "en": "You can return to the signup by clicking this button",
         "da": "Du kan g\u00e5 tilbage til tilmeldingen ved at trykke p\u00e5 knappen her"

@@ -14,7 +14,7 @@
             "status": "disabled",
             "input": "participant",
             "compare": "equals",
-            "value": "Forælder"
+            "value": "For\u00e6lder"
         },
         {
             "type": "field_compare",
@@ -42,7 +42,7 @@
                     "type": "paragraph",
                     "text": {
                         "en": "\u00a0If you are an organizer arriving during the [b]set-up days (monday, tuesday)[\/b] you must sign up for the set-up crew, even if you are just setting up for the area you work in. This is to ensure that there is enough food for the people setting up. If you do not arrive in the set-up days, you can safely ignore this page.If you are a [b]game master\/game guide[\/b], you can mark it in the activity form on the next page.",
-                        "da": "Hvis du er arrang\u00f8r og kommer i [b]ops\u00e6tningsdagene (mandag, tirsdag),[\/b] skal du tilmelde dig ops\u00e6tningsholdet, ogs\u00e5 selvom du s\u00e6tter dit eget omr\u00e5de op. P\u00e5 den m\u00e5de kan vi sikre os, at der er mad nok til alle, der hj\u00e6lper med at s\u00e6tte Fastaval op. Hvis du er [b]spilleder\/regelformidler[\/b] kan du markere det i aktivitetsskemaet p\u00e5 n\u00e6ste side."
+                        "da": "Hvis du er arrang\u00f8r og kommer i [b]ops\u00e6tningsdagene (mandag-tirsdag),[\/b], skal du tilmelde dig ops\u00e6tningsholdet, ogs\u00e5 selvom du s\u00e6tter dit eget omr\u00e5de op. P\u00e5 den m\u00e5de kan vi sikre os, at der er mad nok til alle, der hj\u00e6lper med at s\u00e6tte Fastaval op. Hvis du er [b]spilleder\/regelformidler[\/b], kan du markere det i aktivitetsskemaet p\u00e5 n\u00e6ste side."
                     }
                 }
             ],
@@ -87,21 +87,21 @@
                     "type": "paragraph",
                     "text": {
                         "en": "[b]What is The Hero Force?[\/b]\nYou become a part of a network of participants who help the organizers out around Fastaval to keep the congress running. You will be assigned a hero-task at one of Fastavals many sales and service venues, according to the timespans you choose in your sign-up. You are more than welcome to do more heroic deeds than one. Read more about The Hero Force [url=https:\/\/www.fastaval.dk\/en\/praktisk\/faelles-fastaval\/#heltestyrken]here[\/url].",
-                        "da": "[b]Hvad er Heltestyrken?[\/b]I Heltestyrken bliver du en del af et netv\u00e6rk af andre deltagere, Helte, som hj\u00e6lper arrang\u00f8rerne og deres omr\u00e5der med at k\u00f8re rundt p\u00e5 Fastaval. Du vil f\u00e5 tildelt en helte-opgave p\u00e5 en af Fastavals salgs- eller servicesteder, alt efter de tidsrum, som du noterer i din tilmelding. Man er ogs\u00e5 velkommen til at tage mere end \u00e9n opgave. L\u00e6s mere om Heltestyrken\n\u00a0[url=https:\/\/www.fastaval.dk\/praktisk\/faelles-fastaval\/#heltestyrken\/]her[\/url]."
+                        "da": "[b]Hvad er Heltestyrken?[\/b]I Heltestyrken bliver du en del af et netv\u00e6rk af andre deltagere, Helte, som hj\u00e6lper arrang\u00f8rerne og deres omr\u00e5der med at k\u00f8re rundt p\u00e5 Fastaval. Du vil f\u00e5 tildelt en helte-opgave p\u00e5 en af Fastavals salgs- eller servicesteder, afh\u00e6ngigt af de tidsrum, som du noterer i din tilmelding. Man er ogs\u00e5 velkommen til at tage mere end \u00e9n opgave. L\u00e6s mere om Heltestyrken\n\u00a0[url=https:\/\/www.fastaval.dk\/praktisk\/faelles-fastaval\/#heltestyrken\/]her[\/url]."
                     }
                 },
                 {
                     "type": "paragraph",
                     "text": {
                         "en": "[b]What is a Game Master?[\/b]\u00a0\nMost of the scenarios at Fastaval are designed to be\u00a0run by a Game Master. The Game Master reads the scenario beforehand, and makes themselves familiar with the story, mechanics, roles, and so on. The scenario\u00a0functions kind of like a manual, which the Game Master follows and interprets\u00a0when running the scenario. The Game Master is the person who runs the scenario for\u00a0the players, and makes sure it moves forward. They typically don\u2019t have a main\u00a0role in the scenario, but can sometimes be expected to play smaller supporting\u00a0roles.\nOften it is an important part of the job for the Game Master to set the\u00a0scenes - which means describing the setting, and what is happening, and to cut\u00a0the scenes when they are played out. Read more about being a Game Master [url=https:\/\/www.fastaval.dk\/en\/praktisk\/faelles-fastaval\/#spilleder]here[\/url].",
-                        "da": "[b]Hvad er en spilleder?[\/b]\n\nLangt de fleste scenarier p\u00e5 Fastaval er designet til, at der er en spilleder der formidler scenariet. Spillederen har l\u00e6st scenariet p\u00e5 forh\u00e5nd, sat sig ind i fort\u00e6llingen, virkemidler, roller og lignende. Scenariet er en slags manual\/drejebog, som spillederen f\u00f8lger og fortolker i praksis. De har typisk ikke en rolle i scenariet, men kan spille for eksempel flere sm\u00e5 biroller, der underst\u00f8tter fort\u00e6llingen. Det er tit en vigtig opgave for spillederen at s\u00e6tte scenerne - alts\u00e5 beskriver hvor og hvad der foreg\u00e5r, og klippe scenerne, n\u00e5r de er spillet f\u00e6rdig. L\u00e6s mere om at v\u00e6re spilleder\u00a0\u00a0 [url=https:\/\/www.fastaval.dk\/praktisk\/faelles-fastaval\/#spilleder]her[\/url]."
+                        "da": "[b]Hvad er en spilleder?[\/b]\n\nLangt de fleste scenarier p\u00e5 Fastaval er designet til, at der er en spilleder, der formidler scenariet. Spillederen har l\u00e6st scenariet p\u00e5 forh\u00e5nd, sat sig ind i fort\u00e6llingen, virkemidler, roller og lignende. Scenariet er en slags manual\/drejebog, som spillederen f\u00f8lger og fortolker i praksis. De har typisk ikke en rolle i scenariet, men kan for eksempel spille flere sm\u00e5 biroller, der underst\u00f8tter fort\u00e6llingen. Det er tit en vigtig opgave for spillederen at s\u00e6tte scenerne - alts\u00e5 beskrive, hvor og hvad der foreg\u00e5r, og klippe scenerne, n\u00e5r de er spillet f\u00e6rdig. L\u00e6s mere om at v\u00e6re spilleder\u00a0\u00a0 [url=https:\/\/www.fastaval.dk\/praktisk\/faelles-fastaval\/#spilleder]her[\/url]."
                     }
                 },
                 {
                     "type": "paragraph",
                     "text": {
                         "en": "[b]What is a Game Guide?[\/b]\nWhen playing a board game for the first time, it's often helpful to have someone at the table who already knows the game. If you sign up as a game guide in a game block, you take on the role of that person for one of this year's designer board games, and you're expected to take responsibility for communicating the rules of the game so that the game at your table runs smoothly. You'll have the opportunity to contribute to Fastaval by doing what many board gamers do best: create a good atmosphere around the table and help fellow players have a great gaming experience. Read more about Game Guide [url=https:\/\/www.fastaval.dk\/en\/praktisk\/faelles-fastaval\/#regelformidler]here[\/url].",
-                        "da": "[b]Hvad er en regelformidler?[\/b]\nN\u00e5r man spiller et br\u00e6tspil for f\u00f8rste gang er det ofte en stor hj\u00e6lp at have en person ved bordet som allerede kender spillet. Hvis du melder dig som regelformidler i en spilblok p\u00e5tager du dig rollen som denne person for et af \u00e5rets designerbr\u00e6tspil, og det er nu din fornemme opgave at videreformidle spillets regler, s\u00e5 spillet ved dit bord k\u00f8rer bedst muligt. Du f\u00e5r mulighed for at bidrage til Fastaval ved at g\u00f8re det mange br\u00e6tspillere g\u00f8r bedst: skab en god stemning om bordet og hj\u00e6lp medspillere med at have en god spiloplevelse. L\u00e6s mere om Regelformidler \u00a0[url=https:\/\/www.fastaval.dk\/praktisk\/faelles-fastaval\/#regelformidler]her[\/url]."
+                        "da": "[b]Hvad er en regelformidler?[\/b]\nN\u00e5r man spiller et br\u00e6tspil for f\u00f8rste gang, er det ofte en stor hj\u00e6lp at have en person ved bordet, som allerede kender spillet. Hvis du melder dig som regelformidler i en spilblok, p\u00e5tager du dig rollen som denne person for et af \u00e5rets designerbr\u00e6tspil. Det er nu din fornemme opgave at videreformidle spillets regler, s\u00e5 spillet ved dit bord k\u00f8rer bedst muligt. Du f\u00e5r mulighed for at bidrage til Fastaval ved at g\u00f8re d\u00e9t, mange br\u00e6tspillere g\u00f8r bedst: Skabe en god stemning om bordet og hj\u00e6lpe medspillere med at have en god spiloplevelse. L\u00e6s mere om Regelformidler \u00a0[url=https:\/\/www.fastaval.dk\/praktisk\/faelles-fastaval\/#regelformidler]her[\/url]."
                     }
                 },
                 {
@@ -265,7 +265,7 @@
                     "type": "paragraph",
                     "text": {
                         "en": "Thank you for your contribution to the Hero Force! You will be assigned at least one shift, but you are more than welcome to do more.\u00a0",
-                        "da": "Tak for at bidrage til heltestyrken! Du f\u00e5r tildelt mindst \u00e9n vagt, men du er mere end velkommen til at tage flere.\u00a0"
+                        "da": "Tak for at bidrage til Heltestyrken! Du f\u00e5r tildelt mindst \u00e9n vagt, men du er mere end velkommen til at tage flere.\u00a0"
                     }
                 },
                 {
@@ -308,7 +308,7 @@
                     "type": "text_area",
                     "text": {
                         "en": "If there is anything we should know regarding your ability to perform heroic deeds, disabilities, preference for certain areas etc. then please note them here:",
-                        "da": "Hvis der er noget vi skal vide i forhold til din evne til at udf\u00f8re en helte-opgave, handicap, typen af opgaver du foretr\u00e6kker mm., s\u00e5 skriv dem her."
+                        "da": "Hvis der er noget, vi skal vide i forhold til din evne til at udf\u00f8re en helte-opgave, eventuelle handicap, typen af opgaver du foretr\u00e6kker, mm., s\u00e5 skriv dem her."
                     },
                     "infosys_id": "note:gds"
                 }
@@ -335,7 +335,7 @@
                     "type": "paragraph",
                     "text": {
                         "en": "Thank you for your help with facilitating Fastaval's scenarios. You can choose which scenarios you want to facilitate under the \"activities\" tab. If you have any questions, you can write to the GM coordinators at\u00a0[email]spilleder@fastaval.dk[\/email].",
-                        "da": "Tak for at hj\u00e6lpe til med at spillede Fastavals scenarier. Du skal v\u00e6lge hvilke scenarier du gerne vil spillede under fanen \"aktiviteter\". Har du sp\u00f8rgsm\u00e5l, kan du skrive til\u00a0[email]spilleder@fastaval.dk[\/email]."
+                        "da": "Tak for at hj\u00e6lpe til med at spillede Fastavals scenarier. Du skal v\u00e6lge, hvilke scenarier du gerne vil spillede under fanen \"aktiviteter\". Har du sp\u00f8rgsm\u00e5l, kan du skrive til\u00a0[email]spilleder@fastaval.dk[\/email]."
                     }
                 },
                 {
@@ -350,7 +350,7 @@
                     "type": "select",
                     "text": {
                         "en": "Is there a maximum number of scenarios you want to facilitate?",
-                        "da": "Er der et maksimalt antal scenarier du vil spillede?"
+                        "da": "Er der et maksimalt antal scenarier, du vil spillede?"
                     },
                     "infosys_id": "gm_max",
                     "options": [
@@ -402,7 +402,7 @@
                     "type": "paragraph",
                     "text": {
                         "en": "Thank you for your help with explaining rules for Fastaval's board games. You can choose which games you want to explain rules for under the \"activities\" tab.",
-                        "da": "Tak for at hj\u00e6lpe til med at forklare regler til Fastavals br\u00e6tspil. Du skal v\u00e6lge hvilke br\u00e6tspil du gerne vil forklare regler til under fanen \"aktiviteter\"."
+                        "da": "Tak for at hj\u00e6lpe til med at forklare regler til Fastavals br\u00e6tspil. Du skal v\u00e6lge, hvilke br\u00e6tspil du gerne vil forklare regler til under fanen \"aktiviteter\"."
                     }
                 },
                 {
@@ -417,7 +417,7 @@
                     "type": "select",
                     "text": {
                         "en": "Is there a maximum number of board games you want to explain rules for?",
-                        "da": "Er der et maksimalt antal br\u00e6tspil du vil forklare regler til?"
+                        "da": "Er der et maksimalt antal br\u00e6tspil, du vil forklare regler til?"
                     },
                     "infosys_id": "rules_guide_max",
                     "options": [
@@ -457,7 +457,7 @@
                     "type": "paragraph",
                     "text": {
                         "en": "Thank you for your help with the set-up of Fastaval! There will be food served on the set-up days, therefore we need to know which days you will join us.\nPlease select which days you will be on location to assist with setting up Fastaval:",
-                        "da": "Tak for at hj\u00e6lpe til med ops\u00e6tningen af Fastaval! Der vil blive serveret mad i ops\u00e6tningsdagene, derfor er vi n\u00f8dt til at vide, hvilke dage du spiser med.\nAngiv her, hvilke dage du kommer til ops\u00e6tningen:"
+                        "da": "Tak for at hj\u00e6lpe til med ops\u00e6tningen af Fastaval! Der vil blive serveret mad i ops\u00e6tningsdagene, og derfor er vi n\u00f8dt til at vide, hvilke dage du spiser med.\nAngiv her, hvilke dage du kommer til ops\u00e6tningen:"
                     }
                 },
                 {
