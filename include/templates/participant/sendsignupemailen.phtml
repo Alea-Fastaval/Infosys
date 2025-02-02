@@ -1,6 +1,6 @@
 <h1>Thank you for signing up!</h1>
 <p>
-Your signup has been registered - with participant ID <strong><?=$this->participant->id?></strong>. Below you can see the information we have registered.
+Your signup has been registered with participant ID <strong><?=$this->participant->id?></strong>. Below you can see the information we have registered.
 </p>
 <p>
     You will recieve further information about your personal schedule, when we're closer to Fastaval.
@@ -9,7 +9,8 @@ Your signup has been registered - with participant ID <strong><?=$this->particip
 <h2>Payment</h2>
 <p>
     <?php if ($this->participant->betalt_beloeb == 0) : ?>
-Your payment amounts to <strong><?=$this->prices['total']?></strong> DKK - deadline for payment is <?= $this->payment_day;?>. If you sign up after <?=$this->payment_day?>, payment is due same day as your signup.
+Your payment amounts to <strong><?=$this->prices['total']?></strong> DKK, and the deadline for payment is <?= $this->payment_day;?>.
+If you sign up after <?=$this->payment_day?>, payment is due same day as your signup.
 
     <?php else : ?>
 You have already paid <?=$this->participant->betalt_beloeb?>DKK but it seems that you still owe <strong><?=($this->prices['total'] - $this->participant->betalt_beloeb)?></strong> DKK on your signup.
@@ -22,7 +23,7 @@ You can pay using our new on-line payment system, by following the link below:<b
 <a href="https://www.fastaval.dk/25tilmelding/paynow?hash=<?=$this->participant->participant_hash?>">Pay on-line</a>
 </p>
 <p>
-When using other payment options remember to clearly state your name and participant ID which is: <strong><?=$this->participant->id?></strong>
+When using other payment options remember to clearly state your name and participant ID, which is: <strong><?=$this->participant->id?></strong>
 </p>
 <p>
     You can also pay right away by using Paypal. Transfer to <a href="mailto:andreas@fastaval.dk.">andreas@fastaval.dk.</a>
@@ -30,20 +31,24 @@ When using other payment options remember to clearly state your name and partici
     <?= ($this->prices['total'] - $this->participant->betalt_beloeb + 100);?> DKK
 </p>
 <p>
-Alternatively you can pay by bank transfer - please note that we take a fee on bank transfer amounting to 20 DKK (which makes the amount to pay <strong><?=($this->prices['total'] - $this->participant->betalt_beloeb + 20)?></strong> DKK)<br/>
-Please notice that there are usually an extra fee on international bank transfers. <b>All fees incurred on international transfers will be your responsibility</b>.</br>
+Alternatively you can pay by bank transfer. Please note that we take a fee on bank transfer amounting to 20 DKK
+(which makes the amount to pay <strong><?=($this->prices['total'] - $this->participant->betalt_beloeb + 20)?></strong> DKK)<br/>
+Please notice that there is usually an extra fee on international bank transfers.
+<b>All fees incurred on international transfers will be your responsibility</b>.</br>
 * Paying from a Danish bank, use these details: Reg.: 9070 / Accountnr.: 1638710893<br/>
 * Our bank information is IBAN DK1090701638710893 and BIC VRSPDK22.<br/>
 * deadline for payment is the same here: <?=$this->payment_day?>
 </p>
 <?php endif;?>
 <p>
-<strong>Please note </strong>that you can change your signup details through the signup at <a href="https://www.fastaval.dk/en/25tilmelding/">www.fastaval.dk</a>, up until <?=$this->end_signup_changes_date?>. All you need is your e-mail address and this code: <strong><?=$this->participant->password?></strong>
+<strong>Please note </strong>that you can change your signup details using the signup at
+<a href="https://www.fastaval.dk/en/25tilmelding/">www.fastaval.dk</a>, up until <?=$this->end_signup_changes_date?>.
+All you need is your e-mail address and this code: <strong><?=$this->participant->password?></strong>
 </p>
 <?php if ($this->participant_photo_upload_link) : ?>
 <p>
 As a volunteer/writer/designer you need to have a picture on your nametag, to be able to use your discount at Fastaval.
-Please use the following link to <strong>upload a photo</strong> for it:
+Please use the following link to <strong>upload a photo</strong>:
 <a href="<?= $this->participant_photo_upload_link;?>"><?= $this->participant_photo_upload_link;?></a>
 </p>
 <?php endif;?>

@@ -1,6 +1,6 @@
 <h1>Tak for din tilmelding!</h1>
 <p>
-    Din tilmelding er nu registreret - med deltagernummer <strong><?=$this->participant->id?></strong>. Nedenfor er vedlagt de oplysninger vi har registret på dig.
+    Din tilmelding er nu registreret med deltagernummer <strong><?=$this->participant->id?></strong>. Nedenfor er de oplysninger vi har registret på dig.
 </p>
 <p>
     Der vil komme mere information om dit fastlagte program, når vi nærmer os Fastaval.
@@ -9,7 +9,8 @@
 <h2>Betaling</h2>
 <p>
     <?php if ($this->participant->betalt_beloeb == 0) : ?>
-Din tilmelding beløber sig til <strong><?=$this->prices['total']?></strong> kr. der bedes betales senest d. <?=$this->payment_day?> Tilmelder du dig efter <?=$this->payment_day?>, skal du betale samme dag som du tilmelder dig.
+Din tilmelding beløber sig til <strong><?=$this->prices['total']?></strong> kr. der skal betales senest d. <?=$this->payment_day?>
+Tilmelder du dig efter <?=$this->payment_day?>, skal du betale samme dag som du tilmelder dig.
 
     <?php else : ?>
 Du har allerede betalt <?=$this->participant->betalt_beloeb?>kr men det ser ud til at du stadig skylder <strong><?= ($this->prices['total'] - $this->participant->betalt_beloeb)?></strong>kr.
@@ -17,16 +18,17 @@ Du kan betale nu via online-betalingen eller bankoverførsel, eller når du anko
     <?php endif;?>
 </p>
 <p>
-Vi har fået nyt betalingssystem der kører gennem Bifrost, derfor vil det være deres navn der fremgår i betalingsvinduet. 
-Du kan betale via vores nye on-line betalingsystem ved at følge nedenstående link:<br>
+Vi har fået nyt betalingssystem, der kører gennem Bifrost, derfor vil det være deres navn, der fremgår i betalingsvinduet. 
+Du kan betale via vores nye online betalingssystem ved at følge nedenstående link:<br>
 <a href="https://www.fastaval.dk/25tilmelding/paynow?hash=<?=$this->participant->participant_hash?>">Betal on-line</a>
 </p>
 <p>
-Ved anden form for betaling skal du HUSKE at anføre dit navn og deltagernummer som er: <strong><?=$this->participant->id?></strong>
+Ved anden form for betaling skal du HUSKE at anføre dit navn og deltagernummer, som er: <strong><?=$this->participant->id?></strong>
 </p>
 <p>
-Alternativt kan du betale via bankoverførsel - bemærk at der er et gebyr på bankoverførsel på 20 kr (og betalingen bliver derfor <strong><?=($this->prices['total'] - $this->participant->betalt_beloeb + 20)?></strong> kr.)<br/>
-Hvis du betaler via overførsel fra en bank udenfor Danmark, skal du være opmærksom på at, banken ofte tager et ekstra gebyr som du selv skal betale.<br/>
+Alternativt kan du betale via bankoverførsel - bemærk at der er et gebyr på 20 kr. på bankoverførsel, og at betalingen
+derfor bliver <strong><?=($this->prices['total'] - $this->participant->betalt_beloeb + 20)?></strong> kr. ved denne løsning.<br/>
+Hvis du betaler via overførsel fra en bank udenfor Danmark, skal du være opmærksom på, at banken ofte tager et ekstra gebyr som du selv skal betale.<br/>
 * Ved bankoverførsel til vores bankkonto: Reg.: 9070 / Kontonr.: 1638710893<br/>
 * Ved indbetaling fra en bank UDENFOR Danmark: BIC VRSPDK22 og IBAN DK1090701638710893 <strong>Alle gebyrer for internationale overførlser er dit ansvar</strong><br/>
 * deadline for indbetaling er her ligeledes <?= $this->payment_day;?>
@@ -34,13 +36,14 @@ Hvis du betaler via overførsel fra en bank udenfor Danmark, skal du være opmæ
 <?php endif;?>
 
 <p>
-<strong>Læg mærke til</strong> at du via tilmeldingen på <a href="https://www.fastaval.dk/25tilmelding/">www.fastaval.dk</a> kan loade og ændre din tilmelding, helt frem til <?=$this->end_signup_changes_date?>. Du skal bare bruge din email og denne kode: <strong><?=$this->participant->password?></strong>
+<strong>Læg mærke til</strong> at du via tilmeldingen på <a href="https://www.fastaval.dk/25tilmelding/">www.fastaval.dk</a>
+kan loade og ændre din tilmelding, helt frem til <?=$this->end_signup_changes_date?>. Du skal bruge din email og denne kode: <strong><?=$this->participant->password?></strong>
 </p>
 
 <?php if ($this->participant_photo_upload_link) : ?>
 <p>
 Som arrangør/forfatter/designer skal du have et billede på dit navneskilt, for at kunne bruge din arrangørrabat på Fastaval.
-Brug venligst dette link til at <strong>uploade et billede</strong> til det:
+Brug venligst dette link til at <strong>uploade dit billede</strong>:
 <a href="<?= $this->participant_photo_upload_link;?>"><?= $this->participant_photo_upload_link;?></a>
 </p>
 <?php endif;?>
