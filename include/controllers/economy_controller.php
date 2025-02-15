@@ -148,4 +148,98 @@ class EconomyController extends Controller
     $this->page->columns = $columns;
     $this->page->data = $data;
   }
+
+  /**
+   * Page for listing and confirming on-line payments done via ForeningLet
+   *
+   * @access public
+   * @return void
+   */
+  public function registerPayments() {
+    if (!$this->model->getLoggedInUser()->hasRole('Admin')) {
+      $this->errorMessage('Kun admin kan lave batch registrering af betalinger');
+      $this->hardRedirect($this->url('home'));
+    }
+
+    // if it's not a post request, don't do anything
+    $post = (object) [];
+    if ($this->page->request->isPost()){
+      $post = $this->page->request->post;
+    }
+    
+    $session = $this->dic->get('Session');
+    $registered_payments = $this->model->loadPayments();
+    
+    if (isset($post->importpayments)) {
+      // Did the user submit a file
+      $file = isset($_FILES['payments']) ? $_FILES['payments'] : null;
+      if($file == null || $file['error'] == UPLOAD_ERR_NO_FILE) {
+        $this->errorMessage('Ingen fil valgt.');
+        return;
+      }
+
+      $sheet_data = $this->model->parsePaymentSheet($file);
+      $this->model->matchPayments($sheet_data, $registered_payments);
+      $session->sheet_data = $sheet_data;
+    }
+
+   
+    $this->page->registered_payments = $registered_payments;
+    $this->page->sheet_data = $session->sheet_data;
+
+    $this->page->registerEarlyLoadJS('register_payments.js');
+  }
+
+  /**
+   * Ajax function for confirming on-line payments done via ForeningLet
+   *
+   * @access public
+   * @return void
+   */
+  public function confirmPayments() {
+    if (!$this->model->getLoggedInUser()->hasRole('Admin')) {
+      $this->jsonOutput([
+        'status' => 'error',
+        'message' => 'Admin only',
+      ], 401);
+    }
+
+    // if it's not a post request, don't do anything
+    if (!$this->page->request->isPost()){
+      $this->jsonOutput([
+        'status' => 'error',
+        'message' => 'not a POST request',
+      ], 400);
+    }
+
+    $post = $this->page->request->post;
+    if (!isset($post->list)){
+      $this->jsonOutput([
+        'status' => 'error',
+        'message' => 'missing list of payments',
+      ], 400);
+    }
+
+    $session = $this->dic->get('Session');
+    $sheet_data = $session->sheet_data;
+
+    $result_list = [];
+    foreach ($post->list as $payment) {
+      $result = $this->model->confirmSinglePayment($payment['participant'], $sheet_data->rows[$payment['sheet_row']], $payment['payment']);
+      $result['sheet_row'] = $payment['sheet_row'];
+
+      $$result_list[] = $result;
+    }
+
+    $this->jsonOutput([
+      'status' => 'success',
+      'message' => 'payments confirmed',
+      'result' => $$result_list,
+    ]);
+
+    //$this->fileLog("confirmPayments request:\n".print_r($post,true));
+  }
 }
+
+
+

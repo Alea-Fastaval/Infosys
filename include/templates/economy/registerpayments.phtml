@@ -1,0 +1,299 @@
+<?php echo $this->getMessagesHtml();?>
+<div class='middleboxes' id='register-payments'>
+	<fieldset>
+		<legend>Bekræft On-line Betalinger</legend>
+		<div class="outer-container">
+			<form action="" method="post" name="frmExcelImport" id="frmExcelImport" enctype="multipart/form-data">
+				<div>
+					<label>Vælg en fil med udtræk fra ForeningLet</label>
+					<input type="file" name="payments" id="payments_file" accept=".csv,text/csv"/>
+					<button type="submit" id="importpayments" name="importpayments" class="btn-submit">Importér</button>
+			  </div>
+			</form>
+		</div>
+  </fieldset>
+<?php if (isset($this->sheet_data)) {?>  
+  <fieldset>
+    <legend>Betalinger hentet fra ForeningLet</legend>
+    <div class="category-list">
+    <?php
+      $use_headers = [0, 1, 3, 4, 5, 8];
+      $headers = [];
+      foreach ($use_headers as $value) {
+        $headers[$value] = $this->sheet_data->header_text[$value];
+      }
+
+      $categories = [
+        'full' => "Fuld Match",
+        'essential' => "Matcher ID og beløb",
+        'participant' => "Matcher deltager ID",
+        'none' => "Ingen match",
+        'processed' => "Godkendte og registrerede betalinger",
+      ];
+
+      $field_matching = [
+        0 => 'display_id', 
+        1 => 'participant',
+        3 => 'payment_id',
+        4 => 'text',
+        8 => 'amount',
+      ];
+
+      $group = ""; 
+      foreach ($this->sheet_data->rows as $row_index => $row) { 
+        if ($group == "" || $group != $row['group']) {
+          if ($group != "") {
+            ?></tbody></table><?php
+
+            if (in_array($group, ['full', 'essential'])) {
+              ?>
+                <div class="confirm-group confirm-group-bottom">
+                  Godkend alle i ovenstående kategori
+                  <button id="confirm-group-bottom-<?=$group?>" class="group-button" table="<?=$group?>">Godkend Alle</button>
+                </div>
+              <?php
+            }
+
+            ?><div class="spacer"></div><?php
+          }
+
+          $group = $row['group'];
+    
+          if (in_array($group, ['full', 'essential'])) {
+    ?>
+          <div class="confirm-group confirm-group-top">
+            Godkend alle i denne kategori
+            <button id="confirm-group-top-<?=$group?>" class="group-button" table="<?=$group?>">Godkend Alle</button>
+          </div>
+    <?php  } ?>
+          <h3><?=$categories[$group]?></h3>
+          <?php if (!in_array($group, ['full', 'processed'])) {?>
+            <p>Tjek om der er dobbelt registreringer hos ForeningLet</p>
+          <?php } ?>
+          <table id="<?=$group?>">
+            <thead>
+              <tr>
+                <?php foreach ($headers as $value) { ?>
+                  <th><?=$value?></th>
+                <?php } ?>
+                <th></th><th></th>
+              </tr>
+            </thead>
+            <tbody>
+    <?php 
+        }
+        $values = 'sheet-row="'.$row_index.'" participant="'.trim(substr($row[1], 18)).'"';
+        if (isset($row['match_id'])) {
+          $values .= " payment-id=\"$row[match_id]\"";
+        }
+        $row_style = $row['group'] == 'full' ? ' style="background-color:lightgreen;"': '';
+        ?><tr class="transaction-row" <?=$values.$row_style?>><?php
+        foreach ($headers as $key => $value) {
+          $cell_style = '';
+          if ($row_style == '' && isset($field_matching[$key]) && isset($row['match'][$field_matching[$key]])) {
+            $cell_style = " style='background-color:lightgreen;'";
+          }
+          ?><td <?=$cell_style?>><?=$row[$key]?></td><?php 
+        } 
+        if ($row['match']['participant'] && $group != 'processed') {
+          ?><td><button id="confirm-single-<?=$$row['payment_id']?>" class="confirm-button">Godkend</button></td><?php 
+          ?><td><button id="decline-single-<?=$$row['payment_id']?>" class="decline-button">Afvis</button></td><?php 
+        }
+      ?>
+              </tr>
+    <?php } ?>
+            </tbody>
+          </table>
+  </div>
+  </fieldset>
+<?php } ?>
+  <fieldset>
+    <legend>Betalinger registreret i Infosys</legend>
+    <div class="category-list">
+      <?php
+        $headers = [
+          'id' => 'Betaling ID',
+          'participant_id' => 'Deltager ID',
+          'amount' => 'Beløb',
+          'created' => 'Oprettet',
+          'completed' => 'Udført',
+          'confirmed' => 'Bekræftet',
+          'betalt_beloeb' => 'Har betalt',
+        ];
+
+        $categories = [
+          'created' => 'Oprettet',
+          'pending' => 'Afventer',
+          'confirmed' => 'Godkendt',
+          'cancelled' => 'Anulleret',
+        ];
+
+        $group = ""; 
+        foreach ($this->registered_payments as $payment) { 
+          if ($group == "" || $group != $payment['status']) {
+            if ($group != "") {
+              echo "</tbody></table>";
+            }
+
+            $group = $payment['status'];
+      ?>
+            <h3><?=$categories[$group]?></h3>
+            <table>
+              <thead>
+                <tr>
+                  <?php foreach ($headers as $value) { ?>
+                    <th><?=$value?></th>
+                  <?php } ?>
+                </tr>
+              </thead>
+              <tbody>
+      <?php 
+          }
+      ?>
+                <tr>
+                  <?php foreach ($headers as $key => $value) { 
+                    $text = "";
+                    if (in_array($key, ['created','completed','confirmed'])) {
+                      $text = $payment[$key] != null ? date('Y-m-d H:i', $payment[$key]) : "-";
+                    } else {
+                      $text = $payment[$key];
+                    }
+                    ?>
+                    <td><?=$text?></td>
+                  <?php } ?>
+                </tr>
+      <?php } ?>
+              </tbody>
+            </table>
+    </div>
+    <pre style="float:left;">
+      <?= ''//json_encode($this->registered_payments, JSON_PRETTY_PRINT)?>
+    </pre>
+    <pre style="float:left;">
+      <?=''//print_r($this->sheet_data,true)?>
+    </pre>
+  </fieldset>
+  <?php 
+  if (true) { ?>
+</div>
+    <?php
+    return;
+  }
+
+  $headers = [
+    'customer-name' => 'Navn',
+    'mp-number' => 'Telefon',
+    'amount' => 'Beløb',
+    'comment' => 'Kommentar',
+    'transactionid' => 'ID',
+  ];
+  ?>
+  <fieldset>
+    <p>
+      Her er de beste gæt på hvor betalingerne hører til.<br>
+      De grønne markeringer er der hvor der er fundet et match mellem en række i arket og oplysninger på en deltager.<br>
+      <strong>Bemærk:</strong> der ikke er gemt noget og du skal godkende de enkelte forslag for rent faktisk at
+      foretage ændringer i infosys.
+    </p>
+    <div class="category-list">
+      <?php foreach($this->payment_data as $cid => $category) {
+        if(empty($category) || $cid === 'all') continue;
+        
+        $cat_header = str_replace("-", ", ", $cid);
+        $cat_header = str_replace("id", "Deltager ID", $cat_header);
+        $cat_header = str_replace("phone", "Telefonnummer", $cat_header);
+        $cat_header = str_replace("name", "Navn", $cat_header);
+        $cat_header = str_replace("amount", "Beløb", $cat_header);
+        $cat_header = str_replace(", multi", " (flere resultater)", $cat_header);
+        $cat_header = "Matcher: " . $cat_header;
+
+        $show_buttons = true;
+        if($cid === 'unknown') {
+          $unknown = true;
+          $show_buttons = false;
+          $cat_header = "Afvist eller ingen match og skal håndteres manuelt";
+        }
+
+        if ($cid === 'processed') {
+          $cat_header = "Godkendte og registrerede betalinger";
+          $show_buttons = false;
+        }
+
+        $multi = str_contains($cid, 'multi');
+        if (!$multi && $show_buttons) { ?>
+          <div class="confirm-group confirm-group-top">
+            Godkend alle i denne kategori
+            <button id="confirm-group-<?=$cid?>" class="group-button">Godkend Alle</button>
+          </div>
+        <?php } ?>
+        <h3><?=$cat_header?></h3>
+        <?php if($unknown || $multi) { ?>
+          <p>Du kan manuelt indtaste id på den deltager du vil bogføre betalingen hos</p>
+        <?php } ?>
+        <table id="<?=$cid?>" <?=$multi?'class="multi"':''?>>
+          <thead>
+            <tr>
+              <th></th>
+              <?php foreach($headers as $header) { ?>
+                <th><?=$header?></th>
+              <?php } ?>
+              <th colspan="2"></th>
+            </tr>
+          <thead>
+          <tbody>
+          <?php foreach($category as $pay_id => $payment) { ?>
+            <tr class="top-row" transactionid="<?=$pay_id?>">
+              <td>MobilePay</td>
+              <?php foreach($headers as $hid => $header) { ?>
+                <td><?=$payment['sheet-row'][$hid]?></td>
+              <?php } ?>
+              <?php if ($unknown || $multi) { ?>
+                <td>
+                  <label for="participant-<?=$pay_id?>">Deltager ID:</label>  
+                  <input id="participant-<?=$pay_id?>" type="number">
+                </td>
+                <td><button id="manual-button-<?=$pay_id?>" class="manual-confirm-button">Bogfør</button></td>
+              <?php } ?>
+            </tr>
+            <?php 
+              if (is_array($payment['participant-info'])) {
+                foreach($payment['participant-info'] as $id => $participant) { 
+                  ?>
+                  <tr participantid="<?=$id?>" transactionid="<?=$pay_id?>">
+                    <td>Deltager</td>
+                    <td><?=$participant['name']?></td>
+                    <td><?=$participant['phone']?></td>
+                    <td><?=$participant['signup-amount']?> / <?=$participant['real-amount']?></td>
+                    <td><?=$participant['comment']?></td>
+                    <td>ID:<?=$participant['display-id']?></td>
+                    <?php if ($show_buttons) { ?>
+                      <td><button id="confirm-<?=$pay_id?>-<?=$id?>" class="confirm-button" 
+                          transaction="<?=$pay_id?>" participant="<?=$id?>">
+                        Godkend
+                      </button></td>
+                      <?php if (!$multi) { ?>
+                        <td><button id="reject-<?=$pay_id?>-<?=$id?>" class="reject-button"
+                            transaction="<?=$pay_id?>" participant="<?=$id?>">
+                          Afvis
+                        </button></td>
+                      <?php } ?>
+                    <?php } ?>
+                  </tr>
+                  <?php
+                } 
+              }
+            }
+            ?>
+          </tbody>
+        </table>
+        <?php if (!$multi && $show_buttons) { ?>
+          <div class="confirm-group confirm-group-bottom">
+            Godkend alle i ovenstående kategori
+            <button id="confirm-group-<?=$cid?>" class="group-button">Godkend Alle</button>
+          </div>
+          <div class="spacer">&nbsp;</div>
+        <?php } ?>
+      <?php } ?>
+    </div>
+  </fieldset>
+</div>

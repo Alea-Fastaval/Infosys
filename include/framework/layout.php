@@ -530,6 +530,7 @@ HTML;
             <li><a href='{$this->url('economy_breakdown')}'>Budget oversigt</a></li>
             <li><a href='{$this->url('accounting_overview')}'>Regnskabs-oversigt</a></li>
             <li><a href='{$this->url('participant_overview')}'>Deltager-oversigt</a></li>
+            <li><a href='{$this->url('register_payments')}'>On-line Betalinger</a></li>
         </ul>
     </li>
     <li class='topmenu-item'>

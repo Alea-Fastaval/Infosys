@@ -17,6 +17,7 @@ CREATE TABLE payment_registrations (
   token TEXT DEFAULT NULL,
   fl_id INT DEFAULT NULL,
   completed INT DEFAULT NULL,
+  confirmed INT DEFAULT NULL,
   status char(10) DEFAULT 'created',
   PRIMARY KEY(id),
   CONSTRAINT `payment_registrations_pufk` FOREIGN KEY (`payment_user_id`) REFERENCES `payment_users` (`payment_user_id`)

@@ -152,8 +152,8 @@ class Routes
         $this->routes['show_double_bookings']                       = array('url' => 'participant/check-double-bookings', 'controller' => 'Participant', 'method' => 'checkForDoubleBookings');
         $this->routes['show_refund']                                = array('url' => 'participant/show-refund', 'controller' => 'Participant', 'method' => 'showRefund');
         $this->routes['name_tag_list']                              = array('url' => 'participant/name-tag-list', 'controller' => 'Participant', 'method' => 'nameTagList');
-        $this->routes['register_mobilepay_payments']                = array('url' => 'participant/register-mobilepay', 'controller' => 'Participant', 'method' => 'registerMobilepay');
-        $this->routes['confirm_mobilepay_payments']                 = array('url' => 'participant/ajax/confirm-mobilepay', 'controller' => 'Participant', 'method' => 'ajaxConfirmPayment');
+        // $this->routes['register_mobilepay_payments']                = array('url' => 'participant/register-mobilepay', 'controller' => 'Participant', 'method' => 'registerMobilepay');
+        // $this->routes['confirm_mobilepay_payments']                 = array('url' => 'participant/ajax/confirm-mobilepay', 'controller' => 'Participant', 'method' => 'ajaxConfirmPayment');
 
         $this->routes['participant_reset_password']                 = array('url' => 'participant/reset-password/:hash:', 'controller' => 'Participant', 'method' => 'resetParticipantPassword');
 
@@ -200,7 +200,9 @@ class Routes
         $this->routes['economy_breakdown']      = array('url' => 'economy/breakdown', 'controller' => 'Participant', 'method' => 'economyBreakdown');
         $this->routes['accounting_overview']    = array('url' => 'economy/accounting-overview/', 'controller' => 'Economy', 'method' => 'accountingOverview');
         $this->routes['participant_overview']   = array('url' => 'economy/participant-overview/', 'controller' => 'Economy', 'method' => 'participantOverview');
-
+        $this->routes['register_payments']      = array('url' => 'economy/register-payments', 'controller' => 'Economy', 'method' => 'registerPayments');
+        $this->routes['confirm_payments']       = array('url' => 'economy/confirm-payments', 'controller' => 'Economy', 'method' => 'confirmPayments');
+        
         // TODO remove methods and pages only used by this route
         $this->routes['detailed_budget']      = array('url' => 'economy/detailedbudget/', 'controller' => 'Economy', 'method' => 'detailedBudget');
 
