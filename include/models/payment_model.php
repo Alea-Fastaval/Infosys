@@ -23,6 +23,7 @@ class PaymentModel extends Model {
       "SELECT payment_user_id FROM payment_users WHERE participant_id = ?",
       $uid
     );
+    $this->fileLog("Get payment user for participant $uid result:\n".print_r($result,true));
 
     if (empty($result)) return null;
     
@@ -30,6 +31,14 @@ class PaymentModel extends Model {
   }
 
   public function createPaymentUser($user_id) {
+    // Insert first to minimize chance of duplicates from multiple requests.
+    $payment_uid = 0;
+    $display_id = 0;
+    $this->db->exec(
+      "INSERT INTO payment_users VALUES(?,?,?)",
+      [$user_id, $payment_uid, $display_id],
+    );
+
     $first_name = "Fastaval Deltager ". $user_id;
     $result = $this->foreningLetAPI('member', [
       'member' => [
@@ -42,13 +51,11 @@ class PaymentModel extends Model {
       ]
     ]);
 
-    //$this->fileLog("Payment Create User Result:\n".print_r($result,true));
-    
     $payment_uid = $result->member->id;
     $display_id = $result->member->display_id;
     $this->db->exec(
-      "INSERT INTO payment_users VALUES(?,?,?)",
-      [$user_id, $payment_uid, $display_id],
+      "UPDATE payment_users SET payment_user_id = ?, payment_display_id = ? WHERE participant_id = ?",
+      [$payment_uid, $display_id, $user_id],
     );
     return $payment_uid;
   }
