@@ -1,7 +1,7 @@
 <h2>Sidste påmindelse om betaling til Fastaval <?=$this->year?></h2>
 
 <p>
-    Hej <?= e($this->participant->fornavn);?> <?= e($this->participant->efternavn);?>,
+    Hej <?= $this->participant->getName()?>,
 </p>
 
 <p>Vi skriver til dig, fordi vi ikke kan se din betaling for Fastaval <?=$this->year?>.</p>

@@ -1612,7 +1612,7 @@ HAVING
 
         $return = array(
             'id'         => $participant->id,
-            'name'       => trim($participant->fornavn . ' ' . $participant->efternavn),
+            'name'       => $participant->getName(),
             'checked_in' => strtotime($participant->checkin_time) > 1 ? 1 : 0,
             'messages'   => $participant->beskeder,
             'sleep'      => $sleep,

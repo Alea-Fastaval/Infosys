@@ -1910,6 +1910,14 @@ WHERE
         } 
     }
 
+    public function getShortName() {
+        if (!empty($this->storage['nickname'])) {
+            return explode(' ', $this->storage['nickname'])[0];
+        } else {
+            return explode(' ', $this->storage['fornavn'])[0];
+        } 
+    }
+
     /**
      * Check if participant is a board game designer
      */

@@ -375,7 +375,7 @@ ORDER BY
             $aktivitet = $hold->getAktivitet();
             $afvikling = $hold->getAfvikling();
 
-            $firstname = $deltager->fornavn;
+            $firstname = $deltager->getShortName();
             $tid       = date('H:i', strtotime($afvikling->start));
 
             $message_da = "Hej {$firstname}. Om lidt kl {$tid} skal du være med til {$aktivitet->navn}";
@@ -412,7 +412,7 @@ ORDER BY
 
             $gds = $vagt->getGDS();
 
-            $firstname = $deltager->fornavn;
+            $firstname = $deltager->getShortName();
             $tid       = date('H:i', strtotime($vagt->start));
 
             $message_da   = "Hej {$firstname}. Din {$gds->navn} helte-tjans starter om lidt - kl.{$tid} :-) Masser af tak og kram fra Fastaval";
@@ -444,7 +444,7 @@ ORDER BY
 
             $gds = $vagt->getGDS();
 
-            $firstname = $deltager->fornavn;
+            $firstname = $deltager->getShortName();
             $tid       = date('H:i', strtotime($vagt->start));
 
             $message_da   = "Hej {$firstname}. Din {$gds->navn} helte-tjans starter om lidt - kl.{$tid} :-) Masser af tak og kram fra Fastaval";
@@ -538,7 +538,7 @@ ORDER BY
             $aktivitet = $hold->getAktivitet();
             $afvikling = $hold->getAfvikling();
 
-            $firstname = $deltager->fornavn;
+            $firstname = $deltager->getShortName();
             $title     = $aktivitet->navn;
 
             if ($afvikling->lokale_id && ($lokale = $this->createEntity('Lokaler')->findById($afvikling->lokale_id))) {
@@ -622,7 +622,7 @@ SQL;
 
             $gds = $vagt->getGDS();
 
-            $firstname = $deltager->fornavn;
+            $firstname = $deltager->getShortName();
             $title     = $gds->navn;
             $tid       = date('H:i', strtotime($vagt->start));
             $message   = "Hej {$firstname}. Din {$title} helte-tjans starter om lidt - kl.{$tid} :-) Masser af tak og kram fra Fastaval";
@@ -682,7 +682,7 @@ SQL;
 
             $gds = $vagt->getGDS();
 
-            $firstname = $deltager->fornavn;
+            $firstname = $deltager->getShortName();
             $title     = $gds->navn;
             $tid       = date('H:i', strtotime($vagt->start));
             $message   = "Hej {$firstname}. Obs! Husk du har en {$title} GDS-tjans i morgen kl.{$tid} :-) Masser af tak og kram fra Fastaval";

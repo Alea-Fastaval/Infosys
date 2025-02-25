@@ -8,7 +8,7 @@
         ?>
         <p class='deltager-wearorder-deltager'>
             ID: <?=$deltager->id?>
-            Navn: <a href="<?=$this->url('visdeltager', array('id' => $deltager->id))?>"><?=$deltager->fornavn?> <?=$deltager->efternavn?></a>
+            Navn: <a href="<?=$this->url('visdeltager', array('id' => $deltager->id))?>"><?=$deltager->getName()?></a>
         </p>
         <p class='deltager-wearord-order'>
             Kategori: <?=$ord->getWearName('da', false)?>, <?=$ord->getWearpris()->getCategory()->navn?>

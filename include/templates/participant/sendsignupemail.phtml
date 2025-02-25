@@ -65,7 +65,7 @@ Brug venligst dette link til at <strong>uploade dit billede</strong>:
 <tr><td colspan="3" style="text-align: center; background-color: lightgray; border-top: 1px solid black; border-bottom: 1px solid black;">
     <h3>Praktisk<h3>
 </td></tr>
-<tr><td colspan="2">Navn:                                   </td><td><?=$this->participant->getName()?></td></tr>
+<tr><td colspan="2">Navn:                                   </td><td><?=$this->participant->fornavn?> <?=$this->participant->efternavn?></td></tr>
 <tr><td colspan="2">Adresse:                                </td><td><?=$this->participant->adresse1?></td></tr>
 <?php if ($this->participant->adresse2) : ?>
 <tr><td colspan="2">                                        </td><td><?=$this->participant->adresse2?></td></tr>
