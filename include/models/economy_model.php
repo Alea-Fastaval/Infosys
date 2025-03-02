@@ -372,7 +372,9 @@ ORDER BY
 
   public function loadPayments() {
     $query = 
-      "SELECT pu.participant_id, pu.payment_display_id, pr.id, pr.amount, pr.created, pr.fl_id, pr.completed, pr.confirmed, pr.status, d.betalt_beloeb FROM payment_users AS pu
+      "SELECT pu.participant_id, pu.payment_display_id, pr.id, pr.amount, pr.created, pr.fl_id, pr.completed,
+        pr.confirmed, pr.status, d.betalt_beloeb, d.original_price 
+      FROM payment_users AS pu
       JOIN payment_registrations AS pr ON pu.payment_user_id = pr.payment_user_id
       JOIN deltagere AS d ON pu.participant_id = d.id
       ORDER BY pr.status, pr.created";
@@ -507,6 +509,32 @@ ORDER BY
     return [
       'status' => 'error',
       'message' => "Kunne ikke opdatere deltager $participant_id"
+    ];
+  }
+
+  public function cancelPendingPayment($payment_id) {
+    $query = "SELECT * FROM payment_registrations WHERE id = ?";
+    $result = $this->db->query($query, [$payment_id]);
+    if (empty($result)) {
+      return [
+        'status' => 'error',
+        'message' => 'Payment ID not found',
+      ];
+    }
+
+    if ($result[0]['status'] !== 'pending') {
+      return [
+        'status' => 'error',
+        'message' => 'Payment status is not pending',
+      ];
+    }
+
+    $query = "UPDATE payment_registrations SET status = 'cancelled' WHERE id = ?";
+    $this->db->exec($query, [$payment_id]);
+
+    return [
+      'status' => 'success',
+      'message' => 'Payment has been cancelled',
     ];
   }
 }

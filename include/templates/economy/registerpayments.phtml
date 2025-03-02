@@ -96,8 +96,8 @@
           ?><td <?=$cell_style?>><?=$row[$key]?></td><?php 
         } 
         if ($row['match']['participant'] && $group != 'processed') {
-          ?><td><button id="confirm-single-<?=$$row['payment_id']?>" class="confirm-button">Godkend</button></td><?php 
-          ?><td><button id="decline-single-<?=$$row['payment_id']?>" class="decline-button">Afvis</button></td><?php 
+          ?><td><button id="confirm-single-<?=$row['payment_id']?>" class="confirm-button">Godkend</button></td><?php 
+          ?><td><button id="decline-single-<?=$row['payment_id']?>" class="decline-button">Afvis</button></td><?php 
         }
       ?>
               </tr>
@@ -119,6 +119,7 @@
           'completed' => 'Udført',
           'confirmed' => 'Bekræftet',
           'betalt_beloeb' => 'Har betalt',
+          'original_price' => 'Pris, tilmelding',
         ];
 
         $categories = [
@@ -158,8 +159,15 @@
                     } else {
                       $text = $payment[$key];
                     }
+                    $style = '';
+                    if ($key == 'amount' && $payment['amount'] != $payment['original_price']) {
+                      $style = 'style="background-color:pink;"';
+                    }
                     ?>
-                    <td><?=$text?></td>
+                    <td <?=$style?>><?=$text?></td>
+                  <?php } ?>
+                  <?php if ($group == 'pending') { ?>
+                    <td><button id="cancel-single-<?=$payment['id']?>" payment-id="<?=$payment['id']?>" class="cancel-button">Annuller</button></td>
                   <?php } ?>
                 </tr>
       <?php } ?>

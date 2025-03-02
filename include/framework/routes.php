@@ -202,6 +202,7 @@ class Routes
         $this->routes['participant_overview']   = array('url' => 'economy/participant-overview/', 'controller' => 'Economy', 'method' => 'participantOverview');
         $this->routes['register_payments']      = array('url' => 'economy/register-payments', 'controller' => 'Economy', 'method' => 'registerPayments');
         $this->routes['confirm_payments']       = array('url' => 'economy/confirm-payments', 'controller' => 'Economy', 'method' => 'confirmPayments');
+        $this->routes['cancel_payment']         = array('url' => 'economy/cancel-payment', 'controller' => 'Economy', 'method' => 'cancelPayment');
         
         // TODO remove methods and pages only used by this route
         $this->routes['detailed_budget']      = array('url' => 'economy/detailedbudget/', 'controller' => 'Economy', 'method' => 'detailedBudget');

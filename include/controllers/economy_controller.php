@@ -237,7 +237,41 @@ class EconomyController extends Controller
       'result' => $$result_list,
     ]);
 
-    //$this->fileLog("confirmPayments request:\n".print_r($post,true));
+  }
+
+  /**
+   * Ajax function for canceling on-line payments pending confirmation
+   *
+   * @access public
+   * @return void
+   */
+  public function cancelPayment() {
+    if (!$this->model->getLoggedInUser()->hasRole('Admin')) {
+      $this->jsonOutput([
+        'status' => 'error',
+        'message' => 'Admin only',
+      ], 401);
+    }
+
+    // if it's not a post request, don't do anything
+    if (!$this->page->request->isPost()){
+      $this->jsonOutput([
+        'status' => 'error',
+        'message' => 'not a POST request',
+      ], 400);
+    }
+
+    $post = $this->page->request->post;
+    if (!isset($post->payment_id)){
+      $this->jsonOutput([
+        'status' => 'error',
+        'message' => 'missing payment ID',
+      ], 400);
+    }
+
+    $result = $this->model->cancelPendingPayment($post->payment_id);
+
+    $this->jsonOutput($result, $result['status'] == 'success'? 200 : 400);
   }
 }
 

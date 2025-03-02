@@ -17,6 +17,10 @@
     $('.manual-confirm-button').click(function() {
       manualConfirm(this);
     });
+
+    $('.cancel-button').click(function() {
+      cancel(this);
+    });
   });
 
   function confirm(button) {
@@ -97,6 +101,32 @@
         markError(result.sheet_row);
       }
     }
+  }
+
+  function cancel(button) {
+    button.innerHTML = "Arbejder";
+    button.disabled = true;
+
+    var payment_id = button.getAttribute('payment-id');
+
+    $.ajax('/economy/cancel-payment', {
+      type: 'post',
+      accepts: 'application/json',
+      data: { payment_id},
+      success: function(data, status, jqXHR) {
+        if (data.status == 'success') {
+          button.innerHTML = 'Anulleret';
+          $(button).parents('tr').css('opacity', '.5');
+        } else {
+          alert("Der skete en fejl:" + data.message);
+          button.innerHTML = "Fejl";
+        }
+      },
+      error: function(jqXHR, status, error) {
+        alert("Der skete en fejl:" + error);
+        button.innerHTML = "Fejl";
+      }
+    });
   }
 
   function reject(button) {
