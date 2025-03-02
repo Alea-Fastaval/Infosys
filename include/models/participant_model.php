@@ -3239,7 +3239,7 @@ WHERE (
         $participants = $this->createEntity('Deltagere')->findAll();
 
         foreach($participants as $participant) {
-            if ($participant->anulled) continue;
+            if ($participant->annulled == 'ja') continue;
             
             $participant->difference = $participant->calcSignupTotal() - $participant->betalt_beloeb;
             if ($participant->difference > 0) {
