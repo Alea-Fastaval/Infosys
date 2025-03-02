@@ -1,10 +1,10 @@
 {
-    "age_young": 18,
+    "age_young": "25",
     "age_kid": "15",
-    "max_financial_support": 85,
+    "max_financial_support": "88",
     "max_bus_tickets": "48",
     "max_junior_tickets": "60",
-    "max_junior_reserve": "20",
+    "max_junior_reserve": "10",
     "birth": "birthdate",
     "participant": "participant",
     "organizer": "organizercategory",
@@ -79,7 +79,7 @@
         }
     },
     "input_error": {
-        "en": "There some issues with the input on the current page.\nDo you want to stay and fix them?",
+        "en": "There's some issues with the input on the current page.\nDo you want to stay and fix them?",
         "da": "Der er nogle problemer med indtastningen p\u00e5 den nuv\u00e6rende side.\nVil du blive p\u00e5 siden og rette dem?"
     },
     "sub_total": {

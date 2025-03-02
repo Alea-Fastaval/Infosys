@@ -1446,9 +1446,9 @@ SQL;
         }
 
         require_once 'PEAR.php';
-        require_once 'Image/Barcode.php';
+        require_once 'Image/Barcode2.php';
 
-        $barcode    = new Image_Barcode;
+        $barcode    = new Image_Barcode2;
         $img        = $barcode->draw($participant->getEan8Number($this->getConYear()), 'ean8', 'png', false);
         $width      = imagesx($img);
         $height     = imagesy($img);
@@ -1487,9 +1487,9 @@ SQL;
         }
 
         require_once 'PEAR.php';
-        require_once 'Image/Barcode.php';
+        require_once 'Image/Barcode2.php';
 
-        $barcode    = new Image_Barcode;
+        $barcode    = new Image_Barcode2;
         $img        = @$barcode->draw($participant->getEan8Number($this->getConYear()), 'ean8', 'png', false);
         $width      = imagesx($img);
         $height     = imagesy($img);
@@ -1527,9 +1527,9 @@ SQL;
         }
 
         require_once 'PEAR.php';
-        require_once 'Image/Barcode.php';
+        require_once 'Image/Barcode2.php';
 
-        $barcode    = new Image_Barcode;
+        $barcode    = new Image_Barcode2;
         $img        = $barcode->draw($participant->getEan8Number($this->getConYear()), 'ean8', 'png', false);
         $width      = imagesx($img);
         $height     = imagesy($img);
@@ -1596,9 +1596,9 @@ SQL;
         imagettftext($text2, $lineheight, 0, 4, $bbox2_height - 4, $black, "/usr/share/fonts/truetype/ttf-liberation/LiberationMono-Regular.ttf", "#" . $participant_id);
 
         require_once 'PEAR.php';
-        require_once 'Image/Barcode.php';
+        require_once 'Image/Barcode2.php';
 
-        $barcode    = new Image_Barcode;
+        $barcode    = new Image_Barcode2;
         $img        = $barcode->draw($participant->getEan8Number($this->getConYear()), 'ean8', 'png', false);
         $width      = imagesx($img);
         $height     = imagesy($img);
@@ -2071,7 +2071,7 @@ INSERT INTO participantidtemplates SET template_id = ?, participant_id = ? ON DU
      */
     public function getDisplayColumns()
     {
-        $filter_out = array('id', 'krigslive_bus', 'password', 'ovelokale_id', 'ny_alea', 'er_alea', 'adresse1', 'adresse2', 'alder', 'rabat', 'deltaget_i_fastaval', 'sovelokale_id');
+        $filter_out = array('id', 'krigslive_bus', 'password', 'ovelokale_id', 'ny_alea', 'er_alea', 'adresse2', 'alder', 'rabat', 'deltaget_i_fastaval', 'sovelokale_id');
         $columns    = array_diff($this->createEntity('Deltagere')->getColumns(), $filter_out);
 
         $readable_columns = $this->createEntity('Deltagere')->getHumanReadableFieldNames();
@@ -2448,17 +2448,6 @@ SET participant_id = ?, amount = ?, cost = ?, fees = ?, timestamp = NOW()
         $page->gds         = $participant->getGDSTilmeldinger();
         $page->food        = $participant->getMadtider();
 
-        $api = $this->factory('Api');
-        if ($participant->id) {
-            try {
-                $hash = $api->getParticipantPaymentHash($participant);
-            } catch (FrameworkException $e) {
-                $hash = $api->setParticipantPaymentHash($participant);
-            }
-
-            $page->payment_url = $this->url('participant_payment', array('hash' => $hash));
-        }
-
         $entrance = array();
         $prices   = array(
             'alea'              => 0,
@@ -2707,13 +2696,13 @@ SET participant_id = ?, amount = ?, cost = ?, fees = ?, timestamp = NOW()
      */
     public function getParticipantsForPaymentReminder($days_ago = 1)
     {
+        //return [$this->createEntity('Deltagere')->findById(1)];
+
         $participants = $this->getParticipantsSignedupDaysAgo($days_ago);
-        $participants = $this->filterOutPaidSignups($participants);
+        $participants = $this->filterOutAnnulled($participants);
         $participants = $this->filterOutGroups($participants);
         $participants = $this->filterOutRecentReminders($participants, $days_ago);
-        $participants = $this->filterOutAnnulled($participants);
-
-        //return [$this->createEntity('Deltagere')->findById(1)];
+        $participants = $this->filterOutPaidSignups($participants);
         return $participants;
     }
 
@@ -2722,8 +2711,8 @@ SET participant_id = ?, amount = ?, cost = ?, fees = ?, timestamp = NOW()
         //return [$this->createEntity('Deltagere')->findById(1)];
 
         $participants = $this->createEntity('Deltagere')->findAll();
-        $participants = $this->filterOutRecentMails($participants, 1);
         $participants = $this->filterOutAnnulled($participants);
+        $participants = $this->filterOutRecentMails($participants, 1);
 
         return $participants;
     }
@@ -3244,6 +3233,21 @@ WHERE (
         }
 
         return $refundees;
+    }
+
+    public function findPeopleNeedingPayment(){
+        $participants = $this->createEntity('Deltagere')->findAll();
+
+        foreach($participants as $participant) {
+            if ($participant->anulled) continue;
+            
+            $participant->difference = $participant->calcSignupTotal() - $participant->betalt_beloeb;
+            if ($participant->difference > 0) {
+                $debitors[] = $participant;
+            }
+        }
+
+        return $debitors;
     }
 
     public function parsePaymentSheet($file){

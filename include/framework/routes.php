@@ -88,8 +88,11 @@ class Routes
         $this->routes['reset_pass_submit']     = array('url' => 'reset-pass-submit/:hash:', 'controller' => 'Index', 'method' => 'resetPassAction');
 
         // SMS stuffs - hackish
-        $this->routes['kickoff_sms_script'] = array('url' => 'index/kickoffsmsscript', 'controller' => 'index', 'method' => 'kickOffSMSScript');
         $this->routes['sms_auto_dryrun']    = array('url' => 'sms/auto-dryrun', 'controller' => 'sms', 'method' => 'autoDryRun');
+
+        // Automatic messages
+        $this->routes['kickoff_sms_script'] = array('url' => 'index/automaticmessages', 'controller' => 'index', 'method' => 'sendAutomaticMessages');
+
 
         // deltager routes
         $this->routes['all_users_ajax']                             = array('url' => 'deltager/ajax/userlist', 'controller' => 'Participant', 'method' => 'ajaxlist');
@@ -148,9 +151,10 @@ class Routes
         $this->routes['participant_check_for_voucher']              = array('url' => 'participant/has-vouchers/:participant_id:', 'controller' => 'Participant', 'method' => 'checkForVouchers');
         $this->routes['show_double_bookings']                       = array('url' => 'participant/check-double-bookings', 'controller' => 'Participant', 'method' => 'checkForDoubleBookings');
         $this->routes['show_refund']                                = array('url' => 'participant/show-refund', 'controller' => 'Participant', 'method' => 'showRefund');
+        $this->routes['show_debitors']                              = array('url' => 'participant/show-debitors', 'controller' => 'Participant', 'method' => 'showMissingPayment');
         $this->routes['name_tag_list']                              = array('url' => 'participant/name-tag-list', 'controller' => 'Participant', 'method' => 'nameTagList');
-        $this->routes['register_mobilepay_payments']                = array('url' => 'participant/register-mobilepay', 'controller' => 'Participant', 'method' => 'registerMobilepay');
-        $this->routes['confirm_mobilepay_payments']                 = array('url' => 'participant/ajax/confirm-mobilepay', 'controller' => 'Participant', 'method' => 'ajaxConfirmPayment');
+        // $this->routes['register_mobilepay_payments']                = array('url' => 'participant/register-mobilepay', 'controller' => 'Participant', 'method' => 'registerMobilepay');
+        // $this->routes['confirm_mobilepay_payments']                 = array('url' => 'participant/ajax/confirm-mobilepay', 'controller' => 'Participant', 'method' => 'ajaxConfirmPayment');
 
         $this->routes['participant_reset_password']                 = array('url' => 'participant/reset-password/:hash:', 'controller' => 'Participant', 'method' => 'resetParticipantPassword');
 
@@ -194,9 +198,13 @@ class Routes
         $this->routes['participant_register_bank_payment']          = array('url' => 'participant/register-bank-transfer/:id:', 'controller' => 'Participant', 'method' => 'registerBankTransfer');
 
         // economy stuffs
-        $this->routes['economy_breakdown']    = array('url' => 'economy/breakdown', 'controller' => 'Participant', 'method' => 'economyBreakdown');
-        $this->routes['accounting_overview']  = array('url' => 'economy/accounting-overview/', 'controller' => 'Economy', 'method' => 'accountingOverview');
-
+        $this->routes['economy_breakdown']      = array('url' => 'economy/breakdown', 'controller' => 'Participant', 'method' => 'economyBreakdown');
+        $this->routes['accounting_overview']    = array('url' => 'economy/accounting-overview/', 'controller' => 'Economy', 'method' => 'accountingOverview');
+        $this->routes['participant_overview']   = array('url' => 'economy/participant-overview/', 'controller' => 'Economy', 'method' => 'participantOverview');
+        $this->routes['register_payments']      = array('url' => 'economy/register-payments', 'controller' => 'Economy', 'method' => 'registerPayments');
+        $this->routes['confirm_payments']       = array('url' => 'economy/confirm-payments', 'controller' => 'Economy', 'method' => 'confirmPayments');
+        $this->routes['cancel_payment']         = array('url' => 'economy/cancel-payment', 'controller' => 'Economy', 'method' => 'cancelPayment');
+        
         // TODO remove methods and pages only used by this route
         $this->routes['detailed_budget']      = array('url' => 'economy/detailedbudget/', 'controller' => 'Economy', 'method' => 'detailedBudget');
 
@@ -465,6 +473,7 @@ class Routes
         // $this->routes['payment_cancel']             = array('url' => 'payment/cancel', 'controller' => 'Payment', 'method' => 'cancelPayment');
         // $this->routes['payment_status']             = array('url' => 'payment/status', 'controller' => 'Payment', 'method' => 'checkPayment');
         // $this->routes['payment_check_total']        = array('url' => 'payment/participanttotal', 'controller' => 'Payment', 'method' => 'checkTotal');
+        $this->routes['payment_create']            = array('url' => 'payment/create', 'controller' => 'Payment', 'method' => 'setupPayment');
 
         // Ticket system
         $this->routes['tickets_main']               = array('url' => 'tickets', 'controller' => 'Tickets', 'method' => 'mainPage');

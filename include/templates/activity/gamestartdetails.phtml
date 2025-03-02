@@ -39,7 +39,7 @@ $this->registerLateLoadJS('gamestartdetails.js');
             <ul>
                 <?php foreach ($detail['run']->getAssignedGMs() as $gms) :
                     foreach ($gms as $gm) :?>
-                    <li><?php echo e($gm->getDeltager()->fornavn);?> <?php echo e($gm->getDeltager()->efternavn);?> (<?php echo e($gm->getDeltager()->mobiltlf);?>)</li>
+                    <li><?=$gm->getDeltager()->getname()?> (<?php echo e($gm->getDeltager()->mobiltlf);?>)</li>
                     <?php endforeach;
                 endforeach;?>
             </ul>

@@ -238,7 +238,7 @@ HAVING
                     $time = array(
                         'afvikling_id' => intval($afvikling->id),
                         'aktivitet_id' => intval($res->id),
-                        'lokale_id'    => $lokale ? $lokale->id : '',
+                        'lokale_id'    => $lokale ? $lokale->id : null,
                         'lokale_navn'  => $lokale ? '​'.$lokale->beskrivelse : '',
                         'start'        => $this->makeJsonTimestamp($afvikling->start, $app_output),
                         'end'          => $this->makeJsonTimestamp($afvikling->slut, $app_output),
@@ -259,7 +259,7 @@ HAVING
                                 $time = array(
                                     'afvikling_id' => intval($multi->id) . '00' . intval($afvikling->id),
                                     'aktivitet_id' => intval($res->id),
-                                    'lokale_id'    => $lokale ? $lokale->id : '',
+                                    'lokale_id'    => $lokale ? $lokale->id : null,
                                     'lokale_navn'  => $lokale ? '​'.$lokale->beskrivelse : '',
                                     'start'        => $this->makeJsonTimestamp($multi->start, $app_output),
                                     'end'          => $this->makeJsonTimestamp($multi->slut, $app_output),
@@ -322,7 +322,7 @@ HAVING
                     $time = array(
                         'afvikling_id' => intval($afvikling->id),
                         'aktivitet_id' => intval($res->id),
-                        'lokale_id'    => $lokale ? $lokale->id : '',
+                        'lokale_id'    => $lokale ? $lokale->id : null,
                         'lokale_navn'  => $lokale ? '​'.$lokale->beskrivelse : '',
                         'start'        => $this->makeJsonTimestamp($afvikling->start),
                         'end'          => $this->makeJsonTimestamp($afvikling->slut),
@@ -337,7 +337,7 @@ HAVING
                                 $time = array(
                                     'afvikling_id' => intval($multi->id) . '00' . intval($afvikling->id),
                                     'aktivitet_id' => intval($res->id),
-                                    'lokale_id'    => $lokale ? $lokale->id : '',
+                                    'lokale_id'    => $lokale ? $lokale->id : null,
                                     'lokale_navn'  => $lokale ? '​'.$lokale->beskrivelse : '',
                                     'start' => $this->makeJsonTimestamp($multi->start),
                                     'end' => $this->makeJsonTimestamp($multi->slut),
@@ -1612,7 +1612,7 @@ HAVING
 
         $return = array(
             'id'         => $participant->id,
-            'name'       => trim($participant->fornavn . ' ' . $participant->efternavn),
+            'name'       => $participant->getName(),
             'checked_in' => strtotime($participant->checkin_time) > 1 ? 1 : 0,
             'messages'   => $participant->beskeder,
             'sleep'      => $sleep,
@@ -1688,7 +1688,7 @@ HAVING
                 continue;
             }
 
-            $type = $play->type === 'spilleder' && $version >= 2 ? 'spilleder' : $activity->type;
+            $type = $play->type === 'spiller' ? $activity->type : $play->type;
 
             $item = array(
                 'type'          => 'activity',

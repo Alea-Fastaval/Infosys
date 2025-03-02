@@ -1,0 +1,1 @@
+ALTER TABLE deltagere ADD participant_hash text;

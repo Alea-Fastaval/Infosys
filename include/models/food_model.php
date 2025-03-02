@@ -267,7 +267,7 @@ class FoodModel extends Model
         $texts = array_map(function($x) {return '<strong>' . $x->getMad()->kategori . '</strong>';}, $received);
 
         $this->log("Deltager #{$deltager->id} har fået mad udleveret af {$this->getLoggedInUser()->user}", 'Mad', $this->getLoggedInUser());
-        return htmlspecialchars($deltager->fornavn . " " . $deltager->efternavn, ENT_QUOTES) . " (ID: {$deltager->id}):  " . implode(' +++ ', $texts) . "<br/>Markeret som modtaget - hvis det er en fejl, så tryk på Undo-knappen.";
+        return htmlspecialchars($deltager->getName(), ENT_QUOTES) . " (ID: {$deltager->id}):  " . implode(' +++ ', $texts) . "<br/>Markeret som modtaget - hvis det er en fejl, så tryk på Undo-knappen.";
     }
 
     /**
@@ -349,7 +349,7 @@ class FoodModel extends Model
         $texts = array_map(function($x) {return '<strong>' . $x->getMad()->kategori . '</strong>';}, $unreceived);
 
         $this->log("Deltager #{$deltager->id} har fået mad markeret ikke-udleveret af {$this->getLoggedInUser()->user}", 'Mad', $this->getLoggedInUser());
-        return htmlspecialchars($deltager->fornavn . " " . $deltager->efternavn, ENT_QUOTES) . " (ID: {$deltager->id}) har fået slettet markeringen for " . implode(', ', $texts) . ".";
+        return htmlspecialchars($deltager->getName(), ENT_QUOTES) . " (ID: {$deltager->id}) har fået slettet markeringen for " . implode(', ', $texts) . ".";
     }
 
     public function retrieveHandoutStats(RequestVars $post) {

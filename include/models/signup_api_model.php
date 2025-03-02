@@ -42,6 +42,12 @@ class SignupApiModel extends Model {
       }
 
       // Count junior participants
+      $query = "SELECT COUNT(*) as count FROM deltagere WHERE brugerkategori_id = 10"; //Junior participants have ID 10
+      $result = $this->db->query($query);
+      if (count($result) == 1) {
+        $config->current_junior_participants = $result[0]['count'];
+        $config->junior_closed = $result[0]['count'] >= ($config->max_junior_tickets + $config->max_junior_reserve);
+      }
 
       // Count bus tickets
       $query = 
@@ -136,11 +142,11 @@ class SignupApiModel extends Model {
     $result = (object)[];
 
     $categories = [
-      12 => [
-        'exclude' => 18,
+      24 => [
+        'exclude' => 25,
       ],
-      18 => [
-        'exclude' => 12,
+      25 => [
+        'exclude' => 24,
       ],
     ];
     $food_entity = $this->createEntity('Mad');
@@ -243,6 +249,7 @@ class SignupApiModel extends Model {
       $run_info = (object)[];
       $run_info->id = $run->id;
       $run_info->activity = $run->aktivitet_id;
+      $run_info->activity_name = $result->activities[$run->aktivitet_id]->title['da'];
       $run_info->start = $set_time($run->start);
       $run_info->end = $set_time($run->slut);
       $run_info->signups = $run_signups[$run->id] ?? 0;
@@ -270,6 +277,12 @@ class SignupApiModel extends Model {
     
     foreach($result->runs as $day => $runs) {
       usort($result->runs[$day], function($a, $b) {
+        if ($a->start['stamp'] == $b->start['stamp']) {
+          if($a->end['stamp'] == $b->end['stamp']) {
+            return strcmp($a->activity_name, $b->activity_name);
+          }
+          return $a->end['stamp'] - $b->end['stamp'];
+        }
         return $a->start['stamp'] - $b->start['stamp'];
       });
     }
@@ -328,7 +341,7 @@ class SignupApiModel extends Model {
     if (!isset($data['info'])) {
       // Create barebone participant
       $participant = $this->createEntity('Deltagere');
-      $participant->password = sprintf('%06d', mt_rand(0, 999999));
+      $participant->password = sprintf('%06d', mt_rand(100000, 999999));
       $participant->fornavn = "";
       $participant->efternavn = "";
       $participant->adresse1 = "";
@@ -349,8 +362,18 @@ class SignupApiModel extends Model {
     
     if(count($result['errors']) == 0) {
       // Update participant
-      if(!$participant->update()) {
+      $participant->participant_hash = $data['hash'];
+      try {
+        if(!$participant->update()) {
+          throw new FrameworkException("Failed update on participant\nParticipant:".print_r($participant, true));
+        }
+      } catch (FrameworkException $error) {
+        $this->fileLog("Failed to create participant from data with hash: $data[hash]");
+        $error->logException();
         $result['errors']['confirm'][] = ['type' => 'database'];
+
+        // Delete participant if this was a new entry that failed
+        if (!isset($data['info'])) $participant->delete();
       }
     }
 
@@ -432,11 +455,12 @@ class SignupApiModel extends Model {
     $participant->signed_up = date('Y-m-d H:i:s');
     
     // Reset entrance types
+    // Don't remove bank transfer fee (37)
+    // Don't remove sparkling wine (81) from late signup
     if ($late_signup) {
-      // Don't remove sparkling wine from late signups since it's disabled on the page
-      $participant->removeEntranceExcept([81]);
+      $participant->removeEntranceExcept([81, 37]);
     } else {
-      $participant->removeEntrance();
+      $participant->removeEntranceExcept([37]);
     }
 
     // Reset DIY
@@ -515,6 +539,40 @@ class SignupApiModel extends Model {
               $bk  = $this->createEntity('BrugerKategorier');
               $participant->brugerkategori_id = $bk->findByname($value)->id;
               $is_organizer = $value == 'Arrangør';
+
+              // Some special logic for parents
+              if ($participant->brugerkategori_id == 11) {
+                $entry = $this->createEntity('Indgang');
+                $select = $entry->getSelect();
+                $select->setWhere('type', 'like', '%Forælder%');
+                $entry = $entry->findBySelect($select);
+                if (!$entry) {
+                  $errors['entry'][] = [
+                    'type' => 'no_entry',
+                    'info' => "parent",
+                    'age'  => $age,
+                    'alea' => ($is_alea || $items['misc:alea']),
+                    'organizer' => $is_organizer,
+                  ];
+                  continue 2;
+                }
+                $participant->setIndgang($entry);
+
+                $categories['entry'] = [
+                  [
+                    'key' => 'parent',
+                    'value' => 'on',
+                    'price' => $entry->pris,
+                  ],
+                  [
+                    'key' => 'sub_total',
+                    'value' => $entry->pris,
+                  ]
+                ];
+  
+                $total += $entry->pris;
+              }
+
               break;
 
             case 'wear_orders':
@@ -647,11 +705,11 @@ class SignupApiModel extends Model {
               }
           }
         } else {
+          if ($value === 'off') continue;
+
           $key_cat = $key_parts[0];
           $key_item = $key_parts[1];
 
-          if ($value === 'off') continue;
-          
           switch($key_cat) {
             case 'junior':
 
@@ -699,7 +757,7 @@ class SignupApiModel extends Model {
                   }
                 }
                 // NB! We assume Alea signup is earlier or same page
-                if ($age >= $config['main']->age_kid && ($is_alea || $items->{'misc:alea'})) {
+                if ($age >= $config['main']->age_kid && ($is_alea || $items['misc:alea'])) {
                   $select->setWhere('type', 'like', '%Alea%');
                  } else {
                   $select->setWhere('type', 'not like', '%Alea%');
@@ -727,7 +785,7 @@ class SignupApiModel extends Model {
                   'type' => 'no_entry',
                   'info' => "$key_cat:$key_item $value",
                   'age'  => $age,
-                  'alea' => ($is_alea || $items->{'misc:alea'}),
+                  'alea' => ($is_alea || $items['misc:alea']),
                   'organizer' => $is_organizer,
                 ];
                 continue 2;
@@ -747,13 +805,23 @@ class SignupApiModel extends Model {
               //   continue 2;
               // }
 
+              
+
               $entry = $this->createEntity('Indgang');
               $select = $entry->getSelect();
               if ($key_item == 'partout') {
-                $select->setWhere('type', 'like', 'Overnatning - Partout%');
-                // NB! We assume organizer setting is before this
-                if ($age >= $config['main']->age_kid && $is_organizer) {
-                  $select->setWhere('type', 'like', '%Arrangør%');
+                if ($items['sleeping_area:family'] == 'on') {
+                  if ($age >= $config['main']->age_kid) {
+                    $select->setWhere('type', '=', 'Overnatning - FastaFamily');
+                  } else {
+                    $select->setWhere('type', '=', 'Overnatning - FastaFamily - Barn');
+                  }
+                } else {
+                  $select->setWhere('type', 'like', 'Overnatning - Partout%');
+                  // NB! We assume organizer setting is before this
+                  if ($age >= $config['main']->age_kid && $is_organizer) {
+                    $select->setWhere('type', 'like', '%Arrangør%');
+                  }
                 }
               } else {
                 $day = intval($key_item) -1;
@@ -776,6 +844,7 @@ class SignupApiModel extends Model {
               break;
 
             case 'sleeping_area':
+              // TODO check sleeping area age restrictions
               $sleeping_areas[] = $key_item;
               break;
 
@@ -796,7 +865,7 @@ class SignupApiModel extends Model {
                       'id' => "$key",
                       'age'  => $age,
                     ];
-                    continue 2;
+                    continue 3;
                   }
                   $select->setWhere('id', '=', 81); // Sparkling wine ID
                   break;
@@ -869,7 +938,6 @@ class SignupApiModel extends Model {
               } else {
                 $price = $foodprice;
               }
-
               break;
 
             case 'hero':
@@ -1055,6 +1123,8 @@ class SignupApiModel extends Model {
     // Notes
     if ($junior_contact) $participant->setNote('junior_ward', $junior_contact);
 
+    $participant->original_price = $total;
+
     return [
       'errors' => $errors,
       'categories' => $categories,
@@ -1173,9 +1243,9 @@ class SignupApiModel extends Model {
 
         case  $entrance->isDayTicket() || $entrance->isSleepTicket():
           $type = $entrance->isDayTicket() ? 'entry' : 'sleeping';
-          $entrance = $type == 'entry' ? true : $entrance;
+          $has_entrance = $type == 'entry' ? true : $has_entrance;
           $start = new DateTime($entrance->start);
-          $day = intval($start->format('d')) -2;
+          $day = intval($start->format('N')) -2;
           $signup["$type:$day"] = 'on';
           break;
 
@@ -1209,6 +1279,9 @@ class SignupApiModel extends Model {
 
         case in_array($entrance->id, [81, 82, 83]): // Ottofest extra
           $signup['misc:party'.($entrance->id - 80)] = 'on';
+          break;
+
+        case $entrance->id == 37: // Bank transfer fee
           break;
 
         default:
@@ -1306,19 +1379,21 @@ class SignupApiModel extends Model {
     }
 
     // Get notes
-    foreach($participant->note as $key => $note) {
-      if ($key == 'junior_ward') {
-        $ids = [
-          'Navn' => 'contact_name',
-          'Telefon' => 'contact_number',
-          'Email' => 'contact_mail',
-        ];
-        foreach(explode("\n", $note->content) as $line) {
-          [$label, $value] = explode(":", $line);
-          $signup['junior:'.$ids[$label]] = trim($value);
+    if (is_object($participant->note)) {
+      foreach($participant->note as $key => $note) {
+        if ($key == 'junior_ward') {
+          $ids = [
+            'Navn' => 'contact_name',
+            'Telefon' => 'contact_number',
+            'Email' => 'contact_mail',
+          ];
+          foreach(explode("\n", $note->content) as $line) {
+            [$label, $value] = explode(":", $line);
+            $signup['junior:'.$ids[$label]] = trim($value);
+          }
+        } else {
+          $signup['note:'.$key] = $note->content;
         }
-      } else {
-        $signup['note:'.$key] = $note->content;
       }
     }
 

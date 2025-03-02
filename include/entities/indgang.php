@@ -80,7 +80,7 @@ class Indgang extends DBObject
             return false;
         }
 
-        return stripos($this->type, 'indgang') !== false;
+        return (stripos($this->type, 'indgang') !== false) || (stripos($this->type, 'Dagsbillet') !== false);
     }
 
     public function isParty()
@@ -176,7 +176,8 @@ class Indgang extends DBObject
         {
             return false;
         }
-        return stripos($this->type, 'partout') !== false ? true : false;
+        if (stripos($this->type, 'fastafamily') !== false) return true;
+        return stripos($this->type, 'partout') !== false;
     }
 
     /**
@@ -191,7 +192,8 @@ class Indgang extends DBObject
             return false;
         }
 
-        return stripos($this->type, 'alle') !== false || stripos($this->type, 'partout') !== false || stripos($this->type, 'leje') !== false;
+        if ($this->isPartout()) return true;
+        return stripos($this->type, 'alle') !== false || stripos($this->type, 'leje') !== false;
     }
 
     public function isDayTicket()
@@ -200,7 +202,7 @@ class Indgang extends DBObject
             return false;
         }
 
-        return $this->type == "Indgang - Enkelt";
+        return ($this->type == "Indgang - Enkelt") || (stripos($this->type, 'Dagsbillet') !== false);
     }
 
     public function isAleaMembership()

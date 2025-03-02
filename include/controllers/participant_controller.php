@@ -574,6 +574,12 @@ class ParticipantController extends Controller
                     $this->page->model    = $this->model;
                     $this->page->setTemplate('visEdit');
                 }
+            } elseif ($post->cancel_deltager) {
+                $deltager->annulled = 'ja';
+                $deltager->update();
+                $this->successMessage('Tilmeldingen er anulleret');
+                $this->log("Deltager #{$deltager->id} blev anulleret af {$this->model->getLoggedInUser()->user}", 'Deltager', $this->model->getLoggedInUser());
+                $this->hardRedirect($this->url('visdeltager', array('id' => $deltager->id)));
             } elseif ($post->delete_deltager) {
                 $this->page->deltager = $deltager;
                 $this->page->setTemplate('confirmDelete');
@@ -1751,7 +1757,7 @@ die("Not actually sending final reminders<br>\n");
         die();
     }
 
-    protected function sendPaymentReminder($participant, $template, $danish, $danish_title = '', $english_title = '')
+    protected function sendPaymentReminder($participant, $template, $danish, $danish_title = null, $english_title = null)
     {
         $this->model->setupPaymentReminderEmail($participant, $this->page);
 
@@ -1776,6 +1782,9 @@ die("Not actually sending final reminders<br>\n");
         return $mail->send();
     }
 
+    /**
+     * participant/sendwelcomemail
+     */
     public function sendWelcomeMail() {
         $participants = $this->model->getParticipantsForwelcomeMail();
         echo "Sending to ".count($participants)." participants<br>\n";
@@ -1784,6 +1793,7 @@ die("Not actually sending welcome mail\n");
         // Finish response before sending mails, to avoid timeout
         session_write_close();
         fastcgi_finish_request();
+        set_time_limit(0); // setting this to avoid ending execution when sending a lot of mails
 
         $count = 0;
         foreach ($participants as $participant) {
@@ -1793,10 +1803,10 @@ die("Not actually sending welcome mail\n");
 
             $year = date('Y', strtotime($this->config->get('con.start')));
             if ($participant->speaksDanish()) {
-                $title = $danish_title ? $danish_title : "Fastaval $year - Deltagerseddel";
+                $title = $danish_title ? $danish_title : "Fastaval $year - Dit Fastaval Program";
                 $this->page->setTemplate('participant/welcomemailda');
             } else {
-                $title = $english_title ? $english_title : "Fastaval $year - Participant sheet";
+                $title = $english_title ? $english_title : "Fastaval $year - Your Fastaval Program";
                 $this->page->setTemplate('participant/welcomemailen');
             }
     
@@ -1982,6 +1992,15 @@ exit;
         $this->page->rfundees = $this->model->findPeopleNeedingRefund();
     }
 
+    /**
+     * List participants that need a refund
+     *
+     * @access public
+     * @return void
+     */
+    public function showMissingPayment(){
+        $this->page->debitors = $this->model->findPeopleNeedingPayment();
+    }
 
     /**
      * List participants with the information needed for name tags
@@ -2003,11 +2022,10 @@ exit;
             if ($post->filetype === "csv") {
                 $data = [ 0 => ["ID", "Kaldenavn", "Pronomen", "Område"]];
                 foreach ($participants as $participant) {
-                    $nickname = !empty($participant->nickname) ? $participant->nickname: $participant->getName();
                     $work_area = $participant->work_area ? $participant->arbejdsomraade : "";
                     $data[] = [
                         $participant->id,
-                        $nickname,
+                        $participant->getNickname(),
                         $participant->getPronoun(),
                         $work_area,
                     ];
@@ -2027,9 +2045,7 @@ exit;
                 foreach ($participants as $participant) {
                     $sheet->setCellValue('A'.$row, $participant->id);
                     
-                    $nickname = !empty($participant->nickname) ? $participant->nickname: $participant->getName();
-                    $sheet->setCellValue('B'.$row, $nickname);
-                    
+                    $sheet->setCellValue('B'.$row, $participant->getNickname());
                     $sheet->setCellValue('C'.$row, $participant->getPronoun());
 
                     $barcode = $this->model->generateEan8SheetBarcode($participant->id);

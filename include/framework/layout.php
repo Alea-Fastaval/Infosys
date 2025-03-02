@@ -442,6 +442,7 @@ HTML;
 
             if ($this->user->hasRole('Infonaut') || $this->user->hasRole('Admin')) {
                 $return .= <<<HTML
+            <li><a href='{$this->url('show_debitors')}'>Deltagere der mangler at betale (eller har betalt for lidt)</a></li>
             <li><a href='{$this->url('template_editing')}'>ID skabeloner</a></li>
             <li><a href='{$this->url('show_missing_photo')}'>Arrangører med manglende ID-billede</a></li>
             <li><a href='{$this->url('photo_download')}'>Hent billeder til ID</a></li>
@@ -529,6 +530,8 @@ HTML;
         <ul class='submenu'>
             <li><a href='{$this->url('economy_breakdown')}'>Budget oversigt</a></li>
             <li><a href='{$this->url('accounting_overview')}'>Regnskabs-oversigt</a></li>
+            <li><a href='{$this->url('participant_overview')}'>Deltager-oversigt</a></li>
+            <li><a href='{$this->url('register_payments')}'>On-line Betalinger</a></li>
         </ul>
     </li>
     <li class='topmenu-item'>
