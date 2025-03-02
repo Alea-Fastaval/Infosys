@@ -575,7 +575,7 @@ class ParticipantController extends Controller
                     $this->page->setTemplate('visEdit');
                 }
             } elseif ($post->cancel_deltager) {
-                $deltager->anulled = 'ja';
+                $deltager->annulled = 'ja';
                 $deltager->update();
                 $this->successMessage('Tilmeldingen er anulleret');
                 $this->log("Deltager #{$deltager->id} blev anulleret af {$this->model->getLoggedInUser()->user}", 'Deltager', $this->model->getLoggedInUser());
@@ -1992,6 +1992,15 @@ exit;
         $this->page->rfundees = $this->model->findPeopleNeedingRefund();
     }
 
+    /**
+     * List participants that need a refund
+     *
+     * @access public
+     * @return void
+     */
+    public function showMissingPayment(){
+        $this->page->debitors = $this->model->findPeopleNeedingPayment();
+    }
 
     /**
      * List participants with the information needed for name tags
