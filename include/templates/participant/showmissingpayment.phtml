@@ -1,0 +1,29 @@
+<h1>Deltagere der mangler at betale for tilmeldingen (eller har betalt for lidt)</h1>
+<?php if (empty($this->debitors)) : ?>
+<h2>Ingen fundet</h2>
+<?php else : ?>
+  <fieldset>
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Deltager</th>
+          <th>Pris for tilmelding</th>
+          <th>Betalt beløb</th>
+          <th>Difference</th>
+        </tr>
+      <thead>
+      <tbody>
+        <?php foreach ($this->debitors as $participant) : ?>
+          <tr>
+            <td><a href="<?= $this->url('visdeltager', ['id' => $participant->id]);?>"><?=$participant->id?></a></td>
+            <td><a href="<?= $this->url('visdeltager', ['id' => $participant->id]);?>"><?= e($participant->getName())?></a></td>
+            <td><?=$participant->signupCost?> kr.</td>
+            <td><?=$participant->betalt_beloeb?> kr.</td>
+            <td><?=$participant->difference?> kr.</td>
+          </tr>
+        <?php endforeach;?>
+      </tbody>
+    </table>
+  </fieldset>
+<?php endif; ?>

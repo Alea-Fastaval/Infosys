@@ -3235,6 +3235,21 @@ WHERE (
         return $refundees;
     }
 
+    public function findPeopleNeedingPayment(){
+        $participants = $this->createEntity('Deltagere')->findAll();
+
+        foreach($participants as $participant) {
+            if ($participant->anulled) continue;
+            
+            $participant->difference = $participant->calcSignupTotal() - $participant->betalt_beloeb;
+            if ($participant->difference > 0) {
+                $debitors[] = $participant;
+            }
+        }
+
+        return $debitors;
+    }
+
     public function parsePaymentSheet($file){
         $csv = file_get_contents($file['tmp_name']);
         $lines = explode("\n", $csv);

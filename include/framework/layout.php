@@ -442,6 +442,7 @@ HTML;
 
             if ($this->user->hasRole('Infonaut') || $this->user->hasRole('Admin')) {
                 $return .= <<<HTML
+            <li><a href='{$this->url('show_debitors')}'>Deltagere der mangler at betale (eller har betalt for lidt)</a></li>
             <li><a href='{$this->url('template_editing')}'>ID skabeloner</a></li>
             <li><a href='{$this->url('show_missing_photo')}'>Arrangører med manglende ID-billede</a></li>
             <li><a href='{$this->url('photo_download')}'>Hent billeder til ID</a></li>
