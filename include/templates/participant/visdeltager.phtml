@@ -263,8 +263,8 @@ $this->registerLateLoadJS('participant.js');
             <legend>Pris breakdown</legend>
             <table cellpadding='0' cellspacing='0'>
                 <tr>
-                    <td>Pris fra tilmelding</td>
-                    <td class='priser'><?= $this->deltager->original_price;?>,-</td>
+                    <td>Oprindelig pris fra tilmelding</td>
+                    <td class='priser'><?= $this->deltager->original_price ?>,-</td>
                 </tr>
                 <tr>
                     <td colspan='2'><hr/></td>
@@ -283,32 +283,41 @@ $this->registerLateLoadJS('participant.js');
                 </tr>
                 <tr>
                     <td>Aktiviteter</td>
-                    <td class='priser'><?= $this->deltager->calcActivities();?>,-</td>
+                    <td class='priser'><?= $this->deltager->calcActivities(true)?>,-</td>
                 </tr>
                 <tr>
-                    <td>Andet (fest, etc)</td>
+                    <td>Andet (fest, gebyrer, etc)</td>
                     <td class='priser'><?= $this->deltager->calcOtherStuff();?>,-</td>
                 </tr>
                 <tr>
-                    <td>Alea</td>
-                    <td class='priser'><?= $this->deltager->calcAlea();?>,-</td>
-                </tr>
-                <?php if ($this->deltager->rig_onkel == 'ja' || $this->deltager->hemmelig_onkel == 'ja') :?>
-                <tr>
-                    <td class='pris-underline'>Onkel</td>
-                    <td class='priser pris-underline'><?= $this->deltager->calcRichBastard();?>,-</td>
-                </tr>
-                <?php endif;?>
-                <tr>
-                    <td class='pris-underline'>Reel total</td>
-                    <td class='priser pris-underline'><?= $this->deltager->calcRealTotal();?>,-</td>
+                    <td class='pris-underline'>Alea</td>
+                    <td class='priser  pris-underline'><?= $this->deltager->calcAlea();?>,-</td>
                 </tr>
                 <tr>
-                    <td class='pris-underline'>Tilmelding total</td>
-                    <td class='priser pris-underline'><?= $this->deltager->calcSignupTotal();?>,-</td>
+                    <td>Pris for tilmelding (inklusiv ændringer fra infosys)</td>
+                    <td class='priser'><?= $this->deltager->calcSignupTotal() ?>,-</td>
                 </tr>
                 <tr>
-                    <td class='pris-underline'>Difference (<?= $this->deltager->calcRealTotal();?> - <?= $this->deltager->betalt_beloeb;?>):</td>
+                    <td>Forubetalt</td>
+                    <td class='priser'><?= $this->deltager->betalt_beloeb?>,-</td>
+                </tr>
+                <tr>
+                    <td class='pris-underline'>Difference for tilmelding</td>
+                    <td class='priser pris-underline difference' style='background-color: #e0e0e0'><?= $this->deltager->calcSignupTotal() - $this->deltager->betalt_beloeb;?>,-</td>
+                </tr>
+                <tr>
+                    <td colspan='2'><hr/></td>
+                </tr>
+                <tr>
+                    <td>Pris for ikke tildelte aktiviteter</td>
+                    <td class='priser'><?= $this->deltager->calcActivities(true) - $this->deltager->calcActivities(false)?>,-</td>
+                </tr>
+                <tr>
+                    <td>Total pris ved chek-ind</td>
+                    <td class='priser'><?= $this->deltager->calcRealTotal();?>,-</td>
+                </tr>
+                <tr>
+                    <td class='pris-underline'>Difference ved check-ind (<?= $this->deltager->calcRealTotal();?> - <?= $this->deltager->betalt_beloeb;?>):</td>
                     <td class='priser pris-underline difference' style='background-color: #e0e0e0'><?= $this->deltager->calcRealTotal() - $this->deltager->betalt_beloeb;?>,-</td>
                 </tr>
             </table>

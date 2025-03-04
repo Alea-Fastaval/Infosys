@@ -908,18 +908,26 @@ class Deltagere extends DBObject implements AgeFulfilment
             return 0;
         }
 
-        if (!$this->gamesCost) {
-            $result  = 0;
-            $pladser = $signups ? $this->getTilmeldinger() : $this->getPladser();
+        if($signups == true) {
+            if (isset($this->gameSignupCost)) return $this->gameSignupCost;
+        } else {
+            if (isset($this->gameCost)) return $this->gameCost;
+        }
 
-            foreach ($pladser as $g) {
-                $result += ($g->type == 'spiller' || $g->tilmeldingstype == 'spiller') ? $g->getAktivitet()->pris : 0;
-            }
+        $result  = 0;
+        $pladser = $signups ? $this->getTilmeldinger() : $this->getPladser();
 
+        foreach ($pladser as $g) {
+            $result += ($g->type == 'spiller' || $g->tilmeldingstype == 'spiller') ? $g->getAktivitet()->pris : 0;
+        }
+
+        if($signups == true) {
+            $this->gameSignupCost = $result;
+        } else {
             $this->gamesCost = $result;
         }
 
-        return $this->gamesCost;
+        return $result;
     }
 
     /**
@@ -994,17 +1002,14 @@ class Deltagere extends DBObject implements AgeFulfilment
      */
     public function calcRealTotal()
     {
-        if (!$this->isLoaded())
-        {
+        if (!$this->isLoaded()) {
             return 0;
         }
-        if (!$this->realCost)
-        {
-            $result = 0;
-            $result += $this->calcEntry() + $this->calcFood() + $this->calcActivities();
-            $result += $this->calcWear() + $this->calcRichBastard() + $this->calcAlea() + $this->calcOtherStuff();
-            $this->realCost = $result;
+
+        if (!$this->realCost) {
+            $this->realCost = $this->calcTotal(false);
         }
+
         return $this->realCost;
     }
 
@@ -1021,13 +1026,24 @@ class Deltagere extends DBObject implements AgeFulfilment
         }
 
         if (!$this->signupCost) {
-            $result = 0;
-            $result += $this->calcEntry() + $this->calcFood() + $this->calcActivities(true);
-            $result += $this->calcWear() + $this->calcRichBastard() + $this->calcAlea() + $this->calcOtherStuff();
-            $this->signupCost = $result;
+            $this->signupCost = $this->calcTotal(true);
         }
 
         return $this->signupCost;
+    }
+
+    /**
+     * Calculate total price for participant,
+     * 
+     * @param $signup:
+     *      - false: use only assigned activities
+     *      - true: use all activities signed up for
+     */
+    private function calcTotal($signup) {
+        $result = 0;
+        $result += $this->calcEntry() + $this->calcFood() + $this->calcActivities($signup);
+        $result += $this->calcWear() + $this->calcRichBastard() + $this->calcAlea() + $this->calcOtherStuff();
+        return $result;
     }
 
 //}}}
