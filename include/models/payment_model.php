@@ -61,7 +61,7 @@ class PaymentModel extends Model {
   }
 
   public function updatePayments($participant) {
-    $balance = $participant->original_price - $participant->betalt_beloeb;
+    $balance = $participant->calcSignupTotal() - $participant->betalt_beloeb;
     if ($balance <= 0) return 'no payment needed';
 
     $payment_uid = $this->getPaymentUser($participant->id);
