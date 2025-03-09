@@ -1,0 +1,1 @@
+ALTER TABLE gds ADD map_coords text;

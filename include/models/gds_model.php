@@ -356,6 +356,7 @@ SQL;
                    'moedested'      => 'moedested',
                    'moedested_en'   => 'moedested_en',
                    'gdscategory_id' => 'category_id',
+                   'map_coords'     => 'map_coords',
                   ];
 
         foreach ($fields as $key => $field) {

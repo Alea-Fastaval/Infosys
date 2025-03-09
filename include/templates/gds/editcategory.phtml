@@ -15,6 +15,7 @@
                 <option value="<?= e($category->id);?>" <?= $this->diy->category_id == $category->id ? 'selected' : '';?>><?= e($category->name_da);?></option>
             <?php endforeach;?>
             </select>
+            <span class='label'>Position på Kort</span><input type='text' name='map_coords' required value='<?= e($this->diy->map_coords);?>'/></span>
             <br/>
             <br/>
             <span class='label'>Aldersbegrænsning:</span> Min: <input type="number" value="<?= e($this->diy->getMinAge() ?: '');?>" name="min_age"/> max: <input type="number" value="<?= e($this->diy->getMaxAge() ?: '');?>" name="max_age"/>

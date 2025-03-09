@@ -427,10 +427,13 @@ HAVING
                     'info'        => array(
                         'title_da'       => $res->navn,
                         'description_da' => $res->beskrivelse,
+                        'meet_da'        => $res->moedested,
                         'title_en'       => $res->title_en,
                         'description_en' => $res->description_en,
+                        'meet_en'        => $res->moedested_en,
                         'category_da'    => $res->getCategory()->name_da,
                         'category_en'    => $res->getCategory()->name_en,
+                        'map_coords'     => $res->map_coords,
                     ),
                 );
                 $act['vagter'] = $this->prepareShiftStructure($res);
