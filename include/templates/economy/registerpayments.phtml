@@ -132,10 +132,17 @@
         $group = ""; 
         foreach ($this->registered_payments as $payment) { 
           if ($group == "" || $group != $payment['status']) {
+            
             if ($group != "") {
-              echo "</tbody></table>";
+              ?>
+                  <td colspan="<?=count($headers)-3?>"></td>
+                  <td>Totalt beløb:</td>
+                  <td><?=$total?></td>
+                </tbody></table>
+              <?php
             }
 
+            $total = 0; // Reset total for new category
             $group = $payment['status'];
       ?>
             <h3><?=$categories[$group]?></h3>
@@ -145,12 +152,17 @@
                   <?php foreach ($headers as $value) { ?>
                     <th><?=$value?></th>
                   <?php } ?>
+                  <?php if ($group == 'pending') { ?>
+                    <th>Pris, med rettelser</th>
+                  <?php } ?>
+                  
                 </tr>
               </thead>
               <tbody>
-      <?php 
-          }
-      ?>
+        <?php 
+          } // if ($group == "" || $group != $payment['status'])
+          $total += $payment['amount'];
+        ?>
                 <tr>
                   <?php foreach ($headers as $key => $value) { 
                     $text = "";
@@ -160,13 +172,14 @@
                       $text = $payment[$key];
                     }
                     $style = '';
-                    if ($key == 'amount' && $payment['amount'] != $payment['original_price']) {
+                    if ($key == 'amount' && $payment['amount'] != $payment['current_price']) {
                       $style = 'style="background-color:pink;"';
                     }
                     ?>
                     <td <?=$style?>><?=$text?></td>
                   <?php } ?>
                   <?php if ($group == 'pending') { ?>
+                    <td><?=$payment['current_price']?></td>
                     <td><button id="cancel-single-<?=$payment['id']?>" payment-id="<?=$payment['id']?>" class="cancel-button">Annuller</button></td>
                   <?php } ?>
                 </tr>

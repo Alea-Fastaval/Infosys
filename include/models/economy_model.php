@@ -378,7 +378,17 @@ ORDER BY
       JOIN payment_registrations AS pr ON pu.payment_user_id = pr.payment_user_id
       JOIN deltagere AS d ON pu.participant_id = d.id
       ORDER BY pr.status, pr.created";
-    return $this->db->query($query);
+
+    $result = $this->db->query($query);
+
+    foreach ($result as $index => $row) {
+      if ($row['status'] == 'pending') {
+        $participant = $this->createEntity('Deltagere')->findById($row['participant_id']);
+        $result[$index]['current_price'] = $participant->calcSignupTotal();
+      }
+    }
+
+    return $result;
   }
 
   public function parsePaymentSheet($file){
