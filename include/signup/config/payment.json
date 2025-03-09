@@ -59,6 +59,10 @@
         "en": "Pay now",
         "da": "Betal nu"
     },
+    "wait": {
+        "en": "Wait",
+        "da": "Vent"
+    },
     "already_paid": {
         "en": "You have already paid the full amount for your registration.",
         "da": "Du har allerede betalt det fulde bel\u00f8b for din tilmelding."
