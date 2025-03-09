@@ -227,10 +227,10 @@ class Controller extends Common
      * @access public
      * @return void
      */
-    public function checkUser()
-    {
+    public function checkUser() {
+
         if (!($user = $this->model->getLoggedInUser())) {
-            $this->hardRedirect($this->url('login_page'));
+            $this->hardRedirect($this->url('login_page')."?location=".$this->route['url']);
         }
 
         if (!$user->canAccess(get_class($this), $this->route['method'])) {

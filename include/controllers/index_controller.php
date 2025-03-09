@@ -103,6 +103,10 @@ class IndexController extends Controller
     public function login() {
         $this->page->setTitle('Login');
 
+        if (isset($this->page->request->get->location)) {
+            $this->page->redirect = $this->page->request->get->location;
+        }
+
         if (!$this->page->request->isPost()) {
             return;
         }
@@ -116,6 +120,10 @@ class IndexController extends Controller
         if ($this->model->handleLogin($post->user, $post->pass)) {
             if ($post->user == 'mad') {
                 $this->hardRedirect($this->url('food_handout'));
+            }
+
+            if (isset($post->redirect) && $post->redirect !== '') {
+                $this->hardRedirect($post->redirect);
             }
 
             $this->hardRedirect($this->url('home'));
