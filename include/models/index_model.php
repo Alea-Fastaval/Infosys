@@ -424,7 +424,7 @@ ORDER BY
 
             // $recipient = $this->createEntity('Deltagere')->findById(1);
             $recipient = $deltager;
-            if ($this->sendMessage($recipient, $deltager->speaksDanish() ? $message_da : $message_en ,$message_id, $firebase)) {
+            if ($this->sendMessage($recipient, $deltager->speaksDanish() ? $message_da : $message_en ,$message_id, $firebase, ['window' => 'gds'])) {
                 $count++;
             } else {
                 $error++;
@@ -465,14 +465,14 @@ ORDER BY
         $log->logToDB("InfoSys har sendt beskeder til mogendagens helte. {$count} lykkedes, {$error} fejlede", 'Firebase', 1);
     }
 
-    function sendMessage($receiver, $message, $message_id, $firebase) {
+    function sendMessage($receiver, $message, $message_id, $firebase, $data = null) {
         try {
             $query = "INSERT INTO participant_messages (message_id, participant_id) VALUES (?,?)";
             $args = [$message_id, $receiver->id];
             $this->db->exec($query, $args);
 
             if ($receiver->gcm_id) { // Sending via Firebase
-                if (!$firebase->sendMessage($message, $receiver->gcm_id)) {
+                if (!$firebase->sendMessage($message, $receiver->gcm_id, $data)) {
                     $error = $firebase->getError();
 
                     switch($error['code']) {

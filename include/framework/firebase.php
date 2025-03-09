@@ -78,7 +78,7 @@ class Firebase {
     ];
   }
 
-  function sendMessage($message, $id) {
+  function sendMessage($message, $id, $data = null) {
     // Check that we have a valid access token
     if (!isset($this->access['expires']) || $this->access['expires'] < time() + 10) {
       $this->refreshToken();
@@ -93,6 +93,10 @@ class Firebase {
         "title" => $title
       ],
     ];
+
+    if (isset($data)) {
+      $message['data'] = $data;
+    }
 
     if (is_string($id)) {
       $message['token'] = $id;
