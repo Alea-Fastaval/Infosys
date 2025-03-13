@@ -781,4 +781,32 @@ class ApiController extends Controller
 
         $this->jsonOutput($loans);
     }
+
+    public function getRibbonUser() {
+
+        if (!$this->page->request->isPost()) {
+            header('HTTP/1.1 400 Not post request');
+            exit;
+        }
+
+        $post = $this->page->request->post;
+
+        if (
+            !isset($post->id) ||
+            !isset($post->pass) ||
+            !($participant = $this->model->findParticipant($post->id)) ||
+            $participant->annulled === 'ja' ||
+            $post->pass != $participant->password
+        ) {
+            header('HTTP/1.1 401 No such user');
+            exit;
+        }
+
+        $this->jsonOutput([
+            'status' => 'success',
+            'name' => $participant->getName(),
+            'email' => $participant->email,
+        ]);
+
+    }
 }

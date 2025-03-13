@@ -415,6 +415,8 @@ class Routes
         $this->routes['api_user_data_v']         = array('url' => 'api/v:version:/confirmation-data', 'controller' => 'Api', 'method' => 'getConfirmationData');
         $this->routes['api_boardgames']          = array('url' => 'api/v:version:/boardgames', 'controller' => 'Api', 'method' => 'getBoardgameData');
         $this->routes['api_boardgame_loans']     = array('url' => 'api/boardgameloans/:id:', 'controller' => 'Api', 'method' => 'getBoardgameLoans');
+        $this->routes['api_ribbon_login']        = array('url' => 'api/ribbon/login', 'controller' => 'Api', 'method' => 'getRibbonUser');
+        
 
         $this->routes['api_request_password_reminder'] = array('url' => 'api/request-password-email', 'controller' => 'Api', 'method' => 'requestPasswordReminder');
 
