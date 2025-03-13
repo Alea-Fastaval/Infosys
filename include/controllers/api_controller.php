@@ -613,6 +613,13 @@ class ApiController extends Controller
             exit;
         }
 
+        $pass = isset($this->page->request->post->pass) ? $this->page->request->post->pass : $this->page->request->get->pass;
+
+        if (!$pass || $participant->password != $pass) {
+            header('HTTP/1.1 403 No access');
+            exit;
+        }
+
         $this->checkData();
 
         try {
@@ -637,6 +644,13 @@ class ApiController extends Controller
     {
         if (empty($this->vars['id']) || !($participant = $this->model->findParticipant($this->vars['id'])) || $participant->annulled === 'ja') {
             header('HTTP/1.1 400 No such user');
+            exit;
+        }
+
+        $pass = isset($this->page->request->post->pass) ? $this->page->request->post->pass : $this->page->request->get->pass;
+
+        if (!$pass || $participant->password != $pass) {
+            header('HTTP/1.1 403 No access');
             exit;
         }
 
@@ -753,6 +767,13 @@ class ApiController extends Controller
     public function getBoardgameLoans() {
         if (empty($this->vars['id']) || !($participant = $this->model->findParticipant($this->vars['id'])) || $participant->annulled === 'ja') {
             header('HTTP/1.1 400 No such user');
+            exit;
+        }
+
+        $pass = isset($this->page->request->post->pass) ? $this->page->request->post->pass : $this->page->request->get->pass;
+
+        if (!$pass || $participant->password != $pass) {
+            header('HTTP/1.1 403 No access');
             exit;
         }
 
