@@ -181,6 +181,8 @@ class EconomyController extends Controller
       $sheet_data = $this->model->parsePaymentSheet($file);
       $this->model->matchPayments($sheet_data, $registered_payments);
       $session->sheet_data = $sheet_data;
+    } else {
+      $session->sheet_data = [];
     }
 
    
