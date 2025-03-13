@@ -114,10 +114,10 @@
         $headers = [
           'id' => 'Betaling ID',
           'participant_id' => 'Deltager ID',
-          'amount' => 'Beløb',
           'created' => 'Oprettet',
           'completed' => 'Udført',
           'confirmed' => 'Bekræftet',
+          'amount' => 'Beløb',
           'betalt_beloeb' => 'Har betalt',
           'original_price' => 'Pris, tilmelding',
         ];
@@ -143,6 +143,7 @@
             }
 
             $total = 0; // Reset total for new category
+            $even = false;
             $group = $payment['status'];
       ?>
             <h3><?=$categories[$group]?></h3>
@@ -163,17 +164,20 @@
           } // if ($group == "" || $group != $payment['status'])
           $total += $payment['amount'];
         ?>
-                <tr>
+                <tr <?=$even?'class="alterngrey"':''?>>
                   <?php foreach ($headers as $key => $value) { 
                     $text = "";
                     if (in_array($key, ['created','completed','confirmed'])) {
                       $text = $payment[$key] != null ? date('Y-m-d H:i', $payment[$key]) : "-";
+                    } elseif ($key == 'participant_id') {
+                      $text = "<a href=\"".$this->url('visdeltager', ['id' => $payment[$key]])."\">$payment[$key]</a>";
                     } else {
                       $text = $payment[$key];
                     }
                     $style = '';
-                    if ($key == 'amount' && $payment['amount'] != $payment['current_price']) {
-                      $style = 'style="background-color:pink;"';
+                    if ($key == 'amount') {
+                      if($group == 'pending' && $payment['amount'] != $payment['current_price'] - $payment['betalt_beloeb'])
+                        $style = 'style="background-color:pink;"';
                     }
                     ?>
                     <td <?=$style?>><?=$text?></td>
@@ -183,7 +187,10 @@
                     <td><button id="cancel-single-<?=$payment['id']?>" payment-id="<?=$payment['id']?>" class="cancel-button">Annuller</button></td>
                   <?php } ?>
                 </tr>
-      <?php } ?>
+      <?php 
+          $even = !$even;
+        } 
+      ?>
               </tbody>
             </table>
     </div>
