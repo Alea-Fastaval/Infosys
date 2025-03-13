@@ -23,7 +23,6 @@ class PaymentModel extends Model {
       "SELECT payment_user_id FROM payment_users WHERE participant_id = ?",
       $uid
     );
-    $this->fileLog("Get payment user for participant $uid result:\n".print_r($result,true));
 
     if (empty($result)) return null;
     
@@ -65,6 +64,12 @@ class PaymentModel extends Model {
     if ($balance <= 0) return 'no payment needed';
 
     $payment_uid = $this->getPaymentUser($participant->id);
+
+    if ($payment_uid == null) {
+      $this->fileLog("updatePayments(): No payment user found for participant ID $participant->id\n");
+      return 'no payment user';
+    }
+    
     $result = $this->db->query(
       "SELECT * FROM payment_registrations WHERE status = 'pending' AND payment_user_id = ?",
       [$payment_uid],
