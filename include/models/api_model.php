@@ -1614,16 +1614,15 @@ HAVING
         }
 
         $return = array(
-            'id'         => $participant->id,
-            'name'       => $participant->getName(),
-            'checked_in' => strtotime($participant->checkin_time) > 1 ? 1 : 0,
-            'messages'   => $participant->beskeder,
-            'sleep'      => $sleep,
-            'category'   => $category->navn,
-            'food' => array(
-            ),
-            'wear' => array(
-            ),
+            'id'            => $participant->id,
+            'name'          => $participant->getName(),
+            'checked_in'    => strtotime($participant->checkin_time) > 1 ? 1 : 0,
+            'messages'      => $participant->beskeder,
+            'notifications' => !empty($participant->gcm_id),
+            'sleep'         => $sleep,
+            'category'      => $category->navn,
+            'food'          => array(),
+            'wear'          => array(),
             'scheduling' => array(),
         );
 
@@ -1762,72 +1761,13 @@ HAVING
      * @access public
      * @return void
      */
-    public function registerApp(DBObject $participant, $json)
+    public function registerApp(DBObject $participant, $firebase_token)
     {
-        if (empty($json['gcm_id']) && empty($json['apple_id'])) {
-            throw new FrameworkException('Lacking device id in post');
+        if ($participant->gcm_id !== $firebase_token) {
+            $participant->gcm_id = $firebase_token;
+            $participant->update();
         }
 
-        if (!empty($json['gcm_id'])) {
-            return $this->handleGcmRegistration($participant, $json);
-        }
-
-        if (!empty($json['apple_id'])) {
-            return $this->handleAppleRegistration($participant, $json);
-        }
-    }
-
-    /**
-     * handles apple device registration
-     *
-     * @param DBObject $participant Participant to register id for
-     * @param array    $json        Data from request
-     *
-     * @access protected
-     * @return self
-     */
-    protected function handleAppleRegistration(DBObject $participant, $json)
-    {
-        if ($participant->apple_id === $json['apple_id']) {
-            return $this;
-        }
-
-        $participant->apple_id = $json['apple_id'];
-        $participant->update();
-
-        if ($participant->speaksDanish()) {
-            $message = 'Du vil fremover modtage notifikationer via Fastaval appen';
-            $title   = 'Fastaval notifikation';
-
-        } else {
-            $message = 'You will from now on receive notification via the Fastaval App';
-            $title   = 'Fastaval app notification';
-        }
-
-        //list($code, $data, $return) = $participant->sendAppleMessage($this->config->get('gcm.server_api_key'), $message, $title);
-
-        //$this->log('Sent apple notification to participant #' . $participant->id . '. Result: ' . $return, 'App', null);
-
-        return $this;
-    }
-
-    /**
-     * handles GCM/google registration
-     *
-     * @param DBObject $participant Participant to register id for
-     * @param array    $json        Data from request
-     *
-     * @access protected
-     * @return self
-     */
-    protected function handleGcmRegistration(DBObject $participant, $json)
-    {
-        if ($participant->gcm_id === $json['gcm_id']) {
-            return $this;
-        }
-
-        $participant->gcm_id = $json['gcm_id'];
-        $participant->update();
 
         if ($participant->speaksDanish()) {
             $message = [
