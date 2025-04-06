@@ -1797,11 +1797,14 @@ die("Not actually sending welcome mail\n");
 
         $count = 0;
         foreach ($participants as $participant) {
+            $year = date('Y', strtotime($this->config->get('con.start')));
+            
             $this->page->id = $participant->id;
             $this->page->code = $participant->password;
             $this->page->name = $participant->getName();
-
-            $year = date('Y', strtotime($this->config->get('con.start')));
+            $this->page->year = $year;
+            
+            //if (false) {
             if ($participant->speaksDanish()) {
                 $title = $danish_title ? $danish_title : "Fastaval $year - Dit Fastaval Program";
                 $this->page->setTemplate('participant/welcomemailda');
@@ -1812,12 +1815,18 @@ die("Not actually sending welcome mail\n");
     
             $mail = new Mail($this->config);
     
-            $mail->setFrom($this->config->get('app.email_address'), $this->config->get('app.email_alias'))
+            try {
+                $mail->setFrom($this->config->get('app.email_address'), $this->config->get('app.email_alias'))
                 ->setRecipient($participant->email)
                 ->setSubject($title)
                 ->setBodyFromPage($this->page);
     
-            $mail->send();
+                $mail->send();
+            } catch(Exception $e) {
+                $this->fileLog("Could not send mail to participant $participant->id\nError:".$e->getMessage());
+                $this->log('Error sending welcome mail to participant (ID: ' . $participant->id . ')', 'Mail', null);
+                continue;
+            }
     
             $this->log('System sent welcome mail to participant (ID: ' . $participant->id . ')', 'Mail', null);
 
