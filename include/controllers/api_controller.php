@@ -782,6 +782,47 @@ class ApiController extends Controller
         $this->jsonOutput($loans);
     }
 
+    public function boardgameRankings() {
+
+        // GET
+        if (!$this->page->request->isPost()) {
+            $pid = $this->page->request->get->id;
+            $result = $this->model->getBoardgameRankings($pid);
+            $this->jsonOutput($result);
+        }
+
+        // POST
+        $post = $this->page->request->post;
+
+        if (!isset($post->id) || !isset($post->pass)) {
+            $this->jsonOutput([
+                "status" => "error",
+                "message" => "Missing id or pass",
+            ], 400);
+        }
+
+        if (!isset($post->rankings) || !is_array($post->rankings)) {
+            $this->jsonOutput([
+                "status" => "error",
+                "message" => "Missing or malformed rankings",
+            ], 400);
+        }
+
+        if (
+            !($participant = $this->model->findParticipant($post->id)) ||
+            $participant->annulled === 'ja' ||
+            $post->pass != $participant->password
+        ) {
+            $this->jsonOutput([
+                "status" => "error",
+                "message" => "id or pass incorrect",
+            ], 401);
+        }
+
+        $result = $this->model->setBoardgameRankings($post->id, $post->rankings);
+        $this->jsonOutput($result);
+    }
+
     public function getRibbonUser() {
 
         if (!$this->page->request->isPost()) {

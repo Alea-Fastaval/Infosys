@@ -1941,4 +1941,44 @@ HAVING
 
         return $loans;
     }
+
+    public function getBoardgameRankings($pid) {
+        $query = "SELECT * FROM boardgame_rankings WHERE participant_id = ? ORDER BY ranking ASC";
+        $result = $this->db->query($query, $pid);
+
+        if (count($result) == 0) {
+            return [
+                "status" => "success",
+                "message" => "no rankings set for participant",
+                "rankings" => null,
+            ];
+        }
+
+        $rankings = [];
+        foreach ($result as $row) {
+            $rankings[] = $row['boardgame_id'];
+        }
+
+        return [
+            "status" => "success",
+            "rankings" => $rankings,
+        ];
+    }
+
+    public function setBoardgameRankings($pid, $rankings) {
+        $query = "DELETE FROM boardgame_rankings WHERE participant_id = ?";
+        $this->db->exec($query, $pid);
+
+        $query = "INSERT INTO boardgame_rankings (participant_id, boardgame_id, ranking) VALUES (:pid, :bid0, 1),(:pid, :bid1, 2),(:pid, :bid2, 3),(:pid, :bid3, 4),(:pid, :bid4, 5)";
+        $args = ["pid" => $pid];
+        for ($i = 0; $i < 5 ; $i++) { 
+            $args["bid$i"] = $rankings[$i];
+        }
+        $this->db->exec($query, $args);
+
+        return [
+            "status" => "success",
+            "message" => "Rankings set for participant $pid",
+        ];
+    }
 }
