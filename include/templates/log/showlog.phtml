@@ -1,40 +1,34 @@
-<?php $this->registerEarlyLoadJS('DataTables-1.9.0/media/js/jquery.dataTables.js');
-$this->includeCSS('../js/DataTables-1.9.0/media/css/jquery.dataTables.css');
-$this->includeCSS('../js/DataTables-1.9.0/media/css/jquery.dataTables_themeroller.css');
+<?php 
+  $this->registerEarlyLoadJS('log.js');
+  $this->registerEarlyLoadJS('DataTables-1.9.0/media/js/jquery.dataTables.js');
+  $this->includeCSS('../js/DataTables-1.9.0/media/css/jquery.dataTables.css');
+  $this->includeCSS('../js/DataTables-1.9.0/media/css/jquery.dataTables_themeroller.css');
 ?>
+<label class="checkbox inline" for="auto-update-checkbox">Opdater automatisk</label>
+<input type="checkbox" name="auto_update" id="auto-update-checkbox" checked="checked">
 <table class='log-table'>
-    <thead>
-        <tr>
-            <th>Tid</th>
-            <th>Type</th>
-            <th>Data</th>
-            <th>User</th>
-        </tr>
-    </thead>
-    <tbody>
-        <?php foreach ($this->log_messages as $message) : ?>
-            <tr>
-                <td><?= e($message['created']);?></td>
-                <td><?= e($message['type']);?></td>
-                <td><?= e($message['message']);?></td>
-                <td><?= e($message['user']);?></td>
-            </tr>
-        <?php endforeach;?>
-    </tbody>
+  <thead>
+    <tr>
+      <th>Tid</th>
+      <th>Type</th>
+      <th>Data</th>
+      <th>User</th>
+    </tr>
+  </thead>
+  <tbody>
+    <?php foreach ($this->log_messages as $message) : ?>
+      <tr>
+        <td><?= e($message['created']);?></td>
+        <td><?= e($message['type']);?></td>
+        <td><?= e($message['message']);?></td>
+        <td><?= e($message['user']);?></td>
+      </tr>
+    <?php endforeach;?>
+  </tbody>
 </table>
 <script>
-$(function() {
-    $('.log-table').dataTable({
-        bJQueryUI: true,
-        sPaginationType: 'full_numbers',
-        bProcessing: true,
-        bLengthChange: true,
-        bServerSide: true,
-        sAjaxSource: '<?= $this->url('log_ajax');?>',
-        iDisplayStart: 0,
-        iDisplayLength: 10,
-        iDeferLoading: <?= $this->row_count;?>,
-        aaSorting: [[0, 'desc']]
-    });
-});
+  var page = {
+    ajax_url: '<?=$this->url('log_ajax')?>',
+    row_count: <?=$this->row_count?>,
+  }
 </script>
