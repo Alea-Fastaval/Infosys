@@ -1909,13 +1909,22 @@ HAVING
         $query = "DELETE FROM boardgame_rankings WHERE participant_id = ?";
         $this->db->exec($query, $pid);
 
-        $query = "INSERT INTO boardgame_rankings (participant_id, boardgame_id, ranking) VALUES (:pid, :bid0, 1),(:pid, :bid1, 2),(:pid, :bid2, 3),(:pid, :bid3, 4),(:pid, :bid4, 5)";
+        $query = "INSERT INTO boardgame_rankings (participant_id, boardgame_id, ranking) VALUES ";
         $args = ["pid" => $pid];
-        for ($i = 0; $i < 5 ; $i++) { 
+        for ($i = 0; $i < 5 ; $i++) {
+            if ($rankings[$i] == null) continue;
+            if ($i > 0) $query .= ", ";
+            $query .= "(:pid, :bid$i, ".($i + 1).")";
             $args["bid$i"] = $rankings[$i];
         }
-        $this->db->exec($query, $args);
+        if (count($args) == 1) {
+            return [
+                "status" => "success",
+                "message" => "Rankings has been reset for participant $pid",
+            ];
+        }
 
+        $this->db->exec($query, $args);
         return [
             "status" => "success",
             "message" => "Rankings set for participant $pid",
