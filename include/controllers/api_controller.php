@@ -619,7 +619,6 @@ class ApiController extends Controller
         }
         $post = $this->page->request->post;
 
-        $this->fileLog("Register App, POST:".print_r($post, true));
         if (!$post->pass || $participant->password != $post->pass) {
             header('HTTP/1.1 403 No access');
             exit;
@@ -664,7 +663,6 @@ class ApiController extends Controller
         }
         $post = $this->page->request->post;
 
-        $this->fileLog("Register App, POST:".print_r($post, true));
         if (!$post->pass || $participant->password != $post->pass) {
             header('HTTP/1.1 403 No access');
             exit;
