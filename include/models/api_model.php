@@ -1618,7 +1618,7 @@ HAVING
             'name'          => $participant->getName(),
             'checked_in'    => strtotime($participant->checkin_time) > 1 ? 1 : 0,
             'messages'      => $participant->beskeder,
-            'notifications' => !empty($participant->gcm_id),
+            'firebase_token' => !empty($participant->gcm_id) ? $participant->gcm_id : null,
             'sleep'         => $sleep,
             'category'      => $category->navn,
             'food'          => array(),
