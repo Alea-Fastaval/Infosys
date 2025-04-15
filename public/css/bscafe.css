@@ -69,7 +69,7 @@
     cursor: pointer;
 }
 
-input[type=text] {
+.content-container input[type=text] {
     border-radius: 0.3em;
     border: none;
     padding: 0.4em 0.8em;
