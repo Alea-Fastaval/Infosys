@@ -488,7 +488,7 @@ GROUP BY
 
         $header_index = array();
         $data = explode("\n", str_replace(array("\r\n", "\r"), "\n", $post->input));
-        $headers = array_flip(explode("\t", array_shift($data)));
+        $headers = array_flip(explode(";", array_shift($data)));
 
         foreach ($required_headers as $header) {
             if (!isset($headers[$header])) {
@@ -509,7 +509,7 @@ GROUP BY
                 continue;
             }
 
-            $columns = explode("\t", $row);
+            $columns = explode(";", $row);
 
             $game = $this->createEntity('Boardgame');
 
