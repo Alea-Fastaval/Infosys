@@ -178,10 +178,16 @@ FROM
 
         $return['Udlån lige nu'] = count($this->db->query($query));
 
+        $query = "SELECT * FROM boardgames bg LEFT JOIN (SELECT boardgame_id, COUNT(*) FROM boardgameevents WHERE type = 'borrowed' GROUP BY boardgame_id) borrow_count ON bg.id = borrow_count.boardgame_id WHERE boardgame_id IS NULL";
+        $not_borrowed = $this->db->query($query);
+
+        $return['not_borrowed_count']['heading'] = "Antal ikke udlånt";
+        $return['not_borrowed_count']['sort'] = "y";
+        $return['not_borrowed_count']['value'] = count($not_borrowed);
+
         $return['not_borrowed']['heading'] = "Har ikke været udlånt";
         $return['not_borrowed']['sort'] = "z";
-        $query = "SELECT * FROM boardgames bg LEFT JOIN (SELECT boardgame_id, COUNT(*) FROM boardgameevents WHERE type = 'borrowed' GROUP BY boardgame_id) borrow_count ON bg.id = borrow_count.boardgame_id WHERE boardgame_id IS NULL";
-        $return['not_borrowed']['list'] = $this->db->query($query);
+        $return['not_borrowed']['list'] = $not_borrowed;
 
         return $return;
     }
@@ -263,10 +269,17 @@ WHERE
 
         $return['Udlån lige nu'] = count($this->db->query($query));
 
+        $query = "SELECT * FROM boardgames bg LEFT JOIN (SELECT boardgame_id, COUNT(*) FROM boardgameevents WHERE type = 'borrowed' GROUP BY boardgame_id) borrow_count ON bg.id = borrow_count.boardgame_id WHERE boardgame_id IS NULL AND designergame = 1";
+        $not_borrowed = $this->db->query($query);
+
+        $return['not_borrowed_count']['heading'] = "Antal ikke udlånt";
+        $return['not_borrowed_count']['sort'] = "y";
+        $return['not_borrowed_count']['value'] = count($not_borrowed);
+
+
         $return['not_borrowed']['heading'] = "Har ikke været udlånt";
         $return['not_borrowed']['sort'] = "z";
-        $query = "SELECT * FROM boardgames bg LEFT JOIN (SELECT boardgame_id, COUNT(*) FROM boardgameevents WHERE type = 'borrowed' GROUP BY boardgame_id) borrow_count ON bg.id = borrow_count.boardgame_id WHERE boardgame_id IS NULL AND designergame = 1";
-        $return['not_borrowed']['list'] = $this->db->query($query);
+        $return['not_borrowed']['list'] = $not_borrowed;
 
         return $return;
     }
