@@ -511,11 +511,13 @@ GROUP BY
             $header_index[$header] = $headers[$header];
         }
 
-        $query = 'DELETE FROM boardgameevents;';
-        $this->db->exec($query);
-
-        $query = 'DELETE FROM boardgames;';
-        $this->db->exec($query);
+        if($post->mode == 'delete') {
+            $query = 'DELETE FROM boardgameevents;';
+            $this->db->exec($query);
+    
+            $query = 'DELETE FROM boardgames;';
+            $this->db->exec($query);
+        }
 
         foreach ($data as $row) {
             if (strlen(trim($row)) === 0) {
@@ -536,7 +538,11 @@ GROUP BY
             $game->insert();
         }
 
-        $this->log('Brætspils data blev upload og resat af ' . $this->getLoggedInUser()->user, 'Boardgames', $this->getLoggedInUser());
+        if($post->mode == 'delete') {
+            $this->log('Brætspils data blev uploaded og nulstillet af ' . $this->getLoggedInUser()->user, 'Boardgames', $this->getLoggedInUser());
+        } else {
+            $this->log('Brætspils data blev uploaded og tilføjet af ' . $this->getLoggedInUser()->user, 'Boardgames', $this->getLoggedInUser());
+        }
 
         return true;
     }
