@@ -270,6 +270,8 @@ class Routes
         $this->routes['room_image_overview'] = array('url' => 'rooms/image-overview','controller' => 'Rooms', 'method' => 'imageOverview');
 
         $this->routes['sleep_statistics']    = array('url' => 'rooms/sleepstatistics', 'controller' => 'Rooms', 'method' => 'sleepStatistics');
+        $this->routes['sleep_stats_json']    = array('url' => 'rooms/sleepstatsjson', 'controller' => 'Rooms', 'method' => 'getSleepStatsJSON');
+        
 
         // wear routes
         $this->routes['wearhome']                     = array('url' => 'wear/', 'controller' => 'Wear', 'method' => 'main');
