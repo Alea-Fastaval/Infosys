@@ -91,7 +91,7 @@ class Routes
         $this->routes['sms_auto_dryrun']    = array('url' => 'sms/auto-dryrun', 'controller' => 'sms', 'method' => 'autoDryRun');
 
         // Automatic messages
-        $this->routes['kickoff_sms_script'] = array('url' => 'index/automaticmessages', 'controller' => 'index', 'method' => 'sendAutomaticMessages');
+        $this->routes['cron_notifications'] = array('url' => 'index/automaticmessages', 'controller' => 'index', 'method' => 'sendAutomaticMessages');
 
 
         // deltager routes
