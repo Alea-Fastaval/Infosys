@@ -358,7 +358,7 @@ ORDER BY
 
         if (time() < $start->getTimestamp() || time() > $end->getTimestamp()) {
             $this->fileLog("Running auto message script outside con times");
-            $log->logToDB("Kan ikke sende automatiske beskeder - udenfor tidsperioden", 'Messages', 1);
+            $log->logToDB("Kan ikke sende automatiske beskeder - udenfor tidsperioden", 'Messages', 0);
             return;
         }
 
