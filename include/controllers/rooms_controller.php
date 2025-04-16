@@ -244,4 +244,10 @@ class RoomsController extends Controller
         exit;
     }
     //}}}
+
+    public function getSleepStatsJSON() {
+        $this->jsonOutput(
+            $this->model->gatherSleepingStatistics()
+        );
+    }
 }
