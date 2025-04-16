@@ -3653,4 +3653,217 @@ WHERE (
 
         return $this->db->query("SELECT id, title_en, navn FROM aktiviteter WHERE type = 'braet' OR type = 'rolle' $sort");
     }
+
+    public function createDoorParticipant($post) {
+        //$this->fileLog("Create Door Participant post:".print_r($post, true));
+
+        $participant = $this->createEntity('Deltagere');
+        $participant->password = sprintf('%06d', mt_rand(100000, 999999));
+        $participant->medical_note = '';
+        $participant->gcm_id = '';
+
+        // Base data
+        $fields = [
+            'fornavn',
+            'efternavn',
+            'brugerkategori_id',
+            'adresse1',
+            'postnummer',
+            'by',
+            'country',
+            'birthdate',
+            'email',
+        ];
+
+        foreach($fields as $field) {
+            $participant->$field = $post->$field;
+        }
+
+        try {
+            $participant->insert();
+        } catch (FrameworkException $e) {
+            $e->logException();
+            return [
+                'status' => 'error',
+                'message' => 'could not create participant',
+                'error' => $e->getMessage(),
+            ];
+        }
+
+        $this->log("Deltager #{$deltager->id} blev oprettet i døren af {$this->getLoggedInUser()->user}", 'Deltager', $this->getLoggedInUser());
+
+        $age = $participant->getAge(new DateTime($this->config->get('con.start')));
+        $config = json_decode(file_get_contents(SIGNUP_FOLDER."config/main.json"));
+        $price = 0;
+
+        // Special logic for parents
+        if ($participant->brugerkategori_id == 11) {
+            $entry = $this->createEntity('Indgang');
+            $select = $entry->getSelect();
+            $select->setWhere('type', 'like', '%Forælder%');
+            $entry = $entry->findBySelect($select);
+            if (!$entry) {
+                return [
+                    'status' => 'error',
+                    'message' => 'could not find entance type for parents',
+                ];
+            }
+            $participant->setIndgang($entry);
+            $this->log("Deltager #{$participant->id} fik tilføjet entre i døren", 'Deltager', $this->getLoggedInUser());
+
+            return [
+                "status" => "success",
+                "id" => $participant->id,
+                "price" => $entry->pris,
+            ];
+        }
+
+        // Entrance
+        if ($post->entry_all == "true") {
+            $entry = $this->createEntity('Indgang');
+            $select = $entry->getSelect();
+            $select->setWhere('type', 'like', '%Indgang - Partout%');
+
+            if ($age < $config->age_young) {
+                if ($age < $config->age_kid) {
+                    $select->setWhere('type', 'like', '%Barn%');  
+                } else {
+                    $select->setWhere('type', 'like', '%Ung%');
+                }
+            } else {
+                $select->setWhere('type', 'not like', '%Barn%');  
+                $select->setWhere('type', 'not like', '%Ung%');
+            }
+            $select->setWhere('type', 'not like', '%Alea%');
+            $select->setWhere('type', 'not like', '%Arrangør%');
+
+            $entry = $entry->findBySelect($select);
+            if (!$entry) {
+                return [
+                    'status' => 'error',
+                    'message' => 'could not find partout entrance',
+                ];
+            }
+
+            $participant->setIndgang($entry);
+            $price += $entry->pris;
+        } else {
+            foreach($post->entry as $key => $val) {
+                if ($val != "true") continue;
+                $date = new DateTime($this->config->get('con.start'));
+                if ($key > 0) $date->add(new DateInterval("P{$key}D"));
+
+                $entry = $this->createEntity('Indgang');
+                $select = $entry->getSelect();
+                $select->setWhereDate('start', '=', $date->format('Y-m-d'));
+
+                if ($age < $config->age_kid) {
+                    $select->setWhere('type', '=', 'GRATIST Dagsbillet');
+                } else {
+                    $select->setWhere('type', '=', 'Indgang - DØR');
+                }  
+
+                $entry = $entry->findBySelect($select);
+                if (!$entry) {
+                    return [
+                        'status' => 'error',
+                        'message' => 'could not find single day entrance for day '.$key,
+                    ];
+                }
+                $participant->setIndgang($entry);
+                $price += $entry->pris;
+            }
+        }
+
+        // Sleeping
+        $sleep_data = [];
+        if ($post->sleep_all == "true") {
+            $entry = $this->createEntity('Indgang');
+            $select = $entry->getSelect();
+            $select->setWhere('type', 'like', '%Overnatning - Partout%');
+            $select->setWhere('type', 'not like', '%GRATIS%');  
+            $select->setWhere('type', 'not like', '%Arrangør%');
+
+            $entry = $entry->findBySelect($select);
+            if (!$entry) {
+                return [
+                    'status' => 'error',
+                    'message' => 'could not find partout sleeping',
+                ];
+            }
+
+            $participant->setIndgang($entry);
+            $price += $entry->pris;
+            $sleep_data[] = [
+                'room_id' => $post->sleep_location,
+                'starts' => date('Y-m-d 22:00:00', strtotime($this->config->get('con.start'))),
+                'ends' => date('Y-m-d 10:00:00', strtotime($this->config->get('con.end'))),
+            ];
+        } else {
+            foreach($post->sleep as $key => $val) {
+                if ($val != "true") continue;
+                $date = new DateTime($this->config->get('con.start'));
+                if ($key > 0) $date->add(new DateInterval("P{$key}D"));
+
+                $entry = $this->createEntity('Indgang');
+                $select = $entry->getSelect();
+                $select->setWhereDate('start', '=', $date->format('Y-m-d'));
+                $select->setWhere('type', '=', 'Overnatning - Enkelt');
+
+                $entry = $entry->findBySelect($select);
+                if (!$entry) {
+                    return [
+                        'status' => 'error',
+                        'message' => 'could not find single day sleeping for day '.$key,
+                    ];
+                }
+                $participant->setIndgang($entry);
+                $price += $entry->pris;
+
+                $date2 = clone $date;
+                $date2->add(new DateInterval("P1D"));
+
+                $sleep_data[] = [
+                    'room_id' => $post->sleep_location,
+                    'starts' => $date->format('Y-m-d')." 22:00:00",
+                    'ends' => $date2->format('Y-m-d')." 10:00:00",
+                ];    
+            }
+        }
+
+        if (count($sleep_data) > 0) {
+            $this->updateSleepingData($participant->id, $sleep_data);
+        }
+        $this->log("Deltager #{$participant->id} fik tilføjet entre/overnatning i døren", 'Deltager', $this->getLoggedInUser());
+
+        return [
+            "status" => "success",
+            "id" => $participant->id,
+            "price" => $price,
+        ];
+    }
+
+    public function checkInDoorParticipant($post) {
+        $participant = $this->createEntity('Deltagere')->findById($post->id);
+
+        if ($participant->checkin_time !== '0000-00-00 00:00:00') {
+            return [
+                'status' => 'error',
+                'message' => "participant with ID: $participant->id is already checked in",
+            ];
+        }
+
+        $participant->checkin_time = date('Y-m-d H:i:s');
+        $participant->udeblevet = 'nej';
+
+        $participant->checkin_balance = $participant->betalt_beloeb = $post->price;
+        $participant->update();
+
+        $this->log("Deltager #{$participant->id} blev checked ind af {$this->getLoggedInUser()->user}", 'Deltager', $this->getLoggedInUser());
+
+        return [
+            'status' => 'success',
+            'id' => $participant->id,
+        ];
+    }
 }

@@ -1,0 +1,88 @@
+<?php
+  $this->registerEarlyLoadJS('create_and_checkin.js');
+  $this->includeCSS('participant-details.css');
+?>
+<h1 class="text-center">Opret og Check-in</h1>
+<p class="text-center">til opretning af nye deltagere i døren</p>
+<div class="edit_details">
+  <fieldset id="basic-info-fields">
+    <legend>Oplysninger om deltageren</legend>
+    <div class="form-grid">
+      <b>Fornavn:</b>
+      <input type='text' value='' name='fornavn' />
+      <b>Efternavn:</b>
+      <input type='text' value='' name='efternavn' /></td>
+      <b>Deltagertype:</b>
+      <select id="user-category-select" name="brugerkategori_id">
+          <?php 
+            foreach ($this->participant_categories as $category) {
+              if (in_array($category->id, [2, 7, 10])) continue; // No organizers, freeloaders or junior participants
+              ?><option value="<?=$category->id?>" <?=$category->id == 1 ? 'selected': ''?>><?=$category->navn?></option><?php
+            }
+          ?>
+      </select>
+      <b>Adresse:</b>
+      <input type='text' value='' name='adresse1' />
+      <b>Postnr:</b>
+      <input type='text' value='' name='postnummer' />
+      <b>By:</b>
+      <input type='text' value='' name='by' />
+      <b>Land:</b>
+      <select name="country">
+          <?php 
+            foreach ($this->countries as $country) {
+              ?><option value="<?=$country['code']?>" <?=$country['code'] == 'DK' ? 'selected': ''?>><?=$country['name_da']?></option><?php
+            }
+          ?>
+      </select>
+      <b>Fødselsdato:</b>
+      <input type='date' value='' name='birthdate' />
+      <b>Email:</b>
+      <input class='doubleinput' type='text' value='' name='email' />
+    </div>
+  </fieldset>
+  <fieldset id="entry-and-sleeping-fields">
+    <legend>Ingang & Overnatning</legend>
+    <div class="entry-table">
+      <div></div> <!-- empty corner -->
+      <b>Onsdag</b>
+      <b>Torsdag</b>
+      <b>Fredag</b>
+      <b>Lørdag</b>
+      <b>Søndag</b>
+      <b>Partout</b>
+      <b>Entré</b>
+      <input type='checkbox' class="single-entry" value='true' name='entry[0]'/>
+      <input type='checkbox' class="single-entry" value='true' name='entry[1]'/>
+      <input type='checkbox' class="single-entry" value='true' name='entry[2]'/>
+      <input type='checkbox' class="single-entry" value='true' name='entry[3]'/>
+      <input type='checkbox' class="single-entry" value='true' name='entry[4]'/>
+      <input type='checkbox' class="all-entry" value='true' name='entry_all'/>
+      <b>Overnatning</b>
+      <input type='checkbox' class="single-sleep" value='true' name='sleep[0]'/>
+      <input type='checkbox' class="single-sleep" value='true' name='sleep[1]'/>
+      <input type='checkbox' class="single-sleep" value='true' name='sleep[2]'/>
+      <input type='checkbox' class="single-sleep" value='true' name='sleep[3]'/>
+      <input type='checkbox' class="single-sleep" value='true' name='sleep[4]'/>
+      <input type='checkbox' class="all-sleep" value='true' name='sleep_all'/>
+    </div>
+    <div class="sleep-location-wrapper" style="display:none;">
+      <b>Vælg sovelokale</b>
+      <select name="sleep_location"></select>
+      <p>( ledige pladser gælder for de valgte dage )</p>
+    </div>
+  </fieldset>
+  <fieldset>
+    <div class="button-wrapper">
+      <button id="create-and-checkin-button">Opret & Check-ind</button>
+    </div>
+  </fieldset>
+  <div class="dialog-wrapper" style="display:none">
+    <div class="dialog">
+      <p>Deltageren er oprettet med ID: <span id="checkin-participant-id">fejl</span></p>
+      <p>Deltageren skal betale <span id="checkin-price">fejl</span> kr.</p>
+      <button id="checkin-cancel-button">Afbryd</button>
+      <button id="checkin-continue-button">Fortsæt</button>
+    </div>
+  </div>
+</div>
