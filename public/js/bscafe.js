@@ -1094,7 +1094,7 @@ var BSCafe = (function ($, window) {
                             let category = stats[key];
                             let sort = category.sort ?? key;
                             let heading = category.heading ?? key;
-                            let value = category.value ?? key;
+                            let value = category.value ?? category;
                             if (!category.list) {
                                 $items.push($(`<dt data-sort="${sort}">${heading}</dt><dd>${value}</dd>`));
                             } else {
