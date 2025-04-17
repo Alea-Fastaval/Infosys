@@ -370,7 +370,7 @@ GROUP BY
 
             $participants[] = array(
                 'id'      => intval($participant->id),
-                'name'    => $participant->getName(),
+                'name'    => $participant->getName()." (".$participant->efternavn.")",
                 'barcode' => $participant->getEan8Number($this->getConYear()),
             );
         }
