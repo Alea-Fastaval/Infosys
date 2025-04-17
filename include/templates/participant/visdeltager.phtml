@@ -318,7 +318,7 @@ $this->registerLateLoadJS('participant.js');
                 </tr>
                 <tr>
                     <td class='pris-underline'>Difference ved check-ind (<?= $this->deltager->calcRealTotal();?> - <?= $this->deltager->betalt_beloeb;?>):</td>
-                    <td class='priser pris-underline difference' style='background-color: #e0e0e0'><?= $this->deltager->calcRealTotal() - $this->deltager->betalt_beloeb;?>,-</td>
+                    <td class='priser pris-underline real-difference' style='background-color: #e0e0e0'><?= $this->deltager->calcRealTotal() - $this->deltager->betalt_beloeb;?>,-</td>
                 </tr>
             </table>
         </fieldset>
