@@ -1,0 +1,93 @@
+.form-grid {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: repeat(3, 1fr 2fr);
+    align-items: center;
+}
+
+.form-grid input,
+.form-grid select {
+    margin: 0;
+    box-sizing: border-box;
+    height: 2rem;
+    width: 100%;
+}
+
+.entry-table {
+    display: grid;
+    grid-template-columns: 2fr repeat(6, 1fr);
+    align-items: center;
+    justify-items: center;
+
+    gap: .5rem;
+    width: 40rem;
+    margin: .5rem auto;
+}
+
+.entry-table :nth-child(7n+1) {
+    justify-self: right;
+}
+
+.entry-table input,
+.form-grid input[type="checkbox"] {
+    height: 2rem;
+    width: 2rem;
+}
+
+.sleep-location-wrapper {
+    margin: 1rem auto;
+    width: fit-content;
+    text-align: center;
+}
+
+.sleep-location-wrapper select {
+    width: 20rem;
+}
+
+.button-wrapper {
+    margin: .5rem auto;
+    width: fit-content;
+}
+
+.dialog-wrapper {
+    position: fixed;
+    top: 41px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0,0,0,.5);
+}
+
+.dialog {
+    font-size: 3rem;
+    line-height: normal;
+    
+    width: fit-content;
+    margin: 0 auto;
+
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+
+    color: white;
+    background-color: black;
+
+    border-radius: 1rem;
+    padding: 1rem 2rem;
+}
+
+.dialog button {
+    font-size: 1.5rem;
+    line-height: normal;
+    padding: .5rem 1rem;
+    border: none;
+    border-radius: .5rem;
+}
+
+#checkin-continue-button {
+    background-color: lightgreen;
+}
+
+#checkin-cancel-button {
+    background-color: salmon;
+}

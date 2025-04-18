@@ -435,6 +435,7 @@ XML;
             <li><a href='{$this->url('vis_alle_deltagere')}?show_search_box=true'>Deltager-søgning</a></li>
             <li><a href='{$this->url('vis_spilledere')}'>Spilledere</a></li>
             <li><a href='{$this->url('opret_deltager')}'>Opret deltager</a></li>
+            <li><a href='{$this->url('create_and_checkin')}'>Opret og Check-in</a></li>
             <li><a href='{$this->url('checkin_interface')}'>Checkin registrering</a></li>
             <li><a href='{$this->url('show_double_bookings')}'>Tjek for dobbelt-bookinger</a></li>
             <li><a href='{$this->url('show_refund')}'>Deltagere der skal have penge tilbage</a></li>
