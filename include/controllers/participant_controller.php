@@ -2406,4 +2406,28 @@ die ("This page has to be enabled by someone with access to the server code");
         $this->page->fields = $this->model->getDeltagerFieldsWithNames();
     }
 
+    public function createAndCheckIn() {
+        if(!$this->page->request->isPost()) {
+            // Normal page
+            $this->page->setTitle('Create and Check-in');
+            $this->page->participant_categories = $this->model->getAllBrugerKategorier();
+            $this->page->countries = $this->model->getCountries();
+            $this->page->areas = $this->model->getWorkAreas();
+            return;
+        }
+
+        // Post request
+        $post = $this->page->request->post;
+        if ($post->action == 'do_checkin') {
+            $info = $this->model->checkInDoorParticipant($post);
+        } else {
+            $info = $this->model->createDoorParticipant($post);
+        }
+
+        if ($info['status'] != 'success') {
+            $this->jsonOutput($info, 400);
+        }
+
+        $this->jsonOutput($info);
+    }
 }

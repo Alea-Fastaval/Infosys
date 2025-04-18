@@ -108,6 +108,7 @@ class Routes
         $this->routes['list_schedule_signups']                      = array('url' => 'deltager/visforafvikling/:afvikling_id:/:assigned:', 'controller' => 'Participant', 'method' => 'listForSchedule');
         $this->routes['list_group_participants']                    = array('url' => 'deltager/visforhold/:hold_id:', 'controller' => 'Participant', 'method' => 'listForGroup');
         $this->routes['opret_deltager']                             = array('url' => 'deltager/opret/', 'controller' => 'Participant', 'method' => 'createDeltager');
+        $this->routes['create_and_checkin']                         = array('url' => 'deltager/createcheckin/', 'controller' => 'Participant', 'method' => 'createAndCheckIn');
         $this->routes['participant_info']                           = array('url' => 'deltager/tilmeldingsinfo/:hash:', 'controller' => 'Participant', 'method' => 'displayParticipantInfo');
         $this->routes['print_list']                                 = array('url' => 'deltager/printlist/', 'controller' => 'Participant', 'method' => 'printList');
         $this->routes['sms_send']                                   = array('url' => 'deltager/sendsmstexts/', 'controller' => 'Participant', 'method' => 'sendSMSes');
