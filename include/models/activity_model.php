@@ -2032,4 +2032,40 @@ GROUP BY
 
         return $return_list;
     }
+
+    public function calcBoardRanking() {
+        $query = 
+        "SELECT ak.navn, ak.id, bg.ranking, COUNT(*) as 'count'
+            FROM aktiviteter ak
+            LEFT JOIN boardgame_rankings bg ON bg.boardgame_id = ak.id
+        WHERE ak.type = 'braet'
+        GROUP BY ak.id, bg.ranking";
+
+        $games = [];
+        $result = $this->db->query($query);
+        foreach($result as $rank_count) {
+            if ($rank_count['ranking'] == null) {
+                $games[$rank_count['id']] = [
+                    'name' => $rank_count['navn'],
+                    'rankings' => [],
+                ];                
+            }
+            if (!isset($games[$rank_count['id']])) {
+                $games[$rank_count['id']] = [
+                    'name' => $rank_count['navn'],
+                    'rankings' => [
+                        $rank_count['ranking'] => $rank_count['count'],
+                    ],
+                ];
+            } else {
+                $games[$rank_count['id']]['rankings'][$rank_count['ranking']] = $rank_count['count'];
+            }
+        }
+        $this->fileLog('Boardgame rankings result:'.print_r($games, true));
+
+        return [
+            'list' => $list,
+            'game_votes' => $games,
+        ];
+    }
 }
