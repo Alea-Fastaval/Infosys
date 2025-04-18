@@ -3679,6 +3679,14 @@ WHERE (
             $participant->$field = $post->$field;
         }
 
+        if($post->alea == 'true') {
+            $participant->er_alea = 'ja';
+        }
+
+        if($participant->brugerkategori_id == 2) {
+            $participant->work_area = $post->work_area;
+        }
+
         try {
             $participant->insert();
         } catch (FrameworkException $e) {
@@ -3718,6 +3726,23 @@ WHERE (
             ];
         }
 
+        // Alea membership fee
+        if($post->alea == 'true') {
+            $entry = $this->createEntity('Indgang');
+            $select = $entry->getSelect();
+            $select->setWhere('type', '=', 'Alea medlemskab');
+            $entry = $entry->findBySelect($select);
+            if (!$entry) {
+                return [
+                    'status' => 'error',
+                    'message' => 'could not find entance type for alea membership',
+                ];
+            }
+            $participant->setIndgang($entry);
+            $price += $entry->pris;
+            $this->log("Deltager #{$participant->id} fik tilføjet Alea medlemskab i døren", 'Deltager', $this->getLoggedInUser());
+        }
+
         // Entrance
         if ($post->entry_all == "true") {
             $entry = $this->createEntity('Indgang');
@@ -3734,8 +3759,20 @@ WHERE (
                 $select->setWhere('type', 'not like', '%Barn%');  
                 $select->setWhere('type', 'not like', '%Ung%');
             }
-            $select->setWhere('type', 'not like', '%Alea%');
-            $select->setWhere('type', 'not like', '%Arrangør%');
+
+            // Entrance with alea discount (kids get free entance anyway)
+            if ($post->alea == 'true' && $age >= $config->age_kid) {
+                $select->setWhere('type', 'like', '%Alea%');
+            } else {
+                $select->setWhere('type', 'not like', '%Alea%');
+            }
+
+            // Discount for organizers
+            if ($participant->brugerkategori_id == 2 && $age >= $config->age_kid) {
+                $select->setWhere('type', 'like', '%Arrangør%');
+            } else {
+                $select->setWhere('type', 'not like', '%Arrangør%');
+            }
 
             $entry = $entry->findBySelect($select);
             if (!$entry) {
@@ -3782,8 +3819,14 @@ WHERE (
             $select = $entry->getSelect();
             $select->setWhere('type', 'like', '%Overnatning - Partout%');
             $select->setWhere('type', 'not like', '%GRATIS%');  
-            $select->setWhere('type', 'not like', '%Arrangør%');
 
+            // Discount for organizers
+            if ($participant->brugerkategori_id == 2) {
+                $select->setWhere('type', 'like', '%Arrangør%');
+            } else {
+                $select->setWhere('type', 'not like', '%Arrangør%');
+            }
+            
             $entry = $entry->findBySelect($select);
             if (!$entry) {
                 return [

@@ -2412,6 +2412,7 @@ die ("This page has to be enabled by someone with access to the server code");
             $this->page->setTitle('Create and Check-in');
             $this->page->participant_categories = $this->model->getAllBrugerKategorier();
             $this->page->countries = $this->model->getCountries();
+            $this->page->areas = $this->model->getWorkAreas();
             return;
         }
 

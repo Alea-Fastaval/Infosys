@@ -2,6 +2,7 @@
 
 $(function() {
   let role_select = $('#user-category-select')
+  let alea_check = $('#alea-member-checkbox')
 
   let single_entry = $('.single-entry')
   let all_entry = $('.all-entry')
@@ -18,10 +19,26 @@ $(function() {
 
   role_select.on('change', function(){
     let entry_fields = $('#entry-and-sleeping-fields')
+    let organizer_fields = $('.organizer-fact')
+
     if ($(this).val() == 11) {
       entry_fields.hide()
     } else {
       entry_fields.show()
+    }
+
+    if ($(this).val() == 2) {
+      organizer_fields.show()
+      alea_check.prop('checked', true)
+    } else {
+      organizer_fields.hide()
+    }
+  })
+
+  alea_check.on('click', function(evt) {
+    if (role_select.val() == 2 && !alea_check.prop('checked')) {
+      alert('Arrangører skal være medlem af Alea')
+      evt.preventDefault()
     }
   })
 

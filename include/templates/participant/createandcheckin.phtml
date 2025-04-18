@@ -16,7 +16,7 @@
       <select id="user-category-select" name="brugerkategori_id">
           <?php 
             foreach ($this->participant_categories as $category) {
-              if (in_array($category->id, [2, 7, 10])) continue; // No organizers, freeloaders or junior participants
+              if (in_array($category->id, [7, 10])) continue; // No organizers, freeloaders or junior participants
               ?><option value="<?=$category->id?>" <?=$category->id == 1 ? 'selected': ''?>><?=$category->navn?></option><?php
             }
           ?>
@@ -38,7 +38,19 @@
       <b>Fødselsdato:</b>
       <input type='date' value='' name='birthdate' />
       <b>Email:</b>
-      <input class='doubleinput' type='text' value='' name='email' />
+      <input type='text' value='' name='email' />
+      <b>Telefonnummer:</b>
+      <input type='tel' value='' name='mobiltlf' />
+      <b>Medlem af Alea:</b>
+      <input id="alea-member-checkbox" type='checkbox' value='' name='alea' />
+      <b class="organizer-fact" style="display:none">Arrangørområde:</b>
+      <select class="organizer-fact" style="display:none" name="work_area">
+          <?php 
+            foreach ($this->areas as $area) {
+              ?><option value="<?=$area['id']?>"><?=$area['name_da']?></option><?php
+            }
+          ?>
+      </select>
     </div>
   </fieldset>
   <fieldset id="entry-and-sleeping-fields">

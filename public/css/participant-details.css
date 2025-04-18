@@ -28,7 +28,8 @@
     justify-self: right;
 }
 
-.entry-table input {
+.entry-table input,
+.form-grid input[type="checkbox"] {
     height: 2rem;
     width: 2rem;
 }
