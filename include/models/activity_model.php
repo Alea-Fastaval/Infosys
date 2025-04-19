@@ -2034,6 +2034,9 @@ GROUP BY
     }
 
     public function calcBoardRanking() {
+        //---------------------------------------
+        // Raw voting data
+        //---------------------------------------
         $query = 
         "SELECT ak.navn, ak.id, bg.ranking, COUNT(*) as 'count'
             FROM aktiviteter ak
@@ -2041,6 +2044,7 @@ GROUP BY
         WHERE ak.type = 'braet'
         GROUP BY ak.id, bg.ranking";
 
+        // Order rankings per game
         $games = [];
         $result = $this->db->query($query);
         foreach($result as $rank_count) {
@@ -2061,11 +2065,120 @@ GROUP BY
                 $games[$rank_count['id']]['rankings'][$rank_count['ranking']] = $rank_count['count'];
             }
         }
-        $this->fileLog('Boardgame rankings result:'.print_r($games, true));
 
+        //---------------------------------------
+        // Rank choice elimination
+        //---------------------------------------
+        $query = "SELECT * FROM boardgame_rankings ORDER BY participant_id, ranking";
+        $result = $this->db->query($query);
+
+        // Collect voters
+        $voters = [];
+        foreach ($result as $row) {
+            $rank = intval($row['ranking']) - 1;
+            if (!isset($voters[$row['participant_id']])) {
+                $voters[$row['participant_id']] = [
+                    $rank => $row['boardgame_id'],
+                ];
+            } else {
+                $voters[$row['participant_id']][$rank] = $row['boardgame_id'];
+            }
+        }
+
+        // Prepare list of games
+        $contestants = [];
+        foreach($games as $game_id => $game) {
+            $contestants[$game_id] = [];
+        }
+
+        // Assign voters to each game
+        foreach ($voters as $voter_id => $voter) {
+            $game_id = array_shift($voter);
+            $contestants[$game_id][$voter_id] = $voter;
+        }
+
+        // Elimination start
+        $max_round = count($contestants);
+        $round = 1;
+        $eliminated = [];
+        while (count($contestants) > 0 && $round  <= $max_round) {
+            // Find least votes
+            $least_votes = 1000000;
+            $least_games = [];
+            foreach ($contestants as $game_id => $game_voters) {
+                $vote_count = count($game_voters);
+                if ( $vote_count < $least_votes) {
+                    $least_votes = $vote_count;
+                    $least_games = [];
+                }
+                if ($vote_count <= $least_votes) {
+                    $least_games[] = $game_id;
+                }
+            }
+
+            // One elimination candidate
+            if (count($least_games) == 1) {
+                $this->eliminateGame($least_games[0], $contestants, $eliminated, $round);
+                $round++;
+                continue;
+            }
+
+            // Tie breaker by most high ranked votes
+            for ($rank = 1; $rank <= 5; $rank++) {
+                $leaving_games = [];
+                $least_rankings = 100000;
+
+                // Find least high rank votes
+                foreach ($least_games as $game_id) {
+                    $rank_count = $games[$game_id]['rankings'][$rank] ?? 0;
+                    if ( $rank_count < $least_rankings) {
+                        $least_rankings = $rank_count;
+                        $leaving_games = [];
+                    }
+                    if ($rank_count <= $least_rankings) {
+                        $leaving_games[] = $game_id;
+                    }
+                }
+
+                // Only one with lowest vote of this rank
+                if (count($leaving_games) == 1) {
+                    $this->eliminateGame($leaving_games[0], $contestants, $eliminated, $round);
+                    $round++;
+                    continue 2;
+                } else {
+                    // Continue to next rank with current lowest votes
+                    $least_games = [];
+                    foreach($leaving_games as $game_id) {
+                        $least_games[] = $game_id;
+                    }
+                }
+            }
+
+            // Couldn't break the tie so all lowest score goes
+            $round+= count($least_games) - 1;
+            foreach($least_games as $game_id) {
+                $this->eliminateGame($game_id, $contestants, $eliminated, $round);
+            }
+            $round++;
+        }
+        
+        arsort($eliminated);
         return [
-            'list' => $list,
+            'list' => $eliminated,
             'game_votes' => $games,
         ];
+    }
+
+    private function eliminateGame($game_id, &$contestants, &$eliminated, $round) {
+        $eliminated[$game_id] = $round;
+        foreach($contestants[$game_id] as $voter_id => $voter) {
+            if (count($voter) == 0) continue; //Voter has no more game rankings
+            do {
+                $next_game = array_shift($voter);
+            } while(isset($eliminated[$next_game]) && count($voter) > 0);
+            if (isset($eliminated[$next_game])) continue;
+            $contestants[$next_game][$voter_id] = $voter;
+        }
+        unset($contestants[$game_id]);
     }
 }
