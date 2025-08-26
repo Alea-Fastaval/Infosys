@@ -358,8 +358,7 @@ GROUP BY
     {
         $select = $this->createEntity('Deltagere')->getSelect();
 
-        $select->setWhere('annulled', '=', 'nej')
-            ->setWhere('signed_up', '>', '0000-00-00');
+        $select->setWhere('annulled', '=', 'nej');
 
         $participants = array();
 
