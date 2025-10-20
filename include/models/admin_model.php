@@ -207,6 +207,10 @@ class AdminModel extends Model
         $this->db->exec('DELETE FROM deltagere_indgang');
         $this->db->exec('DELETE FROM pladser');
         $this->db->exec('DELETE FROM participants_sleepingplaces');
+        $this->db->exec('DELETE FROM payment_registrations');
+        $this->db->exec('DELETE FROM payment_log');
+        $this->db->exec('DELETE FROM payment_users');
+        $this->db->exec('DELETE FROM boardgame_rankings');
         $this->db->exec('DELETE FROM deltagere');
         $this->db->exec('ALTER TABLE deltagere AUTO_INCREMENT = 1');
     }
