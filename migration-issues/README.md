@@ -37,38 +37,44 @@ Estimates are provided in story points:
 
 ## Issue List
 
-1. **001-participant-api.md** - Participant/Attendee API (HIGH)
-2. **002-authentication.md** - Authentication & Authorization (CRITICAL)
-3. **003-activity-api.md** - Activity & Schedule Management API (HIGH)
-4. **004-database-setup.md** - Database Schema & EF Setup (CRITICAL)
-5. **005-payment-integration.md** - Payment Integration (HIGH)
+### Phase 1: Foundation (Critical)
+1. **001-participant-api.md** - Participant/Attendee API (HIGH, 8-13 pts)
+2. **002-authentication.md** - Authentication & Authorization (CRITICAL, 5-8 pts)
+3. **003-activity-api.md** - Activity & Schedule Management API (HIGH, 8-13 pts)
+4. **004-database-setup.md** - Database Schema & EF Setup (CRITICAL, 5-8 pts)
+5. **005-payment-integration.md** - Payment Integration (HIGH, 5-8 pts)
 
-Additional issues should be created for:
-- GDS shift management API
-- Shop/economy API
-- Food management API
-- Entrance tracking API
-- Wear/merchandise API
-- Rooms management API
+### Phase 2: Core Features
+6. **006-gds-api.md** - GDS Shift Management API (HIGH, 8-13 pts)
+7. **007-frontend-infrastructure.md** - Angular Frontend Setup (CRITICAL, 5-8 pts)
+8. **012-signup-module-api.md** - Signup Module & Public API (MEDIUM-HIGH, 8-13 pts)
+
+### Phase 3: Supporting Features
+9. **008-shop-economy-api.md** - Shop & Economy Management API (MEDIUM, 5-8 pts)
+10. **009-resources-api.md** - Resources API (Food, Wear, Entrance, Rooms) (MEDIUM, 8-13 pts)
+11. **010-boardgames-loans-api.md** - Boardgames & Loans API (LOW-MEDIUM, 5-8 pts)
+12. **011-communication-systems.md** - Newsletter, Tickets, SMS, Email (MEDIUM, 8-13 pts)
+
+### Additional Issues to Create
+
+Additional work items should be created for:
 - Photo management API
-- Boardgame library API
-- Loans system API
-- Newsletter system API
-- Ticketing system API
-- SMS integration
-- Email system
-- Translation system
-- Admin tools API
-- Signup module API
-- Frontend Angular components (per feature area)
+- Translation system API
+- Admin tools and reporting
+- Graph/statistics API
+- Log viewing interface
+- ID template/badge designer
 - Barcode generation service
 - PDF generation service
-- Excel import/export service
-- Reporting system
+- Excel import/export utilities
 - Data migration scripts
-- Testing infrastructure
-- CI/CD pipeline
-- Deployment strategy
+- Testing infrastructure setup
+- CI/CD pipeline configuration
+- Deployment strategy and infrastructure
+- Performance optimization
+- Security hardening
+- Documentation
+- Training materials
 
 ## Dependencies
 
@@ -85,33 +91,33 @@ Review dependency chains before starting work.
 1. Database setup (#004)
 2. Authentication (#002)
 
-### Phase 2: Core Features (Sprints 3-6)
+### Phase 2: Core Backend Features (Sprints 3-6)
 3. Participant API (#001)
 4. Activity API (#003)
 5. Payment integration (#005)
+6. GDS system (#006)
 
-### Phase 3: Secondary Features (Sprints 7-10)
-6. GDS system
-7. Shop/economy
-8. Food management
-9. Resource management (rooms, wear, entrance)
+### Phase 3: Frontend Infrastructure (Sprint 7-8)
+7. Angular setup (#007)
+8. Core components and routing
+9. Authentication UI
 
-### Phase 4: Supporting Features (Sprints 11-14)
-10. Boardgames library
-11. Loans system
-12. Ticketing
-13. Newsletter
+### Phase 4: Public & Supporting Features (Sprints 9-12)
+10. Signup module (#012)
+11. Shop/economy (#008)
+12. Resources management (#009)
+13. Communication systems (#011)
 
-### Phase 5: Admin & Tools (Sprints 15-16)
-14. Admin interfaces
-15. Reporting
-16. Tools and utilities
+### Phase 5: Secondary Features (Sprints 13-15)
+14. Boardgames library (#010)
+15. Loans system (#010)
+16. Additional admin tools
 
-### Phase 6: Angular Frontend (Sprints 17-24)
-17. Core components and routing
-18. Participant management UI
-19. Activity management UI
-20. Remaining feature UIs
+### Phase 6: Polish & Launch (Sprints 16-18)
+17. Testing and QA
+18. Performance optimization
+19. Documentation
+20. Deployment and cutover
 
 ## Notes
 
