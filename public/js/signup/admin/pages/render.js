@@ -36,7 +36,7 @@ class SignupAdminRender {
 
   static load_page_list () {
     jQuery.getJSON(
-      "/api/signup/pagelist",
+      "/api/signup/pagelist?config=true",
       function (pages) {
         SignupPageControls.pagelist_ready(pages);
         SignupAdminRender.parse_page_list(pages);
