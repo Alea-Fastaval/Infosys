@@ -202,6 +202,7 @@ class ParticipantModel extends Model
                 $select->setWhereOr('efternavn', 'like', "%{$term}%");
                 $select->setWhereOr('ungdomsskole', 'like', "%{$term}%");
                 $select->setWhereOr('deltager_note', 'like', "%{$term}%");
+                $select->setWhereOr('nickname', 'like', "%{$term}%");
             }
         }
 
