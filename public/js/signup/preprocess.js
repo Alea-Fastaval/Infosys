@@ -2,19 +2,19 @@
 
 class InfosysTextPreprocessor {
   // Preprocess text
-  static process_text(text) {
+  static process_text(text, lang, config) {
     text = jQuery('<div>'+text+'</div>').text(); //strip any HTML
     let match;
     let regex = /\[(\w+)(?:=([^\]]+))?\](.*?)\[\/\1\]/s;
     for (match = text.match(regex); match; match = text.match(regex)) {
-      text = this.processMatch(text, match);
+      text = this.processMatch(text, match, lang, config);
     }
     text = text.replaceAll("\n", "<br>");
     
     return text;
   }
 
-  static processMatch(text, match) {
+  static processMatch(text, match, lang, config) {
     switch (match[1]) {
       case "email":
         return text.replace(match[0], '<a href="mailto:'+match[3]+'">'+match[3]+'</a>');
@@ -31,6 +31,9 @@ class InfosysTextPreprocessor {
         bgcolor = bgcolor ?? "white";
         color = color ?? "black";
         return text.replace(match[0], '<span style="background-color:'+bgcolor+';color:'+color+';">'+match[3]+'</span>');
+
+      case "replace":
+        return text.replace(match[0], config.text_replacement[match[3]][lang]);
 
       default:
         console.log("Unknown token", match);
