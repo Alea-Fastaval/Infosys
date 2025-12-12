@@ -299,7 +299,7 @@
                         {
                             "value": "Juniordeltager",
                             "text": {
-                                "en": "I want to participate in Fastaval Junior (230 kr.)\u00a0 [b]not available in english[\/b]",
+                                "en": "I want to participate in Fastaval Junior (230 kr.) [b]not available in english[\/b]",
                                 "da": "Jeg vil gerne deltage i Fastaval Junior (230 kr.) - For b\u00f8rn fra 6 til 14 \u00e5r"
                             },
                             "display_logic": [
@@ -321,6 +321,33 @@
                                     "config": "junior_closed",
                                     "compare": "equals",
                                     "value": true
+                                },
+                                {
+                                    "type": "config",
+                                    "status": "hidden",
+                                    "config": "junior_signup_open",
+                                    "compare": "equals",
+                                    "value": false
+                                }
+                            ]
+                        },
+                        {
+                            "value": "",
+                            "text": {
+                                "en": "Fastaval Junior signup opens [replace]junior_signup_time[/replace] [b]not available in english[\/b]",
+                                "da": "Tilmeldingen til Fastaval Junior åbner først d. [replace]junior_signup_time[/replace]"
+                            },
+                            "display_logic": [
+                                {
+                                    "type": "default",
+                                    "status": "hidden"
+                                },
+                                {
+                                    "type": "config",
+                                    "status": "disabled",
+                                    "config": "junior_signup_open",
+                                    "compare": "equals",
+                                    "value": false
                                 }
                             ]
                         },

@@ -26,8 +26,29 @@ class SignupApiModel extends Model {
 
     if ($module == 'main') {
       $config = json_decode($content);
+      $config->no_edit = [
+        "signup_end",
+        "con_start",
+        "junior_signup_open",
+        "text_replacement",
+        "autocomplete",
+        "current_financial_support",
+        "current_junior_participants",
+        "junior_closed",
+        "current_bus_tickets",
+      ];
+
       $config->signup_end = $this->config->get('con.signupend');
       $config->con_start = $this->config->get('con.start');
+      $config->junior_signup_open = (strtotime('now') > strtotime($this->config->get('con.juniorsignup')));
+      $junior_signup_time = strtotime($this->config->get('con.juniorsignup'));
+      $config->text_replacement = [
+        "junior_signup_time" => [
+          'en' => date('M jS \a\t g:i a', $junior_signup_time),
+          'da' => date('j/n \k\l. G:i', $junior_signup_time), 
+        ],
+      ];
+
       $config->autocomplete = [
         'organizer_categories' => $this->loadOrganizerCategories(),
         'countries' => $this->loadCountries(),
@@ -69,7 +90,7 @@ class SignupApiModel extends Model {
   public function getAllPages() {
     $pages = [];
 
-    $skip_pages = null;
+    $skip_pages = [];
     $disabled_items = null;
     // Skip certain pages for late signup
     if (strtotime('now') > strtotime($this->config->get('con.signupend'))) {
@@ -78,6 +99,11 @@ class SignupApiModel extends Model {
       $skip_pages = $config->main_signup_only->pages;
       $disabled_items = $config->main_signup_only->items;
       $disabled_options = $config->main_signup_only->options;
+    }
+
+    // Check if junior signup is open
+    if (strtotime('now') < strtotime($this->config->get('con.juniorsignup'))) {
+      $skip_pages[] = 'junior';
     }
 
     $page_files = glob(SIGNUP_FOLDER."pages/*");

@@ -3,10 +3,10 @@
 class InfosysSignupRender {
   static render_element(item, lang, config) {
     let html;
-    item.processed = InfosysTextPreprocessor.process_text(item.text[lang]);
+    item.processed = InfosysTextPreprocessor.process_text(item.text[lang], lang, config);
     
     if(typeof this['render_'+item.type] === 'function') {
-      html = this['render_'+item.type](item, lang);
+      html = this['render_'+item.type](item, lang, config);
     } else {
       html = this.render_unknown(item.processed, item.type)
     }
@@ -53,7 +53,7 @@ class InfosysSignupRender {
     if (item.errors) {
       for(const error in item.errors) {
         let error_div = jQuery('<div class="error-text" error-type="'+error+'"></div>');
-        let error_text = InfosysTextPreprocessor.process_text(item.errors[error][lang]);
+        let error_text = InfosysTextPreprocessor.process_text(item.errors[error][lang], lang, config);
         error_div.html(error_text);
         error_div.hide();
         if(item.type == 'checkbox') {
@@ -147,21 +147,21 @@ class InfosysSignupRender {
     `;
   }
 
-  static render_radio(item, lang) {
+  static render_radio(item, lang, config) {
     let div = jQuery('<div class="input-wrapper input-type-radio"></div>');
     div.append(`<p>${item.processed}</p>`);
     let hidden = jQuery(`<input type="hidden" id="${item.infosys_id}">`);
 
     item.options.forEach(function(element, index)  {
-      div.append(this.render_radio_option(item.infosys_id, index, element, lang));
+      div.append(this.render_radio_option(item.infosys_id, index, element, lang, config));
       if (element.default) hidden.val(element.value);
     }, this);
     div.append(hidden);
     return div.prop('outerHTML');
   }
 
-  static render_radio_option(id, index, element, lang) {
-    let text = InfosysTextPreprocessor.process_text(element.text[lang])
+  static render_radio_option(id, index, element, lang, config) {
+    let text = InfosysTextPreprocessor.process_text(element.text[lang], lang, config)
     let checked = element.default ? "checked" : "";
     return `
       <div class="input-wrapper input-type-radio-option">
