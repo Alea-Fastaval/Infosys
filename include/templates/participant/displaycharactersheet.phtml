@@ -25,7 +25,7 @@
             <tbody>
                 <tr>
                     <td class='column' style="display:flex;">
-                        <img class="logo" src="<?php echo $this->imgLink('charactersheet-logo-2024.jpg');?>" alt='Otto'/>
+                        <img class="logo" src="<?php echo $this->imgLink('Logo for 2025.png');?>" alt='Otto'/>
                         <table class='subtable' cellspacing="0" cellpadding="0" style="height:7rem;">
                             <tbody>
                                 <tr>
@@ -167,24 +167,25 @@
                         <table class='subtable fullwidth' cellspacing="0" cellpadding="0" border="0">
                             <caption>Food</caption>
                             <tr>
-                                <td colspan="3" class='align-center'><em>
+                                <td colspan="4" class='align-center'><em>
                                     NOTE: Dinner is served in rounds. The time given here shows when you can get your
                                     dinner</em>
                                     </td>
                             </tr>
                             <tr class="heading">
-                                <td colspan="3" class='align-center'>
-                                    (If there's no queue or you have an activity you need to get to, you're allowed to
-                                    pick up your dinner during the entire period from 5:30pm to 7:30pm)
+                                <td colspan="4" class='align-center'>
+                                    If there's no queue or you have an activity you need to get to, you're allowed to
+                                    pick up your dinner during the entire period from 5:30pm to 7:30pm (Sunday from 6:30pm)
                                 </td>
                             </tr>
                             <tr>
                                 <td class='label'>&nbsp;</td>
                                 <td class='label align-center'>Breakfast</td>
+                                <td class='label align-center'>Lunch</td>
                                 <td class='label align-center'>Dinner</td>
                             </tr>
                             <?php $day = strtotime($this->con_start);
-                                    $end = strtotime($this->con_end);
+                                    $end = strtotime($this->con_end. ' - 1 day');
                                     $i = 0;
                             while ($day <= $end) :
                                 $date = date('Y-m-d', $day);
@@ -202,14 +203,35 @@
                                 endforeach;
 
                                 if (!$done) : ?>
+                                    <td >&nbsp;</td>
+                                <?php endif;
+
+                                $done = false;
+
+                                foreach ($food as $madtid) :
+                                    if (substr($madtid->dato, 0, 10) == $date && $madtid->isLunch()) :
+                                        $parts = explode("-", $madtid->getMad()->title_en); 
+                                        $name = isset($parts[1]) ? trim($parts[1]) : trim($parts[0]);
+                                    ?>
+                                        <td class='align-left'><?=$name?> (11:00am - 2:00pm)</td>
+                                    <?php
+                                        $done = true;
+                                        break;
+                                    endif;
+                                endforeach;
+
+                                if (!$done) : ?>
                                     <td>&nbsp;</td>
                                 <?php endif;
 
                                 $done = false;
 
                                 foreach ($d->getMadtider() as $madtid) :
-                                    if (substr($madtid->dato, 0, 10) == $date && $madtid->isDinner()) :?>
-                                        <td class='align-left'><?php echo e($madtid->getMad()->title_en);?> (<?php echo $madtid->getHandoutTime($d);?>)</td>
+                                    if (substr($madtid->dato, 0, 10) == $date && $madtid->isDinner()) :
+                                        $parts = explode("-", $madtid->getMad()->title_en); 
+                                        $name = isset($parts[1]) ? trim($parts[1]) : trim($parts[0]);
+                                    ?>
+                                        <td class='align-left'><?=$name?> (<?php echo $madtid->getHandoutTime($d);?>)</td>
                                     <?php $done = true;
                                         break;
                                     endif;
@@ -381,7 +403,7 @@
             <tbody>
                 <tr>
                     <td class='column' style="display:flex;">
-                        <img class="logo" src="<?php echo $this->imgLink('charactersheet-logo-2024.jpg');?>" alt='Otto'/>
+                        <img class="logo" src="<?php echo $this->imgLink('Logo for 2025.png');?>" alt='Otto'/>
                         <table class='subtable' cellspacing="0" cellpadding="0" style="height:7rem;">
                             <tbody>
                                 <tr>
@@ -524,24 +546,25 @@
                         <table class='subtable fullwidth' cellspacing="0" cellpadding="0" border="0">
                             <caption>Mad</caption>
                             <tr>
-                                <td colspan='3' class='align-center'><em>
+                                <td colspan='4' class='align-center'><em>
                                     BEMÆRK: Aftensmadsudleveringen er opdelt i RUNDER. Det påtrykte tidspunkt angiver i 
                                     hvilket tidsrum du kan hente din aftensmad.</em>
                                 </td>
                             </tr>
                             <tr class="heading">
-                                <td colspan='3' class='align-center'>
-                                    (Hvis der ikke er kø, eller du skal nå et scenarie, må du gerne hente din mad i hele
-                                    perioden mellem 17:30 og 19:30)
+                                <td colspan='4' class='align-center'>
+                                    Hvis der ikke er kø, eller du skal nå et scenarie, må du gerne hente din mad i hele
+                                    perioden mellem 17:30 og 19:30 (Søndag fra 16:30)
                                 </td>
                             </tr>
                             <tr>
                                 <td class='label'>&nbsp;</td>
                                 <td class='label align-center'>Morgenmad</td>
+                                <td class='label align-center'>Frokost</td>
                                 <td class='label align-center'>Aftensmad</td>
                             </tr>
                             <?php $day = strtotime($this->con_start);
-                                    $end = strtotime($this->con_end);
+                                    $end = strtotime($this->con_end. ' - 1 day');
                                     $i = 0;
 
                             while ($day <= $end) :
@@ -567,9 +590,30 @@
 
                                 $done = false;
 
+                                foreach ($food as $madtid) :
+                                    if (substr($madtid->dato, 0, 10) == $date && $madtid->isLunch()) :
+                                        $parts = explode("-", $madtid->getMad()->kategori); 
+                                        $name = isset($parts[1]) ? trim($parts[1]) : trim($parts[0]);
+                                    ?>
+                                        <td class='align-left'><?=$name?> (kl. 11:00 - 14:00)</td>
+                                    <?php
+                                        $done = true;
+                                        break;
+                                    endif;
+                                endforeach;
+
+                                if (!$done) : ?>
+                                    <td >&nbsp;</td>
+                                <?php endif;
+
+                                $done = false;
+
                                 foreach ($d->getMadtider() as $madtid) :
-                                    if (substr($madtid->dato, 0, 10) == $date && $madtid->isDinner()) :?>
-                                        <td class='align-left'><?php echo e($madtid->getMad()->kategori);?> (kl. <?php echo $madtid->getHandoutTime($d);?>)</td>
+                                    if (substr($madtid->dato, 0, 10) == $date && $madtid->isDinner()) :
+                                        $parts = explode("-", $madtid->getMad()->kategori); 
+                                        $name = isset($parts[1]) ? trim($parts[1]) : trim($parts[0]);
+                                    ?>
+                                        <td class='align-left'><?=$name?> (kl. <?=$madtid->getHandoutTime($d)?>)</td>
                                     <?php $done = true;
                                         break;
                                     endif;

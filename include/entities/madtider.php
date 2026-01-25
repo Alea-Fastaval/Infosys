@@ -140,8 +140,11 @@ class Madtider extends DBObject
         return $result[0]['count'];
     }
 
-    public function getHandoutTime(Deltagere $d, $format = 'H:i')
-    {
+    public function getHandoutTime(Deltagere $d, $format = null) {
+        if (!isset($format)) {
+            $format = $d->speaksDanish() ? 'G:i' : 'g:i a';
+        }
+
         if (!$this->isLoaded()) {
             return '';
         }

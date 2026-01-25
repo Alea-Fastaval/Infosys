@@ -1643,8 +1643,6 @@ SQL;
 
         $bill = $deltager->calcRealTotal();
 
-        $vouchers = $this->checkParticipantsForVouchers($deltager->id);
-
         if ($deltager->betalt_beloeb != $bill) {
             if ($deltager->betalt_beloeb < $bill) {
                 $text .= '<br/><span style="background-color: #00f; color: #fff;">Deltageren skylder at betale <strong>' . ($bill - $deltager->betalt_beloeb) . ' kr.</strong><input type="hidden" class="previously-paid" value="' . intval($deltager->betalt_beloeb) . '"/></span>';
@@ -1655,6 +1653,8 @@ SQL;
 
             $deltager->checkin_balance = $bill - $deltager->betalt_beloeb;
             $deltager->betalt_beloeb = $bill;
+        } else {
+            $deltager->checkin_balance = 0;
         }
 
         if ($vouchers) {

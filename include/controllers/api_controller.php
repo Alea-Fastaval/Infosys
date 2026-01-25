@@ -613,19 +613,29 @@ class ApiController extends Controller
             exit;
         }
 
-        $pass = isset($this->page->request->post->pass) ? $this->page->request->post->pass : $this->page->request->get->pass;
+        if (!$this->page->request->isPost()) {
+            header('HTTP/1.1 400 Not a post request');
+            exit;
+        }
+        $post = $this->page->request->post;
 
-        if (!$pass || $participant->password != $pass) {
+        if (!$post->pass || $participant->password != $post->pass) {
             header('HTTP/1.1 403 No access');
             exit;
         }
 
-        $this->checkData();
+        if (empty($post->firebase_token)) {
+            header('HTTP/1.1 400 No token');
+            exit;
+        }
 
         try {
-            $this->model->registerApp($participant, $this->json);
-
+            $this->model->registerApp($participant, $post->firebase_token);
             $this->log("Deltager #{$participant->id} registrerede sin app", 'Api', null);
+            $this->jsonOutput([
+                "status" => "success",
+                "message" => "app registered",
+            ]);
 
         } catch (FrameworkException $e) {
             header('HTTP/1.1 500 Fail');
@@ -647,18 +657,24 @@ class ApiController extends Controller
             exit;
         }
 
-        $pass = isset($this->page->request->post->pass) ? $this->page->request->post->pass : $this->page->request->get->pass;
+        if (!$this->page->request->isPost()) {
+            header('HTTP/1.1 400 Not a post request');
+            exit;
+        }
+        $post = $this->page->request->post;
 
-        if (!$pass || $participant->password != $pass) {
+        if (!$post->pass || $participant->password != $post->pass) {
             header('HTTP/1.1 403 No access');
             exit;
         }
 
         try {
             $this->model->unregisterApp($participant);
-
             $this->log("Deltager #{$participant->id} afregistrerede sin app", 'Api', null);
-
+            $this->jsonOutput([
+                "status" => "success",
+                "message" => "app unregistered",
+            ]);
         } catch (FrameworkException $e) {
             header('HTTP/1.1 500 Fail');
         }

@@ -170,12 +170,11 @@ div.header span#homelink a:hover {
 div.header form.search  {
     float: right;
     height: 32px;
-    padding-top: 8px;
     margin: 0 10px 0 0;
 }
 
 div.header form.search input.wildcardsearch {
-    margin-right: 10px;
+    margin: 5px 10px;
 }
 
 div.header ul.topmenu {

@@ -669,9 +669,10 @@ var BSCafe = (function ($, window) {
             });
 
         },
-        handleUpload: function () {
+        handleUpload: function (element, mode) {
             var data = {
-                    input: $(this).parent().find('textarea').val()
+                    mode,
+                    input: element.find('textarea').val()
                 };
 
             $.ajax({
@@ -681,8 +682,9 @@ var BSCafe = (function ($, window) {
                 success: function (parsed_data) {
                     document.location.reload(true);
                 },
-                error: function () {
-                    window.alert('Kunne ikke parse data');
+                error: function (jqXHR) {
+                    let message = "Kunne ikke parse data\nFejl:\n" + jqXHR.responseText
+                    window.alert(message);
                 }
             });
         },
@@ -691,7 +693,18 @@ var BSCafe = (function ($, window) {
                 module.$dialog.remove();
             }
 
-            module.$dialog = $('<div><p>Copypaste spreadsheet data ind her. Kolonnerne skal have følgende overskrifter for at upload accepteres: Navn, Ejer, BGG-id, Kommentar, Designerspil. <strong>VÆR OPMÆRKSOM PÅ AT AL DATA SLETTES!</strong></p><textarea class="spreadsheet-upload"></textarea><button class="upload">Upload</button></div>');
+            module.$dialog = $(`<div>
+                <p>
+                    Copypaste spreadsheet data ind her:<br>
+                    Kolonnerne skal have følgende overskrifter for at upload accepteres: Navn, Ejer, BGG-id, Kommentar, Designerspil.<br>
+                    Kolonner skal være adskilt med ; og uden anførselstegn.<br>
+                    Designerspil angives med 0 eller 1<br>
+                    <strong>VÆR OPMÆRKSOM PÅ AT AL DATA SLETTES hvis du vælger overskriv!</strong>
+                </p>
+                <textarea class="spreadsheet-upload"></textarea>
+                <button class="upload-delete">Overskriv</button>
+                <button class="upload-add">Tilføj</button>
+            </div>`);
 
             module.$dialog.appendTo('body');
 
@@ -704,7 +717,8 @@ var BSCafe = (function ($, window) {
                 }
             });
 
-            module.$dialog.on('click', 'button.upload', module.handleUpload);
+            module.$dialog.on('click', 'button.upload-delete', () => {module.handleUpload(module.$dialog, 'delete')});
+            module.$dialog.on('click', 'button.upload-add', () => {module.handleUpload(module.$dialog, 'add')});
         },
         updateNote: function () {
             if (module.noteUpdateToken) {
@@ -1080,8 +1094,9 @@ var BSCafe = (function ($, window) {
                             let category = stats[key];
                             let sort = category.sort ?? key;
                             let heading = category.heading ?? key;
+                            let value = category.value ?? category;
                             if (!category.list) {
-                                $items.push($('<dt data-sort="' + sort + '">' + heading + '</dt><dd>' + category + '</dd>'));
+                                $items.push($(`<dt data-sort="${sort}">${heading}</dt><dd>${value}</dd>`));
                             } else {
                                 let item_html = `<dt data-sort="${sort}">${heading}</dt>`;
                                 for (const item of category.list) {

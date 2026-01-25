@@ -1,0 +1,50 @@
+<h1>Resultat af Brætspilsafstemningen</h1>
+<fieldset>
+  <legend>Rangliste</legend>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Spil</th>
+        <th>Placering</th>
+      </tr>
+    </thead>
+    <tbody>
+      <?php 
+        $max_plus = count($this->stats['list']) + 1;
+        foreach($this->stats['list'] as $game_id => $round) {
+          ?><tr><td><?=$this->stats['game_votes'][$game_id]['name']?></td><td><?=$max_plus - $round?>.</td></tr><?php
+        }
+      ?>
+    </tbody>
+  </table>
+</fieldset>
+<fieldset>
+  <legend>Stemmeoversigt</legend>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th rowspan="2">Spil</th>
+        <th colspan="5"> Placeringer</th>
+      </tr>
+      <tr>
+        <th>1.</th>
+        <th>2.</th>
+        <th>3.</th>
+        <th>4.</th>
+        <th>5.</th>
+      </tr>
+    </thead>
+    <tbody>
+      <?php
+        foreach($this->stats['game_votes'] as $id => $game) {
+          ?><tr><td><?=$id?>:<?=$game['name']?></td><?php
+          for($rank = 1 ;$rank <= 5; $rank++) {
+            $count = $game['rankings'][$rank];
+            ?><td><?=empty($count)? 0 : $count?></td><?php
+          }
+          ?></tr><?php
+        }
+      ?>
+    </tbody>
+  </table>
+</fieldset>

@@ -56,6 +56,13 @@ class Request
     protected static $get = null;
 
     /**
+     * holds variables from $_GET or $_POST depending on request method
+     *
+     * @var RequestVars
+     */
+    protected static $query = null;
+
+    /**
      * holds variables from $_SERVER
      *
      * @var RequestVars
@@ -92,10 +99,12 @@ class Request
             if ($_SERVER['REQUEST_METHOD'] == 'GET')
             {
                 self::$get = new RequestVars($_GET);
+                self::$query = new RequestVars($_GET);
             }
             else if ($_SERVER['REQUEST_METHOD'] == 'POST')
             {
                 self::$post = new RequestVars($_POST);
+                self::$query = new RequestVars($_POST);
             }
             self::$server = new RequestVars($_SERVER);
         }
@@ -118,6 +127,8 @@ class Request
                 return self::$post;
             case 'get':
                 return self::$get;
+            case 'query':
+                return self::$query;
             case 'server':
                 return self::$server;
             case 'routes':

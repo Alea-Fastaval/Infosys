@@ -810,7 +810,7 @@ class ActivityController extends Controller
      * @access public
      * @return void
      */
-    public function showVotingStats()
+    public function showVotesRole()
     {
         $user = $this->model->getLoggedInUser();
 
@@ -819,6 +819,23 @@ class ActivityController extends Controller
         }
 
         $this->page->stats = $this->model->collectVotingStats();
+    }
+
+    /**
+     * shows voting statistics
+     *
+     * @access public
+     * @return void
+     */
+    public function showVotesBoard()
+    {
+        $user = $this->model->getLoggedInUser();
+
+        if (!$user->hasRole('VotingStats')) {
+            $this->hardRedirect($this->url('no_access'));
+        }
+
+        $this->page->stats = $this->model->calcBoardRanking();
     }
 
     /**

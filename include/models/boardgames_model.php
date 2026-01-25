@@ -178,10 +178,16 @@ FROM
 
         $return['Udlån lige nu'] = count($this->db->query($query));
 
+        $query = "SELECT * FROM boardgames bg LEFT JOIN (SELECT boardgame_id, COUNT(*) FROM boardgameevents WHERE type = 'borrowed' GROUP BY boardgame_id) borrow_count ON bg.id = borrow_count.boardgame_id WHERE boardgame_id IS NULL";
+        $not_borrowed = $this->db->query($query);
+
+        $return['not_borrowed_count']['heading'] = "Antal ikke udlånt";
+        $return['not_borrowed_count']['sort'] = "y";
+        $return['not_borrowed_count']['value'] = count($not_borrowed);
+
         $return['not_borrowed']['heading'] = "Har ikke været udlånt";
         $return['not_borrowed']['sort'] = "z";
-        $query = "SELECT * FROM boardgames bg LEFT JOIN (SELECT boardgame_id, COUNT(*) FROM boardgameevents WHERE type = 'borrowed' GROUP BY boardgame_id) borrow_count ON bg.id = borrow_count.boardgame_id WHERE boardgame_id IS NULL";
-        $return['not_borrowed']['list'] = $this->db->query($query);
+        $return['not_borrowed']['list'] = $not_borrowed;
 
         return $return;
     }
@@ -263,10 +269,17 @@ WHERE
 
         $return['Udlån lige nu'] = count($this->db->query($query));
 
+        $query = "SELECT * FROM boardgames bg LEFT JOIN (SELECT boardgame_id, COUNT(*) FROM boardgameevents WHERE type = 'borrowed' GROUP BY boardgame_id) borrow_count ON bg.id = borrow_count.boardgame_id WHERE boardgame_id IS NULL AND designergame = 1";
+        $not_borrowed = $this->db->query($query);
+
+        $return['not_borrowed_count']['heading'] = "Antal ikke udlånt";
+        $return['not_borrowed_count']['sort'] = "y";
+        $return['not_borrowed_count']['value'] = count($not_borrowed);
+
+
         $return['not_borrowed']['heading'] = "Har ikke været udlånt";
         $return['not_borrowed']['sort'] = "z";
-        $query = "SELECT * FROM boardgames bg LEFT JOIN (SELECT boardgame_id, COUNT(*) FROM boardgameevents WHERE type = 'borrowed' GROUP BY boardgame_id) borrow_count ON bg.id = borrow_count.boardgame_id WHERE boardgame_id IS NULL AND designergame = 1";
-        $return['not_borrowed']['list'] = $this->db->query($query);
+        $return['not_borrowed']['list'] = $not_borrowed;
 
         return $return;
     }
@@ -345,8 +358,7 @@ GROUP BY
     {
         $select = $this->createEntity('Deltagere')->getSelect();
 
-        $select->setWhere('annulled', '=', 'nej')
-            ->setWhere('signed_up', '>', '0000-00-00');
+        $select->setWhere('annulled', '=', 'nej');
 
         $participants = array();
 
@@ -357,7 +369,7 @@ GROUP BY
 
             $participants[] = array(
                 'id'      => intval($participant->id),
-                'name'    => $participant->getName(),
+                'name'    => $participant->getName()." (".$participant->efternavn.")",
                 'barcode' => $participant->getEan8Number($this->getConYear()),
             );
         }
@@ -488,7 +500,7 @@ GROUP BY
 
         $header_index = array();
         $data = explode("\n", str_replace(array("\r\n", "\r"), "\n", $post->input));
-        $headers = array_flip(explode("\t", array_shift($data)));
+        $headers = array_flip(explode(";", array_shift($data)));
 
         foreach ($required_headers as $header) {
             if (!isset($headers[$header])) {
@@ -498,18 +510,20 @@ GROUP BY
             $header_index[$header] = $headers[$header];
         }
 
-        $query = 'DELETE FROM boardgameevents;';
-        $this->db->exec($query);
-
-        $query = 'DELETE FROM boardgames;';
-        $this->db->exec($query);
+        if($post->mode == 'delete') {
+            $query = 'DELETE FROM boardgameevents;';
+            $this->db->exec($query);
+    
+            $query = 'DELETE FROM boardgames;';
+            $this->db->exec($query);
+        }
 
         foreach ($data as $row) {
             if (strlen(trim($row)) === 0) {
                 continue;
             }
 
-            $columns = explode("\t", $row);
+            $columns = explode(";", $row);
 
             $game = $this->createEntity('Boardgame');
 
@@ -523,7 +537,11 @@ GROUP BY
             $game->insert();
         }
 
-        $this->log('Brætspils data blev upload og resat af ' . $this->getLoggedInUser()->user, 'Boardgames', $this->getLoggedInUser());
+        if($post->mode == 'delete') {
+            $this->log('Brætspils data blev uploaded og nulstillet af ' . $this->getLoggedInUser()->user, 'Boardgames', $this->getLoggedInUser());
+        } else {
+            $this->log('Brætspils data blev uploaded og tilføjet af ' . $this->getLoggedInUser()->user, 'Boardgames', $this->getLoggedInUser());
+        }
 
         return true;
     }

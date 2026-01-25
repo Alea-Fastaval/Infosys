@@ -101,7 +101,7 @@ $(function() {
         }
 
         function checkIn(callback) {
-            var difference = parseInt($('td.difference').text(), 10);
+            var difference = parseInt($('td.real-difference').text(), 10);
 
             function makeCheckIn() {
                 checkInRequest(callback, difference);

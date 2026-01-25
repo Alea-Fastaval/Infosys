@@ -87,13 +87,14 @@ class SignupApiModel extends Model {
     return $content;
   }
 
-  public function getAllPages() {
+  public function getAllPages($config = false) {
     $pages = [];
 
     $skip_pages = [];
     $disabled_items = null;
+    
     // Skip certain pages for late signup
-    if (strtotime('now') > strtotime($this->config->get('con.signupend'))) {
+    if (!$config && strtotime('now') > strtotime($this->config->get('con.signupend'))) {
       $config_file = SIGNUP_FOLDER."config/main.json";
       $config = json_decode(file_get_contents($config_file));
       $skip_pages = $config->main_signup_only->pages;

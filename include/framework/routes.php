@@ -91,7 +91,7 @@ class Routes
         $this->routes['sms_auto_dryrun']    = array('url' => 'sms/auto-dryrun', 'controller' => 'sms', 'method' => 'autoDryRun');
 
         // Automatic messages
-        $this->routes['kickoff_sms_script'] = array('url' => 'index/automaticmessages', 'controller' => 'index', 'method' => 'sendAutomaticMessages');
+        $this->routes['cron_notifications'] = array('url' => 'index/automaticmessages', 'controller' => 'index', 'method' => 'sendAutomaticMessages');
 
 
         // deltager routes
@@ -243,7 +243,8 @@ class Routes
         $this->routes['priority_signup_statistics'] = ['url' => 'activities/priority-signups', 'controller' => 'Activity', 'method' => 'showPrioritySignupStatistics'];
 
         $this->routes['prepare_schedule_votes']     = array('url' => 'aktiviteter/schedule-votes/prepare/:time:', 'controller' => 'Activity', 'method' => 'prepareScheduleVotes');
-        $this->routes['show_vote_stats']            = array('url' => 'aktiviteter/voting/stats', 'controller' => 'Activity', 'method' => 'showVotingStats');
+        $this->routes['show_vote_stats']            = array('url' => 'aktiviteter/voting/stats-role', 'controller' => 'Activity', 'method' => 'showVotesRole');
+        $this->routes['show_vote_stats_board']      = array('url' => 'aktiviteter/voting/stats-board', 'controller' => 'Activity', 'method' => 'showVotesBoard');
         $this->routes['voting_ballots']             = array('url' => 'aktiviteter/voting/ballots', 'controller' => 'Activity', 'method' => 'votingBallots');
 
         $this->routes['activity_vote']             = array('url' => 'vote', 'controller' => 'Activity', 'method' => 'specifyVote');

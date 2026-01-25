@@ -33,7 +33,7 @@ class SignupApiController extends Controller {
   public function getPageList() {
     $response = [];
 
-    $pages = $this->model->getAllPages();
+    $pages = $this->model->getAllPages($this->page->request->query->config);
     foreach($pages as $name => $page){
       $response[$name] = [];
       $response[$name]['slug'] = $page->slug;

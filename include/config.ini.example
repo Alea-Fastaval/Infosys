@@ -19,6 +19,7 @@ sms.user           =
 sms.pass           =
 sms.baseurl        =
 sms.service        =
+firebase.credentials =
 payment.freehash   =
 payment.sic        =
 payment.event_id   =
