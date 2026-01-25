@@ -200,36 +200,34 @@
                     "maxlength": 17
                 },
                 {
-                    "type": "radio",
+                    "type": "paragraph",
                     "text": {
-                        "en": "Which pronoun do you want on your name tag?",
-                        "da": "Hvilket pronomen skal der st\u00e5 p\u00e5 dit navneskilt?"
-                    },
-                    "infosys_id": "pronoun",
-                    "options": [
-                        {
-                            "value": "they",
-                            "text": {
-                                "en": "de\/dem (they\/them)",
-                                "da": "de\/dem"
-                            },
-                            "default": true
-                        },
-                        {
-                            "value": "her",
-                            "text": {
-                                "en": "hun\/hende (she\/her)",
-                                "da": "hun\/hende"
-                            }
-                        },
-                        {
-                            "value": "he",
-                            "text": {
-                                "en": "han\/ham (he\/him)",
-                                "da": "han\/ham"
-                            }
-                        }
-                    ]
+                        "en": "(add explanation here)",
+                        "da": "(tilføj forklaring her)"
+                    }
+                },
+                {
+                    "type": "paragraph",
+                    "text": {
+                        "en": "Select your pronouns:",
+                        "da": "Valg af pronomener:"
+                    }
+                }
+            ]
+        },
+        {
+            "headline": {
+                "en": "",
+                "da": ""
+            },
+            "module": "pronouns",
+            "items": [
+                {
+                    "type": "paragraph",
+                    "text": {
+                        "en": "(or add explanation here)",
+                        "da": "(eller tilføj forklaring her)"
+                    }
                 }
             ]
         },

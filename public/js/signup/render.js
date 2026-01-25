@@ -177,11 +177,18 @@ class InfosysSignupRender {
 
     wrapper.append(`<label for="${item.infosys_id}">${item.processed}</label>`);
     
-    let select = jQuery(`<select id="${item.infosys_id}" name="${item.infosys_id}"></select>`);
+    let select = this.render_select_input(item, lang);
     wrapper.append(select);
 
-    if (item.options && Array.isArray(item.options)) item.options.forEach( function (option) {
-      select.append(`<option value="${option.value}">${option.text[lang]}</option>`);
+    return wrapper;
+  }
+
+  static render_select_input(item, lang) {
+    let select = jQuery(`<select id="${item.infosys_id}" name="${item.infosys_id}"></select>`);
+
+    if (item.options && Array.isArray(item.options)) item.options.forEach( function (option, index) {
+      let selected = option.default ? "selected" : "";
+      select.append(`<option value="${option.value}" id="${item.infosys_id}-${index}" "${selected}">${option.text[lang]}</option>`);
     });
 
     if (item.range) {
@@ -191,7 +198,7 @@ class InfosysSignupRender {
       }
     }
 
-    return wrapper;
+    return select;
   }
 
   static render_text_area(item) {

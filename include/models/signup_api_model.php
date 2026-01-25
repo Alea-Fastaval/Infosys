@@ -676,6 +676,35 @@ class SignupApiModel extends Model {
               }
               continue 2;
 
+            case "pronouns":
+              
+              if ($value != "none" && $value != "ask") {
+                $valid = ["ns","no","fs","fo","ms","mo"];
+                $parts = str_split($value, 2);
+                foreach ($parts as $part) {
+                  if (!in_array($part, $valid)) {
+                    $errors[$category][] = [
+                      'type' => 'pronouns_fail',
+                      'info' => 'pronouns',
+                      'value' => $value,
+                      'part' => $part,
+                      'module' => 'pronouns',
+                    ];
+                    continue 3;
+                  }
+                }
+              }
+
+              $participant->pronouns = $value;
+
+              $entries[] = [
+                'special_module' => 'pronouns',
+                'key' => $key,
+                'value' => $value,
+              ];
+
+              continue 2;
+
             default:
               if (!isset($column_info[$key])) {
                 $errors[$category][] = [
@@ -1251,6 +1280,8 @@ class SignupApiModel extends Model {
         $signup[$key] = $value;
       }
     }
+
+    $signup['pronouns'] = $participant->pronouns;
 
     // Collect entrance items
     $signup['misc:extra_support'] = 0;
