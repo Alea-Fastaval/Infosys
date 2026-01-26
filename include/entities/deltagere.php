@@ -1942,7 +1942,7 @@ WHERE
     if (!empty($this->storage['nickname'])) {
       return $this->storage['nickname'];
     } else {
-      return explode(' ', $this->storage['fornavn'])[0];
+      return $this->storage['fornavn']." ".$this->storage['efternavn'];
     } 
   }
 
