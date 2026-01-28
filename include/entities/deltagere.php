@@ -898,7 +898,7 @@ class Deltagere extends DBObject implements AgeFulfilment
     if($signups == true) {
       if (isset($this->gameSignupCost)) return $this->gameSignupCost;
     } else {
-      if (isset($this->gameCost)) return $this->gameCost;
+      if (isset($this->gamesCost)) return $this->gamesCost;
     }
 
     $result  = 0;
