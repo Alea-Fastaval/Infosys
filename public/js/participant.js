@@ -189,15 +189,6 @@ $(function() {
             onerror: updateError
         });
 
-        $('td.editable.pronoun').editable(window.infosys_data.participant_editable_url, {
-            type: 'select',
-            data: '{"they": "De/Dem", "her": "Hun/Hende", "he": "Han/Ham"}',
-            submit: "Ok",
-            indicator: 'Saving ...',
-            tooltip: 'Click to edit',
-            onerror: updateError
-        });
-
         $('.editable.package_gds').editable(window.infosys_data.participant_editable_url, {
             type: 'select',
             data: '{"0":"Nej","1":"Ja"}',
