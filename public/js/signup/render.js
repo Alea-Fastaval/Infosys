@@ -188,7 +188,7 @@ class InfosysSignupRender {
 
     if (item.options && Array.isArray(item.options)) item.options.forEach( function (option, index) {
       let selected = option.default ? "selected" : "";
-      select.append(`<option value="${option.value}" id="${item.infosys_id}-${index}" "${selected}">${option.text[lang]}</option>`);
+      select.append(`<option value="${option.value}" id="${item.infosys_id}-${index}" ${selected}>${option.text[lang]}</option>`);
     });
 
     if (item.range) {
