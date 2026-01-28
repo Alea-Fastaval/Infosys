@@ -682,6 +682,16 @@ class SignupApiModel extends Model {
               if ($value != "none" && $value != "ask") {
                 $valid = ["ns","no","fs","fo","ms","mo"];
                 $parts = str_split($value, 2);
+                if (count($parts) == 0) {
+                    $errors[$category][] = [
+                      'type' => 'pronouns_fail',
+                      'info' => 'pronouns',
+                      'value' => $value,
+                      'module' => 'pronouns',
+                    ];
+                    continue 2;
+                }
+
                 foreach ($parts as $part) {
                   if (!in_array($part, $valid)) {
                     $errors[$category][] = [
