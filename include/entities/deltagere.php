@@ -1837,7 +1837,6 @@ WHERE
    */
   public function isSingleDayParticipant()
   {
-    return false;
     return count(array_filter($this->getIndgang(), function ($x) {
       return $x->isDayTicket() && $x->isEntrance();
     })) <= 1 && count(array_filter($this->getIndgang(), function ($x) {
