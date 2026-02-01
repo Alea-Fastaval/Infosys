@@ -417,7 +417,7 @@ ORDER BY
   public function matchPayments(&$sheet_data, &$registered) {
     foreach ($sheet_data->rows as $row_id => $row) {
       $paricipant_id = substr($row[1], 18);
-      $typecheck = $row[4] == 'Fastaval 2025 tilmelding';
+      $typecheck = $row[4] == 'Fastaval 2026 tilmelding';
       $amount = str_ireplace(['.',',00'], '', $row[8]);
 
       $matches = [];

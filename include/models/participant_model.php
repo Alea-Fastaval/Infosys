@@ -2426,9 +2426,10 @@ SET participant_id = ?, amount = ?, cost = ?, fees = ?, timestamp = NOW()
     {
         $signup_time = strtotime($participant->signed_up) + 86400;
         $signup_end_time = strtotime($this->config->get('con.signupend'));        
+        $signup_pay_by_day = strtotime($this->config->get('con.paybyday'));        
         $constart = strtotime($this->config->get('con.start'));
 
-        $paytime = $signup_end_time > $signup_time ? $signup_end_time : $signup_time;
+        $paytime = $signup_pay_by_day > $signup_time ? $signup_pay_by_day : $signup_time;
         if ($paytime < time()) {
             $paytime = time() + 86400;
         }
@@ -2528,6 +2529,14 @@ SET participant_id = ?, amount = ?, cost = ?, fees = ?, timestamp = NOW()
                 $prices['other-stuff'] += $indgang->pris;
                 if ($indgang->type === 'Leje af madras') $item_prices['mattres'] = $indgang->pris;
             }
+
+            if (stripos($indgang->type, 'junior') !== false) {
+                $page->is_junior = true;
+                if (stripos($indgang->type, 'reserve') !== false) {
+                    $page->is_junior_reserve = true;
+                }
+            } 
+            
         }
         if (isset($entrance['entrance-day']) && is_array($entrance['entrance-day'])) {
             ksort($entrance['entrance-day']);

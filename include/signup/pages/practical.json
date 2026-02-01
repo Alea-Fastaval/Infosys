@@ -115,7 +115,21 @@
                         "da": "F\u00f8dselsdato"
                     },
                     "infosys_id": "birthdate",
-                    "required": "true"
+                    "required": "true",
+                    "errors": {
+                        "invalid_date": {
+                            "en": "Please enter a valid date",
+                            "da": "Indtast venligst en gyldig dato"
+                        },
+                        "date_too_old": {
+                            "en": "That birthdate is unrealistically far in the past",
+                            "da": "Denne f\u00f8dselsdato er urealistisk langt tilbage"
+                        },
+                        "date_too_future": {
+                            "en": "Birthdate cannot be in the future",
+                            "da": "F\u00f8dselsdato m\u00e5 ikke v\u00e6re i fremtiden"
+                        }
+                    }
                 },
                 {
                     "type": "email",
@@ -179,8 +193,8 @@
                 {
                     "type": "paragraph",
                     "text": {
-                        "en": "If you sign up for before the 28th of february, you will receive a nametag upon check-in at Fastaval.\u00a0The nametag will display your participant number first name and preferred pronouns.\u00a0",
-                        "da": "Hvis du tilmelder dig inden d. 28. februar, vil du f\u00e5 et navneskilt, n\u00e5r du checker ind p\u00e5 Fastaval. P\u00e5 navneskiltet vil der fremg\u00e5 dit deltagernummer, fornavn og fortrukne pronomen.\u00a0\u00a0\u00a0"
+                        "en": "If you sign up for before the 21st of february, you will receive a nametag upon check-in at Fastaval.\u00a0The nametag will display your participant number first name and preferred pronouns.\u00a0",
+                        "da": "Hvis du tilmelder dig inden d. 21. februar, vil du f\u00e5 et navneskilt, n\u00e5r du checker ind p\u00e5 Fastaval. P\u00e5 navneskiltet vil der fremg\u00e5 dit deltagernummer, fornavn og foretrukne pronomener.\u00a0\u00a0\u00a0"
                     }
                 },
                 {
@@ -191,26 +205,39 @@
                     }
                 },
                 {
+                    "type": "checkbox",
+                    "text": {
+                        "en": "I want to use a different name than my legal name at Fastaval",
+                        "da": "Jeg ønsker at bruge et andet navn end mit juridiske navn på Fastaval"
+                    },
+                    "infosys_id": "use_nickname",
+                    "no_submit": true
+                },
+                {
                     "type": "text_input",
                     "text": {
-                        "en": "Name for name tag (max 17 characters)",
-                        "da": "Navn til navneskilt (maks 17 tegn)"
+                        "en": "[b]Name for name tag[\/b] (max 17 characters)",
+                        "da": "[b]Navn til navneskilt[\/b] (maks 17 tegn)"
                     },
                     "infosys_id": "nickname",
-                    "maxlength": 17
+                    "maxlength": 17,
+                    "display_logic": [
+                        {
+                            "type": "default",
+                            "status": "hidden"
+                        },
+                        {
+                            "type": "checkbox",
+                            "status": "normal",
+                            "input": "use_nickname"
+                        }                        
+                    ]
                 },
                 {
                     "type": "paragraph",
                     "text": {
-                        "en": "(add explanation here)",
-                        "da": "(tilføj forklaring her)"
-                    }
-                },
-                {
-                    "type": "paragraph",
-                    "text": {
-                        "en": "Select your pronouns:",
-                        "da": "Valg af pronomener:"
+                        "en": "[b]Select your pronouns:[\/b]",
+                        "da": "[b]Valg af pronomener:[\/b]"
                     }
                 }
             ]
@@ -225,8 +252,8 @@
                 {
                     "type": "paragraph",
                     "text": {
-                        "en": "(or add explanation here)",
-                        "da": "(eller tilføj forklaring her)"
+                        "en": "Shown on your nametag. You may combine two options (e.g., \"he\/her\"). Please select \"Ask me\" if you prefer to be asked directly.",
+                        "da": "Vises p\u00e5 navneskiltet. Du kan sammens\u00e6tte to valg (fx \"han\/hende\"). V\u00e6lg venligst \"Sp\u00f8rg mig\", hvis du foretr\u00e6kker, at folk sp\u00f8rger dig direkte."
                     }
                 }
             ]
@@ -332,8 +359,8 @@
                         {
                             "value": "",
                             "text": {
-                                "en": "Fastaval Junior signup opens [replace]junior_signup_time[/replace] [b]not available in english[\/b]",
-                                "da": "Tilmeldingen til Fastaval Junior åbner først d. [replace]junior_signup_time[/replace]"
+                                "en": "Fastaval Junior signup opens [replace]junior_signup_time[\/replace] [b]not available in english[\/b]",
+                                "da": "Tilmeldingen til Fastaval Junior \u00e5bner f\u00f8rst d. [replace]junior_signup_time[\/replace]"
                             },
                             "display_logic": [
                                 {
@@ -486,8 +513,8 @@
                 {
                     "type": "paragraph",
                     "text": {
-                        "en": "A membership costs 75 kr. and lasts until next years Fastaval. You get a 125 kr. discount on partout entry as a member of Alea.",
-                        "da": "Et medlemskab koster 75 kr. og varer indtil Fastaval n\u00e6ste \u00e5r. Du f\u00e5r 125 kr. rabat p\u00e5 partout adgang som medlem af Alea."
+                        "en": "A membership costs 100 kr. and lasts until next years Fastaval. You get a 125 kr. discount on partout entry as a member of Alea.",
+                        "da": "Et medlemskab koster 100 kr. og varer indtil Fastaval n\u00e6ste \u00e5r. Du f\u00e5r til geng\u00e6ld 125 kr. rabat i prisen p\u00e5 partout adgang som medlem af Alea."
                     }
                 },
                 {

@@ -1,27 +1,27 @@
 {
   "choices": {
     "prio": {
-      "en" : [
+      "en": [
         "1st prio",
         "2nd prio",
         "3rd prio",
         "4th prio"
       ],
-      "da" : [
+      "da": [
         "1. prio",
         "2. prio",
         "3. prio",
         "4. prio"
       ]
     },
-    "gm" : {
-      "default" : {
-        "en" : "GM",
-        "da" : "SL"
+    "gm": {
+      "default": {
+        "en": "GM",
+        "da": "SL"
       },
-      "braet" : {
-        "en" : "GG",
-        "da" : "RF"
+      "braet": {
+        "en": "GG",
+        "da": "RF"
       }
     }
   },
@@ -36,7 +36,7 @@
       "color": "#b6d7a8"
     },
     "braet": {
-      "da": "Brætspil",
+      "da": "Br\u00e6tspil",
       "en": "Board games",
       "color": "#9fc5e8"
     },
@@ -46,8 +46,8 @@
       "color": "#ea9999"
     },
     "default": {
-      "da": "Øvrige aktiviteter",
-      "en": "Other activities",
+      "da": "FastaQuests",
+      "en": "FastaQuests",
       "color": "#ffd966"
     }
   },
@@ -59,7 +59,7 @@
   "day_cutoff": 4,
   "link_text": {
     "en": "Read more on the website",
-    "da": "Læs mere på hjemmesiden"
+    "da": "L\u00e6s mere p\u00e5 hjemmesiden"
   },
   "max_signup": {
     "en": "Maximum # signups",
@@ -69,28 +69,28 @@
     "en": "Full",
     "da": "Fyldt"
   },
-  "designer_text" : {
+  "designer_text": {
     "en": "Designer",
     "da": "Designer"
   },
   "errors": {
     "no_days": {
       "en": "There are no activities on the days you're attending Fastaval that matches the current category.",
-      "da": "Der er ingen aktiviteter de dage du er på Fastaval der matcher den valgte kategori."
+      "da": "Der er ingen aktiviteter de dage du er p\u00e5 Fastaval der matcher den valgte kategori."
     },
     "missing_task": {
       "gm": {
-        "da": "Du har valgt at du gerne vil være spilleder, men du har ikke valgt nogen scenarier at være spilleder på.",
+        "da": "Du har valgt at du gerne vil v\u00e6re spilleder, men du har ikke valgt nogen scenarier at v\u00e6re spilleder p\u00e5.",
         "en": "You have chosen to be a gamemaster, but you haven't chosen any scenarios to be gamemaster for."
       },
       "rules": {
-        "da": "Du har valgt at du gerne vil være regelformidler, men du har ikke valgt nogen brætspil at være regelformidler for.",
+        "da": "Du har valgt at du gerne vil v\u00e6re regelformidler, men du har ikke valgt nogen br\u00e6tspil at v\u00e6re regelformidler for.",
         "en": "You have chosen to be a rules explainer, but you haven't chosen any board games to explain rules for."
       }
     },
     "missing_junior": {
       "en": "You have to select at least # junior activities",
-      "da": "Du skal vælge mindst # junior aktiviteter",
+      "da": "Du skal v\u00e6lge mindst # junior aktiviteter",
       "label": {
         "en": "Fastaval Junior Activities",
         "da": "Fastaval Junior Aktiviteter"

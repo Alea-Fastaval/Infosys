@@ -34,8 +34,8 @@ class PaymentModel extends Model {
     $payment_uid = 0;
     $display_id = 0;
     $this->db->exec(
-      "INSERT INTO payment_users VALUES(?,?,?)",
-      [$user_id, $payment_uid, $display_id],
+      "INSERT INTO payment_users (participant_id, payment_user_id, payment_display_id) VALUES(?,?,?)",
+      [$user_id, $payment_uid, $display_id]
     );
 
     $first_name = "Fastaval Deltager ". $user_id;
@@ -43,19 +43,29 @@ class PaymentModel extends Model {
       'member' => [
         'first_name' => $first_name,
         'activity_ids' => [
-          57455, // Alea
+          //57455, // Alea
           //160539, // Fastaval Test
-          160538, //Fastaval 2025
+          //160538, //Fastaval 2025
+          197189, // Fastaval 2026
         ]
       ]
     ]);
 
     $payment_uid = $result->member->id;
     $display_id = $result->member->display_id;
+    // Validate API response before updating DB to avoid NULL bindings
+    if (empty($payment_uid)) {
+      $this->fileLog("createPaymentUser(): foreningLetAPI returned empty member id for participant $user_id\n");
+      // Clean up the placeholder row we inserted earlier
+      $this->db->exec("DELETE FROM payment_users WHERE participant_id = ?", [$user_id]);
+      return null;
+    }
+
     $this->db->exec(
       "UPDATE payment_users SET payment_user_id = ?, payment_display_id = ? WHERE participant_id = ?",
-      [$payment_uid, $display_id, $user_id],
+      [$payment_uid, $display_id, $user_id]
     );
+
     return $payment_uid;
   }
 

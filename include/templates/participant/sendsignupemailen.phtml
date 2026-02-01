@@ -9,18 +9,18 @@ Your signup has been registered with participant ID <strong><?=$this->participan
 <h2>Payment</h2>
 <p>
     <?php if ($this->participant->betalt_beloeb == 0) : ?>
-Your payment amounts to <strong><?=$this->prices['total']?></strong> DKK, and the deadline for payment is <?= $this->payment_day;?>.
+Your payment amounts to <strong><?=$this->prices['total']?></strong> DKK, and the deadline for payment is <?= $this->payment_day;?>.<br/>
 If you sign up after <?=$this->payment_day?>, payment is due same day as your signup.
 
     <?php else : ?>
-You have already paid <?=$this->participant->betalt_beloeb?>DKK but it seems that you still owe <strong><?=($this->prices['total'] - $this->participant->betalt_beloeb)?></strong> DKK on your signup.
+You have already paid <?=$this->participant->betalt_beloeb?>DKK but it seems that you still owe <strong><?=($this->prices['total'] - $this->participant->betalt_beloeb)?></strong> DKK on your signup.<br/>
 You can pay via the online-payment functionality, by bank transfer or upon arriving at Fastaval.
     <?php endif;?>
 </p>
 <p>
 We have a new payment system that goes through Birfrost, therefore it will be their name that appears in the payment window.
-You can pay using our new on-line payment system, by following the link below:<br>
-<a href="https://www.fastaval.dk/25tilmelding/paynow?hash=<?=$this->participant->participant_hash?>">Pay on-line</a>
+You can pay using our new on-line payment system, by following the link below:<br/><br/>
+<a href="https://www.fastaval.dk/26tilmelding/paynow?hash=<?=$this->participant->participant_hash?>">Pay on-line</a>
 </p>
 <p>
 When using other payment options remember to clearly state your name and participant ID, which is: <strong><?=$this->participant->id?></strong>
@@ -35,14 +35,16 @@ Alternatively you can pay by bank transfer. Please note that we take a fee on ba
 (which makes the amount to pay <strong><?=($this->prices['total'] - $this->participant->betalt_beloeb + 20)?></strong> DKK)<br/>
 Please notice that there is usually an extra fee on international bank transfers.
 <b>All fees incurred on international transfers will be your responsibility</b>.</br>
-* Paying from a Danish bank, use these details: Reg.: 9070 / Accountnr.: 1638710893<br/>
-* Our bank information is IBAN DK1090701638710893 and BIC VRSPDK22.<br/>
-* deadline for payment is the same here: <?=$this->payment_day?>
+<ul>
+    <li>Paying from a Danish bank, use these details: Reg.: 9070 / Accountnr.: 1638710893</li>
+    <li>Our bank information is IBAN DK1090701638710893 and BIC VRSPDK22.<strong>Alle gebyrer for internationale overførlser er dit ansvar</strong></li>
+    <li>deadline for payment is the same here: <?=$this->payment_day?></li>
+</ul>
 </p>
 <?php endif;?>
 <p>
 <strong>Please note </strong>that you can change your signup details using the signup at
-<a href="https://www.fastaval.dk/en/25tilmelding/">www.fastaval.dk</a>, up until <?=$this->end_signup_changes_date?>.
+<a href="https://www.fastaval.dk/en/26tilmelding/">www.fastaval.dk</a>, up until <?=$this->end_signup_changes_date?>.
 All you need is your e-mail address and this code: <strong><?=$this->participant->password?></strong>
 </p>
 <?php if ($this->participant_photo_upload_link) : ?>
@@ -100,7 +102,7 @@ Please use the following link to <strong>upload a photo</strong>:
 
 <?php if ($this->participant->isArrangoer()) : ?>
 <tr><td colspan="3" style="text-align: center; background-color: lightgray; border-top: 1px solid black; border-bottom: 1px solid black;">
-    <h3>Organizer, Auther or Desginger<h3>
+    <h3>Organizer, Author or Designer<h3>
 </td></tr>
 <?php $author = $this->participant->getCollection('author')?>
 <?php if (empty($author)) : ?>

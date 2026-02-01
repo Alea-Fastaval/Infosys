@@ -24,28 +24,28 @@
                     "type": "paragraph",
                     "text": {
                         "en": "",
-                        "da": "Nu skal du v\u00e6lge, hvad du gerne vil spille i l\u00f8bet af dagen. Du kan se alle aktiviteterne for Fastaval Junior nedenfor. Du kommer til at spille 2 ting. F\u00f8rste blok kl. 10-12 og anden blok kl. 13-15. Du v\u00e6lger ikke selv, hvad du vil spille i hvilken blok - det finder vi ud af, n\u00e5r vi l\u00e6gger hold."
+                        "da": "Nu skal du v\u00e6lge, hvad du gerne vil spille i l\u00f8bet af dagen. Du kan se alle aktiviteterne for Fastaval Junior nedenfor.\nDu kommer til at spille 2 ting. F\u00f8rste blok kl. 10-12 og anden blok kl. 13-15. Du v\u00e6lger ikke selv, hvad du vil spille i hvilken blok - det finder vi ud af, n\u00e5r vi l\u00e6gger hold."
                     }
                 },
                 {
                     "type": "paragraph",
                     "text": {
                         "en": "",
-                        "da": "[b]V\u00e6lg 4 eller flere prioriteter.[\/b]\nVi beder jer om at prioritere b\u00e5de br\u00e6tspil og rollespil, for det er et stort puslespil, vi skal i gang med, n\u00e5r vi laver hold. Som udgangspunkt skal man regne med at komme til at spille b\u00e5de br\u00e6tspil og rollespil.\u00a0Hvis du har et stort \u00f8nske om kun at spille det ene eller det andet, s\u00e5 skriv det i kommentarfeltet p\u00e5 den forrige side, s\u00e5 vil vi fors\u00f8ge at tage hensyn til det."
+                        "da": "[b]V\u00e6lg 4 eller flere prioriteter.[\/b]\nVi beder jer om at prioritere b\u00e5de br\u00e6tspil og rollespil, for det er stort puslespil, vi skal i gang med, n\u00e5r vi laver hold. Som udgangspunkt skal man regne med at komme til at spille b\u00e5de br\u00e6tspil og rollespil.\nHvis du har et stort \u00f8nske om kun at spille det ene eller det andet, s\u00e5 skriv det i kommentarfeltet p\u00e5 den forrige side, s\u00e5 vil vi fors\u00f8ge at tage hensyn til det."
                     }
                 },
                 {
                     "type": "paragraph",
                     "text": {
                         "en": "",
-                        "da": "Som udgangspunkt skal man tilmelde sig inden for sin aldersgruppe. Det g\u00f8r det nemmere at l\u00e6gge hold og nemmere for den voksne ansvarlige at sikre, at alle f\u00e5r en god oplevelse. Hvis man som for\u00e6lder er i tvivl om, hvorvidt en aktivitet passer til barnet, eller hvis man har en meget god grund til at v\u00e6lge en aktivitet uden for aldersgruppen, kan man skrive til fastavaljunior@gmail.com"
+                        "da": "Som udgangspunkt skal man tilmelde sig inden for sin aldersgruppe. Det g\u00f8r det nemmere at l\u00e6gge hold, og nemmere for den voksne ansvarlige at sikre, at alle f\u00e5r en god oplevelse. Hvis man som for\u00e6lder er i tvivl om, hvorvidt en aktivitet passer til barnet, eller hvis man har en meget god grund til at v\u00e6lge en aktivitet uden for aldersgruppen, kan man skrive til [email]junior@fastaval.dk[\/email]"
                     }
                 },
                 {
                     "type": "paragraph",
                     "text": {
                         "en": "",
-                        "da": "[b]Bonusinfo: Hvis du gerne vil spille rollespil [\/b]\nHvert rollespilshold f\u00e5r sit eget lokale. Din spilleder er en erfaren, voksen rollespiller, og scenariet er skrevet, s\u00e5 det kan spilles af b\u00e5de nybegyndere og erfarne rollespillere p\u00e5 din alder. S\u00e5 hvis det er f\u00f8rste gang, du skal spille rollespil, kan du trygt kaste dig ud i det \u2013 vi lover, at du ikke kan g\u00f8re noget forkert :-)"
+                        "da": "[b]Bonusinfo: Hvis du gerne vil spille rollespil [\/b]\nHvert rollespilshold f\u00e5r sit eget lokale. Din spilleder er en erfaren, voksen rollespiller, og scenariet er skrevet, s\u00e5 det kan spilles af b\u00e5de nybegyndere og erfarne rollespillere p\u00e5 din alder. S\u00e5 hvis det er f\u00f8rste gang, du skal spille rollespil, kan du trygt kaste dig ud i det \u2013 vi lover, at du ikke kan g\u00f8re noget forkert. :-)"
                     }
                 },
                 {
@@ -87,7 +87,7 @@
                     "type": "list",
                     "text": {
                         "en": "",
-                        "da": "Klik p\u00e5 de enkelte aktivitetsnavne for at se en foromtale\/beskrivelse.\nDu prioriterer ved at klikke p\u00e5 s\u00f8jlen ud for hver aktivitet.\nKlik flere gange for at v\u00e6lge prioritet 1 til 4 (1 er h\u00f8jest, 4 er lavest). Du m\u00e5 gerne have flere 3. og 4. prioriteter. Du skal v\u00e6lge mindst 4 aktiviteter."
+                        "da": "Klik p\u00e5 de enkelte aktivitetsnavne for at se en foromtale\/beskrivelse.\nDu prioriterer ved at klikke p\u00e5 s\u00f8jlen ud for hver aktivitet.\n1-3 indikerer din prioritering (1 er h\u00f8jest, 3 lavest). 'SL' og 'SL\/1. prioritet' er ikke til Junior - s\u00e5 dem skal du bare ignorere.\nDu skal v\u00e6lge mindst 4 prioriteter.\nForvirret? [url=https:\/\/www.fastaval.dk\/ny-paa-fastaval\/]Der er hj\u00e6lp at hente her (\u00e5bner i nyt vindue)[\/url]"
                     }
                 }
             ],
@@ -136,15 +136,15 @@
                 {
                     "type": "paragraph",
                     "text": {
-                        "en": "This is the sign-up page for the activities of Fastaval 2025.",
-                        "da": "Dette er tilmeldingssiden for aktiviteter til Fastaval 2025."
+                        "en": "This is the sign-up page for the activities of Fastaval 2026.",
+                        "da": "Dette er tilmeldingssiden for aktiviteter til Fastaval 2026."
                     }
                 },
                 {
                     "type": "paragraph",
                     "text": {
-                        "en": "Below, you will be able to sign up the activities available at Fastaval 2025, including scenarios and boardgames premiering at this years Fastaval, a trip to the swimmingpool, Super Sunday activities, Magic tournaments, and much more.\u00a0",
-                        "da": "Nedenfor vil det v\u00e6re muligt at tilmelde sig aktiviteterne, der er tilg\u00e6ngelige p\u00e5 Fastaval 2025, heriblandt premierescenarier og -br\u00e6tspil, en tur i sv\u00f8mmehallen, Super S\u00f8ndag aktiviteter, Magic turneringer og meget mere.\u00a0"
+                        "en": "Below, you will be able to sign up the activities available at Fastaval 2026, including scenarios and boardgames premiering at this years Fastaval, a trip to the swimmingpool, Super Sunday activities, Magic tournaments, and much more.\u00a0",
+                        "da": "Nedenfor vil det v\u00e6re muligt at tilmelde sig aktiviteterne, der er tilg\u00e6ngelige p\u00e5 Fastaval 2026, heriblandt premierescenarier og -br\u00e6tspil, en tur i sv\u00f8mmehallen, Super S\u00f8ndag aktiviteter, Magic turneringer og meget mere.\u00a0"
                     }
                 },
                 {

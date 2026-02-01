@@ -5,7 +5,7 @@
     },
     "no_orders": {
         "en": "You haven't ordered any wear",
-        "da": "Du har ikke bestil noget wear"
+        "da": "Du har ikke bestilt noget wear"
     },
     "amount": {
         "en": "Amount",
@@ -13,7 +13,7 @@
     },
     "add": {
         "en": "Add",
-        "da": "Tilføj"
+        "da": "Tilf\u00f8j"
     },
     "delete": {
         "en": "Delete",
@@ -25,19 +25,19 @@
     },
     "max_error": {
         "en": "You're not allowed to order more than",
-        "da": "Du må ikke bestille mere end"
+        "da": "Du m\u00e5 ikke bestille mere end"
     },
     "missing_error": {
         "en": "You have to select a",
-        "da": "Du skal huske at vælge en"
+        "da": "Du skal huske at v\u00e6lge en"
     },
     "required": {
         "en": "Required",
-        "da": "Påkrævet"
+        "da": "P\u00e5kr\u00e6vet"
     },
     "range_error": {
         "en": "Amount must be a number between 1 and ",
-        "da": "Antal skal være et tal mellem 1 og "
+        "da": "Antal skal v\u00e6re et tal mellem 1 og "
     },
     "attribute_type": {
         "model": {
@@ -52,7 +52,7 @@
         },
         "size": {
             "en": "Size",
-            "da": "Størrelse",
+            "da": "St\u00f8rrelse",
             "position": 3
         },
         "design": {

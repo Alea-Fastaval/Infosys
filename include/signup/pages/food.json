@@ -39,14 +39,14 @@
                 {
                     "type": "paragraph",
                     "text": {
-                        "en": "Fastaval will have dinner delivered from [url=https:\/\/mosmadhus.dk\/]MOS Madhus[\/url]. The food will be served in the common area, in the following period:",
-                        "da": "Fastaval f\u00e5r aftensmaden leveret fra [url=https:\/\/mosmadhus.dk\/]MOS Madhus[\/url]. Maden serveres i f\u00e6llesomr\u00e5det i f\u00f8lgende tidsrum:"
+                        "en": "Fastaval will have dinner delivered from Spisebordet. The food will be served in the common area, in the following period:",
+                        "da": "Fastaval f\u00e5r aftensmaden leveret fra Spisebordet. Maden serveres i f\u00e6llesomr\u00e5det i f\u00f8lgende tidsrum:"
                     }
                 },
                 {
                     "type": "list",
                     "text": {
-                        "en": "Breakfast: 08.30-10.30Lunch (Sandwich): 11:00-13:00\nDinner: 17.30-19.30 (Sunday 17:00 - 19:00)",
+                        "en": "Breakfast: 08.30-10.30\nLunch (Sandwich): 11:00-13:00\nDinner: 17.30-19.30 (Sunday 17:00 - 19:00)",
                         "da": "Morgenmad: kl. 08:30-10:30\nFrokost (Sandwich): 11:00-13:00\nAftensmad: kl. 17:30-19:30 (s\u00f8ndag kl. 17:00-19:00)"
                     }
                 },
@@ -60,8 +60,8 @@
                 {
                     "type": "paragraph",
                     "text": {
-                        "en": "If you have an allergy not mentioned in the detailed description bellow, and worry that it will be present in the food, please contact our food coordinator at maj@fastaval.dk",
-                        "da": "Har du en allergi, som ikke er n\u00e6vnt, og er du bange for, at den findes i maden, s\u00e5 kontakt vores madansvarlige p\u00e5 maj@fastaval.dk"
+                        "en": "If you have an allergy not mentioned in the detailed description bellow, and worry that it will be present in the food, please contact our food coordinator at [email]maj@fastaval.dk[\/email]",
+                        "da": "Har du en allergi, som ikke er n\u00e6vnt, og er du bange for, at den findes i maden, s\u00e5 kontakt vores madansvarlige p\u00e5 [email]maj@fastaval.dk[\/email]"
                     }
                 }
             ]
@@ -184,8 +184,8 @@
                 {
                     "type": "paragraph",
                     "text": {
-                        "en": "Breakfast will be a breakfast buffet with hearty bread, spreads, boiled eggs, fruits, and vegetables as well as cereal with yogurt, milk, or skyr.",
-                        "da": "Morgenmad er en morgenmadsbuffet med groft br\u00f8d, p\u00e5l\u00e6g, kogte \u00e6g, frugt og gr\u00f8nt, samt morgenmadsprodukter med yoghurt, m\u00e6lk eller skyr."
+                        "en": "Breakfast will be a buffet with -\u00a0Wholegrain bread, cold cuts, boiled eggs, fruit and vegetables, as well as breakfast products with yogurt, milk, or skyr.",
+                        "da": "Morgenmad er en buffet med -\u00a0Groft br\u00f8d, p\u00e5l\u00e6g, kogte \u00e6g, frugt og gr\u00f8nt, samt morgenmadsprodukter med yoghurt, m\u00e6lk eller skyr."
                     }
                 },
                 {
@@ -212,8 +212,8 @@
                 {
                     "type": "paragraph",
                     "text": {
-                        "en": "Pasta Cacio e Pepe with chicken\u00a0\nVegetarian: Pasta Cacio e Pepe\nSide course: Italian inspired salad\nAllergens: Gluten, egg, milk, mustard",
-                        "da": "Pasta Cacio e Pepe med kylling\u00a0\nVegetar: Pasta Cacio e Pepe\nTilh\u00f8rende salat: Italiensk inspireret salat\nAllergener:\u00a0Gluten, \u00e6g, m\u00e6lk, sennep"
+                        "en": "Lasagna Pollo\nVegan: Vegan Lasagna Pollo\nSide course: 2 lovely salads, bread, and butter.\u00a0\nAllergens:\u00a0Celery, lactose, nutmeg, gluten (can be omitted). May contain traces of soy, mustard, celery, sesame, and lactose.",
+                        "da": "Lasagne Pollo\nVegansk:\u00a0Vegansk Lasagne\nTilbeh\u00f8r: 2 dejlige salater, br\u00f8d og sm\u00f8r\nAllergener:\u00a0Selleri, Laktose, Muskatn\u00f8dder, Gluten (kan frasorteres). Kan indeholde spor af\u00a0 Soja, Sennep, Selleri, Sesam, Laktose"
                     }
                 },
                 {
@@ -226,8 +226,8 @@
                 {
                     "type": "paragraph",
                     "text": {
-                        "en": "Chili sin Carne with steamed rice & cr\u00e8me fra\u00eeche\nSide course: Mexican salad\nAllergens: Celery, mustard",
-                        "da": "Chili sin Carne med dampede ris og cr\u00e8me fraiche\nTilh\u00f8rende salat: Mexicansk salat\nAllergener: Selleri, sennep"
+                        "en": "Daal with warm spices\nSide course:\u00a02 lovely salads, bread, and butter.\nAllergens:\u00a0Gluten. May contain traces of soy, mustard, celery, sesame, and lactose.",
+                        "da": "Daal med varme krydderier\nTilbeh\u00f8r: 2 dejlige salater, br\u00f8d og sm\u00f8r\nAllergener:\u00a0Gluten. Kan indeholde spor af\u00a0 Soja, Sennep, Selleri, Sesam, Laktose"
                     }
                 },
                 {
@@ -240,8 +240,8 @@
                 {
                     "type": "paragraph",
                     "text": {
-                        "en": "Red curry chicken with wholegrain noodles and sweet chili sauce\u00a0\nVegetarian: Tofu in red thai curry, wholegrain noodles and sweet chili sauce\nSide course: Thai salad\nAllergens: Sesame, peanut, soy, gluten, mustard, fish",
-                        "da": "Kylling i r\u00f8d thai karry med fuldkornsnudler og s\u00f8d chili sauce\nVegetar: Tofu i r\u00f8d thai karry med fuldkornsnudler og s\u00f8d chili sauce\nTilh\u00f8rende salat: Thai salat\nAllergener:\u00a0Sesam, jordn\u00f8dder, soya, gluten, sennep, fisk"
+                        "en": "Chicken in curry with rice\nVegan: Vegan Curry\u00a0\nSide course:\u00a02 lovely salads, bread, and butter.\nAllergens:\u00a0Celery. May contain traces of soy, mustard, celery, sesame, and lactose.",
+                        "da": "Kylling i karry med ris\nVegansk:\u00a0Vegansk Karryret\nTilbeh\u00f8r: 2 dejlige salater, br\u00f8d og sm\u00f8r\nAllergener:\u00a0Selleri. Kan indeholde spor af\u00a0 Soja, Sennep, Selleri, Sesam, Laktose."
                     }
                 },
                 {
@@ -254,8 +254,8 @@
                 {
                     "type": "paragraph",
                     "text": {
-                        "en": "Butter Chicken\nVegetarian: Paprika Stew\nSide course: Italian inspired salad\nAllergens: Gluten, eggs, milk, celery, mustard, fish, soy, peanuts, mustard",
-                        "da": "Butter Chicken\nVegetar: Paprikagryde\nTilh\u00f8rende salat: Italiensk inspireret salat\nAllergener:\u00a0Gluten, \u00e6g, m\u00e6lk, selleri, sennep, fisk, soya, jordn\u00f8dder, sennep"
+                        "en": "Slow-roasted beef roast with oven-baked potatoes, root vegetables, and pan gravy\nVegan:\u00a0Braised beetroot with citrus on grilled cabbage\nSide course:\u00a02 lovely salads, bread, and butter.\u00a0\nAllergens:\u00a0Gluten, lactose. May contain traces of soy, mustard, celery, sesame, and lactose.",
+                        "da": "Langtidsstegt okseroast med ovnbagte kartofler, rodfrugter og skysovs\nVegansk:\u00a0Brasiseret r\u00f8dbede med citrus p\u00e5 grillet k\u00e5l\nTilbeh\u00f8r: 2 dejlige salater, br\u00f8d og sm\u00f8r\nAllergener:\u00a0Gluten, Laktose. Kan indeholde spor af\u00a0 Soja, Sennep, Selleri, Sesam, Laktose"
                     }
                 },
                 {
@@ -268,8 +268,8 @@
                 {
                     "type": "paragraph",
                     "text": {
-                        "en": "Meatballs in curry sauce with steamed rice and chutney\nVegetarian: Celeriac in curry with steamed rice & chutney\nSide course: This season's fresh salad\nAllergens: Gluten, egg, mustard, milk, celery",
-                        "da": "Boller i karry med dampede ris og chutney\nVegetar: Selleri i karry med dampede ris og chutney\nTilh\u00f8rende salat: S\u00e6sonens friske salat\nAllergener:\u00a0Gluten, \u00e6g, sennep, m\u00e6lk, selleri"
+                        "en": "Build-your-own-burger\nVegan:\u00a0Build-your-own-burger\n\u00a0Side course:\u00a02 lovely salads, bread, and butter.\nAllergens:\u00a0Gluten, lactose. May contain traces of soy, mustard, celery, sesame, and lactose.",
+                        "da": "Byg-selv-burger\nVegansk:\u00a0Byg-selv-burger\nTilbeh\u00f8r: 2 dejlige salater, br\u00f8d og sm\u00f8r\u00a0\nAllergener:\u00a0Gluten, Laktose. Kan indeholde spor af\u00a0 Soja, Sennep, Selleri, Sesam, Laktose"
                     }
                 }
             ]

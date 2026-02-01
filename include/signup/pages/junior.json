@@ -83,7 +83,7 @@
                 {
                     "type": "hidden",
                     "text": {
-                        "en": "Junior entrace",
+                        "en": "Junior entrance",
                         "da": "Junior indgang"
                     },
                     "infosys_id": "junior:entrance",
@@ -93,28 +93,28 @@
                     "type": "paragraph",
                     "text": {
                         "en": "",
-                        "da": "[b]K\u00e6re deltager p\u00e5 Fastaval Junior[\/b]\nFastaval Junior er for b\u00f8rn i alderen 6-14 \u00e5r. Det er her, du har mulighed for at m\u00f8de andre b\u00f8rn p\u00e5 din egen alder, som ogs\u00e5 godt kan lide at spille rollespil eller br\u00e6tspil. Vi gl\u00e6der os rigtig meget til at spille med dig p\u00e5 Fastaval l\u00f8rdag den 19. april fra 10-15."
+                        "da": "[b]K\u00e6re deltager p\u00e5 Fastaval Junior[\/b]\nFastaval Junior er for b\u00f8rn i alderen 6-14 \u00e5r. Det er her, du har mulighed for at m\u00f8de andre b\u00f8rn p\u00e5 din egen alder, som ogs\u00e5 godt kan lide at spille rollespil eller br\u00e6tspil.Vi gl\u00e6der os rigtig meget til at spille med dig p\u00e5 Fastaval l\u00f8rdag den 4. april fra 10-15."
                     }
                 },
                 {
                     "type": "paragraph",
                     "text": {
                         "en": "\u00a0",
-                        "da": "Nu kommer vi til det sjove, hvor du skal v\u00e6lge, hvad du gerne vil spille p\u00e5 dagen. Vi skal ogs\u00e5 vide, hvilken st\u00f8rrelse T-shirt du skal have, og endelig skal vi have navn og kontaktinformationer p\u00e5 den voksne, som er med dig p\u00e5 Fastaval p\u00e5 dagen."
+                        "da": "Nu kommer vi til det sjove, hvor du skal v\u00e6lge, hvad du gerne vil spille p\u00e5 dagen. Vi skal ogs\u00e5 vide, hvilken st\u00f8rrelse T-shirt, du skal have, og endelig skal vi have navn og kontaktinformationer p\u00e5 den voksne, som er med dig p\u00e5 Fastaval p\u00e5 dagen."
                     }
                 },
                 {
                     "type": "paragraph",
                     "text": {
                         "en": "",
-                        "da": "N\u00e5r vi n\u00e6rmer os Fastaval, modtager dine for\u00e6ldre et infobrev samt program, s\u00e5 du ved, hvad du skal spille p\u00e5 dagen. S\u00e5 husk at holde \u00f8je med mailen og v\u00e6r opm\u00e6rksom p\u00e5, at den kan v\u00e6re havnet i din spam-folder. Tilf\u00f8j derfor gerne allerede nu fastavaljunior@gmail.com til jeres adressebog. Hvis du ikke har modtaget en mail fra os senest en uge f\u00f8r Fastaval, bedes du henvende dig til pingvintanterne p\u00e5 fastavaljunior@gmail.com."
+                        "da": "N\u00e5r vi n\u00e6rmer os Fastaval, modtager dine for\u00e6ldre et infobrev samt program, s\u00e5 du ved, hvad du skal spille p\u00e5 dagen. S\u00e5 husk at holde \u00f8je med mailen, og v\u00e6r opm\u00e6rksom p\u00e5, at den kan v\u00e6re havnet i din spam-folder. Tilf\u00f8j derfor gerne allerede nu [email]junior@fastaval.dk[\/email] til jeres adressebog. Hvis du ikke har modtaget en mail fra os senest en uge f\u00f8r Fastaval, bedes du henvende dig til pingvintanterne p\u00e5 [email]junior@fastaval.dk[\/email]"
                     }
                 },
                 {
                     "type": "paragraph",
                     "text": {
                         "en": "\u00a0",
-                        "da": "Vi gl\u00e6der os til at se dig til Fastaval Junior!\nDe bedste hilsner\nMette og Anne, Pingvintanter\u00a0"
+                        "da": "Vi gl\u00e6der os til at se dig til Fastaval Junior!\nDe bedste hilsner\nMette, Anne og Jesper, Pingvintanterne"
                     }
                 }
             ]
@@ -144,7 +144,7 @@
                     "type": "paragraph",
                     "text": {
                         "en": "\u00a0\u00a0",
-                        "da": "Vi vil meget gerne hj\u00e6lpe, hvis I er det mindste i tvivl om noget i forbindelse med tilmelding og selve dagen. Skriv til vores mail, s\u00e5 vender vi tilbage hurtigst muligt.\n[email]fastavaljunior@gmail.com[\/email]\u00a0"
+                        "da": "Vi vil meget gerne hj\u00e6lpe, hvis I er det mindste i tvivl om noget i forbindelse med tilmelding og selve dagen. Skriv til vores mail, s\u00e5 vender vi tilbage hurtigst muligt.\n[email]junior@fastaval.dk[\/email]\u00a0"
                     }
                 }
             ]
@@ -195,7 +195,7 @@
                     "required": "true"
                 },
                 {
-                    "type": "text_input",
+                    "type": "telephone",
                     "text": {
                         "en": "",
                         "da": "Telefonnummer"
@@ -204,7 +204,7 @@
                     "required": "true"
                 },
                 {
-                    "type": "text_input",
+                    "type": "email",
                     "text": {
                         "en": "\u00a0",
                         "da": "Email"
@@ -216,7 +216,7 @@
                     "type": "paragraph",
                     "text": {
                         "en": "",
-                        "da": "Mens Fastaval Junior k\u00f8rer, skal alle deltagere have en ansvarlig voksen til stede p\u00e5 Fastaval, som vi kan tilkalde, hvis der er behov for det. Hvis det ikke er den samme som ovenst\u00e5ende, bedes du skrive dennes navn og telefonnummer i kommentarfeltet p\u00e5 tilmeldingen.\u00a0"
+                        "da": "Mens Fastaval Junior k\u00f8rer, skal alle deltagere have en ansvarlig voksen til stede p\u00e5 Fastaval, som vi kan tilkalde, hvis der er behov for det. Hvis det ikke er den samme som ovenst\u00e5ende, bedes du skrive dennes navn og telefonnummer i kommentarfeltet p\u00e5 tilmeldingen."
                     }
                 }
             ]
@@ -254,7 +254,7 @@
                     "type": "paragraph",
                     "text": {
                         "en": "\u00a0",
-                        "da": "Her kan du skrive, hvis du har s\u00e6rlige behov eller \u00f8nsker, f.eks. nogen du gerne vil spille sammen med. Du skal ogs\u00e5 skrive navn og telefonnummer p\u00e5 den kontaktperson, der er til stede p\u00e5 Fastaval, hvis det ikke er den samme som angivet p\u00e5 den forrige side."
+                        "da": "Her kan du skrive hvis du har s\u00e6rlige behov eller \u00f8nsker, f.eks. nogen du gerne vil spille sammen med. Du skal ogs\u00e5 skrive navn og telefonnummer p\u00e5 den kontaktperson, der er til stede p\u00e5 Fastaval, hvis det ikke er den samme som angivet p\u00e5 den forrige side."
                     }
                 },
                 {

@@ -92,7 +92,14 @@
                             "status": "normal",
                             "input": "misc:fastaval_bus"
                         }
-                    ]
+                    ],
+                    "disabled": "true"
+                }
+            ],
+            "display_logic": [
+                {
+                    "type": "default",
+                    "status": "hidden"
                 }
             ]
         },
@@ -205,8 +212,8 @@
                 {
                     "type": "paragraph",
                     "text": {
-                        "en": "[b]Note:[\/b] We do not look at the comments until after sign-up has closed. If you have questions or need to get in contact with us, we can be reached by mail [email]info@fastaval.dk[\/email]\u00a0",
-                        "da": "[b]Bem\u00e6rk:[\/b] Vi kigger f\u00f8rst bem\u00e6rkningerne igennem, efter at tilmeldingen er lukket. Hvis du har sp\u00f8rgsm\u00e5l eller skal i kontakt med os, kan du fange os p\u00e5 mail [email]info@fastaval.dk[\/email]."
+                        "en": "[b]Note:[\/b] We do not look at the comments until after sign-up has closed. If you have questions or need to get in contact with us, we can be reached by mail [email]fvinformationen@gmail.com[\/email]\u00a0",
+                        "da": "[b]Bem\u00e6rk:[\/b] Vi kigger f\u00f8rst bem\u00e6rkningerne igennem, efter at tilmeldingen er lukket. Hvis du har sp\u00f8rgsm\u00e5l eller skal i kontakt med os, kan du fange os p\u00e5 mail [email]fvinformationen@gmail.com[\/email]."
                     }
                 },
                 {

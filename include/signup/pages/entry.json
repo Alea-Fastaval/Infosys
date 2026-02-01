@@ -55,15 +55,15 @@
                 {
                     "type": "paragraph",
                     "text": {
-                        "en": "A partout ticket for Fastaval costs 400 kr, but organizers, participants younger than 25 and members of Alea receive a discount. The discounts can be combined. Kids under the age of 15 can attend Fastaval for free provided they are accompanied by an adult who has payed for admission.",
-                        "da": "En partout-billet til Fastaval koster 400 kr, men arrang\u00f8rer, deltagere under 25 og medlemmer af Alea f\u00e5r rabat. Rabatterne kan kombineres.\u00a0B\u00f8rn under 15 \u00e5r kan komme gratis med p\u00e5 Fastaval, s\u00e5 l\u00e6nge de er ledsaget af en betalende voksen."
+                        "en": "A partout ticket for Fastaval costs 450 kr, but organizers, participants younger than 21 and members of Alea receive a discount. The discounts can be combined. Kids under the age of 15 can attend Fastaval for free provided they are accompanied by an adult who has payed for admission.",
+                        "da": "En partout-billet til Fastaval koster 450 kr, men arrang\u00f8rer, deltagere under 21 og medlemmer af Alea f\u00e5r rabat. Rabatterne kan kombineres.\u00a0B\u00f8rn under 15 \u00e5r kan komme gratis med p\u00e5 Fastaval, s\u00e5 l\u00e6nge de er ledsaget af en betalende voksen."
                     }
                 },
                 {
                     "type": "list",
                     "text": {
-                        "en": "Organizer discount: 125 kr\nYouth discount (U25): 125 kr\nAlea discount: 125 kr",
-                        "da": "Arrang\u00f8rrabat: 125 kr\nUngdomsrabat (U25): 125 kr\nAlea rabat: 125 kr"
+                        "en": "Organizer discount: 125 kr\nYouth discount (U21): 125 kr\nAlea discount: 125 kr",
+                        "da": "Arrang\u00f8rrabat: 125 kr\nUngdomsrabat (U21): 125 kr\nAlea rabat: 125 kr"
                     }
                 },
                 {
@@ -91,8 +91,8 @@
                 {
                     "type": "paragraph",
                     "text": {
-                        "en": "One-day tickets are 140 kr. per day",
-                        "da": "Endagsbilletter koster 140 kr. per dag"
+                        "en": "One-day tickets are 150 kr. per day (Kids under 15, free)",
+                        "da": "Endagsbilletter koster 150 kr. per dag (B\u00f8rn under 15 gratis)"
                     }
                 },
                 {
@@ -171,15 +171,15 @@
                 {
                     "type": "paragraph",
                     "text": {
-                        "en": "At Fastaval, we have a number of different sleeping areas. You can find a detailed description of each area at [url=https:\/\/www.fastaval.dk\/en\/praktisk\/praktiske-informationer\/#overnatning]website[\/url].",
-                        "da": "P\u00e5 Fastaval har du nogle forskellige overnatningsmuligheder. Du kan l\u00e6se mere detaljeret om dem p\u00e5\u00a0[url=https:\/\/www.fastaval.dk\/praktisk\/praktiske-informationer\/#overnatning]hjemmesiden[\/url]."
+                        "en": "At Fastaval, we have a number of different sleeping areas. You can find a detailed description of each area at [url=https:\/\/www.fastaval.dk\/en\/praktiske-informationer\/#overnatning]website[\/url].",
+                        "da": "P\u00e5 Fastaval har du nogle forskellige overnatningsmuligheder. Du kan l\u00e6se mere detaljeret om dem p\u00e5\u00a0[url=https:\/\/www.fastaval.dk\/praktiske-informationer\/#overnatning]hjemmesiden[\/url]."
                     }
                 },
                 {
                     "type": "paragraph",
                     "text": {
-                        "en": "Accomodation at Fastaval for the whole event costs 200 kr. for participants and 50 kr. for organizers. FastaFamily costs 400 kr. for adult, but for children under the age of 15 it's free",
-                        "da": "Overnatning p\u00e5 hele Fastaval koster 200 kr. for deltagere og 50 kr. for arrang\u00f8rer. Familie p\u00e5 Fastaval koster 400 kr. for voksne, men er gratis for b\u00f8rn under 15 \u00e5r."
+                        "en": "Accomodation at Fastaval for the whole event costs 250 kr. for participants and 50 kr. for organizers. FastaFamily costs 500 kr. for adult, but for children under the age of 15 it's free",
+                        "da": "Overnatning p\u00e5 hele Fastaval koster 250 kr. for deltagere og 50 kr. for arrang\u00f8rer. Familie p\u00e5 Fastaval koster 500 kr. for voksne, men er gratis for b\u00f8rn under 15 \u00e5r."
                     }
                 },
                 {
@@ -293,15 +293,15 @@
                 {
                     "type": "paragraph",
                     "text": {
-                        "en": "If you sleep in the standard dormitory, you can rent a mattress for use during Fastaval. The mattress may not be moved to other dormitories. The matresses are not especially good, but they are better than the floor. Rent at your own risk.\u00a0",
+                        "en": "If you sleep in the standard dormitory, you can rent a mattress for use during Fastaval. The mattress may not be moved to other dormitories. The mattresses are not especially good, but they are better than the floor. Rent at your own risk.",
                         "da": "Hvis du sover i den almindelige sovesal, kan du leje en madras til brug under Fastaval. Madrassen m\u00e5 ikke flyttes til andre sovesale. Madrasserne er ikke specielt gode, men de er bedre end et gulv. Leje p\u00e5 eget ansvar."
                     }
                 },
                 {
                     "type": "checkbox",
                     "text": {
-                        "en": "Yes, I would like to rent a matress for 150 kr.\t\t\t",
-                        "da": "Ja tak, jeg vil gerne leje en madras for 150 kr.\t\t\t"
+                        "en": "Yes, I would like to rent a mattress for 200 kr.",
+                        "da": "Ja tak, jeg vil gerne leje en madras for 200 kr."
                     },
                     "infosys_id": "misc:mattres",
                     "display_logic": [

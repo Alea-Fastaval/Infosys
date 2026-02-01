@@ -480,7 +480,19 @@ class SignupApiModel extends Model {
 
     // Set signup time
     $participant->signed_up = date('Y-m-d H:i:s');
-    
+
+    // Remeber if we have a junior ticket
+    $has_junior = false;
+    foreach ($this->createEntity('DeltagereIndgang')->getDeltagerIndgang($participant) as $indgang) {
+      if (stripos($indgang->type, 'junior') !== false) {
+        if (stripos($indgang->type, 'reserve') !== false) {
+          $has_junior = "reserve";
+        } else {
+          $has_junior = "standard";
+        }
+      } 
+    }
+
     // Reset entrance types
     // Don't remove bank transfer fee (37)
     // Don't remove sparkling wine (81) from late signup
@@ -780,10 +792,16 @@ class SignupApiModel extends Model {
             case 'junior':
 
               if ($key_item == 'entrance') {
-                // Add entry for junior participants
                 $entry = $this->createEntity('Indgang');
                 $select = $entry->getSelect();
                 $select->setWhere('type', 'like', '%Junior%');
+
+                if ($has_junior != "standard" && $config['main']->current_junior_participants >= $config['main']->max_junior_tickets) {
+                  $select->setWhere('type', 'like', '%Reserve%');
+                } else {
+                  $select->setWhere('type', 'not like', '%Reserve%');
+                }
+
                 $entry = $entry->findBySelect($select);
                 $participant->setIndgang($entry);
                 $price = $entry->pris;
@@ -1318,7 +1336,12 @@ class SignupApiModel extends Model {
           break;
 
         case $entrance->type == 'Indgang - Junior':
+        case $entrance->type == 'Indgang - Junior Reserve':
           $signup['junior:entrance'] = 'on';
+          break;
+
+        case $entrance->type == 'Indgang - Forælder':
+          // Nothing to do here, This is already given by participant type
           break;
 
         case $entrance->type == 'Alea medlemskab':

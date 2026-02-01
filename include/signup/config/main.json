@@ -1,5 +1,5 @@
 {
-    "age_young": "25",
+    "age_young": "20",
     "age_kid": "15",
     "max_financial_support": "88",
     "max_bus_tickets": "0",
@@ -54,11 +54,11 @@
             "da": "Indholdet af feltet er ikke p\u00e5 listen over gyldige muligheder.\n(Kontroller stavning og v\u00e6lg en v\u00e6rdi fra listen der dukker op mens du skriver)"
         },
         "require_one": {
-            "en": "You must choose atleast one of the options",
+            "en": "You must choose at least one of the options",
             "da": "Du skal v\u00e6lge mindst en af mulighederne"
         },
         "one_day": {
-            "en": "You must choose atleast one day to attend Fastaval",
+            "en": "You must choose at least one day to attend Fastaval",
             "da": "Du skal v\u00e6lge mindst en dag du kommer p\u00e5 Fastaval"
         },
         "sleeping_too_young": {
@@ -70,7 +70,7 @@
             "da": " \u00e5r er for ung til at m\u00e5tte k\u00f8be vin"
         },
         "unknown_language": {
-            "en": "Contains an unssuported language selection",
+            "en": "Contains an unsupported language selection",
             "da": "Indeholder et sprog der ikke underst\u00f8ttes"
         },
         "unknown_sleeping_area": {
