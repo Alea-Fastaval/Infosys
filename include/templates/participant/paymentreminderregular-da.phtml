@@ -1,59 +1,59 @@
-<h2>Påmindelse om betaling til Fastaval <?=$this->year?></h2>
+<h2>Påmindelse om betaling til Fastaval <?= $this->year ?></h2>
 
-<p>Hej <?=$this->participant->getNickname()?>,</p>
+<p>Hej <?= $this->participant->getNickname() ?>,</p>
 
 <p>
-    Vi skriver til dig, fordi vi ikke kan se, at du har betalt for din tilmelding til Fastaval <?=$this->year?>, og
-    derfor tillader vi os at sende denne påmindelse.
+  Vi skriver til dig, fordi vi ikke kan se, at du har betalt for din tilmelding til Fastaval <?= $this->year ?>, og
+  derfor tillader vi os at sende denne påmindelse.
 </p>
 
 <p>
-    Har du allerede betalt?
-    <ul>
-        <li> Hvis du lige har betalt, kan du se bort fra denne mail da vi bare mangler at opdatere betalinger i vores system.</li>
-        <li> 
-            Hvis det er flere dage siden du har betalt, må du meget gerne skrive til <a href="mailto:info@fastaval.dk">info@fastaval.dk</a>,
-            så vi kan sørge for at få din betaling registreret korrekt.
-        </li> 
-    </ul>
-</p>
-
-<p>
-    Har du ikke betalt, så husk at deadline for din betaling er <?= $this->payment_day;?>. Hvis du ikke betaler senest
-    denne dato, vil din tilmelding blive annulleret.
-</p>
-
-<p>
-    <?php if ($this->participant->betalt_beloeb == 0) : ?>
-        Din tilmelding beløber sig til <strong><?= $this->prices['total'] ?></strong> kr. der skal betales senest d. <?= $this->payment_day ?>
-
-    <?php else : ?>
-        Du har allerede betalt <?= $this->participant->betalt_beloeb ?>kr men det ser ud til at du stadig skylder
-        <strong><?= ($this->prices['total'] - $this->participant->betalt_beloeb) ?></strong>kr.<br />
-        Du kan betale nu via online-betalingen eller bankoverførsel, eller når du ankommer til Fastaval.
-    <?php endif; ?>
-</p>
-
-<p>
-    Vi har fået nyt betalingssystem, der kører gennem Bifrost, derfor vil det være deres navn, der fremgår i betalingsvinduet.
-    Du kan betale via vores nye online betalingssystem ved at følge nedenstående link:<br /><br />
-    <a href="https://www.fastaval.dk/26tilmelding/paynow?hash=<?= $this->participant->participant_hash ?>">Betal on-line</a>
-    (Betalingen bliver gemt med det samme hos vores leverandør, men der kan gå et par dage før betalingen registreres i vores eget system, da det foregår manuelt lige nu)
-</p>
-<p>
-    Ved anden form for betaling skal du HUSKE at anføre dit navn og deltagernummer, som er: <strong><?= $this->participant->id ?></strong>
-</p>
-<p>
-    Alternativt kan du betale via bankoverførsel - bemærk at der er et gebyr på 20 kr. på bankoverførsel, og at betalingen
-    derfor bliver <strong><?= ($this->prices['total'] - $this->participant->betalt_beloeb + 20) ?></strong> kr. ved denne løsning.<br />
-    Hvis du betaler via overførsel fra en bank udenfor Danmark, skal du være opmærksom på, at banken ofte tager et ekstra gebyr som du selv skal betale.<br />
+  Har du allerede betalt?
 <ul>
-    <li>Ved bankoverførsel til vores bankkonto: Reg.: 9070 / Kontonr.: 1638710893</li>
-    <li>Ved indbetaling fra en bank UDENFOR Danmark: BIC VRSPDK22 og IBAN DK1090701638710893 <strong>Alle gebyrer for internationale overførsler er dit ansvar</strong></li>
-    <li>Deadline for indbetaling er her ligeledes <?= $this->payment_day; ?></li>
-    <li>Anfør ALTID navn og deltager ID så vi ved hvem betalingen var fra</li>
+  <li> Hvis du lige har betalt, kan du se bort fra denne mail da vi bare mangler at opdatere betalinger i vores system.</li>
+  <li>
+    Hvis det er flere dage siden du har betalt, må du meget gerne skrive til <a href="mailto:info@fastaval.dk">info@fastaval.dk</a>,
+    så vi kan sørge for at få din betaling registreret korrekt.
+  </li>
 </ul>
 </p>
 
-<p><strong>Vi glæder os til at se dig på Fastaval <?=$this->year?>!</strong></p>
+<p>
+  Har du ikke betalt, så husk at deadline for din betaling er <?= $this->payment_day; ?>. Hvis du ikke betaler senest
+  denne dato, vil din tilmelding blive annulleret.
+</p>
+
+<p>
+  <?php if ($this->participant->betalt_beloeb == 0) : ?>
+    Din tilmelding beløber sig til <strong><?= $this->prices['total'] ?></strong> kr. der skal betales senest d. <?= $this->payment_day ?>
+
+  <?php else : ?>
+    Du har allerede betalt <?= $this->participant->betalt_beloeb ?>kr men det ser ud til at du stadig skylder
+    <strong><?= ($this->prices['total'] - $this->participant->betalt_beloeb) ?></strong>kr.<br />
+    Du kan betale nu via online-betalingen eller bankoverførsel, eller når du ankommer til Fastaval.
+  <?php endif; ?>
+</p>
+
+<p>
+  Vi har fået nyt betalingssystem, der kører gennem Bifrost, derfor vil det være deres navn, der fremgår i betalingsvinduet.
+  Du kan betale via vores nye online betalingssystem ved at følge nedenstående link:<br /><br />
+  <a href="https://www.fastaval.dk/26tilmelding/paynow?hash=<?= $this->participant->participant_hash ?>">Betal on-line</a>
+  (Betalingen bliver gemt med det samme hos vores leverandør, men der kan gå et par dage før betalingen registreres i vores eget system, da det foregår manuelt lige nu)
+</p>
+<p>
+  Ved anden form for betaling skal du HUSKE at anføre dit navn og deltagernummer, som er: <strong><?= $this->participant->id ?></strong>
+</p>
+<p>
+  Alternativt kan du betale via bankoverførsel - bemærk at der er et gebyr på 20 kr. på bankoverførsel, og at betalingen
+  derfor bliver <strong><?= ($this->prices['total'] - $this->participant->betalt_beloeb + 20) ?></strong> kr. ved denne løsning.<br />
+  Hvis du betaler via overførsel fra en bank udenfor Danmark, skal du være opmærksom på, at banken ofte tager et ekstra gebyr som du selv skal betale.<br />
+<ul>
+  <li>Ved bankoverførsel til vores bankkonto: Reg.: 9070 / Kontonr.: 1638710893</li>
+  <li>Ved indbetaling fra en bank UDENFOR Danmark: BIC VRSPDK22 og IBAN DK1090701638710893 <strong>Alle gebyrer for internationale overførsler er dit ansvar</strong></li>
+  <li>Deadline for indbetaling er her ligeledes <?= $this->payment_day; ?></li>
+  <li>Anfør ALTID navn og deltager ID så vi ved hvem betalingen var fra</li>
+</ul>
+</p>
+
+<p><strong>Vi glæder os til at se dig på Fastaval <?= $this->year ?>!</strong></p>
 <p>Mvh Fastaval</p>
