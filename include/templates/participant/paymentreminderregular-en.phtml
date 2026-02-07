@@ -1,60 +1,62 @@
-<h2>Reminder of payment for Fastaval <?= $this->year ?></h2>
+<h2>Payment reminder for Fastaval <?= $this->year ?></h2>
 
 <p>Hi <?= $this->participant->getNickname() ?>,</p>
 
 <p>
-  We&#39;re writing to you because we haven&#39;t registered a payment from you for Fastaval <?= $this->year ?>, and so
-  we thought we&#39;d take the opportunity to remind you.
+  We are writing to you because we haven't registered a payment from you for Fastaval <?= $this->year ?> yet, and
+  we would therefore like to remind you to complete your payment.
 </p>
 
-<p>If you already paid, just ignore this email - we are just lagging a bit behind getting our information up-to-date.</p>
+<p>If you have already paid, please ignore this email – we are likely just still updating our records.</p>
 
 <p>
-  If you haven&#39;t already paid, remember that your deadline for paying is <?= $this->payment_day_en; ?>.
-  If you don&#39;t pay by this date your registration will be canceled.
+  If you haven't paid yet, please remember that the deadline for your payment is <?= $this->payment_day_en; ?>.
+  If we do not receive your payment by this date, ordered items (wear) and food will be removed from your registration.
+  This is due to our ordering process, as we require pre-payment for these items. Your general registration for
+  Fastaval will remain active, and you can pay at the entrance.
 </p>
 
-
-<p>The amount is <strong><?= $this->payment_remainder ?></strong> DKK,</p>
+<p>The remaining amount is: <strong><?= $this->payment_remainder ?> DKK</strong></p>
 <p>
-  When paying remember to clearly state your name and participant ID which is :
+  When paying, remember to clearly state your name and participant ID:
   <strong><?= $this->participant->id ?></strong>
 </p>
 
 <p>
-  If you're using the Danish MobilePay, you can transfer the money to 438490 (Alea).<br>
-  It's important that you pay from the same number as the one you entered during sign-up. If this isn't possible,
-  please email <a href=mailto:andreas@fastaval.dk>andreas@fastaval.dk</a> and we'll figure something out.
+  <strong>MobilePay (Denmark only):</strong><br />
+  If you use MobilePay, you can transfer the money to <strong>438490</strong> (Alea).<br />
+  It is important that you pay from the same phone number you used during sign-up. If this isn't possible,
+  please email <a href="mailto:andreas@fastaval.dk">andreas@fastaval.dk</a> so we can identify your payment.
 </p>
 
 <p>
-  You can also pay right away by using Paypal. Transfer to <a href="mailto:andreas@fastaval.dk.">andreas@fastaval.dk.</a>
-  There is a 100DKK fee for paying with PayPal so you will need to transfer a total of
-  <strong><?= ($this->payment_remainder + 100) ?></strong> kr.
+  <strong>PayPal:</strong><br />
+  You can also pay immediately via PayPal. Transfer to <a href="mailto:andreas@fastaval.dk">andreas@fastaval.dk</a>.<br />
+  Please note there is a 100 DKK fee for using PayPal, so you will need to transfer a total of
+  <strong><?= ($this->payment_remainder + 100) ?></strong> DKK.
 </p>
 
-<h4>Payment by banktransfer</h4>
+<h4>Payment by bank transfer</h4>
 <p>
-  If you cannot pay using one of the above methods, it is also possible to pay through banktransfer. This is a bit
-  more expensive however, as it involves more work. Because of that, there is a fee of <?= e($this->banking_fee); ?>DKK
-  on bank transfers. Also be aware that there are usually an extra fee on international bank transfers.
-  <b>All fees incurred on international transfers will be your responsibility</b>.</br>
+  It is also possible to pay via bank transfer. Please note that there is a fee of <?= e($this->banking_fee); ?> DKK
+  for this option as it requires manual handling. Additionally, international bank transfers usually incur extra fees from the banks.
+  <b>All fees incurred on international transfers are your responsibility.</b>
 </p>
 
-<p>To pay by banktransfer, use the information below:</p>
+<p>To pay by bank transfer, please use the following details:</p>
 <ul>
   <li>
-    Payment due is <?= e($this->payment_remainder + floatval($this->banking_fee)); ?>DKK
-    (<?= e($this->payment_remainder); ?>DKK + <?= e($this->banking_fee); ?>DKK fee)
+    <strong>Amount due:</strong> <?= e($this->payment_remainder + floatval($this->banking_fee)); ?> DKK
+    (<?= e($this->payment_remainder); ?> DKK + <?= e($this->banking_fee); ?> DKK fee)
   </li>
-  <li>From a Danish bank: Reg.: 9070 / Account: 1638710893</li>
-  <li>Our bank information is IBAN DK1090701638710893 and BIC VRAADK21.</li>
+  <li><strong>Danish bank:</strong> Reg.: 9070 / Account: 1638710893</li>
+  <li><strong>International bank:</strong> IBAN: DK1090701638710893 and BIC: VRSPDK22</li>
   <li>
-    ALWAYS make sure to add your name and participant ID <strong><?= $this->participant->id ?></strong> as message so
-    we know who the payment was from
+    <strong>Message:</strong> ALWAYS include your name and participant ID <strong><?= $this->participant->id ?></strong>
+    so we can register your payment correctly.
   </li>
 </ul>
-<p> </p>
+
 <p><strong>We look forward to seeing you at Fastaval <?= $this->year ?>!</strong></p>
-<p>Best,</p>
+<p>Best regards,</p>
 <p>Fastaval</p>

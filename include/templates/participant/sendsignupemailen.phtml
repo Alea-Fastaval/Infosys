@@ -3,59 +3,59 @@
     Your signup has been registered with participant ID <strong><?= $this->participant->id ?></strong>. Below you can see the information we have registered.
 </p>
 <p>
-    You will recieve further information about your personal schedule, when we're closer to Fastaval.
+    You will receive further information about your personal schedule as we get closer to Fastaval.
 </p>
 <?php if ($this->participant->betalt_beloeb < $this->prices['total']) : ?>
     <h2>Payment</h2>
     <p>
         <?php if ($this->participant->betalt_beloeb == 0) : ?>
             Your payment amounts to <strong><?= $this->prices['total'] ?></strong> DKK, and the deadline for payment is <?= $this->payment_day; ?>.<br />
-            If you sign up after <?= $this->payment_day ?>, payment is due same day as your signup.
+            If you sign up after <?= $this->payment_day ?>, payment is due the same day as your signup.
 
         <?php else : ?>
-            You have already paid <?= $this->participant->betalt_beloeb ?>DKK but it seems that you still owe <strong><?= ($this->prices['total'] - $this->participant->betalt_beloeb) ?></strong> DKK on your signup.<br />
-            You can pay via the online-payment functionality, by bank transfer or upon arriving at Fastaval.
+            You have already paid <?= $this->participant->betalt_beloeb ?> DKK, but it seems that you still owe <strong><?= ($this->prices['total'] - $this->participant->betalt_beloeb) ?></strong> DKK on your signup.<br />
+            You can pay via the online payment functionality, by bank transfer, or upon arriving at Fastaval.
         <?php endif; ?>
     </p>
     <p>
-        We have a new payment system that goes through Birfrost, therefore it will be their name that appears in the payment window.
-        You can pay using our new on-line payment system, by following the link below:<br /><br />
-        <a href="https://www.fastaval.dk/26tilmelding/paynow?hash=<?= $this->participant->participant_hash ?>">Pay on-line</a> (Payments are registered immediately with our provider, but it may take a few days before the payment is registered in our own system, as this is done manually right now)
+        We have a new payment system that goes through Bifrost; therefore, it will be their name that appears in the payment window.
+        You can pay using our new online payment system by following the link below:<br /><br />
+        <a href="https://www.fastaval.dk/26tilmelding/paynow?hash=<?= $this->participant->participant_hash ?>">Pay online</a> (Payments are registered immediately with our provider, but it may take a few days before the payment is reflected in our own system, as this is currently handled manually)
     </p>
     <p>
-        When using other payment options remember to clearly state your name and participant ID, which is: <strong><?= $this->participant->id ?></strong>
+        When using other payment options, remember to clearly state your name and participant ID: <strong><?= $this->participant->id ?></strong>
     </p>
     <p>
-        You can also pay right away by using Paypal. Transfer to <a href="mailto:andreas@fastaval.dk.">andreas@fastaval.dk.</a>
-        There is a 100DKK fee for paying with PayPal so you will need to transfer a total of
-        <?= ($this->prices['total'] - $this->participant->betalt_beloeb + 100); ?> DKK
+        You can also pay right away using PayPal. Transfer to <a href="mailto:andreas@fastaval.dk">andreas@fastaval.dk</a>.
+        There is a 100 DKK fee for paying with PayPal, so you will need to transfer a total of
+        <strong><?= ($this->prices['total'] - $this->participant->betalt_beloeb + 100); ?></strong> DKK.
     </p>
     <p>
-        Alternatively you can pay by bank transfer. Please note that we take a fee on bank transfer amounting to 20 DKK
-        (which makes the amount to pay <strong><?= ($this->prices['total'] - $this->participant->betalt_beloeb + 20) ?></strong> DKK)<br />
-        Please notice that there is usually an extra fee on international bank transfers.
-        <b>All fees incurred on international transfers will be your responsibility</b>.</br>
+        Alternatively, you can pay by bank transfer. Please note that we charge a fee for bank transfers amounting to 20 DKK
+        (making the total amount to pay <strong><?= ($this->prices['total'] - $this->participant->betalt_beloeb + 20) ?></strong> DKK).<br />
+        Please note that there is usually an extra fee on international bank transfers.
+        <b>All fees incurred on international transfers are your responsibility</b>.<br />
     <ul>
-        <li>Paying from a Danish bank, use these details: Reg.: 9070 / Accountnr.: 1638710893</li>
-        <li>Our bank information is IBAN DK1090701638710893 and BIC VRSPDK22.<strong>Alle gebyrer for internationale overførlser er dit ansvar</strong></li>
-        <li>deadline for payment is the same here: <?= $this->payment_day ?></li>
+        <li>Paying from a Danish bank, use these details: Reg.: 9070 / Account no.: 1638710893</li>
+        <li>For international transfers: IBAN DK1090701638710893 and BIC VRSPDK22. <strong>All fees for international transfers are your responsibility.</strong></li>
+        <li>The deadline for payment is the same here: <?= $this->payment_day ?></li>
     </ul>
     </p>
 <?php endif; ?>
 <p>
-    <strong>Please note </strong>that you can change your signup details using the signup at
-    <a href="https://www.fastaval.dk/en/26tilmelding/">www.fastaval.dk</a>, up until <?= $this->end_signup_changes_date ?>.
-    All you need is your e-mail address and this code: <strong><?= $this->participant->password ?></strong>
+    <strong>Please note</strong> that you can change your signup details at
+    <a href="https://www.fastaval.dk/en/26tilmelding/">www.fastaval.dk</a> up until <?= $this->end_signup_changes_date ?>.
+    All you need is your email address and this code: <strong><?= $this->participant->password ?></strong>
 </p>
 <?php if ($this->participant_photo_upload_link) : ?>
     <p>
-        As a volunteer/writer/designer you need to have a picture on your nametag, to be able to use your discount at Fastaval.
+        As a volunteer/writer/designer, you need a photo on your nametag to use your discount at Fastaval.
         Please use the following link to <strong>upload a photo</strong>:
         <a href="<?= $this->participant_photo_upload_link; ?>"><?= $this->participant_photo_upload_link; ?></a>
     </p>
 <?php endif; ?>
 <p>
-    If you have any questions or need assistance, you're always welcome to contact us at <a href=mailto:info@fastaval.dk>info@fastaval.dk</a>
+    If you have any questions or need assistance, you're always welcome to contact us at <a href="mailto:info@fastaval.dk">info@fastaval.dk</a>.
 </p>
 <p>
     <b>See you at Fastaval <?= $this->con_year ?>!</b>
@@ -65,7 +65,7 @@
         <tbody>
             <tr>
                 <td colspan="3" style="text-align: center; background-color: lightgray; border-top: 1px solid black; border-bottom: 1px solid black;">
-                    <h3>Login<h3>
+                    <h3>Login</h3>
                 </td>
             </tr>
             <tr>
@@ -79,7 +79,7 @@
 
             <tr>
                 <td colspan="3" style="text-align: center; background-color: lightgray; border-top: 1px solid black; border-bottom: 1px solid black;">
-                    <h3>Practical<h3>
+                    <h3>Practical</h3>
                 </td>
             </tr>
             <tr>
@@ -97,7 +97,7 @@
                 </tr>
             <?php endif; ?>
             <tr>
-                <td colspan="2">Postalcode: </td>
+                <td colspan="2">Postal code: </td>
                 <td><?= $this->participant->postnummer ?></td>
             </tr>
             <tr>
@@ -114,7 +114,7 @@
                     <td><?= $this->participant->mobiltlf ?></td>
                 </tr>
                 <tr>
-                    <td colspan="2">SMS-service during Fastaval: </td>
+                    <td colspan="2">SMS service during Fastaval: </td>
                     <td><?= $this->participant->medbringer_mobil === 'ja' ? 'Yes' : 'No' ?></td>
                 </tr>
             <?php endif; ?>
@@ -131,7 +131,7 @@
                 <td>English</td>
             </tr>
             <tr>
-                <td colspan="2">Used name: </td>
+                <td colspan="2">Nickname: </td>
                 <td><?= $this->participant->nickname ?></td>
             </tr>
             <tr>
@@ -164,7 +164,7 @@
             <?php if ($this->participant->isArrangoer()) : ?>
                 <tr>
                     <td colspan="3" style="text-align: center; background-color: lightgray; border-top: 1px solid black; border-bottom: 1px solid black;">
-                        <h3>Organizer, Author or Designer<h3>
+                        <h3>Organizer, Author or Designer</h3>
                     </td>
                 </tr>
                 <?php $author = $this->participant->getCollection('author') ?>
@@ -203,7 +203,7 @@
 
             <tr>
                 <td colspan="3" style="text-align: center; background-color: lightgray; border-top: 1px solid black; border-bottom: 1px solid black;">
-                    <h3>Entrance and sleeping<h3>
+                    <h3>Entrance and sleeping</h3>
                 </td>
             </tr>
             <?php if (!empty($this->entrance['entrance-junior'])) : ?>
@@ -226,7 +226,7 @@
             <?php endforeach; ?>
             <?php if (!empty($this->entrance['sleeping-partout'])) : ?>
                 <tr>
-                    <td colspan="2">Sleeping area (all-days) </td>
+                    <td colspan="2">Sleeping area (all days) </td>
                     <td><?= $this->item_prices['sleeping-partout'] ?> DKK</td>
                 </tr>
             <?php endif; ?>
@@ -280,7 +280,7 @@
                 <?php $food_credits = $this->food_credits; ?>
                 <tr>
                     <td colspan="3" style="text-align: center; background-color: lightgray; border-top: 1px solid black; border-bottom: 1px solid black;">
-                        <h3>Food<h3>
+                        <h3>Food</h3>
                     </td>
                 </tr>
                 <?php if (!$this->participant->financial_struggle) : ?>
@@ -313,7 +313,7 @@
             <?php if (!empty($this->gds)) : ?>
                 <tr>
                     <td colspan="3" style="text-align: center; background-color: lightgray; border-top: 1px solid black; border-bottom: 1px solid black;">
-                        <h3>The Hero Force<h3>
+                        <h3>The Hero Force</h3>
                     </td>
                 </tr>
                 <?php $max_shifts = $this->participant->desired_diy_shifts; ?>
@@ -343,7 +343,7 @@
             <?php if ($this->participant->ready_mandag == 'ja' || $this->participant->ready_tirsdag == 'ja') : ?>
                 <tr>
                     <td colspan="3" style="text-align: center; background-color: lightgray; border-top: 1px solid black; border-bottom: 1px solid black;">
-                        <h3>Preparation<h3>
+                        <h3>Preparation</h3>
                     </td>
                 </tr>
                 <?php if ($this->participant->ready_mandag == 'ja') : ?>
@@ -364,7 +364,7 @@
             <?php if (!empty($this->activities)) : ?>
                 <tr>
                     <td colspan="3" style="text-align: center; background-color: lightgray; border-top: 1px solid black; border-bottom: 1px solid black;">
-                        <h3>Activities<h3>
+                        <h3>Activities</h3>
                     </td>
                 </tr>
                 <?php if ($this->participant->supergm == 'ja') : ?>
@@ -387,7 +387,7 @@
                 <?php endif; ?>
                 <?php if ($this->participant->rules_guide_max > 0) : ?>
                     <tr>
-                        <td colspan="2">Maksimum guide tasks: </td>
+                        <td colspan="2">Maximum guide tasks: </td>
                         <td><?= $this->participant->rules_guide_max ?></td>
                     </tr>
                 <?php endif; ?>
@@ -421,7 +421,7 @@
             <?php if (!empty($this->wear)) : ?>
                 <tr>
                     <td colspan="3" style="text-align: center; background-color: lightgray; border-top: 1px solid black; border-bottom: 1px solid black;">
-                        <h3>Wear<h3>
+                        <h3>Wear</h3>
                     </td>
                 </tr>
                 <?php foreach ($this->wear as $order) : ?>
@@ -437,7 +437,7 @@
 
             <tr>
                 <td colspan="3" style="text-align: center; background-color: lightgray; border-top: 1px solid black; border-bottom: 1px solid black;">
-                    <h3>Extra<h3>
+                    <h3>Extra</h3>
                 </td>
             </tr>
             <?php if (!empty($this->entrance['party1'])) : ?>
@@ -448,13 +448,13 @@
             <?php endif; ?>
             <?php if (!empty($this->entrance['party2'])) : ?>
                 <tr>
-                    <td colspan="2">Party ekstra 2 (placeholder) </td>
+                    <td colspan="2">Party extra 2 (placeholder) </td>
                     <td><?= $this->item_prices['party2'] ?> DKK</td>
                 </tr>
             <?php endif; ?>
             <?php if (!empty($this->entrance['party3'])) : ?>
                 <tr>
-                    <td colspan="2">Party ekstra 3 (placeholder) </td>
+                    <td colspan="2">Party extra 3 (placeholder) </td>
                     <td><?= $this->item_prices['party3'] ?> DKK</td>
                 </tr>
             <?php endif; ?>
@@ -481,7 +481,7 @@
 
             <tr>
                 <td colspan="3" style="text-align: center; background-color: lightgray; border-top: 1px solid black; border-bottom: 1px solid black;">
-                    <h3>Price<h3>
+                    <h3>Price</h3>
                 </td>
             </tr>
             <tr>
@@ -513,7 +513,7 @@
                 <td><?= $this->prices['other-stuff'] ?> DKK</td>
             </tr>
             <tr>
-                <td colspan="2">Ticketfee </td>
+                <td colspan="2">Ticket fee </td>
                 <td><?= $this->prices['fees'] ?> DKK</td>
             </tr>
             <tr>

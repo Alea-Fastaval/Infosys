@@ -208,7 +208,7 @@
                     "type": "checkbox",
                     "text": {
                         "en": "I want to use a different name than my legal name at Fastaval",
-                        "da": "Jeg ønsker at bruge et andet navn end mit juridiske navn på Fastaval"
+                        "da": "Jeg \u00f8nsker at bruge et andet navn end mit juridiske navn p\u00e5 Fastaval"
                     },
                     "infosys_id": "use_nickname",
                     "no_submit": true
@@ -230,14 +230,14 @@
                             "type": "checkbox",
                             "status": "normal",
                             "input": "use_nickname"
-                        }                        
+                        }
                     ]
                 },
                 {
                     "type": "paragraph",
                     "text": {
                         "en": "[b]Select your pronouns:[\/b]",
-                        "da": "[b]Valg af pronomener:[\/b]"
+                        "da": "[b]Angiv dine pronominer:[\/b]"
                     }
                 }
             ]
