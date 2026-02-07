@@ -875,9 +875,9 @@ DROP TABLE IF EXISTS `mad`;
 /*!40101 SET character_set_client =utf8mb4 */;
 CREATE TABLE `mad` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `kategori` varchar(64) NOT NULL,
+  `kategori` varchar(100) NOT NULL,
   `pris` int(11) NOT NULL,
-  `title_en` varchar(64) NOT NULL DEFAULT '',
+  `title_en` varchar(100) NOT NULL DEFAULT '',
   PRIMARY KEY (`id`),
   UNIQUE KEY `kategori` (`kategori`)
 ) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8mb4;
