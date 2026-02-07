@@ -1,330 +1,576 @@
-<?php if(!$this->is_junior) : // Standard Mail?>
-    <h1>Tak for din tilmelding!</h1>
+<?php if (!$this->is_junior) : // Standard Mail
+?>
+  <h1>Tak for din tilmelding!</h1>
+  <p>
+    Din tilmelding er nu registreret med deltagernummer <strong><?= $this->participant->id ?></strong>. Nedenfor er de oplysninger vi har registret på dig.
+  </p>
+<?php else : // Junior Mail
+?>
+  <?php if (!$this->is_junior_reserve) : ?>
+    <h1>Kære <?= $this->participant->getNickname() ?>!</h1>
     <p>
-        Din tilmelding er nu registreret med deltagernummer <strong><?=$this->participant->id?></strong>. Nedenfor er de oplysninger vi har registret på dig.
+      Du er hermed tilmeldt Fastaval Junior - hurra! Vi ser frem til at møde dig på Fastaval lørdag d. 4. april kl. 9.30.
     </p>
-<?php else : // Junior Mail?>
-    <?php if(!$this->is_junior_reserve) : ?>
-        <h1>Kære <?=$this->participant->getNickname()?>!</h1>
-        <p>
-            Du er hermed tilmeldt Fastaval Junior - hurra! Vi ser frem til at møde dig på Fastaval lørdag d. 4. april kl. 9.30.
-        </p>
-        <p>
-            Så snart tilmeldingen lukker, går pingvintanterne Anne, Mette og Jesper i gang med at lave hold. Snarest derefter vil du få en mail fra os
-            med besked om, hvilke hold du er kommet på, og nogle praktiske oplysninger om selve dagen. Mailen kommer fra <a href="mailto:junior@fastaval.dk">junior@fastaval.dk</a>
-             - sørg for at tilføje denne til din adressebog, så mailen ikke havner i spam-folderen.
-        </p>
-        <p>
-            Allerførst skal dine forældre sørge for, at der er betalt for din deltagelse. (se længere nede)
-        </p>
-    <?php else : // Junior Reservekø?>
-        <h1>Kære <?=$this->participant->getNickname()?>! (Reservekø)</h1>
-        <p>
-            Du er hermed tilmeldt Fastaval Juniors reservekø - hvis du kommer med, ser vi frem til at møde dig på Fastaval lørdag d. 4. april kl. 9.30.
-        </p>
-    <?php endif;?>
-        <p>
-            Nederst i denne mail kan I se, hvad du har ønsket at spille. I kan ændre dette frem til <?=$this->end_signup_changes_date?>
-            ved at gå ind på tilmeldingen igen på <a href="https://www.fastaval.dk/26tilmelding/">www.fastaval.dk</a> og hente din tilmelding.
-            Du skal bruge dit deltagernummer som er <strong><?=$this->participant->id?></strong> og denne kode: <strong><?=$this->participant->password?></strong>
-        </p>
-        <p>
-            Hvis du eller dine forældre har nogle spørgsmål til Fastaval generelt, kan I skrive til <a href="mailto:fvinformationen@gmail.com">fvinformationen@gmail.com</a>.
-            Drejer det sig om Junior, så skriv til pingvintanterne på junior@fastaval.dk
-        </p>
-<?php endif;?>
+    <p>
+      Så snart tilmeldingen lukker, går pingvintanterne Anne, Mette og Jesper i gang med at lave hold. Snarest derefter vil du få en mail fra os
+      med besked om, hvilke hold du er kommet på, og nogle praktiske oplysninger om selve dagen. Mailen kommer fra <a href="mailto:junior@fastaval.dk">junior@fastaval.dk</a>
+      - sørg for at tilføje denne til din adressebog, så mailen ikke havner i spam-folderen.
+    </p>
+    <p>
+      Allerførst skal dine forældre sørge for, at der er betalt for din deltagelse. (se længere nede)
+    </p>
+  <?php else : // Junior Reservekø
+  ?>
+    <h1>Kære <?= $this->participant->getNickname() ?>! (Reservekø)</h1>
+    <p>
+      Du er hermed tilmeldt Fastaval Juniors reservekø - hvis du kommer med, ser vi frem til at møde dig på Fastaval lørdag d. 4. april kl. 10-15
+    </p>
+  <?php endif; ?>
+  <p>
+    Nederst i denne mail kan I se, hvad du har ønsket at spille. I kan ændre dette frem til 21/02-2026 ved at gå ind på <a href="https://www.fastaval.dk/26tilmelding/">www.fastaval.dk</a> og hente din tilmelding.
+    Du skal bruge dit deltagernummer som er <strong><?= $this->participant->id ?></strong> og denne kode: <strong><?= $this->participant->password ?></strong>
+  </p>
+  <p>
+    Så snart tilmeldingen lukker, går pingvintanterne Anne, Mette og Jesper i gang med at lave hold. Hvis vi får plads til dig på Fastaval Junior, kontakter vi dine forældre på mail eller evt.
+    telefon i løbet af uge 9 eller 10. Mailen kommer fra <a href="mailto:junior@fastaval.dk">junior@fastaval.dk</a> - sørg for at tilføje denne til din adressebog, så mailen ikke havner i spam-folderen.
+  </p>
+  <p>Det er ikke sikkert, du får en plads og det er ikke sikkert, vi kan opfylde dine ønsker, men vi gør, hvad vi kan! Du hører fra os inden midten af marts, uanset om du får en plads eller ej.</p>
+  <p>Hvis du får plads på Fastaval Junior, vil du få en mail fra os med besked om, hvilke hold du er kommet på, og nogle praktiske oplysninger om selve dagen.</p>
+  <p><strong>Til forældrene:</strong></p>
+  <p>
+    Af praktiske årsager vil vi anbefale, at I venter med at betale for Fastaval Junior, til vi ved, om der er plads. Hvis dit barn er tilmeldt det øvrige Fastaval, skal I naturligvis betale for det indenfor fristen.
+    Hvis I betaler for Junior, og jeres barn ikke får plads, vil I få pengene refunderet (for Junior).
+  </p>
+  <p>Hvis I har spørgsmål om Fastaval Junior, så skriv til pingvintanterne på <a href="mailto:junior@fastaval.dk">junior@fastaval.dk</a></p>
+  <p>Har I spørgsmål til Fastaval generelt, kan I skrive til <a href="mailto:info@fastaval.dk">info@fastaval.dk</a> </p>
+<?php endif; ?>
 <p>
-    Der vil komme mere information om dit fastlagte program, når vi nærmer os Fastaval.
+  Der vil komme mere information om dit fastlagte program, når vi nærmer os Fastaval.
 </p>
 <?php if ($this->participant->betalt_beloeb < $this->prices['total'] || $this->participant->id == 1) : ?>
-<h2>Betaling</h2>
-<p>
+  <h2>Betaling</h2>
+  <p>
     <?php if ($this->participant->betalt_beloeb == 0) : ?>
-Din tilmelding beløber sig til <strong><?=$this->prices['total']?></strong> kr. der skal betales senest d. <?=$this->payment_day?><br/>
-Tilmelder du dig efter <?=$this->payment_day?>, skal du betale samme dag som du tilmelder dig.
+      Din tilmelding beløber sig til <strong><?= $this->prices['total'] ?></strong> kr. der skal betales senest d. <?= $this->payment_day ?><br />
+      Tilmelder du dig efter <?= $this->payment_day ?>, skal du betale samme dag som du tilmelder dig.
 
     <?php else : ?>
-Du har allerede betalt <?=$this->participant->betalt_beloeb?>kr men det ser ud til at du stadig skylder <strong><?= ($this->prices['total'] - $this->participant->betalt_beloeb)?></strong>kr.<br/>
-Du kan betale nu via online-betalingen eller bankoverførsel, eller når du ankommer til Fastaval.
-    <?php endif;?>
-</p>
-<p>
-Vi har fået nyt betalingssystem, der kører gennem Bifrost, derfor vil det være deres navn, der fremgår i betalingsvinduet. 
-Du kan betale via vores nye online betalingssystem ved at følge nedenstående link:<br /><br/>
-<a href="https://www.fastaval.dk/26tilmelding/paynow?hash=<?=$this->participant->participant_hash?>">Betal on-line</a>
-</p>
-<p>
-Ved anden form for betaling skal du HUSKE at anføre dit navn og deltagernummer, som er: <strong><?=$this->participant->id?></strong>
-</p>
-<p>
-Alternativt kan du betale via bankoverførsel - bemærk at der er et gebyr på 20 kr. på bankoverførsel, og at betalingen
-derfor bliver <strong><?=($this->prices['total'] - $this->participant->betalt_beloeb + 20)?></strong> kr. ved denne løsning.<br/>
-Hvis du betaler via overførsel fra en bank udenfor Danmark, skal du være opmærksom på, at banken ofte tager et ekstra gebyr som du selv skal betale.<br/>
-<ul>
+      Du har allerede betalt <?= $this->participant->betalt_beloeb ?>kr men det ser ud til at du stadig skylder <strong><?= ($this->prices['total'] - $this->participant->betalt_beloeb) ?></strong>kr.<br />
+      Du kan betale nu via online-betalingen eller bankoverførsel, eller når du ankommer til Fastaval.
+    <?php endif; ?>
+  </p>
+  <p>
+    Vi har fået nyt betalingssystem, der kører gennem Bifrost, derfor vil det være deres navn, der fremgår i betalingsvinduet.
+    Du kan betale via vores nye online betalingssystem ved at følge nedenstående link:<br /><br />
+    <a href="https://www.fastaval.dk/26tilmelding/paynow?hash=<?= $this->participant->participant_hash ?>">Betal on-line</a> (Betalingen bliver gemt med det samme hos vores leverandør, men der kan gå et par dage før betalingen registreres i vores eget system, da det foregår manuelt lige nu)
+  </p>
+  <p>
+    Ved anden form for betaling skal du HUSKE at anføre dit navn og deltagernummer, som er: <strong><?= $this->participant->id ?></strong>
+  </p>
+  <p>
+    Alternativt kan du betale via bankoverførsel - bemærk at der er et gebyr på 20 kr. på bankoverførsel, og at betalingen
+    derfor bliver <strong><?= ($this->prices['total'] - $this->participant->betalt_beloeb + 20) ?></strong> kr. ved denne løsning.<br />
+    Hvis du betaler via overførsel fra en bank udenfor Danmark, skal du være opmærksom på, at banken ofte tager et ekstra gebyr som du selv skal betale.<br />
+  <ul>
     <li>Ved bankoverførsel til vores bankkonto: Reg.: 9070 / Kontonr.: 1638710893</li>
     <li>Ved indbetaling fra en bank UDENFOR Danmark: BIC VRSPDK22 og IBAN DK1090701638710893 <strong>Alle gebyrer for internationale overførsler er dit ansvar</strong></li>
-    <li>Deadline for indbetaling er her ligeledes <?= $this->payment_day;?></li>
-</ul>
-</p>
-<?php endif;?>
+    <li>Deadline for indbetaling er her ligeledes <?= $this->payment_day; ?></li>
+  </ul>
+  </p>
+<?php endif; ?>
 
 <p>
-<strong>Læg mærke til</strong> at du via tilmeldingen på <a href="https://www.fastaval.dk/26tilmelding/">www.fastaval.dk</a>
-kan loade og ændre din tilmelding, helt frem til <?=$this->end_signup_changes_date?>. Du skal bruge din email og denne kode: <strong><?=$this->participant->password?></strong>
+  <strong>Læg mærke til</strong> at du via tilmeldingen på <a href="https://www.fastaval.dk/26tilmelding/">www.fastaval.dk</a>
+  kan loade og ændre din tilmelding, helt frem til <?= $this->end_signup_changes_date ?>. Du skal bruge din email og denne kode: <strong><?= $this->participant->password ?></strong>
 </p>
 
 <?php if ($this->participant_photo_upload_link) : ?>
-<p>
-Som arrangør/forfatter/designer skal du have et billede på dit navneskilt, for at kunne bruge din arrangørrabat på Fastaval.
-Brug venligst dette link til at <strong>uploade dit billede</strong>:
-<a href="<?= $this->participant_photo_upload_link;?>"><?= $this->participant_photo_upload_link;?></a>
-</p>
-<?php endif;?>
-<p>
-    Hvis du har spørgsmål eller brug for hjælp, kan du altid skrive til <a href=mailto:info@fastaval.dk>info@fastaval.dk</a>
-</p>
-<p>
-<b>Vi ses på Fastaval <?=$this->con_year?>!</b>
-</p>
+  <p>
+    Som arrangør/forfatter/designer skal du have et billede på dit navneskilt, for at kunne bruge din arrangørrabat på Fastaval.
+    Brug venligst dette link til at <strong>uploade dit billede</strong>:
+    <a href="<?= $this->participant_photo_upload_link; ?>"><?= $this->participant_photo_upload_link; ?></a>
+  </p>
+<?php endif; ?>
+<p>Hvis du har spørgsmål eller brug for hjælp, kan du altid skrive til <a href="mailto:info@fastaval.dk">info@fastaval.dk</a></p>
+<?php if ($this->is_junior_reserve) : ?>
+  <p><b>Vi håber, at vi ses på Fastaval <?= $this->con_year ?>!</b></p>
+<?php else : ?>
+  <p><b>Vi ses på Fastaval <?= $this->con_year ?>!</b></p>
+<?php endif; ?>
 
 <div>
-<table style="width: 100%"><tbody>
-<tr><td colspan="3" style="text-align: center; background-color: lightgray; border-top: 1px solid black; border-bottom: 1px solid black;">
-    <h3>Login<h3>
-</td></tr>
-<tr><td colspan="2">Deltagernummer:                         </td><td><?=$this->participant->id?></td></tr>
-<tr><td colspan="2">Kode:                                   </td><td><?=$this->participant->password?></td></tr>
+  <table style="width: 100%">
+    <tbody>
+      <tr>
+        <td colspan="3" style="text-align: center; background-color: lightgray; border-top: 1px solid black; border-bottom: 1px solid black;">
+          <h3>Login</h3>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="2">Deltagernummer: </td>
+        <td><?= $this->participant->id ?></td>
+      </tr>
+      <tr>
+        <td colspan="2">Kode: </td>
+        <td><?= $this->participant->password ?></td>
+      </tr>
 
-<tr><td colspan="3" style="text-align: center; background-color: lightgray; border-top: 1px solid black; border-bottom: 1px solid black;">
-    <h3>Praktisk<h3>
-</td></tr>
-<tr><td colspan="2">Navn:                                   </td><td><?=$this->participant->fornavn?> <?=$this->participant->efternavn?></td></tr>
-<tr><td colspan="2">Adresse:                                </td><td><?=$this->participant->adresse1?></td></tr>
-<?php if ($this->participant->adresse2) : ?>
-<tr><td colspan="2">                                        </td><td><?=$this->participant->adresse2?></td></tr>
-<?php endif;?>
-<tr><td colspan="2">Postnummer:                             </td><td><?=$this->participant->postnummer?></td></tr>
-<tr><td colspan="2">By:                                     </td><td><?=$this->participant->by?></td></tr>
-<tr><td colspan="2">Land:                                   </td><td><?=$this->participant->getCountry('da')?></td></tr>
-<?php if ($this->participant->mobiltlf) : ?>
-<tr><td colspan="2">Mobil:                                  </td><td><?=$this->participant->mobiltlf?></td></tr>
-<tr><td colspan="2">SMS-service under Fastaval:             </td><td><?=$this->participant->medbringer_mobil === 'ja' ? 'Ja' : 'Nej'?></td></tr>
-<?php endif;?>
-<tr><td colspan="2">Fødselsdato:                             </td><td><?=danishMonthNames(date('j. M Y', strtotime($this->participant->birthdate)))?></td></tr>
-<tr><td colspan="2">Email:                                  </td><td><?=$this->participant->email;?></td></tr>
-<tr><td colspan="2">Sprog til kommunikation:                </td><td>Dansk</td></tr>
-<tr><td colspan="2">Kaldenavn:                              </td><td><?=$this->participant->nickname?></td></tr>
-<tr><td colspan="2">Pronomen:                               </td><td><?=$this->participant->getPronoun()?></td></tr>
-<?php if ($this->participant->ungdomsskole) : ?>
-<tr><td colspan="2">Ungdomsskole/gruppe:                    </td><td><?=$this->participant->ungdomsskole?></td></tr>
-<?php endif;?>
-<tr><td colspan="2">Alea medlemskab:                        </td><td><?=!empty($this->entrance['alea-membership']) ? $this->prices['alea']." kr." : 'Nej';?></td></tr>
-<?php if (!empty($this->participant->note->junior_ward)) : ?>
-<tr><td colspan="2">Kontaktperson:</td></tr>
-<?php foreach(explode('\n', $this->participant->note->junior_ward->content) as $contact_line) : ?>
-    <?php $parts = explode(": ", $contact_line, 2); ?>
-<tr><td colspan="2"><?=$parts[0]?>:                         </td><td><?=e($parts[1])?></td></tr>
-<?php endforeach;?>
-<?php endif;?>
+      <tr>
+        <td colspan="3" style="text-align: center; background-color: lightgray; border-top: 1px solid black; border-bottom: 1px solid black;">
+          <h3>Praktisk<h3>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="2">Navn: </td>
+        <td><?= $this->participant->fornavn ?> <?= $this->participant->efternavn ?></td>
+      </tr>
+      <tr>
+        <td colspan="2">Adresse: </td>
+        <td><?= $this->participant->adresse1 ?></td>
+      </tr>
+      <?php if ($this->participant->adresse2) : ?>
+        <tr>
+          <td colspan="2"> </td>
+          <td><?= $this->participant->adresse2 ?></td>
+        </tr>
+      <?php endif; ?>
+      <tr>
+        <td colspan="2">Postnummer: </td>
+        <td><?= $this->participant->postnummer ?></td>
+      </tr>
+      <tr>
+        <td colspan="2">By: </td>
+        <td><?= $this->participant->by ?></td>
+      </tr>
+      <tr>
+        <td colspan="2">Land: </td>
+        <td><?= $this->participant->getCountry('da') ?></td>
+      </tr>
+      <?php if ($this->participant->mobiltlf) : ?>
+        <tr>
+          <td colspan="2">Mobil: </td>
+          <td><?= $this->participant->mobiltlf ?></td>
+        </tr>
+        <tr>
+          <td colspan="2">SMS-service under Fastaval: </td>
+          <td><?= $this->participant->medbringer_mobil === 'ja' ? 'Ja' : 'Nej' ?></td>
+        </tr>
+      <?php endif; ?>
+      <tr>
+        <td colspan="2">Fødselsdato: </td>
+        <td><?= danishMonthNames(date('j. M Y', strtotime($this->participant->birthdate))) ?></td>
+      </tr>
+      <tr>
+        <td colspan="2">Email: </td>
+        <td><?= $this->participant->email; ?></td>
+      </tr>
+      <tr>
+        <td colspan="2">Sprog til kommunikation: </td>
+        <td>Dansk</td>
+      </tr>
+      <tr>
+        <td colspan="2">Kaldenavn: </td>
+        <td><?= $this->participant->nickname ?></td>
+      </tr>
+      <tr>
+        <td colspan="2">Pronomen: </td>
+        <td><?= $this->participant->getPronoun() ?></td>
+      </tr>
+      <?php if ($this->participant->ungdomsskole) : ?>
+        <tr>
+          <td colspan="2">Ungdomsskole/gruppe: </td>
+          <td><?= $this->participant->ungdomsskole ?></td>
+        </tr>
+      <?php endif; ?>
+      <tr>
+        <td colspan="2">Alea medlemskab: </td>
+        <td><?= !empty($this->entrance['alea-membership']) ? $this->prices['alea'] . " kr." : 'Nej'; ?></td>
+      </tr>
+      <?php if (!empty($this->participant->note->junior_ward)) : ?>
+        <tr>
+          <td colspan="2">Kontaktperson:</td>
+        </tr>
+        <?php foreach (explode('\n', $this->participant->note->junior_ward->content) as $contact_line) : ?>
+          <?php $parts = explode(": ", $contact_line, 2); ?>
+          <tr>
+            <td colspan="2"><?= $parts[0] ?>: </td>
+            <td><?= e($parts[1]) ?></td>
+          </tr>
+        <?php endforeach; ?>
+      <?php endif; ?>
 
-<?php if ($this->participant->isArrangoer()) : ?>
-<tr><td colspan="3" style="text-align: center; background-color: lightgray; border-top: 1px solid black; border-bottom: 1px solid black;">
-    <h3>Arrangør, Forfatter eller Designer<h3>
-</td></tr>
-<?php $author = $this->participant->getCollection('author')?>
-<?php if (empty($author)) : ?>
-<tr><td colspan="2">Arrangør:                               </td><td>Ja</td></tr>
-<tr><td colspan="2">Mit arbejdsområde:                      </td><td><?=$this->participant->arbejdsomraade?></td></tr>
-<?php endif;?>
-<?php if (in_array('role', $author)) : ?>
-<tr><td colspan="2">Forfatter:                              </td><td>Ja</td></tr>
-<tr><td colspan="2">Scenarie:                               </td><td><?=$this->participant->getGame('da')?></td></tr>
-<?php endif;?>
-<?php if (in_array('board', $author)) : ?>
-<tr><td colspan="2">Designer:                               </td><td>Ja</td></tr>
-<tr><td colspan="2">Brætspil:                               </td><td><?=$this->participant->getGame('da')?></td></tr>
-<?php endif;?>
-<?php endif; // isArrangoer()?>
+      <?php if ($this->participant->isArrangoer()) : ?>
+        <tr>
+          <td colspan="3" style="text-align: center; background-color: lightgray; border-top: 1px solid black; border-bottom: 1px solid black;">
+            <h3>Arrangør, Forfatter eller Designer<h3>
+          </td>
+        </tr>
+        <?php $author = $this->participant->getCollection('author') ?>
+        <?php if (empty($author)) : ?>
+          <tr>
+            <td colspan="2">Arrangør: </td>
+            <td>Ja</td>
+          </tr>
+          <tr>
+            <td colspan="2">Mit arbejdsområde: </td>
+            <td><?= $this->participant->arbejdsomraade ?></td>
+          </tr>
+        <?php endif; ?>
+        <?php if (in_array('role', $author)) : ?>
+          <tr>
+            <td colspan="2">Forfatter: </td>
+            <td>Ja</td>
+          </tr>
+          <tr>
+            <td colspan="2">Scenarie: </td>
+            <td><?= $this->participant->getGame('da') ?></td>
+          </tr>
+        <?php endif; ?>
+        <?php if (in_array('board', $author)) : ?>
+          <tr>
+            <td colspan="2">Designer: </td>
+            <td>Ja</td>
+          </tr>
+          <tr>
+            <td colspan="2">Brætspil: </td>
+            <td><?= $this->participant->getGame('da') ?></td>
+          </tr>
+        <?php endif; ?>
+      <?php endif; // isArrangoer()
+      ?>
 
-<tr><td colspan="3" style="text-align: center; background-color: lightgray; border-top: 1px solid black; border-bottom: 1px solid black;">
-    <h3>Entré og overnatning<h3>
-</td></tr>
-<?php if (!empty($this->entrance['entrance-junior'])) : ?>
-<tr><td colspan="2">Fastaval Junior                         </td><td><?=$this->item_prices['entrance-junior']?> kr.</td></tr>
-<?php endif;?>
-<?php if ($this->is_junior_reserve) : ?>
-<tr><td colspan="2">Fastaval Junior Reservekø               </td><td>0 kr.</td></tr>
-<?php endif;?>
-<?php if (!empty($this->entrance['entrance-partout'])) : ?>
-<tr><td colspan="2">Partout indgang (alle dage)             </td><td><?=$this->item_prices['entrance-partout']?> kr.</td></tr>
-<?php endif;?>
-<?php if (isset($this->entrance['entrance-day'])) foreach($this->entrance['entrance-day'] as $date => $value) : ?>
-<tr><td colspan="2">Indgang <?=getWeekDay(date('N', $date))?>  <?=date('j/n', $date)?> </td><td><?=$this->item_prices['entrance-single']?> kr.</td></tr>
-<?php endforeach;?>
-<?php if (!empty($this->entrance['sleeping-partout'])) : ?>
-<tr><td colspan="2">Overnatning (alle dage)                 </td><td><?=$this->item_prices['sleeping-partout']?> kr.</td></tr>
-<?php endif;?>
-<?php if (isset($this->entrance['sleeping-day'])) foreach($this->entrance['sleeping-day'] as $date => $value) : ?>
-<tr><td colspan="2">Overnatning <?=getWeekDay(date('N', $date))?> <?=date('j/n', $date)?> </td><td><?=$this->item_prices['sleeping-single']?> kr.</td></tr>
-<?php endforeach;?>
-<?php $sleeping_area = $this->participant->getCollection('sleeping_area')?>
-<?php if (in_array('regular', $sleeping_area)) : ?>
-<tr><td colspan="2">Almindelig Sovesal:                     </td><td>Ja</td></tr>
-<?php endif;?>
-<?php if (!empty($this->entrance['Leje af madras'])) : ?>
-<tr><td colspan="2">Leje af madras                          </td><td><?=$this->item_prices['mattres']?> kr.</td></tr>
-<?php endif;?>
-<?php if (in_array('sober', $sleeping_area)) : ?>
-<tr><td colspan="2">Stille- og ædrusovesal:                 </td><td>Ja</td></tr>
-<?php endif;?>
-<?php if (in_array('youth', $sleeping_area)) : ?>
-<tr><td colspan="2">Ungdomssovesal:                         </td><td>Ja</td></tr>
-<?php endif;?>
-<?php if (in_array('organizer', $sleeping_area)) : ?>
-<tr><td colspan="2">Arrangørsovesalen:                      </td><td>Ja</td></tr>
-<?php endif;?>
-<?php if (!empty($this->participant->note->sleeping)) : ?>
-<tr><td colspan="2">Bemærkninge til overnatning:</td></tr>
-<tr><td colspan="2"><?=e($this->participant->note->sleeping->content)?></td></tr>
-<?php endif;?>
+      <tr>
+        <td colspan="3" style="text-align: center; background-color: lightgray; border-top: 1px solid black; border-bottom: 1px solid black;">
+          <h3>Entré og overnatning<h3>
+        </td>
+      </tr>
+      <?php if (!empty($this->entrance['entrance-junior'])) : ?>
+        <tr>
+          <td colspan="2">Fastaval Junior </td>
+          <td><?= $this->item_prices['entrance-junior'] ?> kr.</td>
+        </tr>
+      <?php endif; ?>
+      <?php if ($this->is_junior_reserve) : ?>
+        <tr>
+          <td colspan="2">Fastaval Junior Reservekø </td>
+          <td>0 kr.</td>
+        </tr>
+      <?php endif; ?>
+      <?php if (!empty($this->entrance['entrance-partout'])) : ?>
+        <tr>
+          <td colspan="2">Partout indgang (alle dage) </td>
+          <td><?= $this->item_prices['entrance-partout'] ?> kr.</td>
+        </tr>
+      <?php endif; ?>
+      <?php if (isset($this->entrance['entrance-day'])) foreach ($this->entrance['entrance-day'] as $date => $value) : ?>
+        <tr>
+          <td colspan="2">Indgang <?= getWeekDay(date('N', $date)) ?> <?= date('j/n', $date) ?> </td>
+          <td><?= $this->item_prices['entrance-single'] ?> kr.</td>
+        </tr>
+      <?php endforeach; ?>
+      <?php if (!empty($this->entrance['sleeping-partout'])) : ?>
+        <tr>
+          <td colspan="2">Overnatning (alle dage) </td>
+          <td><?= $this->item_prices['sleeping-partout'] ?> kr.</td>
+        </tr>
+      <?php endif; ?>
+      <?php if (isset($this->entrance['sleeping-day'])) foreach ($this->entrance['sleeping-day'] as $date => $value) : ?>
+        <tr>
+          <td colspan="2">Overnatning <?= getWeekDay(date('N', $date)) ?> <?= date('j/n', $date) ?> </td>
+          <td><?= $this->item_prices['sleeping-single'] ?> kr.</td>
+        </tr>
+      <?php endforeach; ?>
+      <?php $sleeping_area = $this->participant->getCollection('sleeping_area') ?>
+      <?php if (in_array('regular', $sleeping_area)) : ?>
+        <tr>
+          <td colspan="2">Almindelig Sovesal: </td>
+          <td>Ja</td>
+        </tr>
+      <?php endif; ?>
+      <?php if (!empty($this->entrance['Leje af madras'])) : ?>
+        <tr>
+          <td colspan="2">Leje af madras </td>
+          <td><?= $this->item_prices['mattres'] ?> kr.</td>
+        </tr>
+      <?php endif; ?>
+      <?php if (in_array('sober', $sleeping_area)) : ?>
+        <tr>
+          <td colspan="2">Stille- og ædrusovesal: </td>
+          <td>Ja</td>
+        </tr>
+      <?php endif; ?>
+      <?php if (in_array('youth', $sleeping_area)) : ?>
+        <tr>
+          <td colspan="2">Ungdomssovesal: </td>
+          <td>Ja</td>
+        </tr>
+      <?php endif; ?>
+      <?php if (in_array('organizer', $sleeping_area)) : ?>
+        <tr>
+          <td colspan="2">Arrangørsovesalen: </td>
+          <td>Ja</td>
+        </tr>
+      <?php endif; ?>
+      <?php if (!empty($this->participant->note->sleeping)) : ?>
+        <tr>
+          <td colspan="2">Bemærkninge til overnatning:</td>
+        </tr>
+        <tr>
+          <td colspan="2"><?= e($this->participant->note->sleeping->content) ?></td>
+        </tr>
+      <?php endif; ?>
 
-<?php if (!empty($this->food)) : ?>
-<?php $food_credits = $this->food_credits; ?>
-<tr><td colspan="3" style="text-align: center; background-color: lightgray; border-top: 1px solid black; border-bottom: 1px solid black;">
-    <h3>Mad<h3>
-</td></tr>
-<?php if (!$this->participant->financial_struggle) : ?>
-<tr><td colspan="2">Økonomisk støtte:                       </td><td>Ja</td></tr>
-<?php endif;?>
-<?php foreach ($this->food as $food) : 
-    $foodcat = $food->getMad();
-    $food_price = $foodcat->pris;
-    if ($food_price > 0) {
-        if ($food->isBreakfast() && $food_credits['breakfast'] > 0) {
-            $food_credits['breakfast']--;
-            $food_price = 0;
-        } elseif ($food->isDinner() && $food_credits['dinner'] > 0) {
-            $food_credits['dinner']--;
-            $food_price = 0;
-        }
-    }
-?>
-<tr><td colspan="2"><?=$foodcat->kategori;?> - <?=getWeekDay(date('N', strtotime($food->dato)))?> </td><td><?=$food_price?> kr.</td></tr>
-<?php endforeach;?>
-<?php endif; // Food?>
+      <?php if (!empty($this->food)) : ?>
+        <?php $food_credits = $this->food_credits; ?>
+        <tr>
+          <td colspan="3" style="text-align: center; background-color: lightgray; border-top: 1px solid black; border-bottom: 1px solid black;">
+            <h3>Mad<h3>
+          </td>
+        </tr>
+        <?php if (!$this->participant->financial_struggle) : ?>
+          <tr>
+            <td colspan="2">Økonomisk støtte: </td>
+            <td>Ja</td>
+          </tr>
+        <?php endif; ?>
+        <?php foreach ($this->food as $food) :
+          $foodcat = $food->getMad();
+          $food_price = $foodcat->pris;
+          if ($food_price > 0) {
+            if ($food->isBreakfast() && $food_credits['breakfast'] > 0) {
+              $food_credits['breakfast']--;
+              $food_price = 0;
+            } elseif ($food->isDinner() && $food_credits['dinner'] > 0) {
+              $food_credits['dinner']--;
+              $food_price = 0;
+            }
+          }
+        ?>
+          <tr>
+            <td colspan="2"><?= $foodcat->kategori; ?> - <?= getWeekDay(date('N', strtotime($food->dato))) ?> </td>
+            <td><?= $food_price ?> kr.</td>
+          </tr>
+        <?php endforeach; ?>
+      <?php endif; // Food
+      ?>
 
-<?php if (!empty($this->gds)) : ?>
-<tr><td colspan="3" style="text-align: center; background-color: lightgray; border-top: 1px solid black; border-bottom: 1px solid black;">
-    <h3>Heltestyrken<h3>
-</td></tr>
-<?php $max_shifts = $this->participant->desired_diy_shifts; ?>
-<tr><td colspan="2">Maks antal opgaver:                     </td><td><?=$max_shifts == 0 ? 'Ingen grænse' : $max_shifts?></td></tr>
-<tr><td colspan="2">Tilmeldte opgaver:</td></tr>
-<?php foreach ($this->gds as $gds_signup) : ?>
-<tr><td colspan="2"><?=getWeekDay(date('N', strtotime($gds_signup->getDate())))?> <?=$gds_signup->getTextDescription('da')?></td></tr>
-<?php endforeach;?>
-<?php if (!empty($this->participant->note->gds)) : ?>
-<tr><td colspan="2">Bemærkninger til Helteopgaver:</td></tr>
-<tr><td colspan="2"><?=e($this->participant->note->gds->content)?></td></tr>
-<?php endif;?>
-<?php endif; // GDS?>
+      <?php if (!empty($this->gds)) : ?>
+        <tr>
+          <td colspan="3" style="text-align: center; background-color: lightgray; border-top: 1px solid black; border-bottom: 1px solid black;">
+            <h3>Heltestyrken<h3>
+          </td>
+        </tr>
+        <?php $max_shifts = $this->participant->desired_diy_shifts; ?>
+        <tr>
+          <td colspan="2">Maks antal opgaver: </td>
+          <td><?= $max_shifts == 0 ? 'Ingen grænse' : $max_shifts ?></td>
+        </tr>
+        <tr>
+          <td colspan="2">Tilmeldte opgaver:</td>
+        </tr>
+        <?php foreach ($this->gds as $gds_signup) : ?>
+          <tr>
+            <td colspan="2"><?= getWeekDay(date('N', strtotime($gds_signup->getDate()))) ?> <?= $gds_signup->getTextDescription('da') ?></td>
+          </tr>
+        <?php endforeach; ?>
+        <?php if (!empty($this->participant->note->gds)) : ?>
+          <tr>
+            <td colspan="2">Bemærkninger til Helteopgaver:</td>
+          </tr>
+          <tr>
+            <td colspan="2"><?= e($this->participant->note->gds->content) ?></td>
+          </tr>
+        <?php endif; ?>
+      <?php endif; // GDS
+      ?>
 
-<?php if ($this->participant->ready_mandag == 'ja' || $this->participant->ready_tirsdag == 'ja') : ?>
-<tr><td colspan="3" style="text-align: center; background-color: lightgray; border-top: 1px solid black; border-bottom: 1px solid black;">
-    <h3>Opsætning<h3>
-</td></tr>
-<?php if ($this->participant->ready_mandag == 'ja') : ?>
-<tr><td colspan="2">Opsætning Mandag:                       </td><td>Ja</td></tr>
-<?php endif;?>
-<?php if ($this->participant->ready_tirsdag == 'ja') : ?>
-<tr><td colspan="2">Opsætning Tirsdag:                      </td><td>Ja</td></tr>
-<?php endif;?>
-<?php endif; // Ready?>
+      <?php if ($this->participant->ready_mandag == 'ja' || $this->participant->ready_tirsdag == 'ja') : ?>
+        <tr>
+          <td colspan="3" style="text-align: center; background-color: lightgray; border-top: 1px solid black; border-bottom: 1px solid black;">
+            <h3>Opsætning<h3>
+          </td>
+        </tr>
+        <?php if ($this->participant->ready_mandag == 'ja') : ?>
+          <tr>
+            <td colspan="2">Opsætning Mandag: </td>
+            <td>Ja</td>
+          </tr>
+        <?php endif; ?>
+        <?php if ($this->participant->ready_tirsdag == 'ja') : ?>
+          <tr>
+            <td colspan="2">Opsætning Tirsdag: </td>
+            <td>Ja</td>
+          </tr>
+        <?php endif; ?>
+      <?php endif; // Ready
+      ?>
 
-<?php if (!empty($this->activities)) : ?>
-<tr><td colspan="3" style="text-align: center; background-color: lightgray; border-top: 1px solid black; border-bottom: 1px solid black;">
-    <h3>Aktiviteter<h3>
-</td></tr>
-<?php if ($this->participant->supergm == 'ja') : ?>
-<tr><td colspan="2">Super-spilleder:                        </td><td>Ja</td></tr>
-<?php endif;?>
-<?php if ($this->participant->gm_max > 0) : ?>
-<tr><td colspan="2">Maks spilleder opgaver:                 </td><td><?=$this->participant->gm_max?></td></tr>
-<?php endif;?>
-<?php if ($this->participant->super_rules_guide == 'ja') : ?>
-<tr><td colspan="2">Super-regelformidler:                   </td><td>Ja</td></tr>
-<?php endif;?>
-<?php if ($this->participant->rules_guide_max > 0) : ?>
-<tr><td colspan="2">Maks regeformidler opgaver:             </td><td><?=$this->participant->rules_guide_max?></td></tr>
-<?php endif;?>
-<?php 
-    $sprog = $this->participant->getCollection('sprog');
-    foreach($sprog as &$sp) $sp = ucfirst($sp);
-?>
-<tr><td colspan="2">Sprog jeg vil spille på:                </td><td><?=implode(", ", $sprog)?></td></tr>
-<?php $max_games = $this->participant->desired_activities; ?>
-<tr><td colspan="2">Maks antal spil:                        </td><td><?=$max_games == 0 ? 'Ingen grænse' : $max_games?></td></tr>
-<?php foreach ($this->activities as $activity_signup) : ?>
-    <?php $activity = $activity_signup->getActivity();
-        $schedule = $activity_signup->getAfvikling();?>
-<tr>
-    <td><?= $activity->navn?></td>
-    <td><?=danishDayNames(date('l H:i', strtotime($schedule->start)))?></td>
-    <td><?= $activity_signup->tilmeldingstype === 'spiller' ? $activity_signup->prioritet . '. prioritet' : 'Spilleder'?></td>
-</tr>
-    <?php endforeach;?>
-<?php endif; // Activites?>
+      <?php if (!empty($this->activities)) : ?>
+        <tr>
+          <td colspan="3" style="text-align: center; background-color: lightgray; border-top: 1px solid black; border-bottom: 1px solid black;">
+            <h3>Aktiviteter<h3>
+          </td>
+        </tr>
+        <?php if ($this->participant->supergm == 'ja') : ?>
+          <tr>
+            <td colspan="2">Super-spilleder: </td>
+            <td>Ja</td>
+          </tr>
+        <?php endif; ?>
+        <?php if ($this->participant->gm_max > 0) : ?>
+          <tr>
+            <td colspan="2">Maks spilleder opgaver: </td>
+            <td><?= $this->participant->gm_max ?></td>
+          </tr>
+        <?php endif; ?>
+        <?php if ($this->participant->super_rules_guide == 'ja') : ?>
+          <tr>
+            <td colspan="2">Super-regelformidler: </td>
+            <td>Ja</td>
+          </tr>
+        <?php endif; ?>
+        <?php if ($this->participant->rules_guide_max > 0) : ?>
+          <tr>
+            <td colspan="2">Maks regeformidler opgaver: </td>
+            <td><?= $this->participant->rules_guide_max ?></td>
+          </tr>
+        <?php endif; ?>
+        <?php
+        $sprog = $this->participant->getCollection('sprog');
+        foreach ($sprog as &$sp) $sp = ucfirst($sp);
+        ?>
+        <tr>
+          <td colspan="2">Sprog jeg vil spille på: </td>
+          <td><?= implode(", ", $sprog) ?></td>
+        </tr>
+        <?php $max_games = $this->participant->desired_activities; ?>
+        <tr>
+          <td colspan="2">Maks antal spil: </td>
+          <td><?= $max_games == 0 ? 'Ingen grænse' : $max_games ?></td>
+        </tr>
+        <?php foreach ($this->activities as $activity_signup) : ?>
+          <?php $activity = $activity_signup->getActivity();
+          $schedule = $activity_signup->getAfvikling(); ?>
+          <tr>
+            <td><?= $activity->navn ?></td>
+            <td><?= danishDayNames(date('l H:i', strtotime($schedule->start))) ?></td>
+            <td><?= $activity_signup->tilmeldingstype === 'spiller' ? $activity_signup->prioritet . '. prioritet' : 'Spilleder' ?></td>
+          </tr>
+        <?php endforeach; ?>
+      <?php endif; // Activites
+      ?>
 
 
-<?php if (!empty($this->wear)) : ?>
-<tr><td colspan="3" style="text-align: center; background-color: lightgray; border-top: 1px solid black; border-bottom: 1px solid black;">
-    <h3>Wear<h3>
-</td></tr>
-<?php foreach ($this->wear as $order) : ?>
-    <?php $price = $order->getWearpris();
-      $name  = $order->getWearName();?>
-<tr><td colspan="2"><?=$order->antal?> <?=$name?></td><td><?=$price->pris?> kr.</td></tr>
-<?php endforeach;?>
-<?php endif; // Wear?>
+      <?php if (!empty($this->wear)) : ?>
+        <tr>
+          <td colspan="3" style="text-align: center; background-color: lightgray; border-top: 1px solid black; border-bottom: 1px solid black;">
+            <h3>Wear<h3>
+          </td>
+        </tr>
+        <?php foreach ($this->wear as $order) : ?>
+          <?php $price = $order->getWearpris();
+          $name  = $order->getWearName(); ?>
+          <tr>
+            <td colspan="2"><?= $order->antal ?> <?= $name ?></td>
+            <td><?= $price->pris ?> kr.</td>
+          </tr>
+        <?php endforeach; ?>
+      <?php endif; // Wear
+      ?>
 
-<tr><td colspan="3" style="text-align: center; background-color: lightgray; border-top: 1px solid black; border-bottom: 1px solid black;">
-    <h3>Ekstra<h3>
-</td></tr>
-<?php if (!empty($this->entrance['party1'])) : ?>
-<tr><td colspan="2">Mousserende vin                         </td><td><?=$this->item_prices['party1']?> kr.</td></tr>
-<?php endif;?>
-<?php if (!empty($this->entrance['party2'])) : ?>
-<tr><td colspan="2">Fest ekstra 2 (placeholder)             </td><td><?=$this->item_prices['party2']?> kr.</td></tr>
-<?php endif;?>
-<?php if (!empty($this->entrance['party3'])) : ?>
-<tr><td colspan="2">Fest ekstra 3 (placeholder)             </td><td><?=$this->item_prices['party3']?> kr.</td></tr>
-<?php endif;?>
-<?php if (isset($this->rig_onkel)) : ?>
-<tr><td colspan="2">Ekstra støtte:                          </td><td><?=$this->rig_onkel?> kr.</td></tr>
-<?php endif;?>
-<?php if (isset($this->hemmelig_onkel)) : ?>
-<tr><td colspan="2">Hemmelig støtte:                        </td><td><?=$this->hemmelig_onkel?> kr.</td></tr>
-<?php endif;?>
-<?php if (!empty($this->participant->note->comment)) : ?>
-<tr><td colspan="2">Kommentar:</td></tr>
-<tr><td colspan="2"><?=e($this->participant->note->comment->content)?></td></tr>
-<?php endif;?>
-<?php if (!empty($this->participant->note->junior_comment)) : ?>
-<tr><td colspan="2">Junior kommentar:</td></tr>
-<tr><td colspan="2"><?=e($this->participant->note->junior_comment->content)?></td></tr>
-<?php endif;?>
+      <tr>
+        <td colspan="3" style="text-align: center; background-color: lightgray; border-top: 1px solid black; border-bottom: 1px solid black;">
+          <h3>Ekstra<h3>
+        </td>
+      </tr>
+      <?php if (!empty($this->entrance['party1'])) : ?>
+        <tr>
+          <td colspan="2">Mousserende vin </td>
+          <td><?= $this->item_prices['party1'] ?> kr.</td>
+        </tr>
+      <?php endif; ?>
+      <?php if (!empty($this->entrance['party2'])) : ?>
+        <tr>
+          <td colspan="2">Fest ekstra 2 (placeholder) </td>
+          <td><?= $this->item_prices['party2'] ?> kr.</td>
+        </tr>
+      <?php endif; ?>
+      <?php if (!empty($this->entrance['party3'])) : ?>
+        <tr>
+          <td colspan="2">Fest ekstra 3 (placeholder) </td>
+          <td><?= $this->item_prices['party3'] ?> kr.</td>
+        </tr>
+      <?php endif; ?>
+      <?php if (isset($this->rig_onkel)) : ?>
+        <tr>
+          <td colspan="2">Ekstra støtte: </td>
+          <td><?= $this->rig_onkel ?> kr.</td>
+        </tr>
+      <?php endif; ?>
+      <?php if (isset($this->hemmelig_onkel)) : ?>
+        <tr>
+          <td colspan="2">Hemmelig støtte: </td>
+          <td><?= $this->hemmelig_onkel ?> kr.</td>
+        </tr>
+      <?php endif; ?>
+      <?php if (!empty($this->participant->note->comment)) : ?>
+        <tr>
+          <td colspan="2">Kommentar:</td>
+        </tr>
+        <tr>
+          <td colspan="2"><?= e($this->participant->note->comment->content) ?></td>
+        </tr>
+      <?php endif; ?>
+      <?php if (!empty($this->participant->note->junior_comment)) : ?>
+        <tr>
+          <td colspan="2">Junior kommentar:</td>
+        </tr>
+        <tr>
+          <td colspan="2"><?= e($this->participant->note->junior_comment->content) ?></td>
+        </tr>
+      <?php endif; ?>
 
-<tr><td colspan="3" style="text-align: center; background-color: lightgray; border-top: 1px solid black; border-bottom: 1px solid black;">
-    <h3>Pris<h3>
-</td></tr>
-<tr><td colspan="2">Entré                                  </td><td><?= $this->prices['entrance']?> kr.</td></tr>
-<tr><td colspan="2">Overnatning                            </td><td><?= $this->prices['sleeping']?> kr.</td></tr>
-<tr><td colspan="2">Alea indmeldelse                       </td><td><?= $this->prices['alea']?> kr.</td></tr>
-<tr><td colspan="2">Mad &amp; fest                         </td><td><?= $this->prices['food']?> kr.</td></tr>
-<tr><td colspan="2">Aktiviteter                            </td><td><?= $this->prices['activities']?> kr.</td></tr>
-<tr><td colspan="2">Wear                                   </td><td><?= $this->prices['wear']?> kr.</td></tr>
-<tr><td colspan="2">Andet                                  </td><td><?= $this->prices['other-stuff']?> kr.</td></tr>
-<tr><td colspan="2">Billetgebyr                            </td><td><?= $this->prices['fees']?> kr.</td></tr>
-<tr><td colspan="2">I alt                                  </td><td><?= $this->prices['total']?> kr.</td></tr>
-</tbody></table>
+      <tr>
+        <td colspan="3" style="text-align: center; background-color: lightgray; border-top: 1px solid black; border-bottom: 1px solid black;">
+          <h3>Pris<h3>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="2">Entré </td>
+        <td><?= $this->prices['entrance'] ?> kr.</td>
+      </tr>
+      <tr>
+        <td colspan="2">Overnatning </td>
+        <td><?= $this->prices['sleeping'] ?> kr.</td>
+      </tr>
+      <tr>
+        <td colspan="2">Alea indmeldelse </td>
+        <td><?= $this->prices['alea'] ?> kr.</td>
+      </tr>
+      <tr>
+        <td colspan="2">Mad &amp; fest </td>
+        <td><?= $this->prices['food'] ?> kr.</td>
+      </tr>
+      <tr>
+        <td colspan="2">Aktiviteter </td>
+        <td><?= $this->prices['activities'] ?> kr.</td>
+      </tr>
+      <tr>
+        <td colspan="2">Wear </td>
+        <td><?= $this->prices['wear'] ?> kr.</td>
+      </tr>
+      <tr>
+        <td colspan="2">Andet </td>
+        <td><?= $this->prices['other-stuff'] ?> kr.</td>
+      </tr>
+      <tr>
+        <td colspan="2">Billetgebyr </td>
+        <td><?= $this->prices['fees'] ?> kr.</td>
+      </tr>
+      <tr>
+        <td colspan="2">I alt </td>
+        <td><?= $this->prices['total'] ?> kr.</td>
+      </tr>
+    </tbody>
+  </table>
 </div>
