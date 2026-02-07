@@ -241,6 +241,7 @@ class SignupApiModel extends Model {
         'en' => $activity->title_en
       ];
       $activity_info->max_signups = $activity->max_signups;
+      $activity_info->max_players = $activity->max_deltagere_per_hold;
 
       $result->activities[$activity->id] = $activity_info;
     }

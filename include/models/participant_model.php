@@ -2390,11 +2390,10 @@ SET participant_id = ?, amount = ?, cost = ?, fees = ?, timestamp = NOW()
      * @param Page      $page        Output object instance
      *
      * @access public
-     * @return Deltagere
      */
     public function setupPaymentReminderEmail(Deltagere $participant, Page $page)
     {
-        $pay_by_time  = strtotime($this->config->get('con.signupend'));
+        $pay_by_time  = strtotime($this->config->get('con.paybyday'));
         $signup_time = strtotime($participant->signed_up) + 86400;
 
         $paytime = $pay_by_time > $signup_time ? $pay_by_time : $signup_time;
@@ -2403,14 +2402,10 @@ SET participant_id = ?, amount = ?, cost = ?, fees = ?, timestamp = NOW()
             $paytime = time() + 86400;
         }
 
-        $api = $this->factory('Api');
-
         $page->participant = $participant;
         $page->payment_remainder = $participant->calcSignupTotal() - $participant->betalt_beloeb;
         $page->payment_day = date('d/m-Y', $paytime);
         $page->payment_day_en = date('M d, Y', $paytime);
-
-        return $participant;
     }
 
     /**

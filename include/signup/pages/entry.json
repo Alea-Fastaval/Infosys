@@ -319,8 +319,8 @@
                 {
                     "type": "paragraph",
                     "text": {
-                        "en": "[b]quiet and sober dormitory[\/b]\nThis year there will be a sober dormitory for people who want to stay sober, quiet, and prefer others to do the same. The quiet\/sober dormitories are located at Mariagerfjord Gymnasium, where you will share a classroom with up to 9 other people.\u00a0",
-                        "da": "[b]Stille- og \u00e6drusovesal[\/b]\nI \u00e5r vil der v\u00e6re en s\u00e6rlig sovesal for folk, der \u00f8nsker at holde sig \u00e6dru og stille og \u00f8nsker, at andre g\u00f8r det samme. Stille\/\u00e6dru sovesalene ligger p\u00e5 Mariagerfjord Gymnasium, hvor du vil dele et klassev\u00e6relse med op til 9 andre deltagere."
+                        "en": "[b]quiet and sober dormitory[\/b]\nThis year there will be a sober dormitory for people who want to stay sober, quiet, and prefer others to do the same. The quiet\/sober dormitories are located at Mariagerfjord Gymnasium, where you will share a classroom with up to 19 other people.\u00a0",
+                        "da": "[b]Stille- og \u00e6drusovesal[\/b]\nI \u00e5r vil der v\u00e6re en s\u00e6rlig sovesal for folk, der \u00f8nsker at holde sig \u00e6dru og stille og \u00f8nsker, at andre g\u00f8r det samme. Stille\/\u00e6dru sovesalene ligger p\u00e5 Mariagerfjord Gymnasium, hvor du vil dele et klassev\u00e6relse med op til 19 andre deltagere."
                     }
                 },
                 {
@@ -399,15 +399,15 @@
                 {
                     "type": "paragraph",
                     "text": {
-                        "en": "[b]Fastaval Family[\/b]\nIf you are visiting Fastaval with children below 15 years old you can sleep at \u00d8sterskov Efterskole. This is [b]not[\/b] a children's dorm, and it is required that all children have an accompanying adult with them. Children sleeping in at \u00d8sterskov Efterskole should be old enough to keep quiet during the night, and show consideration to other sleepers, especially regarding noise and light.",
-                        "da": "[b]Familie p\u00e5 Fastaval[\/b]\nHvis du er p\u00e5 Fastaval med b\u00f8rn under 15 \u00e5r, kan I sove sammen p\u00e5 \u00d8sterskov Efterskole. \u00d8sterskov Efterskole er [b]ikke[\/b] en b\u00f8rnesovesal, og det er et krav, at alle b\u00f8rn har en ledsagende voksen med dem. B\u00f8rn, der sover p\u00e5 \u00d8sterskov Efterskole, skal v\u00e6re gamle nok til at v\u00e6re rolige natten igennem, og tage hensyn til andre sovende deltagere, is\u00e6r hvad ang\u00e5r larm og lys."
+                        "en": "[b]Fastaval Family[\/b]\nIf you are attending Fastaval with children under the age of 15, you can stay together at \u00d8sterskov Efterskole. \u00d8sterskov Efterskole is [b]not[\/b] a children's dormitory, and all children must be accompanied by an adult. Children sleeping at \u00d8sterskov Efterskole must be old enough to be quiet throughout the night and to be considerate of other sleeping participants, especially with regard to noise and light.\n\nThere are 4-person rooms, with each family getting one room. There are 18 rooms in total, one of which is for those responsible for the location.\n\nThere is also the option of participating in communal breakfast and dinner for families with children.\n\n\n\u00a0The final room allocation will take place immediately after February 21, when the families who have been allocated rooms will receive an email.\n\n\n\u00a0Please write in the Comments section the names of the parents and children who will be sharing a room at Fastaval Family.",
+                        "da": "[b]Fastaval Family[\/b]\nHvis du er p\u00e5 Fastaval med b\u00f8rn under 15 \u00e5r, kan I sove sammen p\u00e5 \u00d8sterskov Efterskole. \u00d8sterskov Efterskole er [b]ikke[\/b] en b\u00f8rnesovesal, og det er et krav, at alle b\u00f8rn har en ledsagende voksen med dem. B\u00f8rn, der sover p\u00e5 \u00d8sterskov Efterskole, skal v\u00e6re gamle nok til at v\u00e6re rolige natten igennem, og tage hensyn til andre sovende deltagere, is\u00e6r hvad ang\u00e5r larm og lys.\nDet er 4 personers v\u00e6relser hvor hver familen f\u00e5r et v\u00e6relser. Der er 18 v\u00e6relser i alt, hvor af det ene er til dem, der har ansvaret for den lokation.\nDer er ogs\u00e5 muligheden for at deltage i f\u00e6lles morgen mad + aftensmad for b\u00f8rnefamilier\n\nDen endelige v\u00e6relses tildeling sker umiddelbart efter d. 21\/2, hvor de familier som har f\u00e5et tildelt v\u00e6relser vil modtage en besk\u00e6ftigelses mail.\n\nSkriv gerne i Bem\u00e6rkninger, navne for for\u00e6ldre og b\u00f8rn som skal dele v\u00e6relse p\u00e5 Fastaval Family"
                     }
                 },
                 {
                     "type": "checkbox",
                     "text": {
                         "en": "I would like a spot in the family dormitory",
-                        "da": "Jeg vil gerne have en plads i familiesovesalen"
+                        "da": "Jeg vil gerne have en plads p\u00e5 Fastaval Family"
                     },
                     "infosys_id": "sleeping_area:family",
                     "display_logic": [

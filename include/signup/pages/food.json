@@ -39,8 +39,8 @@
                 {
                     "type": "paragraph",
                     "text": {
-                        "en": "Fastaval will have dinner delivered from Spisebordet. The food will be served in the common area, in the following period:",
-                        "da": "Fastaval f\u00e5r aftensmaden leveret fra Spisebordet. Maden serveres i f\u00e6llesomr\u00e5det i f\u00f8lgende tidsrum:"
+                        "en": "Fastaval gets lunch and dinner delivered from Spisebordet. Lunch is served at the kiosk. Breakfast and dinner are served in the common area during the following times:",
+                        "da": "Fastaval f\u00e5r frokost og aftensmad leveret fra Spisebordet. Frokost udleveres i kiosken. Morgen- og aftensmad serveres i f\u00e6llesomr\u00e5det i f\u00f8lgende tidsrum:"
                     }
                 },
                 {
@@ -53,8 +53,8 @@
                 {
                     "type": "paragraph",
                     "text": {
-                        "en": "Dinner will be served in shifts. Your time slot will appear on your participant sheet closer to Fastaval.",
-                        "da": "Aftensmaden udleveres i runder. Du f\u00e5r dit tidsrum p\u00e5 din deltagerseddel, n\u00e5r vi n\u00e6rmer os Fastaval."
+                        "en": "Breakfast and dinner are served in rounds. You will find your time slot on your participant card as Fastaval approaches.",
+                        "da": "Morgenmad og aftensmad udleveres i runder. Du f\u00e5r dit tidsrum p\u00e5 din deltagerseddel, n\u00e5r vi n\u00e6rmer os Fastaval."
                     }
                 },
                 {
@@ -191,8 +191,8 @@
                 {
                     "type": "paragraph",
                     "text": {
-                        "en": "[b]Lunch  (all days)[\/b]",
-                        "da": "[b]Frokost (alle dage)[\/b]"
+                        "en": "[b]Lunch  (all days)[\/b] - Gluten-free option. Write as comment",
+                        "da": "[b]Frokost (alle dage)[\/b]\u00a0- Glutenfri mulighed. Skriv kommentar"
                     }
                 },
                 {
@@ -205,8 +205,8 @@
                 {
                     "type": "paragraph",
                     "text": {
-                        "en": "[b]Dinner Wednesday[\/b]",
-                        "da": "[b]Aftensmad onsdag[\/b]"
+                        "en": "[b]Dinner Wednesday[\/b]\u00a0- Gluten-free option. Write as comment",
+                        "da": "[b]Aftensmad onsdag[\/b] - Glutenfri mulighed. Skriv kommentar"
                     }
                 },
                 {
@@ -219,8 +219,8 @@
                 {
                     "type": "paragraph",
                     "text": {
-                        "en": "[b]Dinner Thursday [\/b]",
-                        "da": "[b]Aftensmad torsdag[\/b]"
+                        "en": "[b]Dinner Thursday [\/b]\u00a0- Gluten-free option. Write as comment",
+                        "da": "[b]Aftensmad torsdag[\/b]\u00a0- Glutenfri mulighed. Skriv kommentar"
                     }
                 },
                 {
@@ -233,8 +233,8 @@
                 {
                     "type": "paragraph",
                     "text": {
-                        "en": "[b]Dinner Friday [\/b]",
-                        "da": "[b]Aftensmad fredag [\/b]"
+                        "en": "[b]Dinner Friday [\/b]\u00a0- Gluten-free option. Write as comment",
+                        "da": "[b]Aftensmad fredag [\/b]\u00a0- Glutenfri mulighed. Skriv kommentar"
                     }
                 },
                 {
@@ -247,8 +247,8 @@
                 {
                     "type": "paragraph",
                     "text": {
-                        "en": "[b]Dinner Saturday [\/b]",
-                        "da": "[b]Aftensmad l\u00f8rdag [\/b]"
+                        "en": "[b]Dinner Saturday [\/b]\u00a0- Gluten-free option. Write as comment",
+                        "da": "[b]Aftensmad l\u00f8rdag [\/b]\u00a0- Glutenfri mulighed. Skriv kommentar"
                     }
                 },
                 {
@@ -261,8 +261,8 @@
                 {
                     "type": "paragraph",
                     "text": {
-                        "en": "[b]Dinner Sunday [\/b]",
-                        "da": "[b]Aftensmad s\u00f8ndag [\/b]"
+                        "en": "[b]Dinner Sunday [\/b] - Gluten-free option. Write as comment",
+                        "da": "[b]Aftensmad s\u00f8ndag [\/b]\u00a0- Glutenfri mulighed. Skriv kommentar"
                     }
                 },
                 {

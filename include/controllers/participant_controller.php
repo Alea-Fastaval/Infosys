@@ -1768,7 +1768,7 @@ die("Not actually sending final reminders<br>\n");
             $this->page->setTemplate('participant/' . $template . '-da');
 
         } else {
-            $title = $english_title ?? 'Reminder: payment for Fastaval '.$year;
+            $title = $english_title ?? 'Reminder: payment for Fastaval sign-up '.$year;
             $this->page->setTemplate('participant/' . $template . '-en');
         }
 

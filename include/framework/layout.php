@@ -537,7 +537,7 @@ HTML;
         </ul>
     </li>
     <li class='topmenu-item'>
-        GDS
+        Heltestyrke
         <ul class='submenu'>
             <li><a href='{$this->url('gdshome')}'>Vagt-oversigt</a></li>
             <li><a href='{$this->url('gds_categories')}'>Vagt-kategorier</a></li>
