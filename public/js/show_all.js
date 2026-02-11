@@ -155,4 +155,9 @@ $(function() {
     $('a.spreadsheet.btn').click(function(e) {
         replaceIDs(this, e);
     });
+
+    $('div.deltager-search-box-inner .collapse legend').on('click', function() {
+        $(this).closest('fieldset').toggleClass('in');
+    });
+
 });

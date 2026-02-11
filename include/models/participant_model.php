@@ -532,7 +532,7 @@ class ParticipantModel extends Model
     public function getAllFoodDays()
     {
         $DB = $this->db;
-        $query = "SELECT DISTINCT dato FROM madtider ORDER BY dato";
+        $query = "SELECT DISTINCT DATE(dato) as dato FROM madtider ORDER BY dato";
         $answer = array();
         if ($results = $DB->query($query))
         {
@@ -1770,12 +1770,14 @@ SQL;
             $foreign_key_fields[$field_info['key_field']] = $field_info;
         }
 
-        // Fix column names, convert foreign key columns and set joins
+        // Handle special columns, fix column names, convert foreign key columns and set joins
         $join = $group = "";
         foreach ($columns as $id => $column) {
-            if ($column == 'navn') continue; // Don't mess with the name column
+            if ($column == 'navn') {
+                $columns[$id] = "deltagere_navn";
+                continue;
+            } 
 
-            // Special columns
             if ($column == 'assigned_sleeping') {
                 $join .= " LEFT JOIN participants_sleepingplaces ON deltagere.id = participants_sleepingplaces.participant_id";
                 $join .= " LEFT JOIN lokaler ON participants_sleepingplaces.room_id = lokaler.id";
@@ -1783,7 +1785,6 @@ SQL;
                 continue;
             }
 
-            // Special columns
             if ($column == 'has_hero_signup') {
                 $join .= " LEFT JOIN deltagere_gdstilmeldinger ON deltagere.id = deltagere_gdstilmeldinger.deltager_id";
                 $group = " GROUP BY deltagere.id";
@@ -1832,7 +1833,7 @@ SQL;
             if ($group == "") {
                 $where = "WHERE (";
                 for ($i = 0, $max = count($columns); $i < $max; $i++) {
-                    if ($columns[$i] == 'navn') {
+                    if ($columns[$i] == 'deltagere_navn') {
                         $where .= 'fornavn LIKE ' . $this->db->sanitize('%' . $get->sSearch . '%') . " OR ";
                         $where .= 'efternavn LIKE ' . $this->db->sanitize('%' . $get->sSearch . '%') . " OR ";
                     } else {
@@ -1843,16 +1844,11 @@ SQL;
                 $where = substr_replace($where, "", -3);
                 $where .= ')';
             } else {
-                $pre = "HAVING ";
+                $pre = "HAVING";
                 $having = "";
                 foreach($columns as $i => $column) {
-                    $having .= $pre;
-                    if ($column == 'navn') {
-                        $having .= "deltagere_navn LIKE " . $this->db->sanitize("%$get->sSearch%");
-                    } else {
-                        $having .= $columns[$i] ." LIKE " . $this->db->sanitize('%' . $get->sSearch . '%');
-                    }
-                    $pre = "OR ";
+                    $having .= "$pre $column LIKE " . $this->db->sanitize("%$get->sSearch%");
+                    $pre = " OR";
                 }
             }
         }
@@ -1873,7 +1869,7 @@ SQL;
 
         foreach ($columns as $id => $column) {
             switch ($column) {
-                case 'navn':
+                case 'deltagere_navn':
                     $columns[$id] = 'CONCAT(fornavn, " ", efternavn) AS deltagere_navn';
                     break;
 

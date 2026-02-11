@@ -70,8 +70,6 @@ class ViewHelper extends Common
      */
     public function deltagerSearchbox(array $search_vars, Model $model) {
 
-        $fooddays = $model->getAllFoodDays();
-
         $output = <<<HTML
     <div class="deltager-search-box-inner">
             <fieldset>
@@ -198,15 +196,19 @@ HTML;
                         <td><b>Noter:</b> <input class='tripleinput' type='text' value='' name='deltager_search[deltager_note]' /></td>
                     </tr>
                 </table>
-                <hr/>
+            </fieldset>
+            <fieldset class="collapse">
+                <legend>Indgang</legend>
+
                 <table id='search-indgang'>
                     <tbody>
 HTML;
 
         foreach ($model->getAllIndgang() as $ind) {
+            $day = $ind->spansAllConvention() ? '' : danishDayNames(date(' D', strtotime($ind->start)));
             $output .= <<<HTML
                         <tr>
-                            <td>{$ind->getDescription()}</td>
+                            <td>{$ind->type}{$day}</td>
                             <td>{$this->view->genSelect("indgang_search[ind_" . $ind->id . "]", array('','ja','nej'))}</td>
                         </tr>
 HTML;
@@ -215,12 +217,16 @@ HTML;
         $output .= <<<HTML
                     </tbody>
                 </table>
+            </fieldset>
+            <fieldset class="collapse">
+                <legend>Mad</legend>
                 <table id='search-food'>
                     <thead>
                         <tr>
                             <th>&nbsp;</th>
 HTML;
 
+        $fooddays = $model->getAllFoodDays();
         foreach ($fooddays as $day) {
             $output .= "<th>" . danishDayNames(date('D', strtotime($day))) . "</th>";
 
@@ -236,13 +242,13 @@ HTML;
 
             if ($madtider) {
                 $output .= "
-                            <tr>
-                                <td>{$mad->kategori}</td>
+                        <tr>
+                            <td>{$mad->kategori}</td>
 ";
                 foreach ($fooddays as $day) {
                     $output .= "<td>";
                     foreach ($madtider as $mt) {
-                        if ($day == $mt->dato) {
+                        if ($day == date('Y-m-d', strtotime($mt->dato))) {
                             $output .= $this->view->genSelect("mad_search[mt_" . $mt->id . "]", array('', 'ja', 'nej'));
                         }
                     }
@@ -258,6 +264,7 @@ HTML;
                     </tbody>
                 </table>
             </fieldset>
+            <hr>
             <label for='logic'>Søgelogik:</label>
             <select name='logic'>
                 <option value='and'>And</option>

@@ -465,16 +465,6 @@ form.deltager-search-box {
     font-size: small;
 }
 
-table#search-indgang,
-table#search-food {
-    float: left;
-    clear: none;
-    width: auto;
-    border: 1px solid #888888;
-    margin-right: 10px;
-    padding: 10px;
-}
-
 table#search-indgang select,
 table#search-food select {
     width: auto;
@@ -2769,6 +2759,36 @@ form#frmExcelExport select {
 .deltager-search-box-inner input[type=radio],
 .deltager-search-box-inner input[type=checkbox] {
     margin: 0px;
+}
+
+.deltager-search-box-inner hr {
+    clear: both;
+}
+
+.deltager-search-box-inner .collapse {
+    float: left;
+    padding: 10px;
+}
+
+.deltager-search-box-inner .collapse:nth-child(2) {
+    margin-right: 10px;
+}
+
+.deltager-search-box-inner .collapse legend {
+    margin: 0;
+    cursor: pointer;
+}
+
+.deltager-search-box-inner .collapse:not(.in) {
+    padding-bottom: 0;
+}
+
+.deltager-search-box-inner .collapse legend::after {
+    content: " +";
+}
+
+.deltager-search-box-inner .collapse.in legend::after {
+    content: " -";
 }
 
 #sms-dialog .message-wrapper {
