@@ -1671,7 +1671,7 @@ WHERE
   }
 
   public function getEan8Number(String $year) {
-    return numberToEAN8($year . str_pad($this->id, 5, '0', STR_PAD_LEFT));
+    return numberToEAN8(substr($year, -2) . str_pad($this->id, 5, '0', STR_PAD_LEFT));
   }
 
   /**
