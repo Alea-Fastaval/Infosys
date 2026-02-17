@@ -288,6 +288,10 @@ class Deltagere extends DBObject implements AgeFulfilment
     return trim("{$this->fornavn} {$this->efternavn}");
   }
 
+  public function getLegalName() {
+    return trim("{$this->fornavn} {$this->efternavn}");
+  }
+
   /**
    * performs a wildcard search across the tables fields
    *

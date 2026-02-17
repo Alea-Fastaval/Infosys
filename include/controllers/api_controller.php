@@ -861,7 +861,8 @@ class ApiController extends Controller
 
         $this->jsonOutput([
             'status' => 'success',
-            'name' => $participant->getName(),
+            'name' => $participant->getLegalName(),
+            'display_name' => $participant->nickname,
             'email' => $participant->email,
         ]);
 
