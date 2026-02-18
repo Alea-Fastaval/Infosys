@@ -28,6 +28,7 @@ class SignupApiModel extends Model {
       $config = json_decode($content);
       $config->no_edit = [
         "signup_end",
+        "paybyday",
         "con_start",
         "junior_signup_open",
         "text_replacement",
@@ -36,9 +37,11 @@ class SignupApiModel extends Model {
         "current_junior_participants",
         "junior_closed",
         "current_bus_tickets",
+        "bank_fee",
       ];
 
       $config->signup_end = $this->config->get('con.signupend');
+      $config->paybyday = $this->config->get('con.paybyday');
       $config->con_start = $this->config->get('con.start');
       $config->junior_signup_open = (strtotime('now') > strtotime($this->config->get('con.juniorsignup')));
       $junior_signup_time = strtotime($this->config->get('con.juniorsignup'));
@@ -79,6 +82,13 @@ class SignupApiModel extends Model {
       $result = $this->db->query($query);
       if (count($result) == 1) {
         $config->current_bus_tickets = $result[0]['count'];
+      }
+
+      // Get bank transfer fee
+      $query = "SELECT * FROM indgang WHERE type = 'Bankoverførselsgebyr'";
+      $result = $this->db->query($query);
+      if (count($result) == 1) {
+        $config->bank_fee = $result[0]['pris'];
       }
 
       return json_encode($config, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_NUMERIC_CHECK);
