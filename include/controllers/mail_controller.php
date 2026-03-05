@@ -157,4 +157,17 @@ class MailController extends Controller {
     $this->log("Finished sending $type mail to $count participants", 'Mail', null);
     exit;
   }
+
+  /**
+   * Get list of email for everyone who ordered a ribbon collection
+   * mail/ribbonmails
+   */
+  public function getRibbonMails() {
+    $participants = $this->model->getRibbonParticipants();
+
+    foreach ($participants as $participant) {
+      echo $participant->getName() ."&lt;". $participant->email ."&gt;;<br>\n";
+    }
+    exit;
+  }
 }

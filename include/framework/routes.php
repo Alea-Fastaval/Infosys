@@ -165,6 +165,7 @@ class Routes
         $this->routes['send_setup_mail']                            = array('url' => 'mail/sendsetupmail', 'controller' => 'Mail', 'method' => 'sendSetupMail');
         $this->routes['send_evaluation_mail']                       = array('url' => 'mail/sendevaluationmail', 'controller' => 'Mail', 'method' => 'sendEvaluationMail');
         $this->routes['send_password_mail']                         = array('url' => 'mail/fixpassword', 'controller' => 'Mail', 'method' => 'fixPasswords');
+        $this->routes['get_ribbon_mails']                           = array('url' => 'mail/ribbonmails', 'controller' => 'Mail', 'method' => 'getRibbonMails');
         
         // Misc mail
         $this->routes['send_welcome_mail']                          = array('url' => 'participant/sendwelcomemail', 'controller' => 'Participant', 'method' => 'sendWelcomeMail');

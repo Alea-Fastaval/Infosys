@@ -75,4 +75,14 @@ class MailModel extends Model {
     }
   }
 
+  public function getRibbonParticipants() {
+    $participants = [];
+    $ribbon = $this->findEntity('Wear', 30);
+    $orders = $ribbon->getOrders();
+    foreach ($orders as $order) {
+      $participants[] = $this->findEntity('Deltagere', $order['deltager_id']);
+    }
+    return $participants;
+  }
+
 }
