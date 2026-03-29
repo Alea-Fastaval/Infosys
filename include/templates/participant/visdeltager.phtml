@@ -388,7 +388,7 @@ $this->registerLateLoadJS('/ui-widgets/pronoun-widget.js');
     </div>
     <div class='gdsbox'>
         <fieldset>
-            <legend>Helte Opgaver<?php if (!$this->is_read_only) : ?> - <a href="<?= $this->url('update_deltager_gds', array('id' => $this->deltager->id));?>">Ret/slet</a><?php endif;?></legend>
+            <legend>Heltestyrke, Opgaver<?php if (!$this->is_read_only) : ?> - <a href="<?= $this->url('update_deltager_gds', array('id' => $this->deltager->id));?>">Ret/slet</a><?php endif;?></legend>
             <table class='gds_table'>
                 <?php if (!empty($this->deltager_info['gds'])) :
                     foreach ($this->deltager_info['gds'] as $gds) :?>

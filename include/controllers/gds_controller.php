@@ -63,7 +63,7 @@ class GdsController extends Controller
                 $diy = $this->model->createEmptyDiy();
 
             } else {
-                $this->errorMessage("Kunne ikke finde GDS kategorien");
+                $this->errorMessage("Kunne ikke finde heltestyrke kategorien");
                 $this->hardRedirect($this->url('gdshome'));
 
             }
@@ -283,14 +283,14 @@ class GdsController extends Controller
         {
             if (($d = $this->model->findEntity('Deltagere', $id)) && $vagt->addParticipant($d))
             {
-                $this->log("Deltager #{$d->id} blev sat på GDS-Vagt #{$vagt->id} ({$vagt->getGDSName()}) af {$this->model->getLoggedInUser()->user}", 'GDS', $this->model->getLoggedInUser());
+                $this->log("Deltager #{$d->id} blev sat på heltestyrke vagt #{$vagt->id} ({$vagt->getGDSName()}) af {$this->model->getLoggedInUser()->user}", 'GDS', $this->model->getLoggedInUser());
                 $added[] = $d;
             }
             else
             {
                 foreach ($added as $d)
                 {
-                    $this->log("Deltager #{$d->id} blev fjernet fra GDS-Vagt #{$vagt->id} ({$vagt->getGDSName()}) af {$this->model->getLoggedInUser()->user}", 'GDS', $this->model->getLoggedInUser());
+                    $this->log("Deltager #{$d->id} blev fjernet fra heltestyrke vagt #{$vagt->id} ({$vagt->getGDSName()}) af {$this->model->getLoggedInUser()->user}", 'GDS', $this->model->getLoggedInUser());
                     $vagt->removeParticipant($d);
                 }
                 echo "Failed";
@@ -324,7 +324,7 @@ class GdsController extends Controller
             if ($d = $this->model->findEntity('Deltagere', $id))
             {
                 $vagt->removeParticipant($d);
-                $this->log("Deltager #{$d->id} blev fjernet fra GDS-Vagt #{$vagt->id} ({$vagt->getGDSName()}) af {$this->model->getLoggedInUser()->user}", 'GDS', $this->model->getLoggedInUser());
+                $this->log("Deltager #{$d->id} blev fjernet fra heltestyrke vagt #{$vagt->id} ({$vagt->getGDSName()}) af {$this->model->getLoggedInUser()->user}", 'GDS', $this->model->getLoggedInUser());
             }
             else
             {
@@ -403,7 +403,7 @@ class GdsController extends Controller
 
     public function listShifts() {
         if (empty($this->vars['id']) || !($gds = $this->model->findGDS($this->vars['id']))) {
-            $this->errorMessage("Kunne ikke finde GDS kategorien");
+            $this->errorMessage("Kunne ikke finde heltestyrke kategorien");
             $this->hardRedirect($this->url('gdshome'));
         }
 
