@@ -1,0 +1,129 @@
+<?php echo $this->getMessagesHtml();?>
+<?php
+  $columns = [
+    "time",
+    "game",
+    "assigned",
+    "max",
+    "room",
+  ];
+
+  $day = -1;
+  $time = "";      
+
+  if ($this->request->query->csv == "true") {
+    foreach ($this->schedule->games as $game) {
+      $start_time = substr($game["time"], 0, 5);
+      if ($day != $game["day"]) {
+        if ($day != -1) printf(PHP_EOL);
+        $day = $game["day"];
+        $time = $start_time;
+        printf('"%s"' . PHP_EOL, $game["day_name"]);
+        $cells = [];
+        foreach ($columns as $c) { 
+          $cells[] = '"' .(isset($this->schedule->headers[$c]) ? $this->schedule->headers[$c] : $c).'"';
+        }
+        printf(implode(",", $cells) . PHP_EOL);
+      } elseif ($time != $start_time) {
+        $time = $start_time;
+        printf(PHP_EOL);
+      }
+      $cells = [];
+      foreach ($columns as $c) { 
+          $cells[] = '"' .(isset($game[$c]) &&  $game[$c] != 0 ? $game[$c] : ""). '"';
+      }
+      printf(implode(",", $cells) . PHP_EOL);
+    }
+    exit;
+  }
+?>
+<style>
+  @media print {
+    div.maincontainer > *:not(.content-container), a {
+      display: none;
+    }
+
+    h1 {
+      page-break-before: always;
+    }
+
+    h1:nth-child(1) {
+      page-break-before: avoid;
+    }
+
+    table {
+      border-collapse: collapse;
+      margin: 1rem
+    }
+  }
+
+  th {
+    padding: .5rem;
+  }
+
+  td {
+    padding: .5rem;
+    border: 1px solid black;
+  }
+
+  tr.spacer{
+    border: none;
+    height: 1rem;
+  }
+
+  td:nth-child(5) {
+    width: 10rem;
+  }
+
+  a.button {
+    background-color: #FF9540;
+    padding: .5rem 1rem;
+    color: black;
+    text-decoration: none;
+  }
+
+  a.button:hover{
+    background-color: #FFB560;
+  }
+</style>
+<a href="<?=$this->request->path?>?csv=true" class="button">Hent CSV</a>
+<a href="javascript:window.print();" class="button">Print</a>
+<div class="content">
+  <?php 
+    $day = -1;
+    $time = "";      
+    foreach ($this->schedule->games as $game) {
+      $start_time = substr($game["time"], 0, 5);
+      if ($day != $game["day"]) {
+        if ($day != -1) { ?>
+    </tbody>
+  </table>        
+        <?php }
+        $day = $game["day"];
+        $time = $start_time;
+  ?>
+  <h1><?=$game["day_name"]?></h1>
+  <table>
+    <thead>
+      <tr>
+        <?php foreach ($columns as $c) { ?>
+          <th><?= isset($this->schedule->headers[$c]) ? $this->schedule->headers[$c] : $c ?></th>
+        <?php } ?>
+      </tr>
+    </thead>
+    <tbody>
+    <?php } elseif ($time != $start_time) { // if $day 
+      $time = $start_time;
+    ?>
+      <tr class="spacer"></tr>
+    <?php } // if $day ?>
+      <tr>
+        <?php foreach ($columns as $c) { ?>
+          <td><?= isset($game[$c]) &&  $game[$c] != 0 ? $game[$c] : "" ?></td>
+        <?php } ?>
+      </tr>
+    <?php } // foreach $game ?>
+    </tbody>
+  </table>
+</div>
+<!--<pre><?=print_r($this->routes, true)?></pre>-->

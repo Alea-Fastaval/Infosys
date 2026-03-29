@@ -241,6 +241,7 @@ class Routes
         $this->routes['gamestart_minion_change']   = array('url' => 'aktiviteter/gamestart/minion/:id:/change', 'controller' => 'Activity', 'method' => 'gameStartMinionChange');
         $this->routes['gamestart_ajax_info'  ]     = array('url' => 'aktiviteter/gamestart/ajax/:id:/info', 'controller' => 'Activity', 'method' => 'gameStartAjaxInfo');
         $this->routes['gamestart_master_change']   = array('url' => 'aktiviteter/gamestart/master/:id:/change', 'controller' => 'Activity', 'method' => 'gameStartMasterChange');
+        $this->routes['boardgame_schedule']        = array('url' => 'aktiviteter/boardgames/schedule', 'controller' => 'Activity', 'method' => 'boardgameSchedule');
 
         $this->routes['priority_signup_statistics'] = ['url' => 'activities/priority-signups', 'controller' => 'Activity', 'method' => 'showPrioritySignupStatistics'];
 

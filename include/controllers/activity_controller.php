@@ -1147,5 +1147,17 @@ html;
         $mpdf->OutputHttpDownload("$filename.pdf");
     }
 
+    public function boardgameSchedule() {
+        $this->page->schedule = $this->model->boardgameSchedule();
+
+        if ($this->page->request->query->csv == "true") {
+            $this->page->layout_template = "contentonly.phtml";
+
+            header('HTTP/1.1 200 Done');
+            header('Content-Type: application/csv; charset=UTF-8');
+            header('Content-Disposition: attachment; filename="boardgame_schedule.csv"');
+        }
+    }
+
     //}}}
 }

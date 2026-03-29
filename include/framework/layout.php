@@ -477,6 +477,7 @@ HTML;
             <li><a href='{$this->url('holdhome')}'>Hold</a></li>
             <li><a href='{$this->url('vis_alle_hold')}'>Alle hold</a></li>
             <li><a href='{$this->url('opret_hold')}'>Opret hold</a></li>
+            <li><a href='{$this->url('boardgame_schedule')}'>Brætspil hold oversigt</a></li>
             <li><hr/></li>
             <li><a href='{$this->url('show_vote_stats')}'>Afstemning, Rollespil</a></li>
             <li><a href='{$this->url('show_vote_stats_board')}'>Afstemning, Brætspil</a></li>

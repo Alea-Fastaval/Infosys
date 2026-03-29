@@ -2181,4 +2181,35 @@ GROUP BY
         }
         unset($contestants[$game_id]);
     }
+
+    public function boardgameSchedule() {
+        $shcedule = new stdClass();
+        $shcedule->headers = [
+            "time" => "Time",
+            "game" => "Game",
+            "assigned" => "Assigned Players",
+            "max" => "Max Players",
+            "room" => "Room"
+        ];
+
+        $query = 
+        "SELECT 
+            ak.navn as game,
+            (DAYOFWEEK(start) + 5) % 7 as day,
+            DAYNAME(start) as day_name,
+            CONCAT(DATE_FORMAT(start, '%H:%i-'),DATE_FORMAT(slut, '%H:%i')) as time,
+            COUNT(p.deltager_id) as assigned,
+            max_signups as max 
+        FROM afviklinger af 
+        JOIN hold h ON af.id = h.afvikling_id 
+        JOIN aktiviteter ak ON ak.id = af.aktivitet_id 
+        JOIN pladser p ON h.id = p.hold_id 
+        WHERE ak.type = 'braet'
+        GROUP BY af.id
+        ORDER BY day, time";
+
+        $shcedule->games = $this->db->query($query);
+
+        return $shcedule;
+    }
 }
