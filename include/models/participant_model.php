@@ -2709,9 +2709,15 @@ SET participant_id = ?, amount = ?, cost = ?, fees = ?, timestamp = NOW()
 
     public function getParticipantsForwelcomeMail()
     {
-        //return [$this->createEntity('Deltagere')->findById(1)];
+        //return [$this->createEntity('Deltagere')->findById(5)];
 
-        $participants = $this->createEntity('Deltagere')->findAll();
+        //$participants = $this->createEntity('Deltagere')->findAll();
+
+        $entity = $this->createEntity('Deltagere');
+        $select = $entity->getSelect();
+        $select->setWhere('brugerkategori_id', 'IN', [1,2]); // Only regular participants and organizers
+        $participants = $entity->findBySelectMany($select);
+
         $participants = $this->filterOutAnnulled($participants);
         $participants = $this->filterOutRecentMails($participants, 1);
 
