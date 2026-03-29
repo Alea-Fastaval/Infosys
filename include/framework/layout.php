@@ -599,6 +599,7 @@ HTML;
             <li><a href='{$this->url('admin_handle_users')}'>Users</a></li>
             <li><a href='{$this->url('admin_handle_roles')}'>Roles</a></li>
             <li><a href='{$this->url('admin_handle_privileges')}'>Privileges</a></li>
+            <li><a href='{$this->url('admin_generate_badges')}'>Generer navneskilte</a></li>
             <li><a href='{$this->url('admin_reset_signup_confirm')}'>Reset signup</a></li>
         </ul>
     </li>

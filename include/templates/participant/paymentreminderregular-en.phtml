@@ -7,7 +7,14 @@
   we would therefore like to remind you to complete your payment.
 </p>
 
-<p>If you have already paid, please ignore this email – we are likely just still updating our records.</p>
+<p>Did you already pay?</p>
+<ul>
+  <li>If you payed very recently, you can ignore this mail, since we probably just need to update our records</li>
+  <li>
+    If you payed several days ago, we would very much like you to contact us at <a href="mailto:info@fastaval.dk">info@fastaval.dk</a>,
+    so we can register your payment correctly.
+  </li>
+</ul>
 
 <p>
   If you haven't paid yet, please remember that the deadline for your payment is <?= $this->payment_day_en; ?>.
@@ -16,24 +23,25 @@
   Fastaval will remain active, and you can pay at the entrance.
 </p>
 
-<p>The remaining amount is: <strong><?= $this->payment_remainder ?> DKK</strong></p>
 <p>
-  When paying, remember to clearly state your name and participant ID:
-  <strong><?= $this->participant->id ?></strong>
+  <?php if ($this->participant->betalt_beloeb == 0) : ?>
+    The total amount for your registration is <strong><?= $this->payment_remainder ?></strong> DKK, which is due on <?= $this->payment_day ?>.
+
+  <?php else : ?>
+    You have already paid <?= $this->participant->betalt_beloeb ?> DKK, but it looks like you still owe us
+    <strong><?= ($this->payment_remainder) ?></strong> DKK<br />
+  <?php endif; ?>
 </p>
 
 <p>
-  <strong>MobilePay (Denmark only):</strong><br />
-  If you use MobilePay, you can transfer the money to <strong>438490</strong> (Alea).<br />
-  It is important that you pay from the same phone number you used during sign-up. If this isn't possible,
-  please email <a href="mailto:andreas@fastaval.dk">andreas@fastaval.dk</a> so we can identify your payment.
+  We have a new payment system provided by Bifrost, thus it will be their name showing in the payment window.
+  You can pay using our new payment system by following this link:<br /><br />
+  <a href="https://www.fastaval.dk/26tilmelding/paynow?hash=<?= $this->participant->participant_hash ?>">Pay online</a><br />
+  (The payment will be registered instantly at our provider, but it will take a few days to transfer the data to our own system, since it's a manual process)
 </p>
 
 <p>
-  <strong>PayPal:</strong><br />
-  You can also pay immediately via PayPal. Transfer to <a href="mailto:andreas@fastaval.dk">andreas@fastaval.dk</a>.<br />
-  Please note there is a 100 DKK fee for using PayPal, so you will need to transfer a total of
-  <strong><?= ($this->payment_remainder + 100) ?></strong> DKK.
+  When using any other form of payment, it's important that you note both name and participant ID, which is: <strong><?= $this->participant->id ?></strong>
 </p>
 
 <h4>Payment by bank transfer</h4>

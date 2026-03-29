@@ -577,8 +577,8 @@ class ParticipantController extends Controller
             } elseif ($post->cancel_deltager) {
                 $deltager->annulled = 'ja';
                 $deltager->update();
-                $this->successMessage('Tilmeldingen er anulleret');
-                $this->log("Deltager #{$deltager->id} blev anulleret af {$this->model->getLoggedInUser()->user}", 'Deltager', $this->model->getLoggedInUser());
+                $this->successMessage('Tilmeldingen er annulleret');
+                $this->log("Deltager #{$deltager->id} blev annulleret af {$this->model->getLoggedInUser()->user}", 'Deltager', $this->model->getLoggedInUser());
                 $this->hardRedirect($this->url('visdeltager', array('id' => $deltager->id)));
             } elseif ($post->delete_deltager) {
                 $this->page->deltager = $deltager;
@@ -1676,14 +1676,14 @@ class ParticipantController extends Controller
      * Meant to be called by a cron job requesting 'participant/payment-reminder/cron'
      */
     public function cronPaymentReminder() {
-        $late = strtotime($this->config->get('con.signupend')) < strtotime('now');
+        $late = strtotime($this->config->get('con.paybyday')) < strtotime('now');
         $this->sendAllPaymentReminders($late);
         exit;
     }
 
     public function sendAllPaymentReminders($late = false)
     {
-        $participants = $this->model->getParticipantsForPaymentReminder(3);
+        $participants = $this->model->getParticipantsForPaymentReminder(1);
         // echo ($late ? "Late" : "Not Late"). "<br>\n";
         echo "Sender betalings reminder mail til ".count($participants)." deltagere<br>\n";
 die("Not actually sending reminders<br>\n");
@@ -1764,11 +1764,11 @@ die("Not actually sending final reminders<br>\n");
         $year = date('Y', strtotime($this->config->get('con.start')));
         $this->page->year = $year;
         if ($danish) {
-            $title = $danish_title ?? 'Reminder: betaling for tilmelding til Fastaval '.$year;
+            $title = $danish_title ?? "Reminder: betaling for tilmelding til Fastaval $year";
             $this->page->setTemplate('participant/' . $template . '-da');
 
         } else {
-            $title = $english_title ?? 'Reminder: payment for Fastaval sign-up '.$year;
+            $title = $english_title ?? "Reminder: payment for Fastaval sign-up $year";
             $this->page->setTemplate('participant/' . $template . '-en');
         }
 

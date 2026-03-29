@@ -5,7 +5,7 @@
     },
     "cancel_text": {
         "en": "<p>We're sorry that you had to cancel your payment.<\/p>\n<p>If you need our help to solve the problem, you're always welcome to send us an email at  <a href=\"mailto:info@fastaval.dk\">info@fastaval.dk<\/a><\/p>",
-        "da": "<p>Vi beklager at du m\u00e5tte anullere din betaling.<\/p>\n<p>Hvis du har brug for hj\u00e6lp til at l\u00f8se problemet er du altid velkommen til at sende en mail til <a href=\"mailto:info@fastaval.dk\">info@fastaval.dk<\/a><\/p>"
+        "da": "<p>Vi beklager at du m\u00e5tte annullere din betaling.<\/p>\n<p>Hvis du har brug for hj\u00e6lp til at l\u00f8se problemet er du altid velkommen til at sende en mail til <a href=\"mailto:info@fastaval.dk\">info@fastaval.dk<\/a><\/p>"
     },
     "pending_text": {
         "en": "<p>Thank you for your payment. Please wait a moment while we await a response from the payment provider<\/p>\n<p>If this takes longer than 2 minutes, please send us an email at  <a href=\"mailto:info@fastaval.dk\">info@fastaval.dk<\/a><\/p>",

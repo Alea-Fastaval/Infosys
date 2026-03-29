@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Copyright (C) 2009-2012  Peter Lind
  *
@@ -46,9 +47,7 @@ class AdminController extends Controller
    * @access public
    * @return void
    */
-  public function main()
-  {
-  }
+  public function main() {}
 
   /**
    * displays all users and a form for creating new ones
@@ -95,8 +94,197 @@ class AdminController extends Controller
    * @access public
    * @return void
    */
-  public function showConfirmReset()
+  public function showConfirmReset() {}
+
+  /**
+   * shows a simple preview page for generating participant name badges
+   *
+   * @access public
+   * @return void
+   */
+  public function generateBadges()
   {
+    // Enable error display for debugging this page
+    @ini_set('display_errors', 1);
+    @ini_set('display_startup_errors', 1);
+    // Show runtime errors but hide deprecation notices introduced by newer PHP versions
+    error_reporting(E_ALL & ~E_DEPRECATED & ~E_USER_DEPRECATED);
+
+    // Instantiate participant model directly (DI does not register ParticipantModel by name)
+    $participantModel = new ParticipantModel($this->dic->get('DB'), $this->config, $this->dic);
+    $participants = $participantModel->findAll();
+
+    // follow the same flow as ParticipantController::nameTagList
+    $participantModel->generateParticipantBarcodes($participants);
+
+    $photos = [];
+    foreach ($participants as $participant) {
+      $photos[$participant->id] = $participantModel->fetchCroppedPhoto($participant);
+    }
+
+    $this->page->participants = $participants;
+    $this->page->photos = $photos;
+
+    // Default template path (instruct to upload PNG to this location)
+    $this->page->template_path = '/uploads/id_template.png';
+
+    // Provide work area id => name mapping for templates (both languages)
+    $work_areas = [];
+    foreach ($participantModel->getWorkAreas() as $area) {
+      $work_areas[$area['id']] = [
+        'da' => $area['name_da'] ?? $area['name_en'] ?? '',
+        'en' => $area['name_en'] ?? $area['name_da'] ?? '',
+      ];
+    }
+    $this->page->work_areas = $work_areas;
+
+    $this->page->setTitle('Generer deltager navneskilte');
+  }
+
+  /**
+   * generates a multi-page PDF of participant badges (one badge per page, 91x60mm)
+   *
+   * @access public
+   * @return void
+   */
+  public function generateBadgesPDF()
+  {
+    $limit = isset($_GET['limit']) ? (int)$_GET['limit'] : 0;
+
+    $participantModel = new ParticipantModel($this->dic->get('DB'), $this->config, $this->dic);
+    $participants     = $participantModel->findAll();
+    if ($limit > 0) {
+      $participants = array_slice($participants, 0, $limit);
+    }
+
+    if (empty($participants)) {
+      exit('No participants found');
+    }
+
+    $participantModel->generateParticipantBarcodes($participants);
+
+    $photos = [];
+    foreach ($participants as $participant) {
+      $photos[$participant->id] = $participantModel->fetchCroppedPhoto($participant);
+    }
+
+    $work_areas = [];
+    foreach ($participantModel->getWorkAreas() as $area) {
+      $work_areas[$area['id']] = [
+        'da' => $area['name_da'] ?? $area['name_en'] ?? '',
+        'en' => $area['name_en'] ?? $area['name_da'] ?? '',
+      ];
+    }
+
+    // 91mm x 60mm page = 85mm badge + 3mm padding on every side (matches .print-wrapper)
+    $font_path = PUBLIC_PATH . 'fonts/montserrat/';
+    $mpdf = new \Mpdf\Mpdf([
+      'format'        => [91, 60],
+      'margin_left'   => 0,
+      'margin_right'  => 0,
+      'margin_top'    => 0,
+      'margin_bottom' => 0,
+      'fontDir'       => [$font_path],
+      'fontdata'      => [
+        'montserrat' => [
+          'R'  => 'Montserrat-Regular.ttf',
+          'B'  => 'Montserrat-Bold.ttf',
+          'I'  => 'Montserrat-Regular.ttf',
+          'BI' => 'Montserrat-Bold.ttf',
+        ],
+      ],
+      'default_font' => 'montserrat',
+    ]);
+
+    // Write one badge per page using AddPage() so each WriteHTML() call is small and
+    // never exceeds mPDF's pcre.backtrack_limit (passing all badges in one giant string
+    // causes that limit to be hit for large participant lists).
+    // Design values are kept in sync with generatebadges.phtml:
+    //   colours: .red=#9b1919  .blue=#046AA8
+    //   badge 85x54mm, header 14mm (.badge-header), details 36mm (.details)
+    //   header font: 22px bold, name/pronouns: 24px bold (.name/.pronouns), role: 15px (.role)
+    //   details uses justify-content:space-between → 3 equal rows of 12mm each
+    $first = true;
+    foreach ($participants as $participant) {
+      $photo_url = isset($photos[$participant->id]) ? $photos[$participant->id] : '';
+      $photo_src = '';
+      if ($photo_url) {
+        $fs_path = PUBLIC_PATH . ltrim($photo_url, '/');
+        if (file_exists($fs_path)) {
+          $photo_src = $fs_path;
+        }
+      }
+
+      $is_arrangoer = method_exists($participant, 'isArrangoer') && $participant->isArrangoer();
+      $lang         = ($participant->main_lang ?? 'da') === 'en' ? 'en' : 'da';
+      $bg           = $is_arrangoer ? '#9b1919' : '#046AA8';
+      $type_label   = $is_arrangoer
+        ? ($lang === 'en' ? 'ORGANIZER' : 'ARRANGØR')
+        : ($lang === 'en' ? 'PARTICIPANT' : 'DELTAGER');
+      $id           = htmlentities($participant->id);
+      $name         = htmlentities($participant->getName());
+
+      $pronouns = '';
+      if (method_exists($participant, 'getPronoun')) {
+        $pronouns = htmlentities($participant->getPronoun());
+      } elseif (!empty($participant->pronouns)) {
+        $pronouns = htmlentities($participant->pronouns);
+      }
+
+      $wa_data = $work_areas[$participant->work_area] ?? null;
+      $wa      = htmlentities($wa_data ? $wa_data[$lang] : '');
+
+      if ($photo_src) {
+        $img_html = '<img src="' . $photo_src . '" style="height:20mm;width:14.44mm;display:block;">';
+      } else {
+        $img_html = '<img src="' . PUBLIC_PATH . 'img/logo2026.png" style="height:12mm;width:12mm;display:block;margin-right:3mm;margin-left:auto;">';
+      }
+
+      if (!$first) {
+        $mpdf->AddPage();
+      }
+      $first = false;
+
+      $badge = '
+        <div style="padding:3mm;width:91mm;height:60mm;background:white;">
+          <table cellpadding="0" cellspacing="0" style="width:85mm;height:20mm;background:' . $bg . ';color:white;text-transform:uppercase;border-collapse:collapse;font-family:montserrat;">
+            <tr>
+              <td style="vertical-align:middle;text-align:center;font-weight:bold;font-size:30px;line-height:30px;padding:0 2mm;">
+                ' . $type_label . '<br>' . $id . '
+              </td>
+              <td style="width:17mm;height:20mm;vertical-align:middle;text-align:right;padding:0 2mm;">
+                ' . $img_html . '
+              </td>
+            </tr>
+          </table>
+          <table cellpadding="0" cellspacing="0" style="width:85mm;height:34mm;background:white;text-transform:uppercase;border-collapse:collapse;font-family:montserrat;">
+            <tr>
+              <td style="height:20mm;vertical-align:middle;padding:2mm 2mm 0;font-weight:bold;font-size:24px;">
+                ' . $name . '
+              </td>
+              <td rowspan="3" style="width:8mm;rotate:-90;text-align:left;text-transform:none;font-size:8px;font-weight:bold;color:#cccccc;letter-spacing:1px;font-family:montserrat;">
+                Fastaval 2026
+              </td>
+            </tr>
+            <tr>
+              <td style="height:7mm;vertical-align:bottom;padding:0 2mm 2mm;font-weight:bold;font-size:24px;">
+                ' . $pronouns . '
+              </td>
+            </tr>
+            <tr>
+              <td style="height:6mm;vertical-align:bottom;padding:0 2mm 2mm;font-size:15px;line-height:15px;">
+                ' . $wa . '
+              </td>
+            </tr>
+          </table>
+        </div>
+      ';
+
+      $mpdf->WriteHTML($badge, \Mpdf\HTMLParserMode::HTML_BODY);
+    }
+
+    $mpdf->OutputHttpDownload('Deltager-navneskilte-' . date('Y-m-d-Hi') . '.pdf');
+    exit();
   }
 
   /**
@@ -109,7 +297,6 @@ class AdminController extends Controller
   {
     if (!$this->page->request->isPost() || empty($this->page->request->post->confirmReset)) {
       $this->errorMessage('Not resetting as you did not confirm');
-
     } else {
       $this->model->resetSignups();
       $this->successMessage('Signups reset');
@@ -294,7 +481,6 @@ class AdminController extends Controller
     }
 
     exit;
-
   }
 
   /**
@@ -497,7 +683,8 @@ class AdminController extends Controller
     exit;
   }
 
-  public function ajaxUsers() {
+  public function ajaxUsers()
+  {
     $id = $this->vars['id'] ?? '*';
 
     if ($this->page->request->isPost()) {
@@ -511,7 +698,7 @@ class AdminController extends Controller
       );
     } else {
       // GET User(s) info
-      
+
       // Check for correct ID
       if (!is_int($id) && $id != '*') {
         $this->jsonOutput(
@@ -543,7 +730,7 @@ class AdminController extends Controller
       }
 
       $output = [];
-      foreach($users as $user) {
+      foreach ($users as $user) {
         $output[$user->id] = [
           'id' => $user->id,
           'email' => $user->user,

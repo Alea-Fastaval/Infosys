@@ -24,27 +24,27 @@
 
 <p>
   <?php if ($this->participant->betalt_beloeb == 0) : ?>
-    Din tilmelding beløber sig til <strong><?= $this->prices['total'] ?></strong> kr., som skal betales senest d. <?= $this->payment_day ?>.
+    Din tilmelding beløber sig til <strong><?= $this->payment_remainder ?></strong> kr., som skal betales senest d. <?= $this->payment_day ?>.
 
   <?php else : ?>
     Du har allerede betalt <?= $this->participant->betalt_beloeb ?> kr., men det ser ud til, at du stadig skylder
-    <strong><?= ($this->prices['total'] - $this->participant->betalt_beloeb) ?></strong> kr.<br />
-    Du kan betale nu via onlinebetalingen eller bankoverførsel, eller når du ankommer til Fastaval.
+    <strong><?= ($this->payment_remainder) ?></strong> kr.<br />
   <?php endif; ?>
 </p>
 
 <p>
   Vi har fået nyt betalingssystem, der kører gennem Bifrost. Derfor vil det være deres navn, der fremgår i betalingsvinduet.
   Du kan betale via vores nye onlinebetalingssystem ved at følge nedenstående link:<br /><br />
-  <a href="https://www.fastaval.dk/26tilmelding/paynow?hash=<?= $this->participant->participant_hash ?>">Betal online</a>
+  <a href="https://www.fastaval.dk/26tilmelding/paynow?hash=<?= $this->participant->participant_hash ?>">Betal online</a><br />
   (Betalingen bliver gemt med det samme hos vores leverandør, men der kan gå et par dage, før betalingen registreres i vores eget system, da det foregår manuelt lige nu).
 </p>
+
 <p>
   Ved anden form for betaling skal du HUSKE at anføre dit navn og deltagernummer, som er: <strong><?= $this->participant->id ?></strong>
 </p>
 <p>
   Alternativt kan du betale via bankoverførsel. Bemærk, at der er et gebyr på 20 kr. ved bankoverførsel, og at betalingen
-  derfor bliver <strong><?= ($this->prices['total'] - $this->participant->betalt_beloeb + 20) ?></strong> kr. ved denne løsning.<br />
+  derfor bliver <strong><?= ($this->payment_remainder + 20) ?></strong> kr. ved denne løsning.<br />
   Hvis du betaler via overførsel fra en bank uden for Danmark, skal du være opmærksom på, at banken ofte tager et ekstra gebyr, som du selv skal betale.
 </p>
 <ul>

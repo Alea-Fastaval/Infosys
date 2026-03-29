@@ -1,0 +1,22 @@
+<h2>Photo upload reminder — preview</h2>
+
+<p><strong>Recipients:</strong> <?= $this->recipient_count; ?></p>
+
+<?php if (!empty($this->recipients)) : ?>
+  <ul>
+    <?php foreach ($this->recipients as $r) : ?>
+      <li><?= htmlspecialchars($r->email) . ' (id: ' . htmlspecialchars($r->id) . ')'; ?></li>
+    <?php endforeach; ?>
+  </ul>
+<?php endif; ?>
+
+<h3>Sample message</h3>
+<div style="border:1px solid #ddd;padding:10px;">
+  <?= $this->sample_html; ?>
+</div>
+
+<form method="post" action="<?= $this->url('send_photo_upload_reminders'); ?>">
+  <p>
+    <button type="submit">Send to <?= $this->recipient_count; ?> recipients</button>
+  </p>
+</form>

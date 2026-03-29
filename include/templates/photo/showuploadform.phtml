@@ -1,18 +1,28 @@
 <div class="fv-logo"></div>
 <div class="content">
-    <h1><span>Upload dit billede til arrangørkort</span></h1>
-    <p>Her uploader du et vellignende portræt til arrangørkort. Start med at vælge et billede (eller dragndrop det i browseren), beskær det derefter så man tydeligt kan se hvem det er, og slut ved at klikke på upload. <strong>Husk du ikke er færdig før du har fået en succes-besked på siden!</strong></p>
-    <p>Krav til billede:</p>
+    <h1>Upload dit billede til arrangørkort</h1>
+    <p>Her uploader du et vellignende portræt til arrangørkort.</p>
+    <h3>Krav til billede:</h3>
     <ul>
-        <li>Portrætfoto. Ikke et gruppebillede eller billede af helt andre folk</li>
-        <li>Vellignende. Ikke sløret, med underlige filtre, eller andet</li>
-        <li>Ordentlig opløsning. Ingen superpixelerede billeder</li>
+        <li><strong>Portrætfoto</strong>: Det skal være et billede af dig alene - ikke et gruppebillede eller et billede af andre folk.</li>
+        <li><strong>Vellignende</strong>: Billedet skal være skarpt og uden filtre, ansigtsmaling eller masker, der gør det svært at genkende dig.</li>
+        <li><strong>Ordentlig opløsning</strong>: Undgå meget pixelerede eller utydelige billeder.</li>
+        <li><strong>Kig ligefrem</strong>: Dit ansigt skal være tydeligt synligt, vendt mod kameraet og godt oplyst (ikke delvist skjult eller i dyb skygge).</li>
+        <li><strong>Lys baggrund</strong>: Tag gerne billedet mod en lys og ensfarvet væg uden for meget rod/støj i baggrunden.</li>
+        <li>
     </ul>
-    <p>Dit arrangørkort er et ID-kort på Fastaval -  det er et privilegie, ikke en rettighed. Hvis du vil være sikker på at få et, så sørg for at billedet lever op til kravene.</p>
+
+    <h3>Sådan gør du</h3>
+    <ol>
+        <li>Tryk på <b>Vælg Billede</b> og find det billede du vil bruge.</li>
+        <li>Beskær billedet via slideren, så dit ansigt fylder det meste af rammen - <b>Sigt efter at dit ansigt dækker ca. 80% af højden i feltet.</b></li>
+        <li>Tryk på <b>Upload</b> for at uploade billedet.</li>
+    </ol>
+    <p>Dit arrangørkort er et ID-kort på Fastaval - det er et privilegie, ikke en rettighed. Hvis du vil være sikker på at få et, så sørg for at billedet lever op til kravene.</p>
     <div id="image-cropper">
         <div class="container-main">
             <div class="container-image">
-                <div class="cropit-preview"></div>
+                <div class="cropit-preview" style="border: 1px solid black;"></div>
                 <div class="container-tools">
                     <div class="cropit-rotate-buttons">
                         <span class="cropit-rotate-ccw"><i class="icon-ccw"></i></span>
@@ -24,20 +34,21 @@
                 </div>
             </div>
             <div class="action-buttons">
-                <div class="select-image-btn">Select new image</div>
-                <div class="upload-image-btn">Upload image</div>
+                <div class="select-image-btn">Vælg billede</div>
+                <div class="upload-image-btn">Upload</div>
+                <p><strong>Husk du ikke er færdig før du har fået en succes-besked på siden!</strong></p>
             </div>
-    </div>
-    <input type="file" class="cropit-image-input" />
+        </div>
+        <input type="file" class="cropit-image-input" />
     </div>
     <div class="upload-success">Takker! Dit billede er nu blevet uploadet!</div>
     <div class="upload-failure">Noget gik galt undervejs! Kontakt <a href="mailto:info@fastaval.dk">info@fastaval.dk</a> med dit billede til arrangørkort og fortæl hvor i processen det gik galt.</div>
 </div>
 
 <script type="text/javascript">
-infosysExportWidth = <?= e($this->photo_width);?>;
-infosysExportHeight = <?= e($this->photo_height);?>;
-infosysCropUrl = "<?= $this->url('photo_upload_cropped', ['identifier' => $this->identifier]);?>";
-infosysOriginalUrl = "<?= $this->url('photo_upload_original', ['identifier' => $this->identifier]);?>";
-infosysExistingImageUrl = "<?= $this->existing_image ? $this->public_uri . e($this->existing_image) . "?rand=" . uniqid() : "";?>";
+    infosysExportWidth = <?= e($this->photo_width); ?>;
+    infosysExportHeight = <?= e($this->photo_height); ?>;
+    infosysCropUrl = "<?= $this->url('photo_upload_cropped', ['identifier' => $this->identifier]); ?>";
+    infosysOriginalUrl = "<?= $this->url('photo_upload_original', ['identifier' => $this->identifier]); ?>";
+    infosysExistingImageUrl = "<?= $this->existing_image ? $this->public_uri . e($this->existing_image) . "?rand=" . uniqid() : ""; ?>";
 </script>

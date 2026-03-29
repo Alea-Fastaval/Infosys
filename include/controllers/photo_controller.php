@@ -54,7 +54,7 @@ class PhotoController extends Controller
             return $this->send404();
         }
 
-        $user = $this->model->getLoggedInUser();
+        /*$user = $this->model->getLoggedInUser();
         if(strtotime($this->config->get('con.signupend')) < strtotime('now')) {
             $message_da = "Det er for sent at uploade photo. Tilmeldingen er slut og navneskiltene er ved at blive lavet.<br>";
             $message_en = "It is too late to uploade a photo. Sign-up has ended and the name tags are already in the making<br>";
@@ -69,7 +69,7 @@ class PhotoController extends Controller
                 $this->errorMessage("Tilmeldingen er lukket og kun infonauter kan uploade photo");
                 $this->hardRedirect($this->url('deltagerehome'));
             }
-        }
+        } */
 
 
         $this->page->clearEarlyLoadJs();
@@ -177,18 +177,45 @@ class PhotoController extends Controller
      *
      * @access public
      * @return void
+     * 
+     * URL: photo/send-reminders
      */
     public function sendUploadReminders()
     {
         $participant_model = $this->model->factory('Participant');
-        $participants = $this->model->fetchParticipantsToRemind(0);
+        // Only send mails when invoked via POST to avoid accidental sends.
+        $request = $this->page->request;
 
-        echo "Sender foto reminder mail til ".count($participants)." deltagere<br>\n";
-die('Not sending photo reminders');
+        // Determine recipients depending on mode: preview/test or real send
+        $get = $request->get;
+        $post = $request->post;
+
+        $testParticipantId = !empty($get->participant_id) ? intval($get->participant_id) : null;
+        $testEmail = !empty($get->test_to) ? $get->test_to : null;
+
+        if ($testParticipantId) {
+            $single = $this->model->createEntity('Deltagere')->findById($testParticipantId);
+            $participants = $single ? [$single] : [];
+        } elseif ($testEmail) {
+            $p = new stdClass();
+            $p->email = $testEmail;
+            $p->id = 0;
+            $p->speaksDanish = function() { return false; };
+            $participants = [$p];
+        } else {
+            $participants = $this->model->fetchParticipantsToRemind(0);
+        }
+
+        echo "Sender foto reminder mail til ".count($participants)." deltagere\n";
 
         // Finish response before sending mails, to avoid timeout
         session_write_close();
         fastcgi_finish_request();
+
+        // If this is not a POST request, just return (preview mode should use previewUploadReminders)
+        if (!$request->isPost()) {
+            return;
+        }
 
         // loop over participants, get photo upload link, render email, send, log, done
         $count = 0;
@@ -238,6 +265,46 @@ die('Not sending photo reminders');
         $participant_model->setSearchBaseIds($participants);
 
         $this->hardRedirect($this->url('show_search_result'));
+    }
+
+    /**
+     * Preview page for photo upload reminders.
+     * Shows rendered sample email and recipient list, with a Send button.
+     * URL: photo/preview-reminders
+     */
+    public function previewUploadReminders()
+    {
+        $participant_model = $this->model->factory('Participant');
+        $participants = $this->model->fetchParticipantsToRemind(0);
+
+        if (empty($participants)) {
+            echo "No participants to remind.";
+            return;
+        }
+
+        // Use first participant as sample
+        $sample = reset($participants);
+        $this->page->participant = $sample;
+        $this->page->link = $participant_model->getPhotoUploadLink($sample);
+
+        $signup_end_time = strtotime($this->config->get('con.signupend'));
+        if (!$sample->speaksDanish()) {
+            $this->page->signup_end_time = date('M d, Y', $signup_end_time);
+            $this->page->setTemplate('photo/sendphotouploadreminderen');
+        } else {
+            $this->page->signup_end_time = date('d/m-Y', $signup_end_time);
+            $this->page->setTemplate('photo/sendphotouploadreminderda');
+        }
+
+        $sample_html = $this->page->render();
+
+        // Prepare preview page variables
+        $this->page->sample_html = $sample_html;
+        $this->page->recipients = $participants;
+        $this->page->recipient_count = count($participants);
+
+        $this->page->setTemplate('photo/preview_upload_reminders');
+        $this->page->layout_template = 'stripped.phtml';
     }
 
     /**

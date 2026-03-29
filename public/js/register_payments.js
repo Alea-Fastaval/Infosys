@@ -115,7 +115,7 @@
       data: { payment_id},
       success: function(data, status, jqXHR) {
         if (data.status == 'success') {
-          button.innerHTML = 'Anulleret';
+          button.innerHTML = 'Annulleret';
           $(button).parents('tr').css('opacity', '.5');
         } else {
           alert("Der skete en fejl:" + data.message);

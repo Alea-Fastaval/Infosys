@@ -177,6 +177,7 @@ class Routes
         $this->routes['photo_upload_cropped']                       = ['url' => 'photo/upload/cropped/:identifier:', 'controller' => 'Photo', 'method' => 'storeCropped'];
 
         $this->routes['send_photo_upload_reminders']                = ['url' => 'photo/send-reminders', 'controller' => 'Photo', 'method' => 'sendUploadReminders'];
+        $this->routes['preview_photo_upload_reminders']             = ['url' => 'photo/preview-reminders', 'controller' => 'Photo', 'method' => 'previewUploadReminders'];
         $this->routes['show_missing_photo']                         = ['url' => 'photo/see-missing-photo', 'controller' => 'Photo', 'method' => 'seeMissingPhotos'];
         $this->routes['photo_download']                             = ['url' => 'photo/download', 'controller' => 'Photo', 'method' => 'downloadPhotos'];
 
@@ -365,6 +366,8 @@ class Routes
         $this->routes['admin_handle_users']         = array('url' => 'admin/users/', 'controller' => 'Admin', 'method' => 'handleUsers');
         $this->routes['admin_handle_roles']         = array('url' => 'admin/roles/', 'controller' => 'Admin', 'method' => 'handleRoles');
         $this->routes['admin_handle_privileges']    = array('url' => 'admin/privileges/', 'controller' => 'Admin', 'method' => 'handlePrivileges');
+        $this->routes['admin_generate_badges']       = array('url' => 'admin/generate-badges', 'controller' => 'Admin', 'method' => 'generateBadges');
+        $this->routes['admin_generate_badges_pdf']   = array('url' => 'admin/generate-badges-pdf', 'controller' => 'Admin', 'method' => 'generateBadgesPDF');
         $this->routes['admin_reset_signup_confirm'] = array('url' => 'admin/reset/confirm', 'controller' => 'Admin', 'method' => 'showConfirmReset');
         $this->routes['admin_reset_signup_execute'] = array('url' => 'admin/reset/execute', 'controller' => 'Admin', 'method' => 'resetSignups');
 

@@ -1,0 +1,315 @@
+<div style="display:flex; align-items: center; justify-content: space-between;">
+  <h2>Generer deltager navneskilte (preview)</h2>
+  <div style="display: flex; gap: 15px; align-items: center;">
+    <span id="pdf-status" style="display: none; font-weight: bold; color: #333;"></span>
+    <button id="generate-pdf-10-btn">Hent første 10 skilte</button>
+    <button id="generate-pdf-btn">Hent alle skilte</button>
+  </div>
+</div>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;800;900&display=swap" rel="stylesheet">
+<style>
+  /* Print settings: use physical units so printers render at target DPI */
+  @media print {
+    @page {
+      size: A4;
+      margin: 5mm;
+    }
+
+    html,
+    body {
+      -webkit-print-color-adjust: exact;
+      color-adjust: exact;
+    }
+
+    /* Ensure the badge uses physical sizes (mm) so printer rasterizes at device DPI.
+       For best results provide high-resolution source images (pixels >= physical_inches*300). */
+    .print-wrapper {
+      page-break-inside: avoid;
+      -webkit-print-color-adjust: exact;
+    }
+
+    .id-badge {
+      width: 85mm;
+      height: 54mm;
+    }
+
+    .photo,
+    .logo {
+      height: 14mm;
+      width: auto;
+    }
+  }
+
+  .badge-grid {
+    padding: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    background-color: lightgray;
+  }
+
+  .print-wrapper {
+    padding: 3mm;
+    background-color: white;
+  }
+
+  .id-badge {
+    min-width: 85mm;
+    max-width: 85mm;
+    min-height: 54mm;
+    max-height: 54mm;
+    display: flex;
+    flex-direction: column;
+    text-transform: uppercase;
+    position: relative;
+    font-family:
+      "Montserrat",
+      system-ui,
+      Segoe UI,
+      Roboto,
+      Helvetica,
+      Arial;
+  }
+
+  .padded {
+    padding: 3mm 2mm;
+  }
+
+  .flex {
+    display: flex;
+  }
+
+  .col {
+    flex-direction: column;
+  }
+
+  .row {
+    flex-direction: row;
+  }
+
+  .center {
+    justify-content: center;
+    align-items: center;
+  }
+
+  .around {
+    justify-content: space-around;
+  }
+
+  .between {
+    justify-content: space-between;
+  }
+
+  .gap-sm {
+    gap: 2mm;
+  }
+
+  .badge-header {
+    background-color: white;
+    color: black;
+    height: 14mm;
+    position: relative;
+    padding: 3mm 2mm 3mm 2mm;
+  }
+
+  .blue {
+    background: #046AA8;
+    color: white;
+  }
+
+  .red {
+    background: #9b1919;
+    color: white;
+  }
+
+  .details {
+    position: relative;
+    padding: 3mm 2mm;
+    display: flex;
+    flex-direction: row;
+    gap: 3mm;
+    height: 36mm;
+  }
+
+  .name {
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 24px;
+    overflow: hidden;
+  }
+
+  .pronouns {
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 24px;
+  }
+
+  .header-text {
+    font-weight: 700;
+    font-size: 30px;
+    line-height: 30px;
+  }
+
+  .role {
+    font-size: 15px;
+    line-height: 15px;
+    height: 15px;
+  }
+
+  .photo {
+    height: 20mm;
+    width: 14.44mm;
+    max-width: unset;
+  }
+
+  .logo {
+    width: 14mm;
+    height: 14mm;
+    max-width: unset;
+    margin-right: 3mm;
+  }
+
+  .fv-stamp {
+    position: absolute;
+    bottom: 2mm;
+    right: 1mm;
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
+    font-size: 8px;
+    font-weight: 700;
+    color: rgba(0, 0, 0, 0.2);
+    text-transform: none;
+    letter-spacing: 1px;
+    white-space: nowrap;
+  }
+</style>
+
+<?php if (empty($this->participants)) : ?>
+  <p>No participants found.</p>
+<?php else : ?>
+  <div class="badge-grid">
+    <?php foreach ($this->participants as $participant) : ?>
+      <div class="print-wrapper">
+        <div class="id-badge">
+          <?php
+          $frame_class = (method_exists($participant, 'isArrangoer') && $participant->isArrangoer()) ? 'red' : 'blue';
+          $photo = isset($this->photos[$participant->id]) ? $this->photos[$participant->id] : '';
+          $show_photo = false;
+          if ($photo) {
+            $file_path = defined('PUBLIC_PATH') ? PUBLIC_PATH . ltrim($photo, '/') : __DIR__ . '/../../../public' . $photo;
+            if (file_exists($file_path)) {
+              $show_photo = true;
+            }
+          }
+          ?>
+          <div class="badge-header flex center <?= $frame_class ?>">
+            <div class="flex col center" style="width: 100%;">
+              <span class="header-text"><?php $lang = ($participant->main_lang ?? 'da') === 'en' ? 'en' : 'da';
+                                        echo $participant->isArrangoer() ? ($lang === 'en' ? 'ORGANIZER' : 'ARRANGØR') : ($lang === 'en' ? 'PARTICIPANT' : 'DELTAGER'); ?></span>
+              <span class="header-text"><?= htmlentities($participant->id); ?></span>
+            </div>
+            <?php if ($show_photo): ?>
+              <img class="photo" src="<?= $photo; ?>" alt="<?= htmlentities($participant->getName()); ?>" />
+            <?php else: ?>
+              <img class="logo" src="/img/logo2026.png" alt="logo" />
+            <?php endif; ?>
+          </div>
+
+          <div class="details">
+            <div class="flex col between" style="width: 100%">
+              <?php if (!empty($participant->pronouns) || method_exists($participant, 'getPronoun')): ?>
+                <span class="name"><?= htmlentities($participant->getName()); ?></span>
+                <span class="pronouns">
+                  <?php if (method_exists($participant, 'getPronoun')) {
+                    echo htmlentities($participant->getPronoun());
+                  } else {
+                    echo htmlentities($participant->pronouns);
+                  }
+                  ?></span>
+              <?php endif; ?>
+              <?php $lang = ($participant->main_lang ?? 'da') === 'en' ? 'en' : 'da';
+              $wa_data = $this->work_areas[$participant->work_area] ?? null; ?>
+              <span class="role"><?= htmlentities($wa_data ? $wa_data[$lang] : ''); ?></span>
+            </div>
+          </div>
+          <span class="fv-stamp">Fastaval 2026</span>
+        </div>
+      </div>
+    <?php endforeach; ?>
+  </div>
+<?php endif; ?>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const generateBtn = document.getElementById('generate-pdf-btn');
+    const generate10Btn = document.getElementById('generate-pdf-10-btn');
+    const statusSpan = document.getElementById('pdf-status');
+
+    function generatePDF(limit) {
+      generateBtn.disabled = true;
+      generate10Btn.disabled = true;
+      statusSpan.style.display = 'inline';
+      statusSpan.textContent = limit ? 'Genererer PDF med ' + limit + ' skilte...' : 'Genererer PDF med alle skilte...';
+      statusSpan.style.color = '#007bff';
+
+      const url = '/admin/generate-badges-pdf' + (limit ? '?limit=' + limit : '');
+
+      fetch(url, {
+          method: 'GET'
+        })
+        .then(response => {
+          if (!response.ok) {
+            throw new Error('Failed to generate PDF');
+          }
+          const contentDisposition = response.headers.get('content-disposition');
+          let filename = 'deltager-navneskilte.pdf';
+          if (contentDisposition) {
+            const filenameMatch = contentDisposition.match(/filename="?([^"]+)"?/);
+            if (filenameMatch) {
+              filename = filenameMatch[1];
+            }
+          }
+          return response.blob().then(blob => ({
+            blob,
+            filename
+          }));
+        })
+        .then(({
+          blob,
+          filename
+        }) => {
+          const objectUrl = window.URL.createObjectURL(blob);
+          const link = document.createElement('a');
+          link.href = objectUrl;
+          link.download = filename;
+          document.body.appendChild(link);
+          link.click();
+          document.body.removeChild(link);
+          window.URL.revokeObjectURL(objectUrl);
+
+          statusSpan.textContent = 'PDF genereret og hentet!';
+          statusSpan.style.color = '#28a745';
+
+          setTimeout(() => {
+            statusSpan.style.display = 'none';
+            generateBtn.disabled = false;
+            generate10Btn.disabled = false;
+          }, 3000);
+        })
+        .catch(error => {
+          console.error('Error:', error);
+          statusSpan.textContent = 'Fejl ved generering af PDF: ' + error.message;
+          statusSpan.style.color = '#dc3545';
+          generateBtn.disabled = false;
+          generate10Btn.disabled = false;
+        });
+    }
+
+    generateBtn.addEventListener('click', function() {
+      generatePDF(0);
+    });
+    generate10Btn.addEventListener('click', function() {
+      generatePDF(10);
+    });
+  });
+</script>
