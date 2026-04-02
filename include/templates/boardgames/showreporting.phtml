@@ -1,4 +1,4 @@
-"Game","Count","Minutes","Designer"
-<?php foreach ($this->data as $name => $stuff) :
-    printf('"%s","%s","%s","%s"' . PHP_EOL, $name, $stuff['count'], $stuff['time'], $stuff['designergame']);
+"Navn","Ejer","Designer","Kommentar","BGG-id","Lånt","Minutter"
+<?php foreach ($this->data as $name => $data) :
+    printf('"%s","%s","%s","%s","%s","%s","%s"' . PHP_EOL, $name, $data['owner'], $data['designergame'], $data['comment'], $data['bgg_id'], $data['count'], $data['time']);
 endforeach;

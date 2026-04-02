@@ -668,7 +668,7 @@ SET boardgame_id = ?, type = ?, timestamp = NOW(), data = ""
     public function getReportingData()
     {
         $query = '
-SELECT b.name, b.id, b.designergame, be.type, be.timestamp
+SELECT b.name, b.id, b.owner, b.designergame, b.comment, b.bgg_id, be.type, be.timestamp
 FROM boardgames AS b
 LEFT JOIN boardgameevents AS be ON be.boardgame_id = b.id AND be.type IN ("borrowed", "returned")
 ORDER BY b.name, b.id, be.timestamp
@@ -683,7 +683,14 @@ ORDER BY b.name, b.id, be.timestamp
             }
 
             if (empty($reporting[$row['name']])) {
-               $reporting[$row['name']] = ['count' => 0, 'time' => 0, 'designergame' => $row['designergame']];
+               $reporting[$row['name']] = [
+'count' => 0,
+'time' => 0,
+                    'owner' => $row['owner'],
+'designergame' => $row['designergame'],
+                    'comment'      => $row['comment'],
+                    'bgg_id'       => $row['bgg_id'],
+];
             }
 
             if (!empty($from)) {
