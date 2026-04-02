@@ -839,6 +839,66 @@ class ApiController extends Controller
         $this->jsonOutput($result);
     }
 
+    public function setBoargameAlert() {
+        // POST
+        $post = $this->page->request->post;
+
+        if (!isset($post->id) || !isset($post->pass)) {
+            $this->jsonOutput([
+                "status" => "error",
+                "message" => "Missing id or pass",
+            ], 400);
+        }
+
+        if (
+            !($participant = $this->model->findParticipant($post->id)) ||
+            $participant->annulled === 'ja' ||
+            $post->pass != $participant->password
+        ) {
+            $this->jsonOutput([
+                "status" => "error",
+                "message" => "id or pass incorrect",
+            ], 401);
+        }
+
+        if ($this->vars['game_id'] == 'status') {
+            $this->jsonOutput($this->model->getBoardgameAlerts($post->id));
+        }
+
+        $game_id = 0;
+        if (empty($this->vars['game_id']) || ($game_id = intval($this->vars['game_id'])) == 0 ) {
+            $this->jsonOutput([
+                "status" => "error",
+                "message" => "Missing or malformed game id",
+            ], 400);
+        }
+
+        if (!$this->model->checkBoardGame($game_id)) {
+            $this->jsonOutput([
+                "status" => "error",
+                "message" => "Boardgame with id $game_id does not exist",
+            ], 404);
+        }
+
+        if (!isset($post->action)) {
+            $this->jsonOutput([
+                "status" => "error",
+                "message" => "Missing action",
+            ], 400);
+        }
+
+        if (!in_array($post->action, ["add", "remove"])) {
+            $this->jsonOutput([
+                "status" => "error",
+                "message" => "Unknown action: $post->action",
+            ], 400);
+        }
+
+        $result = $this->model->setBoargameAlert($post->id, $game_id, $post->action);
+        $this->jsonOutput($result, $result['status'] == 'success' ? 200 : 400);
+
+    }
+
     public function getRibbonUser() {
 
         if (!$this->page->request->isPost()) {

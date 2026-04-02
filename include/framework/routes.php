@@ -426,6 +426,7 @@ class Routes
         $this->routes['api_boardgames']          = array('url' => 'api/v:version:/boardgames', 'controller' => 'Api', 'method' => 'getBoardgameData');
         $this->routes['api_boardgame_loans']     = array('url' => 'api/boardgameloans/:id:', 'controller' => 'Api', 'method' => 'getBoardgameLoans');
         $this->routes['api_boardgame_ranking']   = array('url' => 'api/boardgamerankings', 'controller' => 'Api', 'method' => 'boardgameRankings');
+$this->routes['api_boardgame_alert']     = array('url' => 'api/boardgamealert/:game_id:', 'controller' => 'Api', 'method' => 'setBoargameAlert');
 
         
         $this->routes['api_ribbon_login']        = array('url' => 'api/ribbon/login', 'controller' => 'Api', 'method' => 'getRibbonUser');

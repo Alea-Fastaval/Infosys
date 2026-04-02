@@ -455,6 +455,30 @@ GROUP BY
         $game->setStatus($post->status, $data);
 
         $this->log('Brætspil (' . $game->id . ', ' . $game->name . ') status rettet til ' . $post->status . ' af ' . $this->getLoggedInUser()->user, 'Boardgames', $this->getLoggedInUser());
+
+        if ($post->status === 'returned') {
+            $message = new stdClass();
+            $message->text_da = "Brætspillet \"$game->name\" er lige blevet indleveret";
+            $message->text_en = "The boardgame \"$game->name\" has just been returned";
+
+            $query = "INSERT INTO messages (text_da, text_en, send_time) VALUES (?,?, NOW())";
+            $args = [$message->text_da, $message->text_en];
+            $message->id = $this->db->exec($query, $args);
+
+            $participant_model = $this->factory('Participant');
+            $firebase = new Firebase($this->config);
+
+            $query = "SELECT participant_id FROM boardgame_alerts WHERE boardgame_id = ?";
+            $alerts = $this->db->query($query, $game->id);
+
+            foreach ($alerts as $row) {
+                $receiver = $this->createEntity('Deltagere')->findById($row['participant_id']);
+                $participant_model->sendFirebaseMessage($receiver, $message);
+            }
+
+            $query = "DELETE FROM boardgame_alerts WHERE boardgame_id = ?";
+            $alerts = $this->db->exec($query, $game->id);
+        }
     }
 
     public function editBoardgame(RequestVars $post)
@@ -515,6 +539,9 @@ GROUP BY
             $this->db->exec($query);
     
             $query = 'DELETE FROM boardgames;';
+            $this->db->exec($query);
+
+            $query = 'DELETE FROM boardgame_alerts;';
             $this->db->exec($query);
         }
 

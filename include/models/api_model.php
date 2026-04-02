@@ -1930,4 +1930,54 @@ HAVING
             "message" => "Rankings set for participant $pid",
         ];
     }
+
+    public function checkBoardGame($game_id) {
+        return !!$this->createEntity('Boardgame')->findById($game_id);
+    }
+
+    public function setBoargameAlert($participant_id, $game_id, $action) {
+        if ($action == 'remove') {
+            $query = "DELETE FROM boardgame_alerts WHERE participant_id = ? AND boardgame_id = ?";
+            $this->db->exec($query,[$participant_id,$game_id]);
+            return [
+                "status" => "success",
+                "message" => "Alert was removed for game $game_id and participant $participant_id",
+            ];
+        }
+
+        // Check if the game has been returned
+        $query = "SELECT * FROM boardgameevents WHERE boardgame_id = ? ORDER BY timestamp DESC LIMIT 1";
+        $last_event =  $this->db->query($query, $game_id);
+
+        if (!isset($last_event) || $last_event[0]['type'] != 'borrowed') {
+            return [
+                "status" => "error",
+                "message" => "Game is not in use",
+//                "event" => print_r($last_event, true),
+            ];
+        }
+
+        $query = "INSERT IGNORE INTO boardgame_alerts (participant_id, boardgame_id) VALUES (?,?)";
+        $this->db->exec($query,[$participant_id,$game_id]);
+
+        return [
+            "status" => "success",
+            "message" => "Alert added for game $game_id and participant $participant_id",
+        ];
+    }
+
+    public function getBoardgameAlerts($participant_id) {
+        $query ="SELECT boardgame_id FROM boardgame_alerts WHERE participant_id = ?";
+        $result = $this->db->query($query,$participant_id);
+
+        $list = [];
+        foreach ($result as $row) {
+            $list[] = $row[0];
+        }
+        
+        return [
+            "status" => "success",
+            "list" => $list,
+        ];
+    }
 }
